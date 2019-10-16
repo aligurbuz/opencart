@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+        <name>Revslider Modifications</name>
+        <version>1.0</version>
+        <code>revslider</code>
+        <author>Smartdatasoft</author>
+        <link>http://www.smartdatasoft.com</link>
+    <!-- admin changes -->
+    <file path="admin/controller/common/column_left.php">
+        <operation>
+            <search><![CDATA[return $this->load->view('common/column_left', $data);]]></search>
+            <add position="before"><![CDATA[
+               
+                        $revslider = array();
+                        $version = VERSION;
+                     
+                        if($version >= "3.0.0.0"){
+                           $token =  $this->session->data['user_token'];
+                           $token_style = "user_token";
+                        }elseif($version == "2.3.0.2"){
+                           $token =  $this->session->data['token'];
+                           $token_style = "token";
+                        }
+			$this->load->language('extension/module/revslideropencart');
+			 if ($this->user->hasPermission('access', 'extension/module/revslideropencart')) {
+				$revslider[] = array(
+					'name'	   => $this->language->get('text_revslider_sliders'),
+					'href'     => $this->url->link('extension/module/revslideropencart', $token_style.'=' . $token, true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/module/revslideropencart')) {
+				$revslider[] = array(
+					'name'	   => $this->language->get('text_revslider_navigation'),
+					'href'     => $this->url->link('extension/module/revslideropencart&view=navigation-editor', $token_style.'=' . $token, true),
+					'children' => array()
+				);
+			}
+                        if ($this->user->hasPermission('access', 'extension/module/revslideropencart')) {
+				$revslider[] = array(
+					'name'	   => $this->language->get('text_revslider_addon'),
+					'href'     => $this->url->link('extension/module/revslideropencart&view=rev_addon-admin-display&page=rev_addon', $token_style.'=' . $token, true),
+					'children' => array()
+				);
+			}
+                if ($this->user->hasPermission('access', 'extension/module/revslideropencart')) {
+				$revslider[] = array(
+					'name'	   => $this->language->get('text_revslider_global_settings'),
+					'href'     => $this->url->link('extension/module/revslideropencart&view=global-settings&page', $token_style.'=' . $token, true),
+					'children' => array()
+				);
+			}
+                        if ($revslider) {	
+				$data['menus'][] = array(
+					'id'       => 'menu-revslider',
+					'icon'	   => 'fa-refresh', 
+					'name'	   => $this->language->get('text_revslider'),
+					'href'     => '',
+					'children' => $revslider
+				);	
+			}
+            ]]></add>
+        </operation>
+    </file>
+    
+   
+    
+      <file path="admin/view/template/common/header.tpl">
+        <operation>
+            <search><![CDATA[jquery-2.1.1.min.js"></script>]]></search>
+            <add position="after"><![CDATA[
+               <script type="text/javascript" src="../system/config/revslider/admin/assets/js/jquery/jquery.min.js"></script>
+               <script type="text/javascript" src="../system/config/revslider/admin/assets/js/jquery/jquery.ui.core.min.js"></script>          
+            ]]></add>
+        </operation>
+    </file> 
+   <file path="admin/view/template/common/header.twig">
+        <operation>
+            <search><![CDATA[jquery-2.1.1.min.js"></script>]]></search>
+            <add position="after"><![CDATA[
+               <script type="text/javascript" src="../system/config/revslider/admin/assets/js/jquery/jquery.min.js"></script>
+               <script type="text/javascript" src="../system/config/revslider/admin/assets/js/jquery/jquery.ui.core.min.js"></script>          
+            ]]></add>
+        </operation>
+    </file> 
+    <!-- admin changes end -->
+  
+</modification>

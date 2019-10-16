@@ -1,0 +1,9 @@
+{% if (type == 1) %} {{ text }} {% else %} 
+<div class="tt-wrapper">
+	<a href="javascript:openPopup('{{ popup_module }}', '{{ product_id }}')" class="btn button-enquiry">
+	     {% if (icon != '' and icon_position == 'left') %} {{ '<img src="image/' ~ icon~ '" align="left" class="icon-enquiry" alt="Icon">' }} {% endif %} 
+	     <span class="text-enquiry">{{ block_name }}</span>
+	     {% if (icon != '' and icon_position == 'right') %} {{ '<img src="image/' ~ icon~ '" align="right" class="icon-enquiry" alt="Icon">' }} {% endif %} 
+	</a>
+</div>
+{% endif %}

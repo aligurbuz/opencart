@@ -1,0 +1,73 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	{% set class = 'col-6 col-md-4 col-lg-3' %}
+	{% if (itemsperpage == 1) %}{% set class = 'col-12' %}{% endif %}
+	{% if (itemsperpage == 2) %}{% set class = 'col-12 col-md-6' %}{% endif %}
+	{% if (itemsperpage == 3) %}{% set class = 'col-12 col-md-6 col-lg-4' %}{% endif %}
+	{% if (itemsperpage == 4) %}{% set class = 'col-6 col-md-4 col-lg-3' %}{% endif %}
+	{% if (itemsperpage == 5) %}{% set class = 'col-6 col-md-4 col-lg-25' %}{% endif %}
+	{% if (itemsperpage == 6) %}{% set class = 'col-6 col-md-3 col-lg-2' %}{% endif %}
+	{% set tabs_id = random(50000) * random(50000) %}
+
+	{% if (tabs|length > 1 ) %} 
+		<div class="container-indent">
+			<div class="container container-fluid-custom-mobile-padding">
+				<ul class="nav nav-tabs tt-tabs-default" role="tablist">
+					{% for tab in tabs %} 
+					<li class="nav-item">
+						<a class="nav-link {% if loop.index == 1 %}active{% endif %}" data-toggle="tab" href="#tt-tab{{ tabs_id }}-{{ loop.index }}">{{ tab['heading'] }}</a>
+					</li>
+					{% endfor %} 
+				</ul>
+				<div class="tab-content">
+					{% for tab in tabs %} 
+						<div class="tab-pane {% if loop.index == 1 %}active{% endif %}" id="tt-tab{{ tabs_id }}-{{ loop.index }}">
+							{% if (carousel != 0) %} 
+							<div class="tt-carousel-products row arrow-location-tab arrow-location-tab01 tt-alignment-img tt-layout-product-item slick-animated-show-js" data-item="{{ itemsperpage }}">
+							{% else %}
+							<div class="row tt-layout-product-item">
+							{% endif %}
+								<div class="{{ class }}">
+									{% for product in tab['products'] %}
+										{% if (cols == 1 and loop.index > 1) or (carousel == 0 and loop.index > 1) or (carousel == 1 and (loop.index-1) is divisible by(cols) and loop.index > 1) %}
+											</div>
+											<div class="{{ class }}">
+										{% endif %}
+										{% include 'wokiee/template/new_elements/product.twig' %}
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% else %} 
+		{% for tab in tabs %} 
+			<div class="container-indent">
+				<div class="container container-fluid-custom-mobile-padding">
+					<div class="tt-block-title">
+						{% set title = tab['heading']|split(',') %}
+						<h1 class="tt-title">{{ title[0] }}</h1>
+						<div class="tt-description">{{ title[1] }}</div>
+					</div>
+
+					{% if (carousel != 0) %} 
+					<div class="tt-carousel-products row arrow-location-tab arrow-location-tab01 tt-alignment-img tt-layout-product-item slick-animated-show-js" data-item="{{ itemsperpage }}">
+					{% else %}
+					<div class="row tt-layout-product-item">
+					{% endif %}
+						<div class="{{ class }}">
+							{% for product in tab['products'] %}
+								{% if (cols == 1 and loop.index > 1) or (carousel == 0 and loop.index > 1) or (carousel == 1 and (loop.index-1) is divisible by(cols) and loop.index > 1) %}
+									</div>
+									<div class="{{ class }}">
+								{% endif %}
+									{% include 'wokiee/template/new_elements/product.twig' %}
+							{% endfor %} 
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %} 
+{% endif %}

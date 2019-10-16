@@ -1,0 +1,60 @@
+{% if (categories) %} 
+<nav>
+	<ul>
+		{% for category in categories %} 
+			<li class="dropdown {% if (category['children']) %}{% if category['column'] == 1 %}tt-megamenu-col-01{% endif %}{% if category['column'] == 2 or category['column'] == 3 %}tt-megamenu-col-02{% endif %}{% if category['column'] == 4 %}megamenu tt-submenu{% endif %}{% endif %}">
+				<a href="{{ category['href'] }}">{{ category['name'] }}</a>
+				{% if (category['children']) %} 
+					{% set row_fluid = 3 %}
+					{% if (category['column'] == 1) %} {% set row_fluid = 12 %} {% endif %}
+					{% if (category['column'] == 2) %} {% set row_fluid = 6 %} {% endif %}
+					{% if (category['column'] == 3) %} {% set row_fluid = 4 %} {% endif %}
+					<div class="dropdown-menu">
+						<div class="row tt-col-list">
+							{% set i = 0 %}
+							{% for s in 1..category['column'] %} 
+							<div class="col-12 col-md-{{ row_fluid }}">
+								<ul class="tt-megamenu-submenu">
+									  {% set j = i + (category['children']|length / category['column'])|round - 1 %}
+									  {% for d in i..j %} 
+										  {% if (category['children'][i] is defined) %} 
+										  	<li><a href="{{ category['children'][i]['href'] }}" class="main-menu">{{ category['children'][i]['name'] }}</a></li>
+										  {% endif %}
+										  {% set i = i+1 %}
+									  {% endfor %}
+								</ul>
+							</div>
+								{% endfor %} 
+						</div>
+					</div>
+				{% endif %}
+				</li>
+		{% endfor %}
+	</ul>
+</nav>
+<!-- tt-mobile menu -->
+<nav class="panel-menu">
+	<ul>
+		{% for category in categories %} 
+			<li>
+				<a href="{{ category['href'] }}">{{ category['name'] }}</a>
+				{% if (category['children']) %} 
+					<ul>
+						{% set i = 0 %}
+						{% for i in 0..category['children']|length %} 
+							{% if (category['children'][i] is defined) %} 
+								<li><a href="{{ category['children'][i]['href'] }}">{{ category['children'][i]['name'] }}</a></li>
+							{% endif %}
+							{% set i = i+1 %}
+						{% endfor %}
+					</ul>
+				{% endif %} 
+			</li>
+		{% endfor %}
+	</ul>
+	<div class="mm-navbtn-names">
+		<div class="mm-closebtn">{% if (theme_options.get( 'close_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'close_text', config.get( 'config_language_id' ) ) }} {% else %}Close{% endif %}</div>
+		<div class="mm-backbtn">{% if (theme_options.get( 'back_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'back_text', config.get( 'config_language_id' ) ) }} {% else %}Back{% endif %}</div>
+	</div>
+</nav>
+{% endif %}

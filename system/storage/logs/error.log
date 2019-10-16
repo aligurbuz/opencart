@@ -1549,3 +1549,42 @@
 2019-10-11 7:13:07 - PHP Warning:  mkdir(): No such file or directory in /var/www/ssl/admin/controller/common/security.php on line 102
 2019-10-11 7:13:07 - PHP Warning:  copy(/var/www/storage/vendor/klarna/kco_rest/src/Klarna/Rest/Transport/Exception/ConnectorException.php): failed to open stream: No such file or directory in /var/www/ssl/admin/controller/common/security.php on line 106
 2019-10-11 7:13:07 - PHP Warning:  copy(/var/www/storage/vendor/symfony/validator/Mapping/Loader/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd): failed to open stream: No such file or directory in /var/www/ssl/admin/controller/common/security.php on line 106
+2019-10-16 9:34:12 - PHP Notice:  Undefined index: token in /var/www/ssl/system/storage/modification/admin/controller/common/column_left.php on line 25
+2019-10-16 9:34:53 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 7
+2019-10-16 9:35:03 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 7
+2019-10-16 9:36:32 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 7
+2019-10-16 9:36:34 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/controller/trendyol/install.php on line 35
+2019-10-16 9:36:47 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 7
+2019-10-16 9:47:19 - PHP Notice:  Cannot find template file for route 'trendyol/install_step1tpl' in /var/www/ssl/admin/controller/extension/module/template_switcher.php on line 139
+2019-10-16 9:48:10 - PHP Notice:  Undefined index: supplier_id in /var/www/ssl/admin/view/template/trendyol/install_step1.tpl on line 23
+2019-10-16 10:01:10 - PHP Notice:  Undefined variable: salecount in /var/www/ssl/admin/view/template/trendyol/dashboard.tpl on line 223
+2019-10-16 10:03:53 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 32
+2019-10-16 10:03:53 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 44
+2019-10-16 10:03:53 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 52
+2019-10-16 10:03:53 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 61
+2019-10-16 10:03:53 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 69
+2019-10-16 10:03:53 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 76
+2019-10-16 10:03:53 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 83
+2019-10-16 10:03:53 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 97
+2019-10-16 10:03:53 - PHP Notice:  Cannot find template file for route 'trendyol/producttpl' in /var/www/ssl/admin/controller/extension/module/template_switcher.php on line 139
+2019-10-16 10:03:55 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 32
+2019-10-16 10:03:55 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 44
+2019-10-16 10:03:55 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 52
+2019-10-16 10:03:55 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 61
+2019-10-16 10:03:55 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 69
+2019-10-16 10:03:55 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 76
+2019-10-16 10:03:55 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 83
+2019-10-16 10:03:55 - PHP Notice:  Undefined index: token in /var/www/ssl/admin/model/trendyol/general.php on line 97
+2019-10-16 10:03:55 - PHP Notice:  Cannot find template file for route 'trendyol/producttpl' in /var/www/ssl/admin/controller/extension/module/template_switcher.php on line 139
+2019-10-16 10:05:08 - PHP Notice:  Cannot find template file for route 'trendyol/producttpl' in /var/www/ssl/admin/controller/extension/module/template_switcher.php on line 139
+2019-10-16 10:05:09 - PHP Notice:  Cannot find template file for route 'trendyol/producttpl' in /var/www/ssl/admin/controller/extension/module/template_switcher.php on line 139
+2019-10-16 10:06:15 - PHP Notice:  Undefined variable: salecount in /var/www/ssl/admin/view/template/trendyol/dashboard.tpl on line 223
+2019-10-16 10:45:01 - PHP Notice:  Undefined index: token in /var/www/ssl/system/config/revslider/revslider-loader.class.php on line 732
+2019-10-16 10:45:01 - PHP Notice:  Undefined variable: url in /var/www/ssl/system/config/revslider/admin/views/master-view.php on line 253
+2019-10-16 10:49:57 - PHP Warning:  file_put_contents(/var/www/ssl/catalog/view/theme/wokiee/skins/store_default/Skin 18/settings.json): failed to open stream: Permission denied in /var/www/ssl/admin/controller/extension/module/wokiee.php on line 310
+2019-10-16 10:49:57 - PHP Warning:  file_put_contents(/var/www/ssl/catalog/view/theme/wokiee/skins/store_default/Skin 18/js/custom_code.js): failed to open stream: Permission denied in /var/www/ssl/admin/controller/extension/module/wokiee.php on line 313
+2019-10-16 10:49:57 - PHP Warning:  file_put_contents(/var/www/ssl/catalog/view/theme/wokiee/skins/store_default/Skin 18/css/custom_code.css): failed to open stream: Permission denied in /var/www/ssl/admin/controller/extension/module/wokiee.php on line 316
+2019-10-16 10:53:44 - PHP Notice:  Undefined variable: salecount in /var/www/ssl/admin/view/template/trendyol/dashboard.tpl on line 223
+2019-10-16 10:54:07 - PHP Notice:  Undefined variable: salecount in /var/www/ssl/admin/view/template/trendyol/dashboard.tpl on line 223
+2019-10-16 11:09:47 - PHP Notice:  Undefined variable: salecount in /var/www/ssl/admin/view/template/trendyol/dashboard.tpl on line 223
+2019-10-16 11:10:37 - PHP Notice:  Undefined variable: salecount in /var/www/ssl/admin/view/template/trendyol/dashboard.tpl on line 223

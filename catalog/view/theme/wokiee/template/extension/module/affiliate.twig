@@ -1,0 +1,23 @@
+<div class="box box-with-links box-no-advanced">
+  <div class="box-heading">{{ heading_title }}</div>
+  <div class="strip-line"></div>
+  <div class="box-content">
+    <ul class="list-box">
+      {% if (not logged) %} 
+      <li><a href="{{ login }}">{{ text_login }}</a> / <a href="{{ register }}">{{ text_register }}</a></li>
+      <li><a href="{{ forgotten }}">{{ text_forgotten }}</a></li>
+      {% endif %} 
+      <li><a href="{{ account }}">{{ text_account }}</a></li>
+      {% if (logged) %} 
+      <li><a href="{{ edit }}">{{ text_edit }}</a></li>
+      <li><a href="{{ password }}">{{ text_password }}</a></li>
+      {% endif %} 
+      <li><a href="{{ payment }}">{{ text_payment }}</a></li>
+      <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
+      <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+      {% if (logged) %} 
+      <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+      {% endif %} 
+    </ul>
+  </div>
+</div>

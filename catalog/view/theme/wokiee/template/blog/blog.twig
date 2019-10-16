@@ -1,0 +1,98 @@
+{{ header }}
+{% set blog = true %}
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+{% set theme_options = registry.get('theme_options') %}
+{% set config = registry.get('config') %} 
+{% set page_direction = theme_options.get( 'page_direction' ) %} {% set language_id = config.get( 'config_language_id' ) %}
+
+{% if (articles|length > 0) %}
+    <div class="posts">
+        {% if (template == 'two_columns.twig') %}
+            <div class="tt-blog-masonry">
+                <div class="tt-blog-init tt-grid-col-2 tt-layout-01-post tt-add-item">
+        {% endif %}
+        {% if (template == 'three_columns.twig') %}
+            <div class="tt-blog-masonry">
+                <div class="tt-blog-init tt-grid-col-3 tt-layout-01-post tt-add-item">
+        {% endif %}
+                    {% include 'wokiee/template/blog/article_list/' ~ settings['article_list_template']|replace({'.tpl': '.twig'}) %}
+        {% if (template == 'two_columns.twig' or template == 'three_columns.twig') %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if (settings['pagination_type'] == 'STANDARD') %} 
+        <div class="pagination-results">
+           {{ pagination }}
+        </div>
+    {% else %} 
+        {% if (is_more) %}
+            <div class="pagination-ajax text-center">
+                 <a href="javascript:;" data-page="2" id="load-more" class="btn">{{ button_load_more }}</a>
+            </div>
+        {% endif %} 
+    {% endif %} 
+{% endif %} 
+    
+<script>
+    function isMore(page)
+    {
+        $.ajax({
+            url: location.href,
+            type: 'get',
+            dataType: 'html',
+            data: { ajax_request: 1, page: page },
+            success: function(data) {
+                if(data == ''){
+                    $('.pagination-ajax').hide();
+                };
+            },
+            error: function(){
+                $('.pagination-ajax').hide();
+            }
+        });
+    }
+    
+    $(function(){        
+        $('#load-more').click(function(){
+            var page = $(this).attr('data-page');
+            $.ajax({
+                url: location.href,
+                type: 'get',
+                dataType: 'html',
+                data: { ajax_request: 1, page: page },
+                beforeSend: function() {
+                    $('#load-more').button('loading');
+                },
+                complete: function() {
+                    $('#load-more').button('reset');
+                },
+                success: function(data) {
+                    if(data == ''){
+                        $('.pagination-ajax').fadeOut();
+                        return;
+                    }
+
+                    {% if (template == 'two_columns.twig' or template == 'three_columns.twig') %}
+                        $('.tt-blog-init').append( data );
+                        setTimeout(function () {
+                            $('.tt-blog-init').isotope( 'reloadItems' ).isotope();
+                        }, 500);
+                   {% else %} 
+                
+                        $('.posts').append('<div class="ajax-content" style="display: none">' + data + '</div>');
+                    
+                        $('.posts .ajax-content').last().fadeIn('slow'); 
+                    {% endif %}      
+                    
+                    $('#load-more').attr('data-page', parseInt(++page));
+                    isMore(page);
+                }
+            });
+        })
+    })
+</script>
+
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

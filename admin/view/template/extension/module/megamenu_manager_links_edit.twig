@@ -1,0 +1,168 @@
+{{ header }}{{ column_left }} 
+<div id="content"><div class="container-fluid">
+     <div class="page-header">
+         <h1>MegaMenu Manager Links</h1>
+         <ul class="breadcrumb">
+               {% for breadcrumb in breadcrumbs %} 
+                <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                {% endfor %} 
+         </ul>
+       </div>
+     <link rel="stylesheet" type="text/css" href="view/stylesheet/css/colorpicker.css" />
+     <script type="text/javascript" src="view/javascript/jquery/colorpicker.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+    
+     {% if (error_warning) %} 
+          <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+       {% else %} 
+       {% if (success) %} 
+       <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+         <button type="button" class="close" data-dismiss="alert">&times;</button>
+       </div>
+       {% endif %} {% endif %} 
+     
+     <!-- Camera slider -->
+     <div class="set-size" id="megamenu-manager-links">     
+          <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">   
+               {% if (link_id is defined) %} 
+               <input type="hidden" name="link_id" value="{{ link_id }}">
+               {% endif %} 
+               
+               <!-- Content -->
+               <div class="content">
+                    <div>
+                         <div class="bg-tabs clearfix">
+                              <div class="tab-content">
+                                   <h4>Link settings {% if (link_id is defined) %} {{ '(ID: ' ~ link_id ~ ')' }} {% endif %}</h4>
+                                   
+                                   <!-- Input -->
+                                   <div class="input clearfix">
+                                        <p style="width: 200px">Link name:</p>
+                                        <div class="list-language">
+                                             {% for language in languages %} 
+                                             <div class="language">
+                                                  {% set language_id = language['language_id'] %} 
+                                                  <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                                  <input type="text" name="name[{{ language_id }}]" {% if (name[language_id] is defined) %} {{ 'value="'~name[language_id]~'"' }} {% endif %}>
+                                             </div>
+                                             {% endfor %} 
+                                        </div>
+                                   </div>
+                                   
+                                   <!-- Input -->
+                                   <div class="input clearfix">
+                                        <p style="width: 200px">Url:</p>
+                                        <div class="list-language">
+                                             {% for language in languages %} 
+                                             <div class="language">
+                                                  {% set language_id = language['language_id'] %} 
+                                                  <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                                  <input type="text" name="url[{{ language_id }}]" {% if (url[language_id] is defined and url is iterable) %} {{ 'value="'~url[language_id]~'"' }} {% elseif (url is defined and url is not iterable) %} {{ 'value="'~url~'"' }} {% endif %}>
+                                             </div>
+                                             {% endfor %} 
+                                        </div>
+                                   </div>
+                                   
+                                   <!-- Input -->
+                                   <div class="input clearfix">
+                                        <p style="width: 200px">Label:</p>
+                                        <div class="list-language">
+                                             {% for language in languages %} 
+                                             <div class="language">
+                                                  {% set language_id = language['language_id'] %} 
+                                                  <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                                  <input type="text" name="label[{{ language_id }}]" {% if (label[language_id] is defined) %} {{ 'value="'~label[language_id]~'"' }} {% endif %}>
+                                             </div>
+                                             {% endfor %} 
+                                        </div>
+                                   </div>
+                                   
+                                   <!-- Input -->
+                                   <div class="input clearfix color_input">
+                                        <p style="width: 200px">Label text color:</p>
+                                        <input type="text" name="label_text" id="label_text" value="{% if (label_text is defined) %}{{ label_text }}{% endif %}">
+                                    <span class="color_selected" {% if (label_text is defined) %} {{ 'style="background: ' ~ label_text ~ '"' }} {% endif %}></span>
+                                   </div>
+                                   
+                                   <script type="text/javascript">
+                                   
+                                   $(document).ready(function() {
+                                   
+                                        $('#label_text').ColorPicker({
+                                             onChange: function (hsb, hex, rgb, el) {
+                                                  $(el).val("#" +hex);
+                                            $(el).next('.color_selected').css("background", "#" + hex);
+                                             },
+                                             onShow: function (colpkr) {
+                                                  $(colpkr).show();
+                                                  return false;
+                                             },
+                                             onHide: function (colpkr) {
+                                                  $(colpkr).hide();
+                                                  return false;
+                                             }
+                                        });
+                                   });
+                                   </script>
+                                   
+                                   <!-- Input -->
+                                   <div class="input clearfix color_input">
+                                        <p style="width: 200px">Label background color:</p>
+                                        <input type="text" name="label_background" id="label_background"  value="{% if (label_background is defined) %}{{ label_background }}{% endif %}">
+                                    <span class="color_selected" {% if (label_background is defined) %} {{ 'style="background: ' ~ label_background ~ '"' }} {% endif %}></span>
+                                   </div>
+                                   
+                                   <script type="text/javascript">
+                                   
+                                   $(document).ready(function() {
+                                   
+                                        $('#label_background').ColorPicker({
+                                             onChange: function (hsb, hex, rgb, el) {
+                                                  $(el).val("#" +hex);
+                                                  $(el).next('.color_selected').css("background", "#" + hex);
+                                             },
+                                             onShow: function (colpkr) {
+                                                  $(colpkr).show();
+                                                  return false;
+                                             },
+                                             onHide: function (colpkr) {
+                                                  $(colpkr).hide();
+                                                  return false;
+                                             }
+                                        });
+                                   });
+                                   </script>
+                                   
+                                   <!-- Input -->
+                                   <div class="input clearfix">
+                                        <p style="width: 200px">Image<br><span style="color:#dedede;font-size:10px">Display only on submenu visible</span></p>
+                                        <div class="own_image clearfix">
+                                             <input type="hidden" name="image" value="{{ image }}" id="input-image" />
+                                             
+                                             {% if (image == '') %} 
+                                                  <a href="" id="thumb-image" class="img-thumbnail img-edit" data-toggle="image"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                                             {% else %} 
+                                                  <a href="" id="thumb-image" class="img-thumbnail img-edit" data-toggle="image"><img src="../image/{{ image }}" data-placeholder="{{ placeholder }}" alt="" /></a>
+                                             {% endif %} 
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                         
+                         <div>
+                              {% if (link_id is defined) %} 
+                              <!-- Buttons -->
+                              <div class="buttons"><input type="submit" name="button-save" class="button-save" value=""></div>
+                              {% else %} 
+                              <div class="buttons"><input type="submit" name="button-add" class="button-save" value=""></div>
+                              {% endif %} 
+                         </div>
+                    </div>
+               </div>
+          </form>        
+     </div>
+</div>
+
+{{ footer }}

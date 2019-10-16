@@ -1,0 +1,107 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+  {% set theme_options = registry.get('theme_options') %}
+  {% set config = registry.get('config') %} 
+<div class="product-information-buttons">
+  <a href="javascript:;" class="mespr button-product-question" data-toggle="modal" data-target="#popup-product-question-{{ module_id }}">
+       {% if (icon != '' and icon_position == 'left') %} {{ '<img src="image/' ~ icon~ '" align="left" class="icon-enquiry" alt="Icon">' }} {% endif %} 
+       <span class="text-enquiry"><i class="icon-f-72"></i> {{ button_text }}</span>
+       {% if (icon != '' and icon_position == 'right') %} {{ '<img src="image/' ~ icon~ '" align="right" class="icon-enquiry" alt="Icon">' }} {% endif %} 
+  </a>
+</div>
+       
+  <div class="modal fade" id="popup-product-question-{{ module_id }}" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-small" id="popup-{{ module_id }}">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+        </div>
+        <div class="modal-body">
+          <div class="tt-modal-verifyage">
+
+            {% if (block_title != '') %}<h5>{{ block_title }}</h5>{% endif %} 
+            <form action="" method="post" enctype="multipart/form-data" id="contact" class="form-contact popup-contact form-default">
+                 {% if (product_id is defined) %} 
+                 <input type="hidden" name="product_id" value="{{ product_id }}" />
+                 {% elseif (url is defined) %} 
+                 <input type="hidden" name="url" value="{{ url }}" />
+                 {% endif %} 
+
+                 <fieldset>
+                   <div class="contact-label">
+                     <div>
+                       <input type="text" name="name" value="" id="input-name" placeholder="{{ entry_name }}" class="form-control" />
+                     </div>
+                   </div>
+                   <div class="contact-label">
+                     <div>
+                       <input type="text" name="email" value="" id="input-email" placeholder="{{ entry_email }}" class="form-control" />
+                     </div>
+                   </div>
+                   <div class="contact-label">
+                     <div>
+                       <textarea name="enquiry" rows="7" id="input-enquiry" placeholder="{{ entry_enquiry }}" class="form-control"></textarea>
+                     </div>
+                   </div>
+                 </fieldset>
+                 
+
+                <input class="btn btn-primary" type="submit" value="{{ button_submit }}" />
+            </form>
+
+            <script type="text/javascript">
+                 function IsEmail(email) {
+                      var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                      return regex.test(email);
+                 }
+
+                 $('#popup-{{ module_id }} #contact').bind('submit', function(){
+                      var valid = true;
+                    
+                      if($('#popup-product-question-{{ module_id }} #input-name').val().length < 3 || $('#popup-product-question-{{ module_id }} #input-name').val().length > 32){
+                           $('#popup-product-question-{{ module_id }} #input-name').addClass("error");
+                           valid = false;
+                      } else {
+                           $('#popup-product-question-{{ module_id }} #input-name').removeClass("error");
+
+                      }
+
+                      if(IsEmail($('#popup-product-question-{{ module_id }} #input-email').val())) {
+                           $('#popup-product-question-{{ module_id }} #input-email').removeClass("error");
+                      } else {
+                           $('#popup-product-question-{{ module_id }} #input-email').addClass("error");
+                           valid = false;
+                      }
+                     
+
+                      if($('#popup-product-question-{{ module_id }} #input-enquiry').val().length < 10 || $('#popup-product-question-{{ module_id }} #input-enquiry').val().length > 3000){
+                           $('#popup-product-question-{{ module_id }} #input-enquiry').addClass("error");
+                           valid = false;
+                      } else {
+                           $('#popup-product-question-{{ module_id }} #input-enquiry').removeClass("error");
+                      }
+
+                      if(valid) {
+                           $.ajax({
+                                  type: "POST",
+                                  url: "{{ contact_url }}",
+                                  data: $("#popup-product-question-{{ module_id }} #contact").serialize(), // serializes the form's elements.
+                                  success: function(data)
+                                  {
+                                      alert(data); // show response from the php script.
+                                      $('#popup-product-question-{{ module_id }}').modal('hide')
+                                  }
+                                });
+
+                           return false;
+                      } else {
+                           return false;
+                      }
+                 });
+            </script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

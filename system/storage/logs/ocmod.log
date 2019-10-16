@@ -1,0 +1,141 @@
+2019-10-16 9:34:12 - MOD: Modification Default
+
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 48
+LINE: 110
+LINE: 122
+
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Revslider Modifications
+
+FILE: admin/controller/common/column_left.php
+CODE: return $this->load->view('common/column_left', $data);
+LINE: 745
+
+FILE: admin/view/template/common/header.twig
+CODE: jquery-2.1.1.min.js"></script>
+LINE: 17
+----------------------------------------------------------------
+MOD: Opencart n11 Entegrasyonu
+CODE: if ($this->user->hasPermission('access', 'catalog/category')) {
+LINE: 29
+
+FILE: admin/controller/catalog/product.php
+CODE: $this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
+LINE: 80
+----------------------------------------------------------------
+2019-10-16 9:34:31 - MOD: Modification Default
+
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 48
+LINE: 110
+LINE: 122
+
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Revslider Modifications
+
+FILE: admin/controller/common/column_left.php
+CODE: return $this->load->view('common/column_left', $data);
+LINE: 745
+
+FILE: admin/view/template/common/header.twig
+CODE: jquery-2.1.1.min.js"></script>
+LINE: 17
+----------------------------------------------------------------
+MOD: Opencart n11 Entegrasyonu
+CODE: if ($this->user->hasPermission('access', 'catalog/category')) {
+LINE: 29
+
+FILE: admin/controller/catalog/product.php
+CODE: $this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
+LINE: 80
+----------------------------------------------------------------
+2019-10-16 10:50:45 - MOD: Modification Default
+
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 48
+LINE: 110
+LINE: 122
+
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Revslider Modifications
+
+FILE: admin/controller/common/column_left.php
+CODE: return $this->load->view('common/column_left', $data);
+LINE: 745
+
+FILE: admin/view/template/common/header.twig
+CODE: jquery-2.1.1.min.js"></script>
+LINE: 17
+----------------------------------------------------------------
+MOD: Opencart n11 Entegrasyonu
+CODE: if ($this->user->hasPermission('access', 'catalog/category')) {
+LINE: 29
+
+FILE: admin/controller/catalog/product.php
+CODE: $this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
+LINE: 80
+----------------------------------------------------------------

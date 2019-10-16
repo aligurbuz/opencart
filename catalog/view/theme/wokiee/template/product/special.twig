@@ -1,0 +1,119 @@
+{{ header }} 
+{% set theme_options = registry.get('theme_options') %}
+{% set config = registry.get('config') %}
+{% set categoryPage = constant('true') %}
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+
+<div id="mfilter-content-container">
+  {% if (products) %} 
+    {% set currently = theme_options.getCurrently() %}
+    <div class="tt-filters-options {% if theme_options.get( 'product_grid_type' ) == '1' or theme_options.get( 'product_grid_type' ) == '2' or theme_options.get( 'product_grid_type' ) == '3' %}desctop-no-sidebar{% endif %}">
+      <h1 class="tt-title">
+        {{ heading_title }}
+      </h1>
+      <div class="tt-btn-toggle">
+        <a href="#">{% if (theme_options.get( 'filter_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'filter_text', config.get( 'config_language_id' ) ) }} {% else %}FILTER{% endif %}</a>
+      </div>
+      <div class="tt-sort d-none d-md-block">
+        <select onchange="location = this.value;">
+          {% for sorts in sorts %} 
+          {% if (sorts['value'] == sort ~ '-' ~ order) %} 
+          <option value="{{ sorts['href'] }}" selected="selected">{{ sorts['text'] }}</option>
+          {% else %} 
+          <option value="{{ sorts['href'] }}">{{ sorts['text'] }}</option>
+          {% endif %} 
+          {% endfor %} 
+        </select>
+        <select onchange="location = this.value;">
+          {% for limits in limits %} 
+          {% if (limits['value'] == limit) %} 
+          <option value="{{ limits['href'] }}" selected="selected">{{ limits['text'] }}</option>
+          {% else %} 
+          <option value="{{ limits['href'] }}">{{ limits['text'] }}</option>
+          {% endif %} 
+          {% endfor %} 
+        </select>
+      </div>
+      {% if not (theme_options.get( 'product_grid_type' ) == '3') %}
+        <div class="tt-quantity">
+          <a href="#" class="tt-col-one d-block d-md-none {% if currently == 'verylarge' %}active{% endif %}" data-value="tt-col-one"></a>
+          <a href="#" class="tt-col-two {% if theme_options.get( 'product_grid_type' ) == '1' or theme_options.get( 'product_grid_type' ) == '2' %}d-block d-md-none{% endif %} {% if currently == 'large' %}active{% endif %}" data-value="tt-col-two"></a>
+          <a href="#" class="tt-col-three d-none d-md-block {% if currently != 'large' and currently != 'small' and currently != 'verysmall' and currently != 'verylarge' %}active{% endif %}" data-value="tt-col-three"></a>
+          <a href="#" class="tt-col-four d-none d-md-block {% if currently == 'small' %}active{% endif %}" data-value="tt-col-four"></a>
+          {% if theme_options.get( 'product_grid_type' ) == '1' or theme_options.get( 'product_grid_type' ) == '2' %}
+            <a href="#" class="tt-col-six d-none d-md-block {% if currently == 'verysmall' %}active{% endif %}" data-value="tt-col-six"></a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if theme_options.get( 'product_grid_type' ) == '3' %}
+      <div class="tt-product-listing-masonry">
+        <div class="tt-product-init tt-add-item">
+          {% for product in products %} 
+            <div class="element-item {% if loop.index == 3 or loop.index == 6 %}double-size{% endif %}">
+                {% include 'wokiee/template/new_elements/product2.twig' %}
+            </div>
+          {% endfor %} 
+        </div>
+      </div>
+    {% else %}
+      {% set class = '4' %}
+      {% if theme_options.get( 'product_grid_type' ) == '1' %}
+        {% set class = '3' %}
+      {% endif %}
+      {% if theme_options.get( 'product_grid_type' ) == '2' %}
+        {% set class = '2' %}
+      {% endif %}
+      {% if currently == 'large' %}{% set class = '6' %}{% endif %}
+      {% if currently == 'small' %}{% set class = '3' %}{% endif %}
+      {% if currently == 'medium' %}{% set class = '4' %}{% endif %}
+      {% if currently == 'verylarge' %}{% set class = '12' %}{% endif %}
+      {% if currently == 'verysmall' %}{% set class = '2' %}{% endif %}
+      <div class="tt-product-listing row">
+        {% for product in products %} 
+          <div class="col-{% if class == '12' %}12{% else %}6{% endif %} {% if class == '3' %}col-md-4 col-lg-{{ class }}{% elseif class == '2' %}col-md-4 col-lg-3 col-xl-{{ class }}{% else %}col-md-{{ class }}{% endif %} tt-col-item">
+              {% include 'wokiee/template/new_elements/product.twig' %}
+          </div>
+        {% endfor %} 
+      </div>
+    {% endif %}
+    
+    <div class="row pagination-results">
+      <div class="col-sm-6 text-left">{{ pagination }}</div>
+      <div class="col-sm-6 text-right">{{ results }}</div>
+    </div>
+  {% else %} 
+  <p style="padding-bottom: 15px">{{ text_empty }}</p>
+  <div class="buttons">
+    <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+  </div>
+  {% endif %} 
+  
+<script type="text/javascript"><!--
+function setCookie(key, value) {
+    var expires = new Date();
+    expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+    document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+}
+$(document).ready(function () {
+  $("body").on("click", ".tt-quantity a", function () {
+    if($(this).attr("data-value") == 'tt-col-two') {
+      setCookie('display','large');
+    } else if($(this).attr("data-value") == 'tt-col-four') {
+      setCookie('display','small');
+    } else if($(this).attr("data-value") == 'tt-col-six') {
+      setCookie('display','verysmall');
+    } else if($(this).attr("data-value") == 'tt-col-one') {
+      setCookie('display','verylarge');
+    } else {
+      setCookie('display','medium');
+    }
+  });
+});
+//--></script> 
+
+</div>
+
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

@@ -1,0 +1,64 @@
+<div class="tt-newsletter" id="newsletter{{ id }}">
+	<div class="tt-mobile-collapse">
+		<h4 class="tt-collapse-title">
+			{{ module['content']['title'] }}
+		</h4>
+		<div class="tt-collapse-content">
+			<p>
+				{{ module['content']['text'] }}
+			</p>
+			<div id="newsletterform" class="form-inline form-default" style="margin-top: 24px">
+				<div class="form-group">
+					<input type="text" name="email" class="form-control email" placeholder="{{ module['content']['input_placeholder'] }}">
+					<button type="submit" class="btn subscribe">{{ module['content']['subscribe_text'] }}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	function Unsubscribe() {
+		$.post('{{ module['content']['unsubscribe_url'] }}', 
+			{ 
+				email: $('#newsletter{{ id }} .email').val() 
+			}, function (e) {
+				$('#newsletter{{ id }} .email').val('');
+				alert(e.message);
+			}
+		, 'json');
+	}
+	
+	function Subscribe() {
+		$.post('{{ module['content']['subscribe_url'] }}', 
+			{ 
+				email: $('#newsletter{{ id }} .email').val() 
+			}, function (e) {
+				if(e.error === 1) {
+					var r = confirm(e.message);
+					if (r == true) {
+					    $.post('{{ module['content']['unsubscribe_url'] }}', { 
+					    	email: $('#newsletter{{ id }} .email').val() 
+					    }, function (e) {
+					    	$('#newsletter{{ id }} .email').val('');
+					    	alert(e.message);
+					    }, 'json');
+					}
+				} else {
+					$('#newsletter{{ id }} .email').val('');
+					alert(e.message);
+				}
+			}
+		, 'json');
+	}
+	
+	$('#newsletter{{ id }} .subscribe').click(Subscribe);
+	$('#newsletter{{ id }} .unsubscribe').click(Unsubscribe);
+	$('#newsletter{{ id }} .email').keypress(function (e) {
+	    if (e.which == 13) {
+	        Subscribe();
+	    }
+	});
+});
+</script>

@@ -1,0 +1,225 @@
+{{ header }} 
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+
+{% if (settings['comments_engine'] == 'FACEBOOK') %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+{% endif %} 
+
+{% set theme_options = registry.get('theme_options') %}
+{% set config = registry.get('config') %} 
+{% set page_direction = theme_options.get( 'page_direction' ) %} 
+{% set language_id = config.get( 'config_language_id' ) %}
+
+{% if (article|length > 0) %}
+  <div class="row justify-content-center">
+    <div class="col-xs-12 col-md-10 col-lg-8 col-md-auto">
+      <div class="tt-post-single">
+        <div class="tt-tag">
+          {% if (tags) %} 
+              {% set i = 0 %}
+                {% for i in i..tags %} 
+                  {% if loop.index == 1 %}<a href="{{ tags[i]['href'] }}">{{ tags[i]['tag'] }}</a>{% endif %}
+              {% endfor %} 
+          {% endif %} 
+        </div>
+        <h1 class="tt-title">
+          {{ heading_title }}
+        </h1>
+        <div class="tt-autor">
+            <span class="month">
+                {{ theme_options.date('M', theme_options.strtotime(article['date_published'])) }} 
+            </span>
+            <span class="day">
+                {{ theme_options.date('d', theme_options.strtotime(article['date_published'])) }},
+            </span>
+            <span class="day">
+                {{ theme_options.date('Y', theme_options.strtotime(article['date_published'])) }} 
+            </span>
+        </div>
+        <div class="tt-post-content">
+          {% if (article['gallery']|length > 0) %}
+              {% if (article['article_list_gallery_display'] == 'CLASSIC') %}
+                    {{ article['gallery'][0]['output'] }}
+              {% endif %} 
+              {% if (article['article_list_gallery_display'] == 'SLIDER') %}
+                <div class="tt-slider-blog-single slick-animated-show-js">
+                  {% for gallery in article['gallery'] %}
+                  <div>{{ gallery['output'] }}</div>
+                  {% endfor %} 
+                </div>
+                <div class="tt-slick-row">
+                  <div class="item">
+                    <div class="tt-slick-quantity">
+                      <span class="account-number">1</span> / <span class="total">1</span>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="tt-slick-button">
+                      <button type="button" class="slick-arrow slick-prev">Previous</button>
+                      <button type="button" class="slick-arrow slick-next">Next</button>
+                    </div>
+                  </div>
+                </div>
+              {% endif %} 
+          {% endif %} 
+          {{ article['content']}}
+        </div>
+        <div class="post-meta">
+          <span class="item">
+            {% if (tags) %} 
+                {% set i = 0 %}
+                  {% for i in i..tags %} 
+                    <a href="{{ tags[i]['href'] }}">{{ tags[i]['tag'] }}</a>{% if not loop.last %},{% endif %}
+                {% endfor %} 
+            {% endif %} 
+          </span>
+        </div>
+      </div>
+
+      {% if (articles|length > 0 and settings['article_related_status'] == 1) %} 
+        {% include 'wokiee/template/blog/article_related/' ~ settings['article_related_template']|replace({'.tpl': '.twig'}) %} 
+      {% endif %}  
+
+       {% if (products|length > 0 and settings['product_related_status'] == 1) %} 
+          <div class="comments-single-post" style="margin-top: 52px">
+            <h6 class="tt-title-border">{{ text_related_products }}</h6>
+            <div class="row tt-layout-product-item">
+                {% for product in products %}
+                  {% if loop.index < 4 %}
+                    <div class="col-6 col-md-4">
+                      {% include 'wokiee/template/new_elements/product.twig' %}
+                    </div>
+                  {% endif %}
+                {% endfor %} 
+            </div>
+          </div>
+       {% endif %}  
+
+      {% if (article['status_comments']) %} 
+        {% if (settings['comments_engine'] == 'LOCAL') %}
+            <div class="comments-single-post" style="margin-top: 52px">
+              <h6 class="tt-title-border">{{ text_comments }}: {{ article['comments_count'] }}</h6>
+                 <div class="box-content">
+                      {% if (comments|length > 0) %}
+                      <div class="tt-comments-layout">
+                          {% for comment in comments %}
+                            <div class="tt-item">
+                              <div class="tt-comments-level-1">
+                                <div class="tt-avatar"></div>
+                                <div class="tt-content">
+                                  <div class="tt-comments-title">
+                                    <span class="username">by <span>{{ comment['name'] }}</span></span>
+                                    <span class="time">{{ theme_options.date('d-m-Y H:i', theme_options.strtotime(comment['date_added'])) }}</span>
+                                  </div>
+                                  <p>
+                                    {{ comment['content'] }} 
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          {% endfor %} 
+                      </div> 
+                      {% else %} 
+                      <p>{{ text_no_comments }}</p>
+                      {% endif %} 
+                </div>
+            </div>
+            
+            <div class="comments-single-post leave-reply" style="margin-top: 52px">
+              <h6 class="tt-title-border">{{ text_leave_reply }}</h6>
+                 <div class="box-content">
+                       <p style="padding-bottom: 20px">{{ text_required_info }}<abbr class="required">*</abbr> </p>
+                       <div class="form-default">
+                         <form class="form-horizontal" method="post" id="form-comment">
+                             <div class="form-group required">
+                                 <label class="control-label" for="input-name">{{ text_name }} *</label>
+                                 <input type="text" name="name" value="" id="input-name" class="form-control">
+                              </div>
+                              <div class="form-group required">
+                                 <label class="control-label" for="input-email">{{ text_email }} *</label>
+                                 <input type="text" name="email" value="" id="input-email" class="form-control">
+                             </div>
+                             <div class="form-group required">
+                                 <label class="control-label" for="input-content">{{ text_content }} *</label>
+                                 <textarea rows="10" id="input-content" name="content" class="form-control"></textarea>
+                             </div>
+         
+                                <button class="btn" id="button-comment" type="submit">{{ button_post_comment }}</button>
+                         </form>
+                       </div>
+                 </div>
+                 
+            </div>
+            {% endif %} 
+
+            {% if (settings['comments_engine'] == 'DISQUS') %}
+              <div style="height: 58px"></div>
+              <div id="disqus_thread"></div>
+              <script type="text/javascript">
+                  /* * * CONFIGURATION VARIABLES * * */
+                  var disqus_shortname = '{{ settings['disqus_name'] }}';
+
+                  /* * * DON'T EDIT BELOW THIS LINE * * */
+                  (function() {
+                      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                  })();
+              </script>
+              <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            {% endif %} 
+
+            {% if (settings['comments_engine'] == 'FACEBOOK') %}
+                 <div style="height: 58px"></div>
+                <div class="fb-comments" data-href="{{ theme_options.facebook() }}" data-width="100%"></div>
+            {% endif %} 
+        {% endif %}
+    </div>
+  </div>
+
+<script>
+    $(function(){
+        $('#button-comment').on('click', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'index.php?route=blog/article/write&article_id={{ article_id }}',
+                type: 'post',
+                dataType: 'json',
+                data: $("#form-comment").serialize(),
+                beforeSend: function() {
+                    $('#button-comment').button('loading');
+                },
+                complete: function() {
+                    $('#button-comment').button('reset');
+                },
+                success: function(json) {
+                    $('.alert-success, .alert-danger').remove();
+
+                    if (json['error']) {
+                        $('.leave-reply .box-content > *:first-child').before('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+                    }
+
+                    if (json['success']) {
+                        $('.leave-reply .box-content > *:first-child').before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+
+                        $('input[name=\'name\']').val('');
+                        $('input[name=\'email\']').val('');
+                        $('textarea[name=\'content\']').val('');
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+{% endif %}
+
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

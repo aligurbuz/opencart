@@ -1,0 +1,29 @@
+<div class="tt-collapse open">
+  <h3 class="tt-collapse-title">{{ heading_title }}</h3>
+  <div class="tt-collapse-content" style="">
+    <ul class="tt-list-row">
+      {% if (not logged) %} 
+      <li><a href="{{ login }}">{{ text_login }}</a></li>
+      <li><a href="{{ register }}">{{ text_register }}</a></li>
+      <li><a href="{{ forgotten }}">{{ text_forgotten }}</a></li>
+      {% endif %} 
+      <li><a href="{{ account }}">{{ text_account }}</a></li>
+      {% if (logged) %} 
+      <li><a href="{{ edit }}">{{ text_edit }}</a></li>
+      <li><a href="{{ password }}">{{ text_password }}</a></li>
+      {% endif %} 
+      <li><a href="{{ address }}">{{ text_address }}</a></li>
+      <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+      <li><a href="{{ order }}">{{ text_order }}</a></li>
+      <li><a href="{{ download }}">{{ text_download }}</a></li>
+      <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
+      <li><a href="{{ reward }}">{{ text_reward }}</a></li>
+      <li><a href="{{ return }}">{{ text_return }}</a></li>
+      <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+      <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+      {% if (logged) %} 
+      <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+      {% endif %} 
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	{% set theme_options = registry.get('theme_options') %}
+	{% set config = registry.get('config') %} 
+
+	<div class="tt-footer-default tt-color-scheme-02">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md-9">
+					<div class="tt-newsletter-layout-01" id="newsletter{{ module_id }}">
+						<div class="tt-newsletter">
+							<div class="tt-mobile-collapse">
+								<h4 class="tt-collapse-title">
+									{{ module_title }}
+								</h4>
+								<div class="tt-collapse-content">
+									<div id="newsletterform" class="form-inline form-default">
+										<div class="form-group">
+											<input type="text" name="email" class="email form-control" placeholder="{{ input_placeholder }}">
+											<button type="submit" class="btn subscribe">{{ subscribe_text }}</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-auto">
+					<ul class="tt-social-icon">
+						<li><a class="icon-g-64" target="_blank" href="http://www.facebook.com/"></a></li>
+						<li><a class="icon-h-58" target="_blank" href="http://www.facebook.com/"></a></li>
+						<li><a class="icon-g-66" target="_blank" href="http://www.twitter.com/"></a></li>
+						<li><a class="icon-g-67" target="_blank" href="http://www.google.com/"></a></li>
+						<li><a class="icon-g-70" target="_blank" href="https://instagram.com/"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		function Unsubscribe() {
+			$.post('{{ unsubscribe_url }}', 
+				{ 
+					email: $('#newsletter{{ module_id }} .email').val() 
+				}, function (e) {
+					$('#newsletter{{ module_id }} .email').val('');
+					alert(e.message);
+				}
+			, 'json');
+		}
+		
+		function Subscribe() {
+			{% if (theme_options.get( 'rodo_status' ) == '1') %} 
+			if($('input[name="agree_rodo2"]').is(':checked')) {
+			{% endif %} 
+			$.post('{{ subscribe_url }}', 
+				{ 
+					email: $('#newsletter{{ module_id }} .email').val() 
+				}, function (e) {
+					if(e.error === 1) {
+						var r = confirm(e.message);
+						if (r == true) {
+						    $.post('{{ unsubscribe_url }}', { 
+						    	email: $('#newsletter{{ module_id }} .email').val() 
+						    }, function (e) {
+						    	$('#newsletter{{ module_id }} .email').val('');
+						    	alert(e.message);
+						    }, 'json');
+						}
+					} else {
+						$('#newsletter{{ module_id }} .email').val('');
+						alert(e.message);
+					}
+				}
+			, 'json');
+			{% if (theme_options.get( 'rodo_status' ) == '1') %} 
+			} else {
+				$('#agree_rodo_form2 .submit').click();
+			}
+			{% endif %} 
+		}
+		
+		$('#newsletter{{ module_id }} .subscribe').click(Subscribe);
+		$('#newsletter{{ module_id }} .unsubscribe').click(Unsubscribe);
+		$('#newsletter{{ module_id }} .email').keypress(function (e) {
+		    if (e.which == 13) {
+		        Subscribe();
+		    }
+		});
+	});
+	</script>
+{% endif %}

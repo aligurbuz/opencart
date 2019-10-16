@@ -1,0 +1,3 @@
+.common-home footer { margin-top: 0px; }
+footer .tt-footer-col { display: none; }
+footer .tt-footer-custom:last-child { margin-top: 0px !important; }

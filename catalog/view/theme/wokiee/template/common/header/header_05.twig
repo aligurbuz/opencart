@@ -1,0 +1,158 @@
+<header>
+	<!-- tt-mobile-header -->
+	<div class="tt-mobile-header">
+		<div class="container-fluid">
+			<div class="tt-header-row">
+				<div class="tt-mobile-parent-menu">
+					<div class="tt-menu-toggle">
+						<i class="icon-03"></i>
+					</div>
+				</div>
+				<!-- search -->
+				<div class="tt-mobile-parent-search tt-parent-box"></div>
+				<!-- /search -->
+				<!-- cart -->
+				<div class="tt-mobile-parent-cart tt-parent-box"></div>
+				<!-- /cart -->
+				<!-- account -->
+				<div class="tt-mobile-parent-account tt-parent-box"></div>
+				<!-- /account -->
+				<!-- currency -->
+				<div class="tt-mobile-parent-multi tt-parent-box"></div>
+				<!-- /currency -->
+			</div>
+		</div>
+		<div class="container-fluid tt-top-line">
+			<div class="row">
+				<div class="tt-logo-container">
+					{% if (logo) %} 
+					<!-- Logo -->
+					<a class="tt-logo tt-logo-alignment" href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" /></a>
+					{% endif %} 
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- tt-desktop-header -->
+	<div class="tt-desktop-header">
+		<div class="container">
+			<div class="tt-header-holder">
+				<div class="tt-col-obj tt-obj-logo obj-aligment-center">
+					{% if (logo) %} 
+					<!-- Logo -->
+					<a class="tt-logo tt-logo-alignment" href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" /></a>
+					{% endif %} 
+				</div>
+				<div class="tt-obj-options obj-move-right tt-position-absolute">
+					<!-- tt-search -->
+					<div class="tt-desctop-parent-search tt-parent-box">
+						<div class="tt-search tt-dropdown-obj">
+							<button class="tt-dropdown-toggle" data-tooltip="{{ text_search }}" data-tposition="bottom">
+								<i class="icon-f-85"></i>
+							</button>
+							<div class="tt-dropdown-menu">
+								<div class="container">
+									<form>
+										<div class="tt-col">
+											<input type="text" class="tt-search-input" placeholder="{{ text_search }}...">
+											<button class="tt-btn-search" type="submit"></button>
+										</div>
+										<div class="tt-col">
+											<button class="tt-btn-close icon-g-80"></button>
+										</div>
+										<div class="tt-info-text">
+											{% if (theme_options.get( 'what_are_you_looking_for_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'what_are_you_looking_for_text', config.get( 'config_language_id' ) ) }} {% else %}What are you Looking for?{% endif %}
+										</div>
+										<div class="search-results">
+											<ul>
+
+											</ul>
+											<button type="button" class="tt-view-all">{% if (theme_options.get( 'view_all_products_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'view_all_products_text', config.get( 'config_language_id' ) ) }} {% else %}View all products{% endif %}</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /tt-search -->
+					<!-- tt-cart -->
+					{{ cart }}
+					<!-- /tt-cart -->
+					<!-- tt-account -->
+					<div class="tt-desctop-parent-account tt-parent-box">
+						<div class="tt-account tt-dropdown-obj">
+							<button class="tt-dropdown-toggle"  data-tooltip="{{ text_account }}" data-tposition="bottom"><i class="icon-f-94"></i></button>
+							<div class="tt-dropdown-menu">
+								<div class="tt-mobile-add">
+									<button class="tt-close">{% if (theme_options.get( 'close_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'close_text', config.get( 'config_language_id' ) ) }} {% else %}Close{% endif %}</button>
+								</div>
+								<div class="tt-dropdown-inner">
+									<ul>
+									    <li><a href="{{ account }}"><i class="icon-f-94"></i>{{ text_account }}</a></li>
+									    <li><a href="{{ wishlist }}"><i class="icon-n-072"></i>{{ text_wishlist }}</a></li>
+									    <li><a href="{{ theme_options.getLinkOpenCart('product/compare') }}"><i class="icon-n-08"></i>{% if (theme_options.get( 'compare_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'compare_text', config.get( 'config_language_id' ) ) }}{% else %}Compare{% endif %}</a></li>
+									    <li><a href="{{ checkout }}"><i class="icon-f-68"></i>{{ text_checkout }}</a></li>
+							            {% if logged %}
+							            <li><a href="{{ logout }}"><i class="icon-f-77"></i>{{ text_logout }}</a></li>
+							            {% else %}
+							            <li><a href="{{ login }}"><i class="icon-f-76"></i>{{ text_login }}</a></li>
+							            <li><a href="{{ register }}"><i class="icon-f-94"></i>{{ text_register }}</a></li>
+							            {% endif %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /tt-account -->
+					<!-- tt-langue and tt-currency -->
+					<div class="tt-desctop-parent-multi tt-parent-box">
+						<div class="tt-multi-obj tt-dropdown-obj">
+							<button class="tt-dropdown-toggle" data-tooltip="{% if (theme_options.get( 'settings_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'settings_text', config.get( 'config_language_id' ) ) }} {% else %}Settings{% endif %}" data-tposition="bottom"><i class="icon-f-79"></i></button>
+							<div class="tt-dropdown-menu">
+								<div class="tt-mobile-add">
+									<button class="tt-close">{% if (theme_options.get( 'close_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'close_text', config.get( 'config_language_id' ) ) }} {% else %}Close{% endif %}</button>
+								</div>
+								<div class="tt-dropdown-inner">
+									{{ language ~ currency }}
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /tt-langue and tt-currency -->
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="tt-header-holder">
+				<div class="tt-obj-menu obj-aligment-center">
+					<!-- tt-menu -->
+					<div class="tt-desctop-parent-menu tt-parent-box">
+						<div class="tt-desctop-menu tt-menu-small">
+							{% set menu9 = theme_options.getModules('menu') %}
+							{% if ( menu9|length > 0 ) %} 
+								{% for module in menu9 %} 
+									{{ module }}
+								{% endfor %}
+							{% else %}
+								{{ menu }}
+							{% endif %}
+						</div>
+					</div>
+					<!-- /tt-menu -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- stuck nav -->
+	<div class="tt-stuck-nav">
+		<div class="container">
+			<div class="tt-header-row ">
+				<div class="tt-stuck-parent-menu"></div>
+				<div class="tt-stuck-parent-search tt-parent-box"></div>
+				<div class="tt-stuck-parent-cart tt-parent-box"></div>
+				<div class="tt-stuck-parent-account tt-parent-box"></div>
+				<div class="tt-stuck-parent-multi tt-parent-box"></div>
+			</div>
+		</div>
+	</div>
+</header>

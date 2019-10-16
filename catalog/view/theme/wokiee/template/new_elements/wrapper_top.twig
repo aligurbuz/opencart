@@ -1,0 +1,182 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	{% set theme_options = registry.get('theme_options') %}
+	{% set config = registry.get('config') %}
+	<div class="tt-breadcrumb">
+		<div class="container">
+			<ul>
+		     	{% for breadcrumb in breadcrumbs %} 
+		     	<li><a href="{{ breadcrumb['href'] }}">{% if (breadcrumb['text'] != '<i class="fa fa-home"></i>') %} {{ breadcrumb['text'] }} {% else %} {% if (theme_options.get( 'home_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'home_text', config.get( 'config_language_id' ) ) }} {% else %} {{ 'Home' }} {% endif %} {% endif %}</a></li>
+		     	{% endfor %} 
+			</ul>
+		</div>
+	</div>
+
+	{% set slideshow = theme_options.getModules('slideshow') %}
+	{% if ( slideshow|length > 0 ) %} 
+		{% for module in slideshow %} 
+			{{ module }}
+		{% endfor %}
+	{% endif %} 
+
+	<div id="tt-pageContent">
+		{% if not product_page %}
+		<div class="container-indent">
+			<div {% if not (categoryPage and theme_options.get( 'product_grid_type' ) == '2') and not (categoryPage and theme_options.get( 'product_grid_type' ) == '3') %}class="container container-fluid-custom-mobile-padding"{% else %}class="container-fluid-custom container-fluid-custom-mobile-padding"{% endif %}>
+				{% set preface_left = theme_options.getModules('preface_left') %}
+				{% set preface_right = theme_options.getModules('preface_right') %}
+				
+				{% if ( preface_left|length > 0 or preface_right|length > 0 ) %} 
+				<div class="row">
+					<div class="col-md-9">
+						{% if ( preface_left|length > 0 ) %}
+							{% for module in preface_left %} 
+								{{ module }}
+							{% endfor %}
+						{% endif %} 
+					</div>
+					
+					<div class="col-md-3">
+						{% if ( preface_right|length > 0 ) %}
+							{% for module in preface_right %} 
+								{{ module }}
+							{% endfor %}
+						{% endif %} 
+					</div>
+				</div>
+				{% endif %} 
+				
+				
+				{% set preface_fullwidth = theme_options.getModules('preface_fullwidth') %}
+				{% if ( preface_fullwidth|length > 0 ) %}
+					{{ '<div class="row"><div class="col-md-12">' }}
+					{% for module in preface_fullwidth %} 
+						{{ module }}
+					{% endfor %}
+					{{ '</div></div>' }}
+				{% endif %} 
+
+				{% if blog %}
+					<h1 class="tt-title-subpages noborder">{{ heading_title }}</h1>
+				{% endif %}
+				
+				<div class="row">
+					{% set columnleft = theme_options.getModules('column_left') %}
+					{% if ( columnleft|length > 0 ) %} 
+					<div class="col-lg-3 leftColumn {% if categoryPage %}aside{% endif %} {% if (categoryPage and theme_options.get( 'product_grid_type' ) == '1') or (categoryPage and theme_options.get( 'product_grid_type' ) == '2') or (categoryPage and theme_options.get( 'product_grid_type' ) == '3') %}desctop-no-sidebar{% endif %}" id="column-left">
+						{% if categoryPage %}
+							<div class="tt-btn-col-close">
+								<a href="#">{% if (theme_options.get( 'close_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'close_text', config.get( 'config_language_id' ) ) }} {% else %}Close{% endif %}</a>
+							</div>
+							<div class="tt-collapse open tt-filter-detach-option">
+								<div class="tt-collapse-content" style="">
+									<div class="filters-mobile">
+										<div class="filters-row-select">
+
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+						{% for module in columnleft %} 
+							{{ module }}
+						{% endfor %}
+					</div>
+					{% endif %} 
+					
+					{% set grid_center = 12 %} {% if ( columnleft|length > 0 ) %} {% set grid_center = 9 %} {% endif %} 
+					<div class="col-lg-{% if (categoryPage and theme_options.get( 'product_grid_type' ) == '1') or (categoryPage and theme_options.get( 'product_grid_type' ) == '2') or (categoryPage and theme_options.get( 'product_grid_type' ) == '3') %}12{% else %}{{ grid_center }}{% endif %}">
+						
+						{% set content_big_column = theme_options.getModules('content_big_column') %}
+						{% if ( content_big_column|length > 0 ) %} 
+							{% for module in content_big_column %} 
+								{{ module }}
+							{% endfor %}
+						{% endif %} 
+						
+						
+						{% set content_top = theme_options.getModules('content_top') %}
+						{% if ( content_top|length > 0 ) %} 
+							{% for module in content_top %} 
+								{{ module }}
+							{% endfor %}
+						{% endif %} 
+						
+						<div class="row">
+							
+							{% set grid_content_top = 12 %} 
+							{% set grid_content_right = 3 %}
+							{% set column_right = theme_options.getModules('column_right') %} 
+							{% if ( column_right|length > 0 ) %}
+								{% if (grid_center == 9) %}
+									{% set grid_content_top = 8 %}
+									{% set grid_content_right = 4 %}
+								{% else %} 
+									{% set grid_content_top = 9 %}
+									{% set grid_content_right = 3 %}
+								{% endif %}
+							{% endif %}
+							
+							<div class="col-lg-{% if (categoryPage and theme_options.get( 'product_grid_type' ) == '1') or (categoryPage and theme_options.get( 'product_grid_type' ) == '2') or (categoryPage and theme_options.get( 'product_grid_type' ) == '3') %}12{% else %}{{ grid_content_top }}{% endif %} center-column" id="content">
+
+								{% if (error_warning is defined and checkoutPage is not defined) %} 
+									{% if (error_warning) %} 
+									<div class="warning">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										{{ error_warning }} 
+									</div>
+									{% endif %} 
+								{% endif %} 
+								
+								{% if (success is defined) %} 
+									{% if (success) %} 
+									<div class="success">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										{{ success }} 
+									</div>
+									{% endif %} 
+								{% endif %}
+		{% else %}
+			{% set preface_left = theme_options.getModules('preface_left') %}
+			{% set preface_right = theme_options.getModules('preface_right') %}
+			{% if ( preface_left|length > 0 or preface_right|length > 0 ) %} 
+			<div class="row">
+				<div class="col-md-9">
+					{% if ( preface_left|length > 0 ) %}
+						{% for module in preface_left %} 
+							{{ module }}
+						{% endfor %}
+					{% endif %} 
+				</div>
+				
+				<div class="col-md-3">
+					{% if ( preface_right|length > 0 ) %}
+						{% for module in preface_right %} 
+							{{ module }}
+						{% endfor %}
+					{% endif %} 
+				</div>
+			</div>
+			{% endif %} 
+			
+			{% set columnleft = theme_options.getModules('column_left') %}
+			{% if ( columnleft|length > 0 ) %} 
+				{% for module in columnleft %} 
+					{{ module }}
+				{% endfor %}
+			{% endif %} 
+
+			{% set content_big_column = theme_options.getModules('content_big_column') %}
+			{% if ( content_big_column|length > 0 ) %} 
+				{% for module in content_big_column %} 
+					{{ module }}
+				{% endfor %}
+			{% endif %} 
+			
+			{% set content_top = theme_options.getModules('content_top') %}
+			{% if ( content_top|length > 0 ) %} 
+				{% for module in content_top %} 
+					{{ module }}
+				{% endfor %}
+			{% endif %} 
+		{% endif %}
+{% endif %}

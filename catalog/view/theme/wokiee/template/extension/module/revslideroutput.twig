@@ -1,0 +1,25 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	{% set config = registry.get('config') %} 
+	{% if slider_align_top == 1 %}
+		<div class="tt-offset-small container-indent">
+			<div class="container">
+	{% else %}
+		<div class="container-indent nomargin">
+			<div class="container-fluid">
+				<div class="row">
+	{% endif %}
+					<div class="slider-revolution revolution-default">
+						<div class="tp-banner-container">
+							<div class="tp-banner revolution">
+								<script type="text/javascript" src="system/config/revslider/public/assets/js/jquery.themepunch.tools.min.js"></script>
+								<script type="text/javascript" src="system/config/revslider/public/assets/js/jquery.themepunch.revolution.min.js"></script>
+								{{ rev_content }} 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	{% if slider_align_top != 1 %}
+		</div>
+	{% endif %}
+{% endif %}

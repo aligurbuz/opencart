@@ -1,0 +1,28 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+    {% set theme_options = registry.get('theme_options') %}
+	<div class="tt-block-aside">
+		<h3 class="tt-aside-title">{{ heading_title }}</h3>
+		<div class="tt-aside-content">
+			<div class="tt-aside-post">
+				{% for article in articles %}
+					<div class="item">
+                        <div class="tt-tag">
+                            <a href="{{ article['href'] }}">{{ article['tags'][0]['tag'] }}</a>
+                        </div>
+						<a href="{{ article['href'] }}">
+							<div class="tt-title">{{ article['title'] }}</div>
+							<div class="tt-description">
+								{{ article['description']|slice(0, 130) ~ '...' }}
+							</div>
+						</a>
+                        <div class="tt-info">
+                            <div class="tt-autor">
+                                {{ theme_options.date('F d, Y', theme_options.strtotime(article['date_published'])) }}
+                            </div>
+                        </div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endif %}

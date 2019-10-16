@@ -1,0 +1,117 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	{% set config = registry.get('config') %}
+	{% set theme_options = registry.get('theme_options') %}
+	{% set page_direction = theme_options.get( 'page_direction' ) %} 
+	{% set language_id = config.get( 'config_language_id' ) %}
+	<nav>
+		<ul>
+			{% if (ustawienia['home_item'] == 'icon' or ustawienia['home_item'] == 'text') %} 
+			<li class="dropdown tt-megamenu-col-02 selected tt-submenu"><a href="{{ home }}">{% if (ustawienia['home_item'] == 'icon') %}<i class="fa fa-home"></i>{% else %}{{ home_text }}{% endif %}</a></li>
+			{% endif %} 
+			{% for row in menu %} 
+				{% set class = '' %}
+				{% set target = constant('false') %}
+				{% if (row['new_window'] == 1) %} 
+					{% set target = 'target="_blank"' %} 
+				{% endif %}
+				{% if (row['custom_class'] != '') %} 
+					{% set class = class ~ '' ~ row['custom_class'] %} 
+				{% endif %}
+				{% set label = constant('false') %} 
+					
+				{% if (row['label'] != '') %} {% set label = '<span class="megamenu-label" style="background: ' ~ row['label_background_color'] ~ ';color: ' ~ row['label_text_color'] ~ ';"><span style="background: ' ~ row['label_background_color'] ~ ';border-color: ' ~ row['label_background_color'] ~ '"></span>' ~ row['label'] ~ '</span>' %}{% endif %}
+
+				<li class='{% if row['submenu_width'] == '280' %}dropdown tt-megamenu-col-01 tt-submenu{% endif %} {% if row['submenu_width'] == '630' %}dropdown tt-megamenu-col-02 tt-submenu{% endif %} {% if row['submenu_width'] == '100%' %}dropdown megamenu tt-submenu{% endif %} {{ class }}'>
+					{{ "<a href='"~row['link']~"' class='"~class_link~"' "~target~">"~row['icon']~theme_options.html_entity_decode(row['name'][lang_id])~label~"</a>" }} 
+					{% if (row['submenu'] is iterable and row['submenu'] is not empty) %}
+						{% set background_image = constant('false') %}
+						{% if (row['submenu_background'] != '') %}
+							{% set background_image = 'style="background-image:url(image/' ~ row['submenu_background'] ~ ');background-position: ' ~ row['submenu_background_position'] ~ ';background-repeat: ' ~ row['submenu_background_repeat'] ~ ';"' %}
+						{% endif %}
+						<div class="dropdown-menu"{{ background_image }}>
+							<div class="row">
+								{% for submenu in row['submenu'] %} 
+									<div class="col-12 col-md-{{ submenu['content_width'] }}">
+										{% if (submenu['content_type'] == '0') %}
+											{{ submenu['html'] }}
+										{% elseif (submenu['content_type'] == '1') %}
+											{% if (submenu['product'] is iterable) %}
+												<div class="tt-product thumbprod-center">
+													<a href="{{ submenu['product']['link'] }}">
+														<div class="tt-image-box">
+															<span class="tt-img"><img src="{{ submenu['product']['image'] }}" alt=""></span>
+														</div>
+														<div class="tt-description">
+															<h2 class="tt-title">{{ submenu['product']['name'] }}</h2>
+															<div class="tt-price">
+																{% if (not submenu['product']['special']) %}
+																	{{ submenu['product']['price'] }}
+																{% else %} 
+																	{{ submenu['product']['special'] }}
+																{% endif %}
+															</div>
+														</div>
+													</a>
+												</div>
+											{% endif %}
+										{% elseif (submenu['content_type'] == '2') %}
+											{{ submenu['categories'] }}
+										{% elseif (submenu['content_type'] == '3') %}
+											<a href="listing-left-column.html" class="tt-title-submenu">{{ submenu['heading'][lang_id] }}</a>
+											<div class="tt-menu-slider header-menu-product arrow-location-03 row">
+												{% for product in submenu['products'] %} 
+													<div class="col-2">
+														<div class="tt-product thumbprod-center">
+															<a href="{{ product['link'] }}">
+																<div class="tt-image-box">
+																	<span class="tt-img"><img src="{{ product['image'] }}" alt=""></span>
+																</div>
+																<div class="tt-description">
+																	<h2 class="tt-title">{{ product['name'] }}</h2>
+																	<div class="tt-price">
+ 																		{% if (not product['special']) %}
+ 																			{{ product['price'] }}
+ 																		{% else %} 
+ 																			{{ product['special'] }}
+ 																		{% endif %}
+																	</div>
+																</div>
+															</a>
+														</div>
+													</div>
+												{% endfor %}
+											</div>
+										{% endif %}											
+									{{ '</div>' }}
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
+				{{ "</li>" }}
+			{% endfor %}
+		</ul>
+	</nav>
+<!-- tt-mobile menu -->
+	<nav class="panel-menu">
+		<ul>
+			{% for row in menu %} 
+				<li>
+					{{ "<a href='"~row['link']~"' class='"~class_link~"' "~target~">"~row['icon']~theme_options.html_entity_decode(row['name'][lang_id])~label~"</a>" }} 
+					{% if (row['submenu'] is iterable and row['submenu'] is not empty) %}
+						<ul>
+							{% for submenu in row['submenu'] %} 
+								{% if (submenu['content_type'] == '2') %}
+									{{ submenu['mobile_categories'] }}
+								{% endif %}											
+							{% endfor %}
+						</ul>
+					{% endif %}
+				{{ "</li>" }}
+			{% endfor %}
+		</ul>
+		<div class="mm-navbtn-names">
+			<div class="mm-closebtn">{% if (theme_options.get( 'close_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'close_text', config.get( 'config_language_id' ) ) }} {% else %}Close{% endif %}</div>
+			<div class="mm-backbtn">{% if (theme_options.get( 'back_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'back_text', config.get( 'config_language_id' ) ) }} {% else %}Back{% endif %}</div>
+		</div>
+	</nav>
+{% endif %}

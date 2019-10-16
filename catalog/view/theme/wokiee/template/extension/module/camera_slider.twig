@@ -1,0 +1,23 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	{% set theme_options = registry.get('theme_options') %}
+	{% set config = registry.get('config') %}
+	{% set language_id = config.get( 'config_language_id' ) %} 
+	<div class="{% if (slider['settings']['layout_type'] == 1) %} {{ 'container container-indent' }} {% else %} {{ 'fullwidth' }} {% endif %}" id="camera_{{ slider['id'] }}">
+		<div class="camera_slider">
+			<div class="camera_wrap" id="camera_wrap_{{ slider['id'] }}" class="carousel-inner">
+				{% for sliders in slider['content'] %} 
+					{% if (sliders[language_id]['status'] == 1) %} 
+						{% set link = constant('false') %}
+						{% set image = sliders[language_id]['slider'] %}
+						
+						{% if (sliders[language_id]['link'] != '') %}
+							{% set link = sliders[language_id]['link'] %}
+						{% endif %} 
+
+						<div>{% if (link) %} {{ '<a href="' ~ link ~ '">' }} {% endif %}<img src="image/{{ image }}" alt="Slider">{% if (link) %} {{ '</a>' }} {% endif %}</div>
+					{% endif %}
+				{% endfor %} 
+			</div>
+		</div>
+	</div>
+{% endif %}

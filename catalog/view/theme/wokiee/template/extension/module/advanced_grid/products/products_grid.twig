@@ -1,0 +1,16 @@
+<div class="container-indent">
+  <div class="container-fluid container-fluid-custom-mobile-padding">
+    <div class="tt-block-title">
+      {% set title = module['content']['title']|split(',') %}
+      <h1 class="tt-title">{{ title[0] }}</h1>
+      <div class="tt-description">{{ title[1] }}</div>
+    </div>
+    <div class="tt-carousel-products row arrow-location-tab arrow-location-tab01 tt-alignment-img tt-layout-product-item slick-animated-show-js" data-item="6">
+      {% for product in module['content']['products'] %}
+        <div class="col-2 col-md-4 col-lg-3">
+          {% include 'wokiee/template/new_elements/product.twig' %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

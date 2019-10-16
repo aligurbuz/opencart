@@ -1,0 +1,42 @@
+<div id="cookie-{{ module_id }}" class="cookie "
+     style="position: fixed;
+            width: 100%;
+            z-index: 9999;
+            {% if (background_color != '') %} {{ 'background-color: ' ~ background_color ~ ';' }} {% endif %} 
+           {% if (background_image != '') %}
+           {{ 'background-image: url(image/' ~ background_image ~ '); 
+           background-position: ' ~ background_image_position ~ ';
+           background-repeat: ' ~ background_image_repeat ~ ';' }} 
+           {% endif %} 
+            {% if (border_color != '') %}
+            border-{{ display_position != '' and display_position == 'top' ? 'bottom' : 'top'~': 1px solid '~border_color~';' }}
+           {% endif %} 
+            {% if (display_position != '') %}
+            {{ display_position~': 0' }}
+           {% else %} 
+            {{ 'bottom: 0; top: auto' }}
+           {% endif %} 
+     ">
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <div class="content" style="{% if (text_color != '') %} {{ 'color: ' ~ text_color ~ ';' }} {% endif %}">{{ text_cookie }}</div>
+
+        <div class="operations">          
+           <div class="btn">{{ text_button }}</div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#cookie-{{ module_id }} .btn').click(function () {
+       var now = new Date();
+         var time = now.getTime();
+         time += 3600 * 24 * 1000 * 365;
+         now.setTime(time);
+       document.cookie = encodeURIComponent('cookie-module-{{ module_id }}-accepted') + "=" + encodeURIComponent(1) + ';expires=' + now.toUTCString() + "; path=/";
+       $('#cookie-{{ module_id }}').fadeOut('slow');
+  });
+});
+</script>

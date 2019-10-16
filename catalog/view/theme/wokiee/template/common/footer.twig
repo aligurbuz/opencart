@@ -1,0 +1,240 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+     {% set theme_options = registry.get('theme_options') %}
+     {% set config = registry.get('config') %}
+          
+     {% set language_id = config.get( 'config_language_id' ) %}
+     {% set customfooter = theme_options.get( 'customfooter' ) %}
+          
+     {% set customfooter_top = theme_options.getModules('customfooter_top') %}
+     {% set customfooter_bottom = theme_options.getModules('customfooter_bottom') %}
+     {% set customfooter_center = theme_options.getModules('customfooter') %}
+     {% set footer_center = theme_options.getModules('footer') %}
+
+<footer>             
+     {% set footer_top = theme_options.getModules('footer_top') %}
+     {% if ( footer_top|length > 0 ) %} 
+          {% for module in footer_top %} 
+               {{ module }}
+          {% endfor %}
+     {% endif %}       
+           
+     <div class="tt-footer-col tt-color-scheme-{% if theme_options.get( 'footer_colors' ) == 3 %}03{% else %}01{% endif %}">
+          <div class="container">  
+               {% if ( footer_center|length > 0 ) %} 
+                    {% for module in footer_center %} 
+                         {{ module }}
+                    {% endfor %}
+               {% else %}            
+                    <div class="row">
+                         {% set footer_left = theme_options.getModules('footer_left') %}
+                         {% set footer_right = theme_options.getModules('footer_right') %}
+                         
+                         {% set span = 3 %}
+                         {% if ( footer_left|length > 0 and footer_right|length > 0 ) %}
+                              {% set span = 2 %}
+                         {% elseif ( footer_left|length > 0 or footer_right|length > 0 ) %}
+                              {% set span = 25 %}
+                         {% endif %} 
+                         
+                         {% if ( footer_left|length > 0 ) %} 
+                              <div class="col-md-{{ span }}">
+                                   {% for module in footer_left %} 
+                                        {{ module }}
+                                   {% endfor %} 
+                              </div>
+                         {% endif %} 
+                         
+                         <!-- Information -->
+                         <div class="col-md-{{ span }}">
+                              <div class="tt-mobile-collapse">
+                                   <h4 class="tt-collapse-title">{{ text_information }}</h4>
+                                   <div class="tt-collapse-content">
+                                        <ul class="tt-list">
+                                             {% for information in informations %} 
+                                             <li><a href="{{ information['href'] }}">{{ information['title'] }}</a></li>
+                                             {% endfor %} 
+                                        </ul>
+                                   </div>
+                              </div>
+                         </div>
+                         
+                         <!-- Customer Service -->
+                         <div class="col-md-{{ span }}">
+                              <div class="tt-mobile-collapse">
+                                   <h4 class="tt-collapse-title">{{ text_service }}</h4>
+                                   <div class="tt-collapse-content">
+                                        <ul class="tt-list">
+                                             <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+                                             <li><a href="{{ return }}">{{ text_return }}</a></li>
+                                             <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
+                                        </ul> 
+                                   </div>
+                              </div>
+                         </div>
+                         
+                         <!-- Extras -->
+                         <div class="col-md-{{ span }}">
+                              <div class="tt-mobile-collapse">
+                                   <h4 class="tt-collapse-title">{{ text_extra }}</h4>
+                                   <div class="tt-collapse-content">
+                                        <ul class="tt-list">
+                                             <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
+                                             <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
+                                             <li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>
+                                             <li><a href="{{ special }}">{{ text_special }} </a></li>
+                                        </ul>
+                                   </div>
+                              </div>
+                         </div>
+                         
+                         <!-- My Account -->
+                         <div class="col-md-{{ span }}">
+                              <div class="tt-mobile-collapse">
+                                   <h4 class="tt-collapse-title">{{ text_account }}</h4>
+                                   <div class="tt-collapse-content">
+                                        <ul class="tt-list">
+                                             <li><a href="{{ account }}">{{ text_account }}</a></li>
+                                             <li><a href="{{ order }}">{{ text_order }}</a></li>
+                                             <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+                                             <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+                                        </ul>
+                                   </div>
+                              </div>
+                         </div>
+                         
+                         {% if ( footer_right|length > 0 ) %} 
+                              <div class="col-md-{{ span }}">
+                                   {% for module in footer_right %} 
+                                        {{ module }}
+                                   {% endfor %} 
+                              </div>
+                         {% endif %} 
+                    </div>
+                       
+                    {% set footer_bottom = theme_options.getModules('footer_bottom') %}
+                    {% if ( footer_bottom|length > 0 ) %} 
+                         {% for module in footer_bottom %} 
+                              {{ module }}
+                         {% endfor %}
+                    {% endif %}
+               {% endif %} 
+          </div>
+     </div> 
+
+     {% set bottom = theme_options.getModules('bottom') %}
+     {% if ( bottom|length > 0 ) %} 
+          {% for module in bottom %} 
+               {{ module }}
+          {% endfor %}
+     {% endif %} 
+</footer>                                         
+<a href="#" class="tt-back-to-top">{% if (theme_options.get( 'back_to_top_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'back_to_top_text', config.get( 'config_language_id' ) ) }}{% else %}BACK TO TOP{% endif %}</a>
+<!-- modal (AddToCartProduct) -->
+<div class="modal  fade"  id="modalAddToCartProduct" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+          <div class="modal-content ">
+               <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+               </div>
+               <div class="modal-body">
+                    <div class="tt-modal-addtocart mobile">
+                         <div class="tt-modal-messages">
+                              <i class="icon-f-68"></i> {% if (theme_options.get( 'added_to_cart_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'added_to_cart_text', config.get( 'config_language_id' ) ) }}{% else %}Added to cart successfully!{% endif %}
+                         </div>
+                         <a href="#" class="btn-link btn-close-popup">{% if (theme_options.get( 'continue_shopping_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'continue_shopping_text', config.get( 'config_language_id' ) ) }}{% else %}CONTINUE SHOPPING{% endif %}</a>
+                       <a href="{{ theme_options.getLinkOpenCart('checkout/cart') }}" class="btn-link">{% if (theme_options.get( 'view_cart_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'view_cart_text', config.get( 'config_language_id' ) ) }}{% else %}VIEW CART{% endif %}</a>
+                       <a href="{{ theme_options.getLinkOpenCart('checkout/checkout') }}" class="btn-link">{% if (theme_options.get( 'proceed_to_checkout_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'proceed_to_checkout_text', config.get( 'config_language_id' ) ) }}{% else %}PROCEED TO CHECKOUT{% endif %}</a>
+                    </div>
+                    <div class="tt-modal-addtocart desctope">
+                         <div class="row">
+                              <div class="col-12 col-lg-6">
+                                   <div class="tt-modal-messages">
+                                        <i class="icon-f-68"></i> {% if (theme_options.get( 'added_to_cart_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'added_to_cart_text', config.get( 'config_language_id' ) ) }}{% else %}Added to cart successfully!{% endif %}
+                                   </div>
+                                   <div class="tt-modal-product">
+                                        <div class="tt-img">
+                                             <img src="catalog/view/theme/wokiee/img/loader.svg" alt="">
+                                        </div>
+                                        <h2 class="tt-title"><a href="product.html">Flared Shift Dress</a></h2>
+                                        <div class="tt-qty">
+                                             {% if (theme_options.get( 'qty_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'qty_text', config.get( 'config_language_id' ) ) }}{% else %}QTY{% endif %}: <span>1</span>
+                                        </div>
+                                   </div>
+                                   <div class="tt-product-total">
+                                        <div class="tt-total">
+                                             <span class="tt-price">$324</span>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="col-12 col-lg-6">
+                                   <a href="#" class="tt-cart-total">
+                                        <p class="text-total" style="margin: 0px">{% if (theme_options.get( 'there_are_one_items_in_your_cart_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'there_are_one_items_in_your_cart_text', config.get( 'config_language_id' ) ) }}{% else %}There are 1 items in your cart{% endif %}</p>
+                                        <div class="tt-total">
+                                             {% if (theme_options.get( 'total_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'total_text', config.get( 'config_language_id' ) ) }}{% else %}TOTAL{% endif %}: <span class="tt-price">$324</span>
+                                        </div>
+                                   </a>
+                                   <a href="#" class="btn btn-border btn-close-popup">{% if (theme_options.get( 'continue_shopping_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'continue_shopping_text', config.get( 'config_language_id' ) ) }}{% else %}CONTINUE SHOPPING{% endif %}</a>
+                                   <a href="{{ theme_options.getLinkOpenCart('checkout/cart') }}" class="btn btn-border">{% if (theme_options.get( 'view_cart_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'view_cart_text', config.get( 'config_language_id' ) ) }}{% else %}VIEW CART{% endif %}</a>
+                                   <a href="{{ theme_options.getLinkOpenCart('checkout/checkout') }}" class="btn">{% if (theme_options.get( 'proceed_to_checkout_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'proceed_to_checkout_text', config.get( 'config_language_id' ) ) }}{% else %}PROCEED TO CHECKOUT{% endif %}</a>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>
+<!-- modal (quickViewModal) -->
+<div class="modal  fade"  id="ModalquickView" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg">
+          <div class="modal-content ">
+               <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+               </div>
+               <div class="modal-body">
+                    <div class="loader"><img src="catalog/view/theme/wokiee/img/loader.svg" alt="Loader"></div>
+                    <div class="quickview-content">
+
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>
+<div id="modalPartialView"></div>
+{% set lista_plikow = [] %} 
+
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/bootstrap.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/slick.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/perfect-scrollbar.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/panelmenu.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/instafeed.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/jquery.plugin.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/jquery.countdown.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/lazyload.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/bootstrap-notify.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/jquery.elevatezoom.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/jquery.magnific-popup.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/air-sticky-block.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/imagesloaded.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/isotope.pkgd.min.js']) %}
+{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/js/common.js']) %}
+{{ theme_options.compressorCodeJs( 'wokiee', lista_plikow, 0, constant('HTTPS_SERVER') ) }}
+
+<script type="text/javascript">
+$('#product .datetimepicker-date').datetimepicker({
+     pickTime: false
+});
+
+$('#product .datetimepicker-datetime').datetimepicker({
+     pickDate: true,
+     pickTime: true
+});
+
+$('#product .datetimepicker-time').datetimepicker({
+     pickDate: false
+});
+</script>
+{% endif %} 
+</body>
+</html>

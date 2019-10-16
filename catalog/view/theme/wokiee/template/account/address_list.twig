@@ -1,0 +1,25 @@
+{{ header }} 
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+
+<h5>{{ text_address_book }}</h5>
+{% if addresses %}
+<div class="table-responsive">
+<table class="tt-table-01">
+  {% for result in addresses %}
+  <tr>
+    <td class="text-left">{{ result.address }}</td>
+    <td class="text-right"><a href="{{ result.update }}" class="btn btn-info">{{ button_edit }}</a> &nbsp; <a href="{{ result.delete }}" class="btn btn-danger">{{ button_delete }}</a></td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+{% else %}
+<p>{{ text_empty }}</p>
+{% endif %}
+<div class="buttons clearfix">
+<div class="pull-left"><a href="{{ back }}" class="btn btn-default">{{ button_back }}</a></div>
+<div class="pull-right"><a href="{{ add }}" class="btn btn-primary">{{ button_new_address }}</a></div>
+</div>
+      
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

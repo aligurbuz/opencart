@@ -1,0 +1,41 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+    <div class="tt-block-aside">
+        <h3 class="tt-aside-title">{{ heading_title }}</h3>
+        <div class="tt-aside-content">
+            <form class="form-default">
+                <div class="tt-form-search search-form">
+                    <input type="text" name="search" value="" id="input-search" placeholder="{{ text_enter_keywords }}..." class="form-control">
+                    <button type="submit" class="tt-btn-icon icon-f-85 blog-button-search"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            /* Search */
+            $('.blog-button-search').bind('click', function() {
+                url = $('base').attr('href') + 'index.php?route=blog/blog';
+
+                var search = $('.search-form input[name=\'search\']').val();
+
+                if (search) {
+                    url += '&search=' + encodeURIComponent(search);
+                }
+                location = url;
+                return false;
+            });
+            
+            $('#input-search').bind("enterKey",function(e){
+                $('.blog-button-search').trigger('click');
+             });
+             $('#input-search').keyup(function(e){
+                 if(e.keyCode == 13)
+                 {
+                     $(this).trigger("enterKey");
+                 }
+             });
+        });
+        
+    </script>
+{% endif %}

@@ -1,0 +1,2338 @@
+{{ header }} 
+
+	{% set fonts = [
+		'standard',
+		'ABeeZee',
+		'Abel',
+		'Abril Fatface',
+		'Aclonica',
+		'Acme',
+		'Actor',
+		'Adamina',
+		'Advent Pro',
+		'Aguafina Script',
+		'Akronim',
+		'Aladin',
+		'Aldrich',
+		'Alef',
+		'Alegreya',
+		'Alegreya SC',
+		'Alex Brush',
+		'Alfa Slab One',
+		'Alice',
+		'Alike',
+		'Alike Angular',
+		'Allan',
+		'Allerta',
+		'Allerta Stencil',
+		'Allura',
+		'Almendra',
+		'Almendra Display',
+		'Almendra SC',
+		'Amarante',
+		'Amaranth',
+		'Amatic SC',
+		'Amethysta',
+		'Anaheim',
+		'Andada',
+		'Andika',
+		'Angkor',
+		'Annie Use Your Telescope',
+		'Anonymous Pro',
+		'Antic',
+		'Antic Didone',
+		'Antic Slab',
+		'Anton',
+		'Arapey',
+		'Arbutus',
+		'Arbutus Slab',
+		'Architects Daughter',
+		'Archivo Black',
+		'Archivo Narrow',
+		'Arial',
+		'Arimo',
+		'Arizonia',
+		'Armata',
+		'Artifika',
+		'Arvo',
+		'Asap',
+		'Asset',
+		'Astloch',
+		'Asul',
+		'Atomic Age',
+		'Aubrey',
+		'Audiowide',
+		'Autour One',
+		'Average',
+		'Average Sans',
+		'Averia Gruesa Libre',
+		'Averia Libre',
+		'Averia Sans Libre',
+		'Averia Serif Libre',
+		'Bad Script',
+		'Balthazar',
+		'Bangers',
+		'Basic',
+		'Battambang',
+		'Baumans',
+		'Bayon',
+		'Belgrano',
+		'Belleza',
+		'BenchNine',
+		'Bentham',
+		'Berkshire Swash',
+		'Bevan',
+		'Bigelow Rules',
+		'Bigshot One',
+		'Bilbo',
+		'Bilbo Swash Caps',
+		'Bitter',
+		'Black Ops One',
+		'Bokor',
+		'Bonbon',
+		'Boogaloo',
+		'Bowlby One',
+		'Bowlby One SC',
+		'Brawler',
+		'Bree Serif',
+		'Bubblegum Sans',
+		'Bubbler One',
+		'Buda',
+		'Buenard',
+		'Butcherman',
+		'Butterfly Kids',
+		'Cabin',
+		'Cabin Condensed',
+		'Cabin Sketch',
+		'Caesar Dressing',
+		'Cagliostro',
+		'Calligraffitti',
+		'Cambo',
+		'Candal',
+		'Cantarell',
+		'Cantata One',
+		'Cantora One',
+		'Capriola',
+		'Cardo',
+		'Carme',
+		'Carrois Gothic',
+		'Carrois Gothic SC',
+		'Carter One',
+		'Caudex',
+		'Cedarville Cursive',
+		'Ceviche One',
+		'Changa One',
+		'Chango',
+		'Chau Philomene One',
+		'Chela One',
+		'Chelsea Market',
+		'Chenla',
+		'Cherry Cream Soda',
+		'Cherry Swash',
+		'Chewy',
+		'Chicle',
+		'Chivo',
+		'Cinzel',
+		'Cinzel Decorative',
+		'Clicker Script',
+		'Coda',
+		'Coda Caption',
+		'Codystar',
+		'Combo',
+		'Comfortaa',
+		'Coming Soon',
+		'Concert One',
+		'Condiment',
+		'Content',
+		'Contrail One',
+		'Convergence',
+		'Cookie',
+		'Copse',
+		'Corben',
+		'Courgette',
+		'Cousine',
+		'Coustard',
+		'Covered By Your Grace',
+		'Crafty Girls',
+		'Creepster',
+		'Crete Round',
+		'Crimson Text',
+		'Croissant One',
+		'Crushed',
+		'Cuprum',
+		'Cutive',
+		'Cutive Mono',
+		'Damion',
+		'Dancing Script',
+		'Dangrek',
+		'Dawning of a New Day',
+		'Days One',
+		'Delius',
+		'Delius Swash Caps',
+		'Delius Unicase',
+		'Della Respira',
+		'Denk One',
+		'Devonshire',
+		'Didact Gothic',
+		'Diplomata',
+		'Diplomata SC',
+		'Domine',
+		'Donegal One',
+		'Doppio One',
+		'Dorsa',
+		'Dosis',
+		'Dr Sugiyama',
+		'Droid Sans',
+		'Droid Sans Mono',
+		'Droid Serif',
+		'Duru Sans',
+		'Dynalight',
+		'EB Garamond',
+		'Eagle Lake',
+		'Eater',
+		'Economica',
+		'Electrolize',
+		'Elsie',
+		'Elsie Swash Caps',
+		'Emblema One',
+		'Emilys Candy',
+		'Engagement',
+		'Englebert',
+		'Enriqueta',
+		'Erica One',
+		'Esteban',
+		'Euphoria Script',
+		'Ewert',
+		'Exo',
+		'Expletus Sans',
+		'Fanwood Text',
+		'Fascinate',
+		'Fascinate Inline',
+		'Faster One',
+		'Fasthand',
+		'Fauna One',
+		'Federant',
+		'Federo',
+		'Felipa',
+		'Fenix',
+		'Finger Paint',
+		'Fjalla One',
+		'Fjord One',
+		'Flamenco',
+		'Flavors',
+		'Fondamento',
+		'Fontdiner Swanky',
+		'Forum',
+		'Francois One',
+		'Freckle Face',
+		'Fredericka the Great',
+		'Fredoka One',
+		'Freehand',
+		'Fresca',
+		'Frijole',
+		'Fruktur',
+		'Fugaz One',
+		'GFS Didot',
+		'GFS Neohellenic',
+		'Gabriela',
+		'Gafata',
+		'Galdeano',
+		'Galindo',
+		'Gentium Basic',
+		'Gentium Book Basic',
+		'Geo',
+		'Georgia',
+		'Geostar',
+		'Geostar Fill',
+		'Germania One',
+		'Gilda Display',
+		'Give You Glory',
+		'Glass Antiqua',
+		'Glegoo',
+		'Gloria Hallelujah',
+		'Goblin One',
+		'Gochi Hand',
+		'Gorditas',
+		'Goudy Bookletter 1911',
+		'Graduate',
+		'Grand Hotel',
+		'Gravitas One',
+		'Great Vibes',
+		'Griffy',
+		'Gruppo',
+		'Gudea',
+		'Habibi',
+		'Hammersmith One',
+		'Hanalei',
+		'Hanalei Fill',
+		'Handlee',
+		'Hanuman',
+		'Happy Monkey',
+		'Headland One',
+		'Henny Penny',
+		'Herr Von Muellerhoff',
+		'Holtwood One SC',
+		'Homemade Apple',
+		'Homenaje',
+		'IM Fell DW Pica',
+		'IM Fell DW Pica SC',
+		'IM Fell Double Pica',
+		'IM Fell Double Pica SC',
+		'IM Fell English',
+		'IM Fell English SC',
+		'IM Fell French Canon',
+		'IM Fell French Canon SC',
+		'IM Fell Great Primer',
+		'IM Fell Great Primer SC',
+		'Iceberg',
+		'Iceland',
+		'Imprima',
+		'Inconsolata',
+		'Inder',
+		'Indie Flower',
+		'Inika',
+		'Irish Grover',
+		'Istok Web',
+		'Italiana',
+		'Italianno',
+		'Jacques Francois',
+		'Jacques Francois Shadow',
+		'Jim Nightshade',
+		'Jockey One',
+		'Jolly Lodger',
+		'Josefin Sans',
+		'Josefin Slab',
+		'Joti One',
+		'Judson',
+		'Julee',
+		'Julius Sans One',
+		'Junge',
+		'Jura',
+		'Just Another Hand',
+		'Just Me Again Down Here',
+		'Kameron',
+		'Karla',
+		'Kaushan Script',
+		'Kavoon',
+		'Keania One',
+		'Kelly Slab',
+		'Kenia',
+		'Khmer',
+		'Kite One',
+		'Knewave',
+		'Kotta One',
+		'Koulen',
+		'Kranky',
+		'Kreon',
+		'Kristi',
+		'Krona One',
+		'La Belle Aurore',
+		'Lancelot',
+		'Lato',
+		'League Script',
+		'Leckerli One',
+		'Ledger',
+		'Lekton',
+		'Lemon',
+		'Libre Baskerville',
+		'Life Savers',
+		'Lilita One',
+		'Lily Script One',
+		'Limelight',
+		'Linden Hill',
+		'Lobster',
+		'Lobster Two',
+		'Londrina Outline',
+		'Londrina Shadow',
+		'Londrina Sketch',
+		'Londrina Solid',
+		'Lora',
+		'Love Ya Like A Sister',
+		'Loved by the King',
+		'Lovers Quarrel',
+		'Luckiest Guy',
+		'Lusitana',
+		'Lustria',
+		'Macondo',
+		'Macondo Swash Caps',
+		'Magra',
+		'Maiden Orange',
+		'Mako',
+		'Marcellus',
+		'Marcellus SC',
+		'Marck Script',
+		'Margarine',
+		'Marko One',
+		'Marmelad',
+		'Marvel',
+		'Mate',
+		'Mate SC',
+		'Maven Pro',
+		'McLaren',
+		'Meddon',
+		'MedievalSharp',
+		'Medula One',
+		'Megrim',
+		'Meie Script',
+		'Merienda',
+		'Merienda One',
+		'Merriweather',
+		'Merriweather Sans',
+		'Metal',
+		'Metal Mania',
+		'Metamorphous',
+		'Metrophobic',
+		'Michroma',
+		'Milonga',
+		'Miltonian',
+		'Miltonian Tattoo',
+		'Miniver',
+		'Miss Fajardose',
+		'Modern Antiqua',
+		'Molengo',
+		'Molle',
+		'Monda',
+		'Monofett',
+		'Monoton',
+		'Monsieur La Doulaise',
+		'Montaga',
+		'Montez',
+		'Montserrat',
+		'Montserrat Alternates',
+		'Montserrat Subrayada',
+		'Moul',
+		'Moulpali',
+		'Mountains of Christmas',
+		'Mouse Memoirs',
+		'Mr Bedfort',
+		'Mr Dafoe',
+		'Mr De Haviland',
+		'Mrs Saint Delafield',
+		'Mrs Sheppards',
+		'Muli',
+		'Mystery Quest',
+		'Neucha',
+		'Neuton',
+		'New Rocker',
+		'News Cycle',
+		'Niconne',
+		'Nixie One',
+		'Nobile',
+		'Nokora',
+		'Norican',
+		'Nosifer',
+		'Nothing You Could Do',
+		'Noticia Text',
+		'Noto Sans',
+		'Noto Serif',
+		'Nova Cut',
+		'Nova Flat',
+		'Nova Mono',
+		'Nova Oval',
+		'Nova Round',
+		'Nova Script',
+		'Nova Slim',
+		'Nova Square',
+		'Numans',
+		'Nunito',
+		'Odor Mean Chey',
+		'Offside',
+		'Old Standard TT',
+		'Oldenburg',
+		'Oleo Script',
+		'Oleo Script Swash Caps',
+		'Open Sans',
+		'Open Sans Condensed',
+		'Oranienbaum',
+		'Orbitron',
+		'Oregano',
+		'Orienta',
+		'Original Surfer',
+		'Oswald',
+		'Over the Rainbow',
+		'Overlock',
+		'Overlock SC',
+		'Ovo',
+		'Oxygen',
+		'Oxygen Mono',
+		'PT Mono',
+		'PT Sans',
+		'PT Sans Caption',
+		'PT Sans Narrow',
+		'PT Serif',
+		'PT Serif Caption',
+		'Pacifico',
+		'Paprika',
+		'Parisienne',
+		'Passero One',
+		'Passion One',
+		'Pathway Gothic One',
+		'Patrick Hand',
+		'Patrick Hand SC',
+		'Patua One',
+		'Paytone One',
+		'Peralta',
+		'Permanent Marker',
+		'Petit Formal Script',
+		'Petrona',
+		'Philosopher',
+		'Piedra',
+		'Pinyon Script',
+		'Pirata One',
+		'Plaster',
+		'Play',
+		'Playball',
+		'Playfair Display',
+		'Playfair Display SC',
+		'Podkova',
+		'Poiret One',
+		'Poller One',
+		'Poly',
+		'Pompiere',
+		'Pontano Sans',
+		'Poppins',
+		'Port Lligat Sans',
+		'Port Lligat Slab',
+		'Prata',
+		'Preahvihear',
+		'Press Start 2P',
+		'Princess Sofia',
+		'Prociono',
+		'Prosto One',
+		'Puritan',
+		'Purple Purse',
+		'Quando',
+		'Quantico',
+		'Quattrocento',
+		'Quattrocento Sans',
+		'Questrial',
+		'Quicksand',
+		'Quintessential',
+		'Qwigley',
+		'Racing Sans One',
+		'Radley',
+		'Raleway',
+		'Raleway Dots',
+		'Rajdhani',
+		'Rambla',
+		'Rammetto One',
+		'Ranchers',
+		'Rancho',
+		'Rationale',
+		'Redressed',
+		'Reenie Beanie',
+		'Revalia',
+		'Ribeye',
+		'Ribeye Marrow',
+		'Righteous',
+		'Risque',
+		'Roboto',
+		'Roboto Condensed',
+		'Roboto Slab',
+		'Rochester',
+		'Rock Salt',
+		'Rokkitt',
+		'Romanesco',
+		'Ropa Sans',
+		'Rosario',
+		'Rosarivo',
+		'Rouge Script',
+		'Ruda',
+		'Rufina',
+		'Ruge Boogie',
+		'Ruluko',
+		'Rum Raisin',
+		'Ruslan Display',
+		'Russo One',
+		'Ruthie',
+		'Rye',
+		'Sacramento',
+		'Sail',
+		'Salsa',
+		'Sanchez',
+		'Sancreek',
+		'Sansita One',
+		'Sarina',
+		'Satisfy',
+		'Scada',
+		'Schoolbell',
+		'Seaweed Script',
+		'Sevillana',
+		'Seymour One',
+		'Shadows Into Light',
+		'Shadows Into Light Two',
+		'Shanti',
+		'Share',
+		'Share Tech',
+		'Share Tech Mono',
+		'Shojumaru',
+		'Short Stack',
+		'Siemreap',
+		'Sigmar One',
+		'Signika',
+		'Signika Negative',
+		'Simonetta',
+		'Sintony',
+		'Sirin Stencil',
+		'Six Caps',
+		'Skranji',
+		'Slackey',
+		'Smokum',
+		'Smythe',
+		'Sniglet',
+		'Snippet',
+		'Snowburst One',
+		'Sofadi One',
+		'Sofia',
+		'Sonsie One',
+		'Sorts Mill Goudy',
+		'Source Code Pro',
+		'Source Sans Pro',
+		'Special Elite',
+		'Spicy Rice',
+		'Spinnaker',
+		'Spirax',
+		'Squada One',
+		'Stalemate',
+		'Stalinist One',
+		'Stardos Stencil',
+		'Stint Ultra Condensed',
+		'Stint Ultra Expanded',
+		'Stoke',
+		'Strait',
+		'Sue Ellen Francisco',
+		'Sunshiney',
+		'Supermercado One',
+		'Suwannaphum',
+		'Swanky and Moo Moo',
+		'Syncopate',
+		'Tangerine',
+		'Taprom',
+		'Tauri',
+		'Teko',
+		'Telex',
+		'Tenor Sans',
+		'Text Me One',
+		'The Girl Next Door',
+		'Tienne',
+		'Times New Roman',
+		'Tinos',
+		'Titan One',
+		'Titillium Web',
+		'Trade Winds',
+		'Trocchi',
+		'Trochut',
+		'Trykker',
+		'Tulpen One',
+		'Ubuntu',
+		'Ubuntu Condensed',
+		'Ubuntu Mono',
+		'Ultra',
+		'Uncial Antiqua',
+		'Underdog',
+		'Unica One',
+		'UnifrakturCook',
+		'UnifrakturMaguntia',
+		'Unkempt',
+		'Unlock',
+		'Unna',
+		'VT323',
+		'Vampiro One',
+		'Varela',
+		'Varela Round',
+		'Vast Shadow',
+		'Vibur',
+		'Vidaloka',
+		'Viga',
+		'Voces',
+		'Volkhov',
+		'Vollkorn',
+		'Voltaire',
+		'Waiting for the Sunrise',
+		'Wallpoet',
+		'Walter Turncoat',
+		'Warnes',
+		'Wellfleet',
+		'Wendy One',
+		'Wire One',
+		'Yantramanav',
+		'Yanone Kaffeesatz',
+		'Yellowtail',
+		'Yeseva One',
+		'Yesteryear',
+		'Zeyada'	
+	] %}
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="view/stylesheet/css/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="view/stylesheet/template_options.css" />
+<script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+<link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+<script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>  
+<script type="text/javascript" src="view/javascript/jquery/colorpicker.js"></script>
+<script type="text/javascript" src="view/javascript/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="view/javascript/beforeafter/jquery-ui.js"></script>
+<script type="text/javascript" src="view/javascript/beforeafter/jquery.beforeafter-1.4.min.js"></script>
+<script type="text/javascript">
+$.fn.tabs = function() {
+	var selector = this;
+	
+	this.each(function() {
+		var obj = $(this); 
+		
+		$(obj.attr('href')).hide();
+		
+		$(obj).click(function() {
+			$(selector).removeClass('selected');
+			
+			$(selector).each(function(i, element) {
+				$($(element).attr('href')).hide();
+			});
+			
+			$(this).addClass('selected');
+			
+			$($(this).attr('href')).show();
+			
+			return false;
+		});
+	});
+
+	$(this).show();
+	
+	$(this).first().click();
+};
+</script>
+
+{{ column_left }} 
+<div id="content"><div class="container-fluid">
+	<div class="page-header">
+	    <h1>Wokiee Theme Options</h1>
+	    <ul class="breadcrumb">
+		     {% for breadcrumb in breadcrumbs %} 
+		      <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+		      {% endfor %} 
+	    </ul>
+	  </div>
+
+	{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% elseif (success) %} 
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% endif %} 
+
+<!-- Theme Options -->
+
+<div class="set-size" id="theme-options">
+	
+	<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+	
+ 		<!-- MULTISTORE -->
+		<div id="tb_store_select">
+			<label class="inline">Store</label>
+			<select name="d_store_id" id="d_store_id">
+			{% for store in stores %} 
+				<option value="{{ 'index.php?route=extension/module/wokiee&store_id=' ~ store['store_id'] ~ '&user_token=' ~ user_token }}"{% if (store_id == store['store_id']) %} {{ ' selected="selected"' }}{% endif %}>{{ store['name'] }}</option>
+			{% endfor %} 
+			</select>
+		</div>
+					    
+		<input type="hidden" name="store_id" value="{{ store_id }}" />
+					    
+		<script type="text/javascript">
+			$(document).ready(function (){
+				$("#d_store_id").bind("change", function() {
+					window.location = $(this).val();
+				});
+				
+				$("#form input").keypress(function(event) {
+				    if (event.which == 13) {
+				        return false;
+				    }
+				});
+				
+				$(".button-add").click(function() {
+					$(".add-skin").show();
+					return false;
+				});
+			});
+		</script>
+		<!-- END MULTISTORE -->
+		
+		<!-- Unlimited theme skins -->
+ 		<div class="content theme-skins" style="overflow: visible;position: relative;z-index: 1">
+			<div>
+				<ul class="skins">
+					{% set liczba_skinow = 0 %} {% if (skins is defined) %} {% for skin in skins %} {% set liczba_skinow = liczba_skinow + 1 %} {% endfor %} {% endif %} 
+					{% set aktywny_skin = constant('false') %} {% if (liczba_skinow > 0) %} 
+					<li><p class="active-skin">Active skin:<br><span>{{ active_skin }}</p></li>
+					<li>
+					     <div class="arrow"></div>
+						<select name="skin" class="select-skins">
+							{% for skin in skins %} 
+							<option{% if (skin == active_skin_edit) %} {% set aktywny_skin = constant('true') %} {{ ' selected="selected"' }} {% endif %} value="{{ skin }}" style="font-size: 12px !important">{{ skin }}</option>
+							{% endfor %} 
+						</select>
+						<input type="hidden" name="save_skin" value="{{ active_skin_edit }}" />
+					</li>
+					<li><input type="submit" name="button-active" class="button-active"></li>
+					{% endif %} 
+					<li><a onclick="#" class="button-add"><span>Add</span></a><div class="add-skin"><input type="text" name="add-skin-name" class="add-skin-name" value=""><input type="submit" name="add-skin" value="Add skin" class="button-add-skin"></div></li>
+					{% if (liczba_skinow > 0) %} 
+					<li><input type="submit" name="button-edit" class="button-edit"></li>
+					<li><input type="submit" name="button-delete" class="button-delete" onclick="return confirm('Are you sure you want to delete?')"></li>
+					{% endif %} 
+				</ul>
+			</div>
+		</div>
+		 
+		{% if (liczba_skinow > 0 and (active_skin != '' or aktywny_skin == constant('true'))) %} 
+		<!-- Content -->
+		
+		<div class="content">
+		
+			<div>
+				<!-- Tabs -->
+				
+				<div class="bg-tabs">
+				
+					<!-- General, Design, Footer TABS -->
+					
+					<div id="tabs" class="htabs main-tabs">
+                        <div class="menu-switcher"></div>
+						<a href="#tab_general" id="general"><span>General settings</span></a>
+						<a href="#tab_design" id="design"><span>Design & colors</span></a>
+						<a href="#tab_custom_block" id="tcustomblock"><span>Custom block</span></a>
+						<a href="#tab_custom_code" id="tcustomcode"><span>Custom code</span></a>
+						<a href="#tab_install_data" id="tinstalldata"><span>Install data</span></a>					
+					</div>
+					
+					<!-- End General, Design Footer Tabs -->
+					
+					<!-- /////////////////// General -->
+					
+					<div id="tab_general" class="tab-content2">
+					
+						<!-- Font, colors, background TABS -->
+						
+						<div id="tabs_general" class="htabs tabs-design">
+						
+							<a href="#tab_layout" id="tlayout"><span>Layout</span></a>
+							<a href="#tab_product" id="tproduct"><span>Product</span></a>
+							<a href="#tab_category" id="tcategory"><span>Category</span></a>
+							<a href="#tab_header" id="theader"><span>Header</span></a>
+							<a href="#tab_translations" id="ttranslations"><span>Translations</span></a>
+						
+						</div>
+						
+						<!-- **************** Tab GENERAL OPTIONS -->
+						
+						<div id="tab_layout" class="tab-content">
+							
+									<!-- Input -->
+									<div class="input">
+										<p>Page Direction:</p>
+										<div class="list-language">
+											{% for language in languages %} 
+											<div class="language select">
+												{% set language_id = language['language_id'] %} 
+												<img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+												<select type="text" name="page_direction[{{ language_id }}]" >
+							                <option value="LTR" {% if (page_direction[language_id] is defined and page_direction[language_id] == 'LTR') %} {{ 'selected' }} {% endif %}>LTR (Left To Right)</option>
+							                <option value="RTL" {% if (page_direction[language_id] is defined and page_direction[language_id] == 'RTL') %} {{ 'selected' }} {% endif %}>RTL (Right To Left)</option>
+							            </select>
+											</div>
+											{% endfor %} 
+										</div>
+										<div class="clear"></div>
+									</div>
+
+                                <div class="input">
+                                    <p style="width:270px">Layout type:</p>
+                                    <select name="layout_type">
+                                        <option value="0" {% if (layout_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Full width</option>
+                                        <option value="1" {% if (layout_type == '1') %}{{ ' selected="selected"' }}{% endif %}>Fixed</option>
+                                    </select>
+                                    <div class="clear"></div>
+                                </div>
+						</div>
+						
+						<!-- Product -->
+						<div id="tab_product" class="tab-content">
+							<div class="section">
+                                <div class="input with-status">
+                                    <p style="width:270px">Sale badge:</p>
+                                    {% if (display_text_sale == 0 and display_text_sale != '') %} {{ '<div class="status status-off" title="0" rel="display_text_sale"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="display_text_sale"></div>' }} {% endif %} 
+                                    <input name="display_text_sale" value="{{ display_text_sale }}" id="display_text_sale" type="hidden" />
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input">
+                                    <p style="width:270px">Type Sale:</p>
+                                    <select name="type_sale">
+                                        <option value="0" {% if (type_sale == '0') %}{{ ' selected="selected"' }}{% endif %}>Text</option>
+                                        <option value="1" {% if (type_sale == '1') %}{{ ' selected="selected"' }}{% endif %}>%</option>
+                                    </select>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input">
+                                    <p style="width:270px">Text Sale:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="sale_text[{{ language_id }}]" {% if (sale_text[language_id] is defined) %} {{ 'value="'~sale_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input with-status">
+                                    <p style="width:270px">Display New:</p>
+                                    {% if (display_text_new == 0 and display_text_new != '') %} {{ '<div class="status status-off" title="0" rel="display_text_new"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="display_text_new"></div>' }} {% endif %} 
+                                    <input name="display_text_new" value="{{ display_text_new }}" id="display_text_new" type="hidden" />
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input">
+                                    <p style="width:270px">Text New:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="new_text[{{ language_id }}]" {% if (new_text[language_id] is defined) %} {{ 'value="'~new_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                
+                                <div class="input">
+                                    <p style="width:270px">New Products label limit:</p>
+                                    <input type="text" name="new_products_label_limit" style="width:60px" value="{{ new_products_label_limit }}" />
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+							<div class="section">
+                                <div class="section-title">
+                                <h4>Product page</h4>
+                                </div>
+                                <div class="section-content">
+                                    <div class="input">
+                                        <p style="width:270px">Product type:</p>
+                                        <select name="product_type">
+                                            <option value="0" {% if (product_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Product type 1</option>
+                                            <option value="1" {% if (product_type == '1') %}{{ ' selected="selected"' }}{% endif %}>Product type 2</option>
+                                            <option value="2" {% if (product_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Product type 3</option>
+                                            <option value="3" {% if (product_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Product type 4</option>
+                                        </select>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="input with-status">
+                                        <p style="width:270px">Product social share:</p>
+                                        {% if (product_social_share == 0 and product_social_share != '') %} {{ '<div class="status status-off" title="0" rel="product_social_share"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="product_social_share"></div>' }} {% endif %} 
+                                        <input name="product_social_share" value="{{ product_social_share }}" id="product_social_share" type="hidden" />
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="input with-status">
+                                        <p style="width:270px">Related products:</p>
+                                        {% if (product_related_status == 0 and product_related_status != '') %} {{ '<div class="status status-off" title="0" rel="product_related_status"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="product_related_status"></div>' }} {% endif %} 
+                                        <input name="product_related_status" value="{{ product_related_status }}" id="product_related_status" type="hidden" />
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="input">
+                                        <p style="width:270px">Option radio style:</p>
+                                        <select name="product_page_radio_style">
+                                            <option value="0" {% if (product_page_radio_style == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                                            <option value="1" {% if (product_page_radio_style == '1') %}{{ ' selected="selected"' }}{% endif %}>Button</option>
+                                        </select>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="input">
+                                        <p style="width:270px">Option checkbox style:</p>
+                                        <select name="product_page_checkbox_style">
+                                            <option value="0" {% if (product_page_checkbox_style == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                                            <option value="1" {% if (product_page_checkbox_style == '1') %}{{ ' selected="selected"' }}{% endif %}>Button</option>
+                                        </select>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="section">
+                                <div class="section-title">
+                                    <h4>Product grid</h4>
+                                </div>
+                                <div class="section-content">
+                                    <div class="input">
+                                        <p style="width:270px">Product number per row:</p>
+                                        <select name="product_per_pow">
+                                            <option value="3"{% if (product_per_pow == '3') %}{{ ' selected="selected"' }}{% endif %}>3</option>
+                                            <option value="4"{% if (product_per_pow == '4' or product_per_pow < 3) %}{{ ' selected="selected"' }}{% endif %}>4</option>
+                                            <option value="5"{% if (product_per_pow == '5') %}{{ ' selected="selected"' }}{% endif %}>5</option>
+                                            <option value="6"{% if (product_per_pow == '6') %}{{ ' selected="selected"' }}{% endif %}>6</option>
+                                        </select>
+                                        <div class="clear"></div>
+                                    </div>
+                                
+                                    <div class="input">
+                                        <p style="width:270px">Product image effect:</p>
+                                        <select name="product_image_effect">
+                                            <option value="0"{% if (product_image_effect == '0') %}{{ ' selected="selected"' }}{% endif %}>None</option>
+                                            <option value="1"{% if (product_image_effect == '1') %}{{ ' selected="selected"' }}{% endif %}>Swap image effect</option>
+                                        </select>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    
+									<div class="input">
+										<p style="width:250px">Display elements on product grid:</p>
+										<div class="clear"></div>
+									</div>
+
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- specials countdown</p>
+										{% if (display_specials_countdown == 0 or display_specials_countdown == '') %} {{ '<div class="status status-off" title="0" rel="display_specials_countdown"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="display_specials_countdown"></div>' }} {% endif %} 
+										<input name="display_specials_countdown" value="{{ display_specials_countdown }}" id="display_specials_countdown" type="hidden" />
+										<div class="clear"></div>
+									</div>
+
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- rating</p>
+										{% if (display_rating == 0 and display_rating != '') %} {{ '<div class="status status-off" title="0" rel="display_rating"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="display_rating"></div>' }} {% endif %} 
+										<input name="display_rating" value="{{ display_rating }}" id="display_rating" type="hidden" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- add to compare</p>
+										{% if (display_add_to_compare == 0 and display_add_to_compare != '') %} {{ '<div class="status status-off" title="0" rel="display_add_to_compare"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="display_add_to_compare"></div>' }} {% endif %} 
+										<input name="display_add_to_compare" value="{{ display_add_to_compare }}" id="display_add_to_compare" type="hidden" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- add to wishlist</p>
+										{% if (display_add_to_wishlist == 0 and display_add_to_wishlist != '') %} {{ '<div class="status status-off" title="0" rel="display_add_to_wishlist"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="display_add_to_wishlist"></div>' }} {% endif %} 
+										<input name="display_add_to_wishlist" value="{{ display_add_to_wishlist }}" id="display_add_to_wishlist" type="hidden" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- add to cart</p>
+										{% if (display_add_to_cart == 0 and display_add_to_cart != '') %} {{ '<div class="status status-off" title="0" rel="display_add_to_cart"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="display_add_to_cart"></div>' }} {% endif %} 
+										<input name="display_add_to_cart" value="{{ display_add_to_cart }}" id="display_add_to_cart" type="hidden" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="input">
+										<p>Product scroll:</p>
+										<div class="clear"></div>
+									</div>
+									
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- latest</p>
+										{% if (product_scroll_latest == 0 and product_scroll_latest != '') %} {{ '<div class="status status-off" title="0" rel="product_scroll_latest"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="product_scroll_latest"></div>' }} {% endif %} 
+										<input name="product_scroll_latest" value="{{ product_scroll_latest }}" id="product_scroll_latest" type="hidden" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- featured</p>
+										{% if (product_scroll_featured == 0 and product_scroll_featured != '') %} {{ '<div class="status status-off" title="0" rel="product_scroll_featured"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="product_scroll_featured"></div>' }} {% endif %} 
+										<input name="product_scroll_featured" value="{{ product_scroll_featured }}" id="product_scroll_featured" type="hidden" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- bestsellers</p>
+										{% if (product_scroll_bestsellers == 0 and product_scroll_bestsellers != '') %} {{ '<div class="status status-off" title="0" rel="product_scroll_bestsellers"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="product_scroll_bestsellers"></div>' }} {% endif %} 
+										<input name="product_scroll_bestsellers" value="{{ product_scroll_bestsellers }}" id="product_scroll_bestsellers" type="hidden" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- specials</p>
+										{% if (product_scroll_specials == 0 and product_scroll_specials != '') %} {{ '<div class="status status-off" title="0" rel="product_scroll_specials"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="product_scroll_specials"></div>' }} {% endif %} 
+										<input name="product_scroll_specials" value="{{ product_scroll_specials }}" id="product_scroll_specials" type="hidden" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="input with-status">
+										<p style="width:270px">&nbsp;&nbsp;&nbsp;- related</p>
+										{% if (product_scroll_related == 0 and product_scroll_related != '') %} {{ '<div class="status status-off" title="0" rel="product_scroll_related"></div>' }} {% else %} {{ '<div class="status status-on" title="1" rel="product_scroll_related"></div>' }} {% endif %} 
+										<input name="product_scroll_related" value="{{ product_scroll_related }}" id="product_scroll_related" type="hidden" />
+										<div class="clear"></div>
+									</div>
+                                </div>
+                            </div>
+							
+						</div>
+						
+						<!-- Category -->
+						<div id="tab_category" class="tab-content">
+                            <div class="section last">
+                                <!-- Input -->
+                                <div class="input">
+                                    <p style="width:270px">Product grid type:</p>
+                                    <select name="product_grid_type">
+                                        <option value="0"{% if (product_grid_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Standard</option>
+                                        <option value="1"{% if (product_grid_type == '1') %}{{ ' selected="selected"' }}{% endif %}>Listing not sidebar</option>
+                                        <option value="2"{% if (product_grid_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Listing not sidebar Full width</option>
+                                        <option value="3"{% if (product_grid_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Listing metro</option>
+                                    </select>
+                                    <div class="clear"></div>
+                                </div>
+
+
+                                <!-- Input -->
+                                <div class="input">
+                                    <p style="width:270px">Refine search style:</p>
+                                    <select name="refine_search_style">
+                                        <option value="0" {% if (refine_search_style == '0') %}{{ ' selected="selected"' }}{% endif %}>With images</option>
+                                        <option value="1" {% if (refine_search_style == '1') %}{{ ' selected="selected"' }}{% endif %}>Text only</option>
+                                        <option value="2" {% if (refine_search_style == '2') %}{{ ' selected="selected"' }}{% endif %}>Disable</option>
+                                    </select>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input">
+                                    <p style="width:270px">Refine search number per row:</p>
+                                    <select name="refine_search_number">
+                                        <option value="2"{% if (refine_search_number == '2') %}{{ ' selected="selected"' }}{% endif %}>2</option>
+                                        <option value="3"{% if (refine_search_number == '3' or refine_search_number < 2) %}{{ ' selected="selected"' }}{% endif %}>3</option>
+                                        <option value="4"{% if (refine_search_number == '4') %}{{ ' selected="selected"' }}{% endif %}>4</option>
+                                        <option value="5"{% if (refine_search_number == '5') %}{{ ' selected="selected"' }}{% endif %}>5</option>
+                                        <option value="6"{% if (refine_search_number == '6') %}{{ ' selected="selected"' }}{% endif %}>6</option>
+                                    </select>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <!-- Input -->
+                                <div class="input">
+                                    <p style="width:270px">Refine search image size:</p>
+                                    <input type="text" name="refine_image_width" style="width:60px" value="{{ refine_image_width }}" />
+                                    <div style="float:left;width:auto;padding-right:15px;position:relative;margin-left:-5px;padding-top:12px"> x </div>
+                                    <input type="text" name="refine_image_height" style="width:60px" value="{{ refine_image_height }}" />
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+						</div>
+						
+						<!-- Header -->
+						<div id="tab_header" class="tab-content">
+ 							<h4 style="margin-top: 20px">Header Type</h4>
+
+							<div class="input">
+								<p>Header Type:</p>
+								<div style="float:left;width:600px">
+									<div class="header_type">
+										<input type="radio" name="header_type" value="1" {% if (header_type < 2) %} {{ 'checked="checked"' }} {% endif %} />
+										<img src="view/image/module_template/header_01.png" alt="" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="header_type">
+										<input type="radio" name="header_type" value="2" {% if (header_type == 2) %} {{ 'checked="checked"' }} {% endif %} />
+										<img src="view/image/module_template/header_02.png" alt="" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="clear"></div>
+									
+									<div class="header_type">
+										<input type="radio" name="header_type" value="3" {% if (header_type == 3) %} {{ 'checked="checked"' }} {% endif %} />
+										<img src="view/image/module_template/header_03.png" alt="" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="header_type">
+										<input type="radio" name="header_type" value="4" {% if (header_type == 4) %} {{ 'checked="checked"' }} {% endif %} />
+										<img src="view/image/module_template/header_04.png" alt="" />
+										<div class="clear"></div>
+									</div>
+									
+									<div class="clear"></div>
+									
+									<div class="header_type">
+										<input type="radio" name="header_type" value="5" {% if (header_type == 5) %} {{ 'checked="checked"' }} {% endif %} />
+										<img src="view/image/module_template/header_05.png" alt="" />
+										<div class="clear"></div>
+									</div>
+
+									<div class="header_type">
+										<input type="radio" name="header_type" value="6" {% if (header_type == 6) %} {{ 'checked="checked"' }} {% endif %} />
+										<img src="view/image/module_template/header_06.png" alt="" />
+										<div class="clear"></div>
+									</div>
+
+									<div class="clear"></div>
+									
+									<div class="header_type">
+										<input type="radio" name="header_type" value="7" {% if (header_type == 7) %} {{ 'checked="checked"' }} {% endif %} />
+										<img src="view/image/module_template/header_07.png" alt="" />
+										<div class="clear"></div>
+									</div>
+
+									<div class="header_type">
+										<input type="radio" name="header_type" value="8" {% if (header_type == 8) %} {{ 'checked="checked"' }} {% endif %} />
+										<img src="view/image/module_template/header_08.png" alt="" />
+										<div class="clear"></div>
+									</div>
+
+									<div class="clear"></div>
+									
+									<div class="header_type">
+										<input type="radio" name="header_type" value="9" {% if (header_type == 9) %} {{ 'checked="checked"' }} {% endif %} />
+										<img src="view/image/module_template/header_09.png" alt="" />
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div> 
+						
+ 						<!-- Translations -->
+						<div id="tab_translations" class="tab-content">
+							<div class="section last">
+                                <div class="input">
+                                    <p style="width:200px">Home:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="home_text[{{ language_id }}]" {% if (home_text[language_id] is defined) %} {{ 'value="'~home_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input">
+                                    <p style="width:200px">Add to compare:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="add_to_compare_text[{{ language_id }}]" {% if (add_to_compare_text[language_id] is defined) %} {{ 'value="'~add_to_compare_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input">
+                                    <p style="width:200px">Add to wishlist:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="add_to_wishlist_text[{{ language_id }}]" {% if (add_to_wishlist_text[language_id] is defined) %} {{ 'value="'~add_to_wishlist_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input">
+                                    <p style="width:200px">Quickview:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="quickview_text[{{ language_id }}]" {% if (quickview_text[language_id] is defined) %} {{ 'value="'~quickview_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input">
+                                    <p style="width:200px">More details:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="more_details_text[{{ language_id }}]" {% if (more_details_text[language_id] is defined) %} {{ 'value="'~more_details_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input">
+                                    <p style="width:200px">Yrs (years) text in countdown:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="yrs_text[{{ language_id }}]" {% if (yrs_text[language_id] is defined) %} {{ 'value="'~yrs_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>    
+
+                                <div class="input">
+                                    <p style="width:200px">Mths (months) text in countdown:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="mths_text[{{ language_id }}]" {% if (mths_text[language_id] is defined) %} {{ 'value="'~mths_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">Wk (weekend) text in countdown:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="wk_text[{{ language_id }}]" {% if (wk_text[language_id] is defined) %} {{ 'value="'~wk_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">Day text in countdown:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="day_text[{{ language_id }}]" {% if (day_text[language_id] is defined) %} {{ 'value="'~day_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">Hrs (hours) text in countdown:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="hrs_text[{{ language_id }}]" {% if (hrs_text[language_id] is defined) %} {{ 'value="'~hrs_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">Min (minutes) text in countdown:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="min_text[{{ language_id }}]" {% if (min_text[language_id] is defined) %} {{ 'value="'~min_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div> 
+
+                                <div class="input">
+                                    <p style="width:200px">Sec (seconds) text in countdown:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="sec_text[{{ language_id }}]" {% if (sec_text[language_id] is defined) %} {{ 'value="'~sec_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div> 
+
+                                <div class="input">
+                                    <p style="width:200px">Close text in menu:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="close_text[{{ language_id }}]" {% if (close_text[language_id] is defined) %} {{ 'value="'~close_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>    
+
+                                <div class="input">
+                                    <p style="width:200px">Back text in menu:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="back_text[{{ language_id }}]" {% if (back_text[language_id] is defined) %} {{ 'value="'~back_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">View all products text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="view_all_products_text[{{ language_id }}]" {% if (view_all_products_text[language_id] is defined) %} {{ 'value="'~view_all_products_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">What are you looking for text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="what_are_you_looking_for_text[{{ language_id }}]" {% if (what_are_you_looking_for_text[language_id] is defined) %} {{ 'value="'~what_are_you_looking_for_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">Added to cart successfully text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="added_to_cart_text[{{ language_id }}]" {% if (added_to_cart_text[language_id] is defined) %} {{ 'value="'~added_to_cart_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">Qty text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="qty_text[{{ language_id }}]" {% if (qty_text[language_id] is defined) %} {{ 'value="'~qty_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">Total text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="total_text[{{ language_id }}]" {% if (total_text[language_id] is defined) %} {{ 'value="'~total_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">There are 1 items in your cart text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="there_are_one_items_in_your_cart_text[{{ language_id }}]" {% if (there_are_one_items_in_your_cart_text[language_id] is defined) %} {{ 'value="'~there_are_one_items_in_your_cart_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">Continue shopping text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="continue_shopping_text[{{ language_id }}]" {% if (continue_shopping_text[language_id] is defined) %} {{ 'value="'~continue_shopping_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div> 
+
+                                <div class="input">
+                                    <p style="width:200px">View cart text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="view_cart_text[{{ language_id }}]" {% if (view_cart_text[language_id] is defined) %} {{ 'value="'~view_cart_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>  
+
+                                <div class="input">
+                                    <p style="width:200px">Proceed to checkout text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="proceed_to_checkout_text[{{ language_id }}]" {% if (proceed_to_checkout_text[language_id] is defined) %} {{ 'value="'~proceed_to_checkout_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div> 
+
+                                <div class="input">
+                                    <p style="width:200px">Settings text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="settings_text[{{ language_id }}]" {% if (settings_text[language_id] is defined) %} {{ 'value="'~settings_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div> 
+
+                                <div class="input">
+                                    <p style="width:200px">Compare text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="compare_text[{{ language_id }}]" {% if (compare_text[language_id] is defined) %} {{ 'value="'~compare_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div> 
+
+                                <div class="input">
+                                    <p style="width:200px">Filter text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="filter_text[{{ language_id }}]" {% if (filter_text[language_id] is defined) %} {{ 'value="'~filter_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div> 
+
+                                <div class="input">
+                                    <p style="width:200px">Back to top text:</p>
+                                    <div class="list-language">
+                                        {% for language in languages %} 
+                                        <div class="language">
+                                            {% set language_id = language['language_id'] %} 
+                                            <img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+                                            <input type="text" name="back_to_top_text[{{ language_id }}]" {% if (back_to_top_text[language_id] is defined) %} {{ 'value="'~back_to_top_text[language_id]~'"' }} {% endif %}>
+                                        </div>
+                                        {% endfor %} 
+                                    </div>
+                                    <div class="clear"></div>
+                                </div> 
+                            </div>
+						</div>
+						
+						
+						<!-- **************** END TAB GENERAL OPTIONS -->
+								
+					</div>
+					
+					<!-- ////////////////////// End General -->
+					
+					<!-- Design -->
+					
+					<div id="tab_design" class="tab-content2">
+					
+						<!-- Font, colors, background TABS -->
+						
+						<div id="tabs_design" class="htabs tabs-design">
+						
+							<a href="#tab_colors" id="tcolors"><span>Colors</span></a>
+						
+						</div>
+						
+						<!-- Font, colors, background -->
+
+						<!-- Colors -->
+						
+						<div id="tab_colors" class="tab-content">
+										
+                            <div class="section">
+                                <!-- Status -->
+                                {% if (colors_status == 1) %} {{ '<div class="status status-on" title="1" rel="colors_status"></div>' }} {% else %} {{ '<div class="status status-off" title="0" rel="colors_status"></div>' }} {% endif %} 
+                                <input name="colors_status" value="{{ colors_status }}" id="colors_status" type="hidden" />
+                            </div>
+
+                            <div class="section">
+                                <div class="input">
+                                    <p style="width:270px">Load styles:</p>
+                                    <select name="load_styles">
+                                        <option value="2"{% if (load_styles == '2') %}{{ ' selected="selected"' }}{% endif %}>standard</option>
+                                        <option value="3"{% if (load_styles == '3') %}{{ ' selected="selected"' }}{% endif %}>skin books</option>
+                                        <option value="4"{% if (load_styles == '4') %}{{ ' selected="selected"' }}{% endif %}>skin yoga</option>
+                                        <option value="5"{% if (load_styles == '5') %}{{ ' selected="selected"' }}{% endif %}>skin glasses</option>
+                                        <option value="6"{% if (load_styles == '6') %}{{ ' selected="selected"' }}{% endif %}>skin kids clothes</option>
+                                        <option value="7"{% if (load_styles == '7') %}{{ ' selected="selected"' }}{% endif %}>skin medical</option>
+                                        <option value="8"{% if (load_styles == '8') %}{{ ' selected="selected"' }}{% endif %}>skin jewelry</option>
+                                        <option value="9"{% if (load_styles == '9') %}{{ ' selected="selected"' }}{% endif %}>skin weapons</option>
+                                    </select>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="input" style="border-bottom: none">
+                                    <p style="width:270px">Footer:</p>
+                                    <select name="footer_colors">
+                                        <option value="2"{% if (footer_colors == '2') %}{{ ' selected="selected"' }}{% endif %}>standard</option>
+                                        <option value="3"{% if (footer_colors == '3') %}{{ ' selected="selected"' }}{% endif %}>dark</option>
+                                    </select>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            
+
+                            <div class="section">
+							
+								{% set i = 0 %} {% for colors in colors_data %} 
+									{{ '<div class="colors_left" ' }}
+									{{ i == 0 ? 'style="padding-top: 0px"' : '' }}
+									{{ '>' }}
+	 {{ '<div class="section accordion">' }}
+	 {{ '<div class="section-title">' }}
+									{{ '	<h4>' ~ colors['name'] ~ '</h4>' }}
+									{{ '	<div class="expander"></div>' }}
+									{{ '</div>' }}
+	 {{ '<div class="section-content">' }}
+										{% for color in colors['content'] %} 
+											{{ '<div class="color_input">' }}
+											{{ '	<p>' ~ color['name'] ~ ':</p>' }}
+	 											<div>
+													<input type="text" value="{{ attribute(_context, color['id']) }}" id="{{ color['id'] }}" name="{{ color['id'] }}" />
+													<span class="color_selected" {% if attribute(_context, color['id']) != '' %}style="background: {{ attribute(_context, color['id']) }}"{% endif %}></span>
+												</div>
+											{{ '</div>' }}
+										{% endfor %}
+										
+	 {{ '</div>' }}
+	 {{ '</div>' }}
+									{{ '</div>' }}
+								{% set i = i + 1 %} 
+								{% endfor %}
+							</div>
+							
+						</div>
+						
+						<!-- End Colors -->
+					
+					</div>
+					
+					<!-- End Design -->
+					
+					
+					<!-- Custom code -->
+					
+					<div id="tab_custom_code" class="tab-content2">
+					
+						<!-- Font, colors, background TABS -->
+						
+						<div id="tabs_custom_code" class="htabs tabs-design">
+						
+							<a href="#tab_css" id="tcss"><span>Css</span></a>
+							<a href="#tab_javascript" id="tjavascript"><span>Javascript</span></a>
+						
+						</div>
+						
+						<!-- ....... TABS CSS -->
+						
+						<div id="tab_css" class="tab-content">
+						
+							<!-- Status -->
+							
+							{% if (custom_code_css_status == 1) %} {{ '<div class="status status-on" title="1" rel="custom_code_css_status"></div>' }} {% else %} {{ '<div class="status status-off" title="0" rel="custom_code_css_status"></div>' }} {% endif %} 
+							
+							<input name="custom_code_css_status" value="{{ custom_code_css_status }}" id="custom_code_css_status" type="hidden" />
+							
+							<!-- Input -->
+							
+							<div class="input">										
+							
+								{% if (custom_code_css is defined) %} 
+								<textarea rows="0" cols="0" name="custom_code_css">{{ custom_code_css }}</textarea>
+								{% else %} 
+								<textarea rows="0" cols="0" name="custom_code_css"></textarea>
+								{% endif %} 
+							
+								<div class="clear"></div>
+							
+							</div>
+							
+							<!-- End Input -->
+						
+						</div>
+						
+						<!-- ....... END TABS CSS -->
+						
+						<!-- ....... TABS JAVASCRIPT -->
+						
+						<div id="tab_javascript" class="tab-content">
+						
+							<!-- Status -->
+							
+							{% if (custom_code_javascript_status == 1) %} {{ '<div class="status status-on" title="1" rel="custom_code_javascript_status"></div>' }} {% else %} {{ '<div class="status status-off" title="0" rel="custom_code_javascript_status"></div>' }} {% endif %} 
+							
+							<input name="custom_code_javascript_status" value="{{ custom_code_javascript_status }}" id="custom_code_javascript_status" type="hidden" />
+							
+							<!-- Input -->
+							
+							<div class="input">										
+							
+								{% if (custom_code_js is defined) %} 
+								<textarea rows="0" cols="0" name="custom_code_js">{{ custom_code_js }}</textarea>
+								{% else %} 
+								<textarea rows="0" cols="0" name="custom_code_js"></textarea>
+								{% endif %} 
+							
+								<div class="clear"></div>
+							
+							</div>
+							
+							<!-- End Input -->
+						
+						</div>
+						
+						<!-- ....... END TABS JAVASCRIPT -->
+										
+					</div>
+					
+					<!-- End Custom code -->
+					
+					<!-- Compressor Code -->
+					
+					<div id="tab_install_data" class="tab-content">
+
+                        <div class="section">
+                            <p style="font-family:Open Sans;color:#4c4c4c;font-size:12px;line-height: 21px;padding-top: 12px">Our theme is MultiStore ready and you can install sample data for each store with some restrictions. Demo content for modules: <b>“Advanded Grid”</b> and <b>“Custom Module”</b> is added as new module on the list. Demo content for other module is replaced. If you have already <b>“MegaMenu”</b> craeted and you install new demo content for this module, the old one will be replaced.<br><br>If you want to make your shop look exactly like our demo. Install sample data.</p>
+
+                            <div class="input" style="border: none">
+
+                                <p style="width:180px">Select version:</p>
+                                <select name="select_demo" id="select_demo">
+                                     <option value="1" {% if (select_demo == '1') %}{{ ' selected="selected"' }}{% endif %}>default</option>
+                                     <option value="2" {% if (select_demo == '2') %}{{ ' selected="selected"' }}{% endif %}>skin 2</option>
+                                     <option value="3" {% if (select_demo == '3') %}{{ ' selected="selected"' }}{% endif %}>skin 3</option>
+                                     <option value="4" {% if (select_demo == '4') %}{{ ' selected="selected"' }}{% endif %}>skin 4</option>
+                                     <option value="5" {% if (select_demo == '5') %}{{ ' selected="selected"' }}{% endif %}>skin 5</option>
+                                     <option value="6" {% if (select_demo == '6') %}{{ ' selected="selected"' }}{% endif %}>skin 6</option>
+                                     <option value="7" {% if (select_demo == '7') %}{{ ' selected="selected"' }}{% endif %}>skin 7</option>
+                                     <option value="8" {% if (select_demo == '8') %}{{ ' selected="selected"' }}{% endif %}>skin 8</option>
+                                     <option value="9" {% if (select_demo == '9') %}{{ ' selected="selected"' }}{% endif %}>skin 9</option>
+                                     <option value="10" {% if (select_demo == '10') %}{{ ' selected="selected"' }}{% endif %}>skin 10</option>
+                                     <option value="11" {% if (select_demo == '11') %}{{ ' selected="selected"' }}{% endif %}>skin 11</option>
+                                     <option value="12" {% if (select_demo == '12') %}{{ ' selected="selected"' }}{% endif %}>skin 12</option>
+                                     <option value="13" {% if (select_demo == '13') %}{{ ' selected="selected"' }}{% endif %}>skin 13</option>
+                                     <option value="14" {% if (select_demo == '14') %}{{ ' selected="selected"' }}{% endif %}>skin 14</option>
+                                     <option value="15" {% if (select_demo == '15') %}{{ ' selected="selected"' }}{% endif %}>skin 15</option>
+                                     <option value="16" {% if (select_demo == '16') %}{{ ' selected="selected"' }}{% endif %}>skin 16</option>
+                                     <option value="17" {% if (select_demo == '17') %}{{ ' selected="selected"' }}{% endif %}>skin 17</option>
+                                     <option value="18" {% if (select_demo == '18') %}{{ ' selected="selected"' }}{% endif %}>skin 18</option>
+                                     <option value="19" {% if (select_demo == '19') %}{{ ' selected="selected"' }}{% endif %}>skin snowboards</option>
+                                     <option value="20" {% if (select_demo == '20') %}{{ ' selected="selected"' }}{% endif %}>skin phones</option>
+                                     <option value="21" {% if (select_demo == '21') %}{{ ' selected="selected"' }}{% endif %}>skin bikes</option>
+                                     <option value="22" {% if (select_demo == '22') %}{{ ' selected="selected"' }}{% endif %}>skin lingerie</option>
+                                     <option value="23" {% if (select_demo == '23') %}{{ ' selected="selected"' }}{% endif %}>skin furniture</option>
+                                     <option value="24" {% if (select_demo == '24') %}{{ ' selected="selected"' }}{% endif %}>skin books</option>
+                                     <option value="25" {% if (select_demo == '25') %}{{ ' selected="selected"' }}{% endif %}>skin yoga</option>
+                                     <option value="26" {% if (select_demo == '26') %}{{ ' selected="selected"' }}{% endif %}>skin glasses</option>
+                                     <option value="27" {% if (select_demo == '27') %}{{ ' selected="selected"' }}{% endif %}>skin kids clothes</option>
+                                     <option value="28" {% if (select_demo == '28') %}{{ ' selected="selected"' }}{% endif %}>skin medical</option>
+                                     <option value="29" {% if (select_demo == '29') %}{{ ' selected="selected"' }}{% endif %}>skin jewelry</option>
+                                     <option value="30" {% if (select_demo == '30') %}{{ ' selected="selected"' }}{% endif %}>skin weapons</option>
+                                </select>
+
+                                <div class="clear"></div>
+
+                             </div>
+                        
+                        </div>
+									
+                            <div class="section">
+                                <div class="section-title">
+                                    <h4>Install sample data <span id="demo">for default version</span>:</h4>
+                                </div>
+                                <div class="section-content">
+								
+						
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Advanced grid:</p>
+                                    <input type="submit" name="install_advanced_grid" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-4 version-6 version-16 version-19 version-21 version-28 version-30">
+                                    <p style="width:450px">Newsletter:</p>
+                                    <input type="submit" name="install_newsletter" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-5 version-6 version-7 version-8 version-9 version-14 version-16 version-20 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Filter product:</p>
+                                    <input type="submit" name="install_filter_product" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Product questions:</p>
+                                    <input type="submit" name="install_product_questions" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">FAQ:</p>
+                                    <input type="submit" name="install_faq" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Custom module:</p>
+                                    <input type="submit" name="install_custom_module" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">MegaMenu:</p>
+                                    <input type="submit" name="install_megamenu" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Popup:</p>
+                                    <input type="submit" name="install_popup" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+                                
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Product blocks:</p>
+                                    <input type="submit" name="install_product_blocks" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-21 version-28">
+                                    <p style="width:450px">Blog latest posts:</p>
+                                    <input type="submit" name="install_blog_latest_posts" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Blog:</p>
+                                    <input type="submit" name="install_blog" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">About page 1:</p>
+                                    <input type="submit" name="install_about_page_1" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">About page 2:</p>
+                                    <input type="submit" name="install_about_page_2" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Contact page 1:</p>
+                                    <input type="submit" name="install_contact_page_1" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version- version-30">
+                                    <p style="width:450px">Services page 1:</p>
+                                    <input type="submit" name="install_services_page_1" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Faq page 2:</p>
+                                    <input type="submit" name="install_faq_page_2" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Gift card page:</p>
+                                    <input type="submit" name="install_gift_card_page" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Lookbook page:</p>
+                                    <input type="submit" name="install_lookbook_page" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Portfolio page (boxed grid - Two columns):</p>
+                                    <input type="submit" name="install_portfolio_page_1" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Portfolio page (boxed grid - Three columns):</p>
+                                    <input type="submit" name="install_portfolio_page_2" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Portfolio page (boxed grid - Four columns):</p>
+                                    <input type="submit" name="install_portfolio_page_3" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version- version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Portfolio page (boxed grid - Four columns without filter):</p>
+                                    <input type="submit" name="install_portfolio_page_4" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Portfolio page (boxed wide - Two columns):</p>
+                                    <input type="submit" name="install_portfolio_page_5" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Portfolio page (boxed wide - Three columns):</p>
+                                    <input type="submit" name="install_portfolio_page_6" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+
+                                <div class="input versions version-1 version-2 version-3 version-4 version-5 version-6 version-7 version-8 version-9 version-10 version-11 version-12 version-13 version-14 version-15 version-16 version-17 version-18 version-19 version-20 version-21 version-22 version-23 version-24 version-25 version-26 version-27 version-28 version-29 version-30">
+                                    <p style="width:450px">Portfolio page (boxed wide - Four columns):</p>
+                                    <input type="submit" name="install_portfolio_page_7" class="button-install" onclick="return confirm('Are you sure you want to install sample data?')" value="">
+
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+					
+					<!-- End Compressor Code -->
+
+
+					<!-- Custom block -->
+					
+					<div id="tab_custom_block" class="tab-content3">
+						<div class="footer_left" style="margin-top: 280px">
+							<div id="tabs_custom_block" class="htabs main-tabs">
+								{% for language in languages %} 
+								<a href="#tab_custom_block_{{ language['language_id'] }}"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" /><span>{{ language['name'] }}</span></a>
+								{% endfor %} 
+							</div>
+						</div>
+						
+						<div class="footer_right">
+							{% for language in languages %} 
+							{% set language_id = language['language_id'] %} 
+							<div id="tab_custom_block_{{ language_id }}">
+								<div id="tabs_custom_block_{{ language_id }}" class="htabs tabs-design">
+									<a href="#tab_product_page_{{ language_id }}" class="tproduct"><span>Product page</span></a>
+								</div>
+								
+								<div id="tab_product_page_{{ language_id }}" class="tab-content4">
+									
+                                    <div class="section">
+                                        <!-- Status -->
+                                        {% if (custom_block['product_page'][language_id]['status'] is defined) %} 
+                                        {% if (custom_block['product_page'][language_id]['status'] == 1) %} {{ '<div class="status status-on" title="1" rel="custom_block_product_page_'~language_id~'_status"></div>' }} {% else %} {{ '<div class="status status-off" title="0" rel="custom_block_product_page_'~language_id~'_status"></div>' }} {% endif %} 
+
+                                        <input name="custom_block[product_page][{{ language_id }}][status]" value="{{ custom_block['product_page'][language_id]['status'] }}" id="custom_block_product_page_{{ language_id }}_status" type="hidden" />
+                                        {% else %} 
+                                        {{ '<div class="status status-off" title="0" rel="custom_block_product_page_'~language_id~'_status"></div>' }} 
+                                        <input name="custom_block[product_page][{{ language_id }}][status]" value="0" id="custom_block_product_page_{{ language_id }}_status" type="hidden" />
+                                        {% endif %} 
+									</div>
+									
+									<div class="section">
+                                        <div class="section-title">
+                                            <h4>Custom block</h4>
+                                        </div>
+                                        <div class="section-content">
+                                            <div class="input">
+                                                <p>Heading:</p>
+                                                {% if (custom_block['product_page'][language_id]['heading'] is defined) %} 
+                                                <input name="custom_block[product_page][{{ language_id }}][heading]" type="text" value="{{ custom_block['product_page'][language_id]['heading'] }}" />
+                                                {% else %} 
+                                                <input name="custom_block[product_page][{{ language_id }}][heading]" type="text" value="" />
+                                                {% endif %} 
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="input-with-editor editor-no-border">										
+                                                {% if (custom_block['product_page'][language_id]['text'] is defined) %} 
+                                                <textarea rows="0" cols="0" name="custom_block[product_page][{{ language_id }}][text]" id="custom_block_product_page_{{ language_id }}_text">{{ custom_block['product_page'][language_id]['text'] }}</textarea>
+                                                {% else %} 
+                                                <textarea rows="0" cols="0" name="custom_block[product_page][{{ language_id }}][text]" id="custom_block_product_page_{{ language_id }}_text"></textarea>
+                                                {% endif %} 
+                                                <div class="clear"></div>
+
+                                                <script type="text/javascript">
+                                                    $('#custom_block_product_page_{{ language_id }}_text').summernote({
+                                                        height: 400
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+							
+							<script type="text/javascript"><!--
+							$('#tabs_custom_block_{{ language_id }} a').tabs();
+							if($.cookie('tabs_custom_block_{{ language_id }}') > 0) {
+								$('#tabs_custom_block_{{ language_id }} a').eq($.cookie('tabs_custom_block_{{ language_id }}')).trigger("click");
+							}
+							$('#tabs_custom_block_{{ language_id }} a').click(function() {
+								var element_index = $('#tabs_custom_block_{{ language_id }} a').index(this);
+								$.cookie('tabs_custom_block_{{ language_id }}', element_index); 
+							});
+							//--></script> 
+							{% endfor %} 
+						</div>		
+					</div>
+					
+					<!-- End Custom block --> 
+										
+					<p style="font-size:1px;line-height:1px;height:1px;clear:both;margin:0px;padding:0px;position:relative;margin-top:-1px"></p>
+				
+				</div>
+				
+				<!-- End Tabs -->
+				
+				<!-- Buttons -->
+				
+				<div class="buttons"><input type="submit" name="button-save" class="button-save" value=""></div>
+				
+				<!-- End Buttons -->
+			
+			</div>
+		
+		</div>
+		<!-- End Content -->
+		 {% else %} 
+			<div class="content">
+				<div style="padding:20px 40px;text-align:center;">
+					You need to add or active skin.
+				</div>
+			</div>
+		{% endif %} 
+		
+	</form>
+	
+</div>
+<!-- End Theme Options -->
+
+</div>
+
+<!-- END #CONTENT -->
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	$('.color_input input').ColorPicker({
+		onChange: function (hsb, hex, rgb, el) {
+			$(el).val("#" +hex);
+			$(el).next('.color_selected').css("background", "#" + hex);
+		},
+		onShow: function (colpkr) {
+			$(colpkr).show();
+			return false;
+		},
+		onHide: function (colpkr) {
+			$(colpkr).hide();
+			return false;
+		}
+	});
+});
+</script>
+<script type="text/javascript"><!--
+$(document).ready(function(){ 
+	$('#tabs a').tabs();
+	if($.cookie('tabs_cookie') > 0) {
+		$('#tabs a').eq($.cookie('tabs_cookie')).trigger("click");
+	}
+	$('#tabs a').click(function() {
+		var element_index = $('#tabs a').index(this);
+		$.cookie('tabs_cookie', element_index); 
+	});
+	
+	$('#tabs_design a').tabs();
+	if($.cookie('tabs_design_cookie') > 0) {
+		$('#tabs_design a').eq($.cookie('tabs_design_cookie')).trigger("click");
+	}
+	$('#tabs_design a').click(function() {
+		var element_index = $('#tabs_design a').index(this);
+		$.cookie('tabs_design_cookie', element_index); 
+	});
+	
+	$('#tabs_general a').tabs();
+	if($.cookie('tabs_general_cookie') > 0) {
+		$('#tabs_general a').eq($.cookie('tabs_general_cookie')).trigger("click");
+	}
+	$('#tabs_general a').click(function() {
+		var element_index = $('#tabs_general a').index(this);
+		$.cookie('tabs_general_cookie', element_index); 
+	});
+	
+	$('#tabs_custom_code a').tabs();
+	if($.cookie('tabs_custom_code_cookie') > 0) {
+		$('#tabs_custom_code a').eq($.cookie('tabs_custom_code_cookie')).trigger("click");
+	}
+	$('#tabs_custom_code a').click(function() {
+		var element_index = $('#tabs_custom_code a').index(this);
+		$.cookie('tabs_custom_code_cookie', element_index); 
+	});
+	
+	$('#tabs_custom_block a').tabs();
+	if($.cookie('tabs_custom_block') > 0) {
+		$('#tabs_custom_block a').eq($.cookie('tabs_custom_block')).trigger("click");
+	}
+	$('#tabs_custom_block a').click(function() {
+		var element_index = $('#tabs_custom_block a').index(this);
+		$.cookie('tabs_custom_block', element_index); 
+	});
+});
+//--></script> 
+
+<script type="text/javascript">
+	{% for language in languages %} 
+	$('#widget_custom_content_{{ language['language_id'] }}').summernote({
+		height: 200
+	});
+	{% endfor %} 
+	
+	$('.customblocktabs a').tabs();
+</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	
+	$('#theme-options').on('click', '.status', function () {
+		
+		var styl = $(this).attr("rel");
+		var co = $(this).attr("title");
+		
+		if(co == 1) {
+		
+			$(this).removeClass('status-on');
+			$(this).addClass('status-off');
+			$(this).attr("title", "0");
+
+			$("#"+styl+"").val(0);
+		
+		}
+		
+		if(co == 0) {
+		
+			$(this).addClass('status-on');
+			$(this).removeClass('status-off');
+			$(this).attr("title", "1");
+
+			$("#"+styl+"").val(1);
+		
+		}
+		
+	});
+
+});	
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+     $('#theme-options').on('change', 'select#select_demo', function () {
+     	$("select#select_demo option:selected").each(function() {
+     		$(".versions").hide();
+     		$(".version-" + $(this).val()).show();
+     		$("#demo").html("for " + $(this).text() + " version");
+     	});
+     });
+     
+     {% if (select_demo > 1) %} 
+          $(".versions").hide();
+          $(".version-{{ select_demo }}").show();
+          $("#demo").html("for " + $("#select_demo option:selected").text() + " version");
+     {% endif %} 
+	
+	$('#theme-options').on('change', 'select.select-page-width', function () {
+		$("select.select-page-width option:selected").each(function() {
+			if($(this).val() == 2) {
+				$(".page-width").show();
+			} else {
+				$(".page-width").hide();
+			}
+		});
+	});
+	
+	$('#theme-options').on('change', '.input-subtle-pattern', function () {
+		$(this).parent().parent().css("background-image", "url(../image/subtle_patterns/" + $(this).val() + ")");
+	});
+    
+    
+    $('.section.accordion .section-title').click(function(){
+        if(!$(this).parent().hasClass('opened')){
+            $(this).parent().addClass('opened')
+            $(this).next('.section-content').hide().stop().slideDown();
+        }else{
+            $(this).parent().removeClass('opened')
+            $(this).next('.section-content').show().stop().slideUp();
+        }
+    })
+    
+    $('.header_type').click(function(){
+        $('.custom-headers .header_type').removeClass('active');
+        $(this).addClass('active');
+    })
+    
+    $('.hover_effect_type').click(function(){
+        $('.custom-banners .hover_effect_type').removeClass('active');
+        $(this).addClass('active');
+        $('.custom-banners').find('input').attr('checked', false);
+        $(this).find('input').attr('checked', true);
+        $('input[name=hover_effect_type]').attr('value',  $(this).find('input').attr('value'));
+    })
+    
+    $('.subtle-pattern').click(function(){
+        $(this).parent().find('.subtle-pattern').removeClass('selected');
+        $(this).addClass('selected');
+        $(this).find('input').trigger('click');
+    })
+    
+    $('.subtle-pattern input').click(function(e){
+        e.stopPropagation();
+    })
+    
+    $('.main-tabs .menu-switcher').click(function(){
+        $('.bg-tabs').toggleClass('shrinked');
+        if($.cookie('main-menu-shrinked')  == 1) {
+            $.cookie('main-menu-shrinked', 0); 
+        }else{
+            $.cookie('main-menu-shrinked', 1); 
+        }
+        
+    })
+    
+    $('#tab_advanced_settings .desc-switcher').click(function(){
+        if($(this).hasClass('hide-desc')){
+            $(this).hide();
+            $('#tab_advanced_settings .desc-switcher.show-desc').show();
+            $(this).parent().find('.advanced_description').hide();
+            $.cookie('advanced-settings-desc-hidden', 1); 
+        }else{
+            $(this).hide();
+            $('#tab_advanced_settings .desc-switcher.hide-desc').show();
+            $(this).parent().find('.advanced_description').show();
+            $.cookie('advanced-settings-desc-hidden', 0); 
+        }
+        
+    })
+    
+    $('.preview-container').beforeAfter({
+        animateIntro : true,
+        introDelay : 1000,
+        introDuration : 300,
+        showFullLinks : false,
+        imagePath: 'view/javascript/beforeafter/'
+    });
+
+});
+	if($.cookie('main-menu-shrinked')  == 1) {
+        $('.bg-tabs').addClass('shrinked');
+    }
+	if($.cookie('advanced-settings-desc-hidden') == 1) {
+        $('#tab_advanced_settings .advanced_description').hide();
+        $('#tab_advanced_settings .desc-switcher.hide-desc').hide();
+        $('#tab_advanced_settings .desc-switcher.show-desc').show();
+    }
+	if($.cookie('main-menu-shrinked')  == 1) {
+        $('.bg-tabs').addClass('shrinked');
+    }
+</script>
+{{ footer }} 

@@ -1,0 +1,129 @@
+body{
+    margin: 0;
+    height: 100%;
+}
+header#header{
+    display: none;
+}
+footer#footer{
+    display: none;
+}
+
+#container{
+    height: 100%;
+}
+
+#theme-options{
+    height: 100%;
+}
+
+
+/* LIVE EDITOR */
+
+#theme-options #live-editor .input select,
+#theme-options #live-editor .input input[type=text],
+#theme-options #live-editor .input textarea {
+    margin-right: 0;
+    padding: 8px 20px;
+}
+
+#theme-options #live-editor .alert{
+    padding-left: 300px;
+}
+
+#theme-options #live-editor .input,
+#theme-options #live-editor .input-with-editor {
+    padding-bottom: 3px;
+}
+
+#theme-options #live-editor .input p {
+    font-size: 13px;
+}
+
+#live-editor {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    font-family: Poppins;
+    
+}
+
+#live-editor .live-sidebar{
+    width: 270px;
+    background: #373737;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+#live-editor .live-sidebar .live-title{
+    font-size: 25px;
+    color: #fff;
+    font-weight: 600;
+    margin: 20px 10px;
+    line-height: 25px;
+}
+
+#live-editor .live-sidebar .live-title span{
+    color: #3ebb24;
+}
+
+#live-editor .live-sidebar .section{
+    background:#fff;
+    margin: 0;
+    padding: 15px 24px;
+}
+
+#live-editor .live-content{
+    margin-left: 270px;
+    height: 100%;
+}
+
+#live-editor .live-content iframe{
+    width: 100%;
+    height: 100%;
+    border: 0;
+    outline: 0;
+}
+
+#theme-options #live-editor .section .section-title {
+    display: block;
+    position: static;
+    width: 100%;
+    padding: 0;
+}
+
+#theme-options #live-editor .section .section-title h4{
+    font-size: 11px;
+    line-height: 12px;
+    padding: 0;
+}
+
+#theme-options #live-editor .section .section-title .expander{
+    background-size: 17px 17px;
+    width: 17px;
+    height: 17px;
+    top: 3px;
+}
+
+#theme-options #live-editor .section.accordion.opened .section-title .expander{
+    background-size: 17px 8px;
+}
+
+#theme-options #live-editor .section .section-content {
+    padding-left: 0;
+}
+
+#theme-options #live-editor .buttons {
+    padding: 0;
+    background-image: none;
+}
+
+#theme-options #live-editor .quit-live-editor {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+}

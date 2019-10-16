@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Opencart n11 Entegrasyonu</name>
+    <code>n11ent</code>
+    <version>1.0</version>
+    <author>Hisef</author>
+    <link>http://www.hisef.com</link>
+    <file path="admin/controller/common/column_left.php">
+        <operation>
+            <search><![CDATA[if ($this->user->hasPermission('access', 'catalog/category')) {]]></search>
+            <add position="before"><![CDATA[
+                $catalog[] = array(
+                    'name'     => 'Trendyol Yönetimi',
+                    'href'     => $this->url->link('trendyol/dashboard', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()       
+                );
+            
+            ]]></add>
+        </operation>
+    </file>
+
+     <file path="admin/controller/catalog/product.php">
+        <operation>
+            <search><![CDATA[$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);]]></search>
+            <add position="after"><![CDATA[
+               // ürün düzenlendiğinde trendyol stok ve fiyatını da düzenle
+               $this->load->model('trendyol/product');
+               $this->model_trendyol_product->updatespforproduct($this->request->get['product_id']);
+            
+            ]]></add>
+        </operation>
+    </file>
+</modification>

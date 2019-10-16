@@ -1,0 +1,533 @@
+{{ header }}{{ column_left }} 
+<div id="content"><div class="container-fluid">
+	<div class="page-header">
+	    <h1>Product Questions</h1>
+	    <ul class="breadcrumb">
+		     {% for breadcrumb in breadcrumbs %} 
+		      <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+		      {% endfor %} 
+	    </ul>
+	  </div>
+	  
+    <link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+    
+	<script type="text/javascript">
+	$.fn.tabs = function() {
+		var selector = this;
+		
+		this.each(function() {
+			var obj = $(this); 
+			
+			$(obj.attr('href')).hide();
+			
+			$(obj).click(function() {
+				$(selector).removeClass('selected');
+				
+				$(selector).each(function(i, element) {
+					$($(element).attr('href')).hide();
+				});
+				
+				$(this).addClass('selected');
+				
+				$($(this).attr('href')).show();
+				
+				return false;
+			});
+		});
+	
+		$(this).show();
+		
+		$(this).first().click();
+	};
+	</script>
+
+	{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% elseif (success) %} 
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% endif %} 
+	
+	<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+		<div class="set-size" id="product_questions">
+			<div class="content">
+				<div>
+					<div class="tabs clearfix">
+						<!-- Tabs module -->
+						<div id="tabs" class="htabs main-tabs">
+							{% set module_row = 1 %} 
+							{% for module in modules %} 
+							<a href="#tab-module-{{ module_row }}" id="module-{{ module_row }}">Module {{ module_row }} &nbsp;<img src="view/image/module_template/delete-slider.png"  alt="" onclick="$('.vtabs a:first').trigger('click'); $('#module-{{ module_row }}').remove(); $('#tab-module-{{ module_row }}').remove(); return false;" /></a>
+							{% set module_row = module_row + 1 %} 
+							{% endfor %} 
+                            <span id="module-add" onclick="addModule();" ><img src="view/image/module_template/add.png" alt="" /> Add Module</span>
+						</div>
+						
+						{% set module_row = 1 %} 
+						{% for module in modules %} 
+						<div id="tab-module-{{ module_row }}" class="tab-content">
+                            <input type="hidden" name="product_questions_module[{{ module_row }}][module_id]" value="{{ module['module_id'] }}" />
+							<table class="form">
+
+							  <tr class="enquiry{{ module_row }}">
+							       <td style="padding-top: 13px">Button text:</td>
+							       <td style="padding-top: 13px"><div class="list-language">
+							            {% for language in languages %} 
+							            <div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" /><input type="text" name="product_questions_module[{{ module_row }}][button_text][{{ language['language_id'] }}]" value="{{ module['button_text'][language['language_id']] is defined ? module['button_text'][language['language_id']] : '' }}"></div>
+							            {% endfor %} 
+							       </div></td>
+							  </tr>
+                              <tr class="enquiry{{ module_row }}">
+							       <td>Button icon:</td>
+							       <td>
+							               {% if (module['icon']) %} 
+							               <a href="" id="thumb-{{ module_row }}" class="img-thumbnail img-edit" data-toggle="image"><img src="../image/{{ module['icon'] }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+							               {% else %} 
+							               <a href="" id="thumb-{{ module_row }}" class="img-thumbnail img-edit" data-toggle="image"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+							               {% endif %} 
+							               <input type="hidden" name="product_questions_module[{{ module_row }}][icon]" value="{{ module['icon'] }}" id="input-{{ module_row }}" />
+							       </td>
+							  </tr>
+							  <tr class="enquiry{{ module_row }}" >
+							       <td>Button Icon position:</td>
+							       <td><select name="product_questions_module[{{ module_row }}][icon_position]">
+							            <option value="left"{% if (module['icon_position'] == 'left') %} {{ ' selected="selected"' }}{% endif %}>Left</option>
+							            <option value="right"{% if (module['icon_position'] == 'right') %} {{ ' selected="selected"' }}{% endif %}>Right</option>
+							       </select></td>
+							  </tr>
+							  <tr class="enquiry{{ module_row }}">
+							       <td style="padding-top: 13px">Block title:</td>
+							       <td style="padding-top: 13px"><div class="list-language">
+							            {% for language in languages %} 
+							            <div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" /><input type="text" name="product_questions_module[{{ module_row }}][block_title][{{ language['language_id'] }}]" value="{{ module['block_title'][language['language_id']] is defined ? module['block_title'][language['language_id']] : '' }}"></div>
+							            {% endfor %} 
+							       </div></td>
+							  </tr>
+							  
+							</table>
+							
+							<table class="form">
+							  <tr>
+							       <td>Show on products from:</td>
+							       <td><select name="product_questions_module[{{ module_row }}][show_on_products_from]" class="get_product_from" title="{{ module_row }}">
+							            <option value="all" {% if (module['show_on_products_from'] == 'all') %} {{ 'selected="selected"' }} {% endif %}>All products</option>
+							            <option value="products" {% if (module['show_on_products_from'] == 'products') %} {{ 'selected="selected"' }} {% endif %}>Choose products</option>
+							            <option value="categories" {% if (module['show_on_products_from'] == 'categories') %} {{ 'selected="selected"' }} {% endif %}>Choose categories</option>
+							       </select>
+							  <tr class="block_{{ module_row }}_products panel-products-autocomplete" {% if (module['show_on_products_from'] != 'products') %} {{ 'style="display: none"' }} {% endif %}>
+							       <td>Products:<br><span style="font-size:11px;color:#808080">(Autocomplete)</span></td>
+							       <td><div><input type="text" alt="{{ module_row }}" name="product_questions_module[{{ module_row }}][product]" value="" /></div>
+							            <div class="scrollbox">
+							            	{% set products = module['products']|split(',') %}
+							            	{% set class = 'odd' %} 
+							            	{% for product in products %} {% if (product > 0) %} 
+							            	{% set class = class == 'even' ? 'odd' : 'even' %} 
+							            	
+							 		{% set model_catalog_product = registry.get('model_catalog_product') %}
+							 		{% set product_info = model_catalog_product.getProduct(product) %} 
+							 		{% set product_name = constant('false') %}
+							 		{% if (product_info) %} 
+							 			{% set product_name = product_info['name'] %}
+							 		{% endif %} 
+							 	
+							            	<div id="product-{{ module_row }}-{{ product }}" class="{{ class }}">{{ product_name }} <img src="view/image/module_template/delete-slider.png" class="delete-product" alt="{{ module_row }}" />
+							            	  <input type="hidden" value="{{ product }}" />
+							            	</div>
+							            	{% endif %} {% endfor %} 
+							            </div>
+							            <input type="hidden" name="product_questions_module[{{ module_row }}][products]" value="{{ module['products'] }}" />
+							       </td>
+							  </tr>
+							  <tr class="block_{{ module_row }}_categories panel-categories-autocomplete" {% if (module['show_on_products_from'] != 'categories') %} {{ 'style="display: none"' }} {% endif %}>
+							       <td>Categories:<br><span style="font-size:11px;color:#808080">(Autocomplete)</span></td>
+							       <td><div><input type="text" alt="{{ module_row }}" name="product_questions_module[{{ module_row }}][category]" value="" /></div>
+							            <div class="scrollbox">
+							            	{% set categories = module['categories']|split(',') %}
+							            	{% set class = 'odd' %} 
+							            	{% for category in categories %} {% if (category > 0) %} 
+							            	{% set class = class == 'even' ? 'odd' : 'even' %} 
+							            	
+							 		{% set model_catalog_category = registry.get('model_catalog_category') %}
+							 		{% set category_info = model_catalog_category.getCategory(category) %} 
+							 		{% set category_name = constant('false') %}
+							 		{% if (category_info) %} 
+							 			{% set category_name = category_info['name'] %}
+							 		{% endif %}
+							 	
+							            	<div id="category-{{ module_row }}-{{ category }}" class="{{ class }}">{{ category_name }} <img src="view/image/module_template/delete-slider.png" class="delete-category" alt="{{ module_row }}" />
+							            	  <input type="hidden" value="{{ category }}" />
+							            	</div>
+							            	{% endif %} {% endfor %} 
+							            </div>
+							            <input type="hidden" name="product_questions_module[{{ module_row }}][categories]" value="{{ module['categories'] }}" />
+							       </td>
+							  </tr>
+
+							  <tr>
+							    <td>Store:</td>
+							    <td><select name="product_questions_module[{{ module_row }}][layout_id]">
+							    	{% if (99999 == module['layout_id']) %} 
+							    	<option value="99999" selected="selected">All stories</option>
+							    	{% else %} 
+							    	<option value="99999">All stories</option>
+							    	{% endif %} 
+							    	{% for store in stores %} 
+							    	<option value="99999{{ store['store_id'] }}" {% if ('99999' ~ store['store_id'] == module['layout_id']) %} {{ 'selected="selected"' }} {% endif %}>Store {{ store['name'] }}</option>
+							    	{% endfor %} 
+							      </select></td>
+							  </tr>
+                              
+							  <tr class="html{{ module_row }}" style="display: none">
+							    <td>Position:</td>
+							    <td><select name="product_questions_module[{{ module_row }}][position]" class="position">
+							         <option value="product_question" selected="selected">Product Question</option>
+							      </select></td>
+							  </tr>
+							  
+							  <tr>
+							    <td>Status:</td>
+							    <td><select name="product_questions_module[{{ module_row }}][status]">
+							        {% if (module['status']) %} 
+							        <option value="1" selected="selected">Enabled</option>
+							        <option value="0">Disabled</option>
+							        {% else %} 
+							        <option value="1">Enabled</option>
+							        <option value="0" selected="selected">Disabled</option>
+							        {% endif %} 
+							      </select></td>
+							  </tr>
+							  <tr>
+							    <td style="border: none;padding-bottom: 0px">Sort Order:</td>
+							    <td style="border: none;padding-bottom: 0px"><input type="text" name="product_questions_module[{{ module_row }}][sort_order]" value="{{ module['sort_order'] }}" size="3" /></td>
+							  </tr>
+							</table>
+						</div>
+						
+						<script type="text/javascript">
+						     $('input[name=\'product_questions_module[{{ module_row }}][category]\']').autocomplete({
+						     	delay: 500,
+						     	source: function(request, response) {
+						     		$.ajax({
+						     			url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+						     			dataType: 'json',
+						     			success: function(json) {		
+						     				response($.map(json, function(item) {
+						     					return {
+						     						label: item['name'],
+						     						value: item['category_id']
+						     					}
+						     				}));
+						     			}
+						     		});
+						     	},
+						     	select: function(item) {
+						     		$('#category-{{ module_row }}-' + item['value']).remove();
+						     		
+						     		$('.block_{{ module_row }}_categories .scrollbox').append('<div id="category-{{ module_row }}-' + item['value'] + '">' + item['label'] + '<img src="view/image/module_template/delete-slider.png" alt="{{ module_row }}" class="delete-category" /><input type="hidden" value="' + item['value'] + '" /></div>');
+						     
+						     		$('.block_{{ module_row }}_categories .scrollbox div:odd').attr('class', 'odd');
+						     		$('.block_{{ module_row }}_categories .scrollbox div:even').attr('class', 'even');
+						     		
+						     		data = $.map($('.block_{{ module_row }}_categories .scrollbox input'), function(element){
+						     			return $(element).attr('value');
+						     		});
+						     						
+						     		$('input[name=\'product_questions_module[{{ module_row }}][categories]\']').attr('value', data.join());
+						     					
+						     		return false;
+						     	}
+						     });
+						     
+						     $('input[name=\'product_questions_module[{{ module_row }}][product]\']').autocomplete({
+						     	delay: 500,
+						     	source: function(request, response) {
+						     		$.ajax({
+						     			url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+						     			dataType: 'json',
+						     			success: function(json) {		
+						     				response($.map(json, function(item) {
+						     					return {
+						     						label: item['name'],
+						     						value: item['product_id']
+						     					}
+						     				}));
+						     			}
+						     		});
+						     	}, 
+						     	select: function(item) {
+						     		$('#product-{{ module_row }}-' + item['value']).remove();
+						     		
+						     		$('.block_{{ module_row }}_products .scrollbox').append('<div id="product-{{ module_row }}-' + item['value'] + '">' + item['label'] + '<img src="view/image/module_template/delete-slider.png" alt="{{ module_row }}" class="delete-product" /><input type="hidden" value="' + item['value'] + '" /></div>');
+						     
+						     		$('.block_{{ module_row }}_products .scrollbox div:odd').attr('class', 'odd');
+						     		$('.block_{{ module_row }}_products .scrollbox div:even').attr('class', 'even');
+						     		
+						     		data = $.map($('.block_{{ module_row }}_products .scrollbox input'), function(element){
+						     			return $(element).attr('value');
+						     		});
+						     						
+						     		$('input[name=\'product_questions_module[{{ module_row }}][products]\']').attr('value', data.join());
+						     					
+						     		return false;
+						     	},
+						     	focus: function(event, ui) {
+						           	return false;
+						        	}
+						     });
+						</script>
+						{% set module_row = module_row + 1 %} 
+						{% endfor %} 
+					</div>
+					
+					<!-- Buttons -->
+					<div class="buttons"><input type="submit" name="button-save" class="button-save" value=""></div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript"><!--
+$('.main-tabs a').tabs();
+//--></script> 
+
+<script type="text/javascript"><!--
+{% set module_row = 1 %} 
+{% for module in modules %} 
+$('#language-{{ module_row }} a').tabs();
+{% set module_row = module_row + 1 %} 
+{% endfor %} 
+//--></script> 
+
+<script type="text/javascript"><!--
+{% set module_row = 1 %} 
+{% for module in modules %} 
+{% set module_row = module_row + 1 %} 
+{% endfor %} 
+//--></script> 
+
+
+
+<script type="text/javascript"><!--
+var module_row = {{ module_row }};
+
+function addModule() {	
+	html  = '<div id="tab-module-' + module_row + '" class="tab-content">';
+        html += '  <input type="hidden" name="product_questions_module[' + module_row + '][module_id]" value="' + module_row + '" />';
+		html += '	<table class="form">';
+		html += '    <tr class="enquiry' + module_row + '">';
+		html += '      <td style="padding-top: 13px">Button text:</td>';
+		html += '      <td style="padding-top: 13px"><div class="list-language">';
+		{% for language in languages %} 
+		html += '               <div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" /><input type="text" name="product_questions_module['+ module_row +'][button_text][{{ language['language_id'] }}]" value=""></div>';
+	     {% endfor %} 
+		html += '      </div></td>';
+		html += '    </tr>';
+		html += '    <tr class="enquiry' + module_row + '">';
+		html += '      <td>Button icon:</td>';
+		html += '      <td>';
+		html += '        <a href="" id="thumb-'+ module_row +'" class="img-thumbnail img-edit" data-toggle="image"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>';
+		html += '        <input type="hidden" name="product_questions_module['+ module_row +'][icon]" value="" id="input-'+ module_row +'" />';
+		html += '      </td>';
+		html += '    </tr>';
+		html += '    <tr class="enquiry' + module_row + '" >';
+		html += '      <td>Button icon position:</td>';
+		html += '      <td><select name="product_questions_module[' + module_row + '][icon_position]">';
+		html += '       		<option value="left">Left</option>';
+		html += '       		<option value="right">Right</option>';
+		html += '      </select></td>';
+		html += '    </tr>';    
+        html += '    <tr class="enquiry' + module_row + '">';
+		html += '      <td style="padding-top: 13px">Block title:</td>';
+		html += '      <td style="padding-top: 13px"><div class="list-language">';
+		{% for language in languages %} 
+		html += '               <div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" /><input type="text" name="product_questions_module['+ module_row +'][block_title][{{ language['language_id'] }}]" value=""></div>';
+	     {% endfor %} 
+		html += '      </div></td>';
+		html += '    </tr>';
+		html += '   </table>';
+
+	
+		html += '  <table class="form">';
+		html += '    <tr>';
+		html += '      <td>Show on products from:</td>';
+		html += '      <td><select name="product_questions_module[' + module_row + '][show_on_products_from]" class="get_product_from" title="' + module_row + '">';
+		html += '       		<option value="all">All products</option>';
+		html += '       		<option value="products">Choose products</option>';
+		html += '       		<option value="categories">Choose categories</option>';
+		html += '      </select>';
+		
+		html += '	     <tr class="block_' + module_row + '_products panel-products-autocomplete" style="display: none">';
+		html += '			<td>Products:<br><span style="font-size:11px;color:#808080">(Autocomplete)</span></td>';
+		html += '			<td><div><input type="text" alt="' + module_row + '" name="product_questions_module['+ module_row +'][product]" value="" /></div>';
+		html += '				<div class="scrollbox products"></div>';
+		html += '			     <input type="hidden" name="product_questions_module['+ module_row +'][products] value="" />';
+		html += '		     </td>';
+		html += '		</tr>';
+		
+		html += '		<tr class="block_' + module_row + '_categories panel-categories-autocomplete" style="display: none">';
+		html += '			<td>Categories:<br><span style="font-size:11px;color:#808080">(Autocomplete)</span></td>';
+		html += '			<td><div><input type="text" alt="' + module_row + '" name="product_questions_module['+ module_row +'][category]" value="" /></div>';
+		html += '			    <div class="scrollbox categories"></div>';
+		html += '			     <input type="hidden" name="product_questions_module['+ module_row +'][categories]" value="" />';
+		html += '		     </td>';
+		html += '		</tr>';
+
+		html += '    <tr>';
+		html += '      <td>Store:</td>';
+		html += '      <td><select name="product_questions_module[' + module_row + '][layout_id]">';
+		html += '           <option value="99999">All stories</option>';
+		{% for store in stores %} 
+		html += '           <option value="99999{{ store['store_id'] }}">Store {{ store['name'] }}</option>';
+		{% endfor %} 
+		html += '      </select></td>';
+		html += '    </tr>';
+		html += '    <tr class="html' + module_row + '" style="display: none">';
+		html += '      <td>Position:</td>';
+		html += '      <td><select name="product_questions_module[' + module_row + '][position]" class="position">';
+        html += '       		 <option value="product_question" selected="selected">Product Question</option>';
+		html += '      </select></td>';
+		html += '    </tr>';
+		html += '    <tr>';
+		html += '      <td>Status:</td>';
+		html += '      <td><select name="product_questions_module[' + module_row + '][status]">';
+		html += '        <option value="1">Enabled</option>';
+		html += '        <option value="0">Disabled</option>';
+		html += '      </select></td>';
+		html += '    </tr>';
+		html += '    <tr>';
+		html += '      <td style="border: none;padding-bottom: 0px">Sort Order:</td>';
+		html += '      <td style="border: none;padding-bottom: 0px"><input type="text" name="product_questions_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
+		html += '    </tr>';
+		html += '  </table>'; 
+	html += '</div>';
+	
+	$('.tabs').append(html);
+	
+	$('#language-' + module_row + ' a').tabs();
+
+	$('#module-add').before('<a href="#tab-module-' + module_row + '" id="module-' + module_row + '">Module ' + module_row + ' &nbsp;<img src="view/image/module_template/delete-slider.png" alt="" onclick="$(\'.vtabs a:first\').trigger(\'click\'); $(\'#module-' + module_row + '\').remove(); $(\'#tab-module-' + module_row + '\').remove(); return false;" /></a>');
+	
+	$('.main-tabs a').tabs();
+	
+	$('#module-' + module_row).trigger('click');
+	
+	var module = module_row;
+	
+	$('input[name=\'product_questions_module[' + module + '][category]\']').autocomplete({
+		delay: 500,
+		source: function(request, response) {
+			$.ajax({
+				url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+				dataType: 'json',
+				success: function(json) {		
+					response($.map(json, function(item) {
+						return {
+							label: item['name'],
+							value: item['category_id']
+						}
+					}));
+				}
+			});
+		},
+		select: function(item) {
+			$('#category-' + module + '-' + item['value']).remove();
+			
+			$('.block_' + module + '_categories .scrollbox').append('<div id="category-' + module + '-' + item['value'] + '">' + item['label'] + '<img src="view/image/module_template/delete-slider.png" alt="' + module + '" class="delete-category" /><input type="hidden" value="' + item['value'] + '" /></div>');
+	
+			$('.block_' + module + '_categories .scrollbox div:odd').attr('class', 'odd');
+			$('.block_' + module + '_categories .scrollbox div:even').attr('class', 'even');
+			
+			data = $.map($('.block_' + module + '_categories .scrollbox input'), function(element){
+				return $(element).attr('value');
+			});
+							
+			$('input[name=\'product_questions_module[' + module + '][categories]\']').attr('value', data.join());
+						
+			return false;
+		}
+	});
+	
+	$('input[name=\'product_questions_module[' + module + '][product]\']').autocomplete({
+		delay: 500,
+		source: function(request, response) {
+			$.ajax({
+				url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+				dataType: 'json',
+				success: function(json) {		
+					response($.map(json, function(item) {
+						return {
+							label: item['name'],
+							value: item['product_id']
+						}
+					}));
+				}
+			});
+		}, 
+		select: function(item) {
+			$('#product-' + module + '-' + item['value']).remove();
+			
+			$('.block_' + module + '_products .scrollbox').append('<div id="product-' + module + '-' + item['value'] + '">' + item['label'] + '<img src="view/image/module_template/delete-slider.png" alt="' + module + '" class="delete-product" /><input type="hidden" value="' + item['value'] + '" /></div>');
+	
+			$('.block_' + module + '_products .scrollbox div:odd').attr('class', 'odd');
+			$('.block_' + module + '_products .scrollbox div:even').attr('class', 'even');
+			
+			data = $.map($('.block_' + module + '_products .scrollbox input'), function(element){
+				return $(element).attr('value');
+			});
+							
+			$('input[name=\'product_questions_module[' +module + '][products]\']').attr('value', data.join());
+						
+			return false;
+		},
+		focus: function(event, ui) {
+	      	return false;
+	   	}
+	});
+	
+	module_row++;
+}
+
+$('#content').on('click', '.delete-product', function () {
+	$(this).parent().remove();
+	
+	$('.block_' + $(this).attr("alt") + '_products .scrollbox div:odd').attr('class', 'odd');
+	$('.block_' + $(this).attr("alt") + '_products .scrollbox div:even').attr('class', 'even');
+
+	data = $.map($('.block_' + $(this).attr("alt") + '_products .scrollbox input'), function(element){
+		return $(element).attr('value');
+	});
+					
+	$('input[name=\'product_questions_module[' + $(this).attr("alt") + '][products]\']').attr('value', data.join());
+});
+
+$('#content').on('click', '.delete-category', function () {
+	$(this).parent().remove();
+	
+	$('.block_' + $(this).attr("alt") + '_categories .scrollbox div:odd').attr('class', 'odd');
+	$('.block_' + $(this).attr("alt") + '_categories .scrollbox div:even').attr('class', 'even');
+
+	data = $.map($('.block_' + $(this).attr("alt") + '_categories .scrollbox input'), function(element){
+		return $(element).attr('value');
+	});
+					
+	$('input[name=\'product_questions_module[' + $(this).attr("alt") + '][categories]\']').attr('value', data.join());
+});
+
+$(document).ready(function() {
+	$('#product_questions').on('change', 'select.get_product_from', function () {
+		var modules = $(this).attr("title");
+		$('.block_' + modules + '_products').hide();
+		$('.block_' + modules + '_categories').hide();
+		if($(this).find("option:selected").val() == 'products') {
+			$('.block_' + modules + '_products').show();
+		}
+		if($(this).find("option:selected").val() == 'categories') {
+			$('.block_' + modules + '_categories').show();
+		}
+	});
+});
+//--></script> 
+{{ footer }}

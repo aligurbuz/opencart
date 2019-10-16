@@ -1,0 +1,31 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+  <div class="comments-single-post" style="margin-top: 52px">
+    <h6 class="tt-title-border">{{ text_related_articles }}</h6>
+    <div class="tt-blog-thumb-list">
+      <div class="row">
+        {% for article2 in articles %}
+          {% if loop.index < 3 %}
+            <div class="col-sm-6">
+              <div class="tt-blog-thumb">
+                {% if (article2['thumb']) %}<div class="tt-img"><a href="{{ article2['href'] }}" target="_blank"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="{{ article2['thumb'] }}" alt=""></a></div>{% endif %} 
+                <div class="tt-title-description">
+                  <div class="tt-background"></div>
+                  {% for tag in article2['tags'] %} 
+                    {% if loop.index == 1 %}
+                      <div class="tt-tag">
+                        <a href="{{ tag['href'] }}">{{ tag['tag'] }}</a>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                  <div class="tt-title">
+                    <a href="{{ article2['href'] }}">{{ article2['title'] }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

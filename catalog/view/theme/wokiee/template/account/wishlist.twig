@@ -1,0 +1,40 @@
+{{ header }} 
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+
+{% if products %}
+  <div class="tt-wishlist-box" id="js-wishlist-removeitem">
+    <div class="tt-wishlist-list">
+      {% for product in products %}
+        <div class="tt-item" id="product-{{ product['product_id'] }}">
+          <div class="tt-col-description">
+            <div class="tt-img">
+              {% if product.thumb %}<a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" /></a>{% endif %}
+            </div>
+            <div class="tt-description">
+              <h2 class="tt-title"><a href="{{ product.href }}">{{ product.name }}</a></h2>
+              <div class="tt-price">
+                {% if not product.special %}
+                  {{ product.price }}
+                {% else %} 
+                  {{ product.special }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="tt-col-btn">
+            <a href="javascript:;" onclick="cart.add('{{ product.product_id }}');" class="tt-btn-addtocart"><i class="icon-f-39"></i>{{ button_cart }}</a>
+            <a class="btn-link js-removeitem" href="{{ product.remove }}"><i class="icon-h-02"></i>{{ button_remove }}</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
+<p style="margin: 0px 0px 0px 0px">{{ text_empty }}</p>
+{% endif %}
+<div class="buttons clearfix" style="padding-top: 16px">
+  <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+</div>
+      
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

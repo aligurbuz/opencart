@@ -1,0 +1,130 @@
+{% set theme_options = registry.get('theme_options') %}
+{% set config = registry.get('config') %}
+
+<div class="tt-product thumbprod-center" id="product-{{ product['product_id'] }}">
+	<div class="tt-image-box">
+		<a href="index.php?route=product/quickview&amp;product_id={{ product['product_id'] }}" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="{% if (theme_options.get( 'quickview_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.html_entity_decode(theme_options.get( 'quickview_text', config.get( 'config_language_id' ) )) }} {% else %} {{ 'Quickview' }} {% endif %}" data-tposition="left"></a>
+		{% if (theme_options.get( 'display_add_to_wishlist' ) != '0') %} 
+			<a href="javascript:wishlist.add('{{ product['product_id'] }}');" class="tt-btn-wishlist" data-tooltip="{% if (theme_options.get( 'add_to_wishlist_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'add_to_wishlist_text', config.get( 'config_language_id' ) ) }} {% else %} {{ 'Add to wishlist' }} {% endif %}" data-tposition="left"></a>
+		{% endif %}
+		{% if (theme_options.get( 'display_add_to_compare' ) != '0') %} 
+			<a href="javascript:compare.add('{{ product['product_id'] }}');" class="tt-btn-compare" data-tooltip="{% if (theme_options.get( 'add_to_compare_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'add_to_compare_text', config.get( 'config_language_id' ) ) }} {% else %} {{ 'Add to compare' }} {% endif %}" data-tposition="left"></a>
+		{% endif %}
+		<a href="{{ product['href'] }}">
+			{% if (product['thumb']) %} 
+				<span class="tt-img"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="{{ product['thumb'] }}" alt="{{ product['name'] }}"></span>
+				{% if (theme_options.get( 'product_image_effect' ) == '1') %}
+					{% set nthumb = product['thumb']|replace({' ': "%20"}) %}
+					{% set adres = constant('HTTP_SERVER') %}
+					{% set nthumb = nthumb|replace({adres: ""}) %}
+					{% set image_size = theme_options.getimagesize(nthumb) %}
+					{% set image_swap = theme_options.productImageSwap(product['product_id'], image_size[0], image_size[1]) %}
+					{% if (image_swap != '') %}<span class="tt-img-roll-over"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="{{ image_swap }}" alt="{{ product['name'] }}"></span>{% endif %}
+				{% endif %}
+			{% else %} 
+				<span class="tt-img"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="image/no_image.jpg" alt=""></span>
+			{% endif %} 
+			{% if (product['special'] and theme_options.get( 'display_text_sale' ) != '0') %} 
+				{% set text_sale = 'Sale' %}
+				{% if (theme_options.get( 'sale_text', config.get( 'config_language_id' ) ) != '') %}
+					{% set text_sale = theme_options.get( 'sale_text', config.get( 'config_language_id' ) ) %}
+				{% endif %} 
+
+				{% if (theme_options.get( 'type_sale' ) == '1') %} 
+					{% set product_detail = theme_options.getDataProduct( product['product_id'] ) %}
+					{% set roznica_ceny = product_detail['price']-product_detail['special'] %}
+					{% set procent = roznica_ceny*100/product_detail['price'] %} 
+					<span class="tt-label-location">
+						<span class="tt-label-sale">-{{ procent|round }}%</span>
+					</span>
+				{% else %} 
+					<span class="tt-label-location">
+						<span class="tt-label-sale">{{ text_sale }}</span>
+					</span>
+				{% endif %}
+			{% elseif (theme_options.get( 'display_text_new' ) != '0' and theme_options.isLatestProduct( product['product_id'] )) %} 
+				<span class="tt-label-location">
+					<span class="tt-label-new">{% if (theme_options.get( 'new_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'new_text', config.get( 'config_language_id' ) ) }} {% else %} {{ 'New' }} {% endif %}</span>
+				</span>
+			{% endif %} 
+		</a>
+		{% if (theme_options.get( 'display_specials_countdown' ) == '1' and product['special']) %} 
+			{% set product_detail = theme_options.getDataProduct( product['product_id'] ) %}
+			{% set date_end = product_detail['date_end'] %}
+			{% if (date_end != '0000-00-00' and date_end) %} 
+				<div class="tt-countdown_box">
+					<div class="tt-countdown_inner">
+						<div class="tt-countdown"
+							data-date="{{ date_end }}"
+							data-year="{% if (theme_options.get( 'yrs_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'yrs_text', config.get( 'config_language_id' ) ) }}{% else %}Yrs{% endif %}"
+							data-month="{% if (theme_options.get( 'mths_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'mths_text', config.get( 'config_language_id' ) ) }}{% else %}Mths{% endif %}"
+							data-week="{% if (theme_options.get( 'wk_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'wk_text', config.get( 'config_language_id' ) ) }}{% else %}Wk{% endif %}"
+							data-day="{% if (theme_options.get( 'day_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'day_text', config.get( 'config_language_id' ) ) }}{% else %}Day{% endif %}"
+							data-hour="{% if (theme_options.get( 'hrs_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'hrs_text', config.get( 'config_language_id' ) ) }}{% else %}Hrs{% endif %}"
+							data-minute="{% if (theme_options.get( 'min_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'min_text', config.get( 'config_language_id' ) ) }}{% else %}Min{% endif %}"
+							data-second="{% if (theme_options.get( 'sec_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'sec_text', config.get( 'config_language_id' ) ) }}{% else %}Sec{% endif %}"></div>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}  
+	</div>
+	<div class="tt-description">
+		<div class="tt-row">
+			<ul class="tt-add-info">
+				{% set product_detail = theme_options.getDataProduct( product['product_id'] ) %} 
+				<li><a href="{{ product_detail['category_url'] }}">{{ product_detail['category_name'] }}</a></li>
+			</ul>
+			{% if product['rating'] > 0 and theme_options.get( 'display_rating' ) == '1' %}
+				<div class="tt-rating">
+					<i class="icon-star{% if product['rating'] < 1 %}-empty{% endif %}"></i>
+					<i class="icon-star{% if product['rating'] < 2 %}-empty{% endif %}"></i>
+					<i class="icon-star{% if product['rating'] < 3 %}-empty{% endif %}"></i>
+					<i class="icon-star{% if product['rating'] < 4 %}-empty{% endif %}"></i>
+					<i class="icon-star{% if product['rating'] < 5 %}-empty{% endif %}"></i>
+				</div>
+			{% endif %}
+		</div>
+		<h2 class="tt-title"><a href="{{ product['href'] }}">{{ product['name'] }}</a></h2>
+		{% if (product['price']) %} 
+			<div class="tt-price">
+				{% if (not product['special']) %} 
+					{{ product['price'] }} 
+				{% else %} 
+					<span class="new-price">{{ product['special'] }}</span> <span class="old-price">{{ product['price'] }}</span>
+				{% endif %} 
+			</div>
+		{% endif %}
+		{% set product_options = theme_options.getProductOptions( product['product_id'] ) %} 
+		{% if product_options|length > 0 %} 
+			<div class="tt-option-block">
+				<ul class="tt-options-swatch">
+					{% for product_option in product_options %}
+						<li class=""><a class="options-color" style="background-image: url(image/{{ product_option['image'] }})" href="#"></a></li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+		<div class="tt-product-inside-hover">
+			{% if (theme_options.get( 'display_add_to_cart' ) != '0') %} 
+				<div class="tt-row-btn">
+					{% set enquiry = constant('false') %} 
+					{% if (config.get( 'product_blocks_module' ) != '') %} {% set enquiry = theme_options.productIsEnquiry(product['product_id']) %} {% endif %}
+					{% if (enquiry is iterable) %} 
+						<a href="javascript:openPopup('{{ enquiry['popup_module'] }}', '{{ product['product_id'] }}')" class="tt-btn-addtocart thumbprod-button-bg">{{ enquiry['block_name'] }}</a>
+					{% else %} 
+						<a onclick="cart.add('{{ product['product_id'] }}');" class="tt-btn-addtocart thumbprod-button-bg">{{ button_cart }}</a>
+					{% endif %} 
+				</div>
+			{% endif %}
+			<div class="tt-row-btn">
+				<a href="index.php?route=product/quickview&amp;product_id={{ product['product_id'] }}" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+				{% if (theme_options.get( 'display_add_to_wishlist' ) != '0') %} 
+					<a href="javascript:wishlist.add('{{ product['product_id'] }}');" class="tt-btn-wishlist"></a>
+				{% endif %}
+				{% if (theme_options.get( 'display_add_to_compare' ) != '0') %} 
+					<a href="javascript:compare.add('{{ product['product_id'] }}');" class="tt-btn-compare"></a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>

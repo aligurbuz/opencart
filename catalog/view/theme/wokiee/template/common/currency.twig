@@ -1,0 +1,13 @@
+{% if (currencies|length > 1) %} 
+<form action="{{ action }}" method="post" enctype="multipart/form-data" id="currency_form">
+	<!-- Currency -->
+	<ul>
+		{% for currency in currencies %} 
+		<li {% if (currency['code'] == code) %}class="active"{% endif %}><a href="javascript:;" onclick="$('input[name=\'code\']').attr('value', '{{ currency['code'] }}'); $('#currency_form').submit();">{# <i class="icon-h-59"></i> #}{{ currency['code'] }} - {{ currency['title'] }}</a></li>
+		{% endfor %} 
+	</ul>
+	
+    <input type="hidden" name="code" value="" />
+    <input type="hidden" name="redirect" value="{{ redirect }}" />
+</form>
+{% endif %}

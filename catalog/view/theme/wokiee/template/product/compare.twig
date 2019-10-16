@@ -1,0 +1,84 @@
+{{ header }} 
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+
+{% if products %}
+  {% for breadcrumb in breadcrumbs %} 
+    {% set heading_title = breadcrumb['text'] %}
+  {% endfor %} 
+  <h1 class="tt-title-subpages noborder">{{ heading_title }}</h1>
+  <div class="tt-compare-table" id="tt-compare-table">
+    {% for product in products %}
+      <div class="tt-item">
+        <div class="tt-image-box">
+          <div class="tt-row-custom">
+            <div class="tt-col">
+              <a href="{{ product.remove }}" class="tt-remove-item js-remove-item"></a>
+            </div>
+          </div>
+          <div class="tt-img">
+            <a href="{{ product.href }}">{% if product.thumb %} <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-thumbnail" /> {% endif %}</a>
+          </div>
+          <h2 class="tt-title"><a href="{{ product.href }}">{{ product.name }}</a></h2>
+          <div class="tt-price">
+            {% if product.price %}
+              {% if not product.special %}
+                {{ product.price }}
+              {% else %} 
+                <strike>{{ product.price }}</strike> 
+                {{ product.special }}
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="tt-col tt-table-title">{{ text_summary }}</div>
+        <div class="tt-col js-description">
+          {{ product.description }}
+        </div>
+        <div class="tt-col tt-table-title">{{ text_model }}</div>
+        <div class="tt-col">
+          {{ product.model }}
+        </div>
+        <div class="tt-col tt-table-title">{{ text_manufacturer }}</div>
+        <div class="tt-col">
+          {{ product.manufacturer }}
+        </div>
+        <div class="tt-col tt-table-title">{{ text_availability }}</div>
+        <div class="tt-col">
+          {{ product.availability }}
+        </div>
+        <div class="tt-col tt-table-title">{{ text_weight }}</div>
+        <div class="tt-col">
+          {{ product.weight }}
+        </div>
+        <div class="tt-col tt-table-title">{{ text_dimension }}</div>
+        <div class="tt-col">
+          {{ product.length }} x {{ product.width }} x {{ product.height }}
+        </div>
+        {% for attribute_group in attribute_groups %}
+        <div class="tt-col tt-table-title">{{ attribute_group.name }}</div>
+        <div class="tt-col">
+          {% for key, attribute in attribute_group.attribute %}
+              {{ attribute.name }}:
+              {% if product.attribute[key] %}
+                {{ product.attribute[key] }}
+              {% endif %}
+            </tr>
+          </tbody>
+          {% endfor %}
+        </div>
+        {% endfor %}
+        <div class="tt-col">
+          <a href="javascript:;" class="btn tt-btn-addtocart" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="icon-f-39"></i>{{ button_cart }}</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+<p style="margin: 0px 0px 16px 0px">{{ text_empty }}</p>
+<div class="buttons">
+  <div class="pull-right"><a href="{{ continue }}" class="btn btn-default">{{ button_continue }}</a></div>
+</div>
+{% endif %}
+  
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

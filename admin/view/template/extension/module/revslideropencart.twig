@@ -1,0 +1,39 @@
+{{ header }}{{ column_left }} 
+
+<div id="content">
+ <div class="page-header">
+    <div class="container-fluid">
+    
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %} 
+        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+        {% endfor %} 
+      </ul>
+    </div>
+  </div>
+<div class="container-fluid">
+    {% if (error_warning) %} 
+      <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+      {% endif %} 
+    <div class="box ">
+      <div class="rev_content content" style="min-width: 1095px;">
+          <!-- content here --> 
+          {{ rev_content }} 
+      </div>
+  </div>
+</div>
+</div>
+<style type="text/css">
+.rev_content .content.wrap {
+  margin: 0px 0px 0 0px;
+}
+</style>
+<script type="text/javascript">
+  jQuery(document).ready(function($){
+    $(this.body).addClass('rev_backoffice wp-core-ui');
+  });
+</script>
+{{ footer }}

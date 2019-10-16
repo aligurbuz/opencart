@@ -1,0 +1,37 @@
+{% set theme_options = registry.get('theme_options') %}
+<div class="tt-collapse open">
+  <h3 class="tt-collapse-title">{{ module['content']['title'] }}</h3>
+  <div class="tt-collapse-content" style="">
+    <div class="tt-aside">
+      {% for product in module['content']['products'] %} 
+        <a class="tt-item" href="{{ product['href'] }}">
+          <div class="tt-img">
+            {% if (product['thumb']) %} 
+              <span class="tt-img"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="{{ product['thumb'] }}" alt="{{ product['name'] }}"></span>
+              {% if (theme_options.get( 'product_image_effect' ) == '1') %}
+                {% set nthumb = product['thumb']|replace({' ': "%20"}) %}
+                {% set adres = constant('HTTP_SERVER') %}
+                {% set nthumb = nthumb|replace({adres: ""}) %}
+                {% set image_size = theme_options.getimagesize(nthumb) %}
+                {% set image_swap = theme_options.productImageSwap(product['product_id'], image_size[0], image_size[1]) %}
+                {% if (image_swap != '') %}<span class="tt-img-roll-over"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="{{ image_swap }}" alt="{{ product['name'] }}"></span>{% endif %}
+              {% endif %}
+            {% else %} 
+              <span class="tt-img"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="image/no_image.jpg" alt=""></span>
+            {% endif %} 
+          </div>
+          <div class="tt-content">
+            <h6 class="tt-title">{{ product['name'] }}</h6>
+            <div class="tt-price">
+             {% if (not product['special']) %}
+              {{ product['price'] }}
+             {% else %} 
+              {{ '<span class="sale-price">' ~ product['special'] ~ '</span> <span class="old-price">' ~ product['price'] ~ '</span>' }}
+             {% endif %}
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

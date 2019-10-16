@@ -1,0 +1,981 @@
+{% if (theme_options.get( 'colors_status' ) == '1') %} 
+<style type="text/css">
+	{% if (theme_options.get( 'main_color' ) != '') %} 
+	.datepicker table tr td.day:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.datepicker table tr td.today:hover, .datepicker table tr td.today:hover:hover, .datepicker table tr td.today.disabled:hover, .datepicker table tr td.today.disabled:hover:hover, .datepicker table tr td.today:active, .datepicker table tr td.today:hover:active, .datepicker table tr td.today.disabled:active, .datepicker table tr td.today.disabled:hover:active, .datepicker table tr td.today.active, .datepicker table tr td.today:hover.active, .datepicker table tr td.today.disabled.active, .datepicker table tr td.today.disabled:hover.active, .datepicker table tr td.today.disabled, .datepicker table tr td.today:hover.disabled, .datepicker table tr td.today.disabled.disabled, .datepicker table tr td.today.disabled:hover.disabled, .datepicker table tr td.today[disabled], .datepicker table tr td.today:hover[disabled], .datepicker table tr td.today.disabled[disabled], .datepicker table tr td.today.disabled:hover[disabled] {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.datepicker table tr td.today:active, .datepicker table tr td.today:hover:active, .datepicker table tr td.today.disabled:active, .datepicker table tr td.today.disabled:hover:active, .datepicker table tr td.today.active, .datepicker table tr td.today:hover.active, .datepicker table tr td.today.disabled.active, .datepicker table tr td.today.disabled:hover.active {
+	    color: {{ theme_options.get( 'main_color' ) }} \9
+	}
+	.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.datepicker table tr td.active:hover, .datepicker table tr td.active:hover:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active.disabled:hover:hover, .datepicker table tr td.active:active, .datepicker table tr td.active:hover:active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.active, .datepicker table tr td.active:hover.active, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled:hover.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active:hover.disabled, .datepicker table tr td.active.disabled.disabled, .datepicker table tr td.active.disabled:hover.disabled, .datepicker table tr td.active[disabled], .datepicker table tr td.active:hover[disabled], .datepicker table tr td.active.disabled[disabled], .datepicker table tr td.active.disabled:hover[disabled] {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.datepicker table tr td.active:active, .datepicker table tr td.active:hover:active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.active, .datepicker table tr td.active:hover.active, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled:hover.active {
+	    color: {{ theme_options.get( 'main_color' ) }} \9
+	}
+	.datepicker table tr td span:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
+	    background-color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.datepicker table tr td span.active:hover, .datepicker table tr td span.active:hover:hover, .datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active.disabled:hover:hover, .datepicker table tr td span.active:active, .datepicker table tr td span.active:hover:active, .datepicker table tr td span.active.disabled:active, .datepicker table tr td span.active.disabled:hover:active, .datepicker table tr td span.active.active, .datepicker table tr td span.active:hover.active, .datepicker table tr td span.active.disabled.active, .datepicker table tr td span.active.disabled:hover.active, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active:hover.disabled, .datepicker table tr td span.active.disabled.disabled, .datepicker table tr td span.active.disabled:hover.disabled, .datepicker table tr td span.active[disabled], .datepicker table tr td span.active:hover[disabled], .datepicker table tr td span.active.disabled[disabled], .datepicker table tr td span.active.disabled:hover[disabled] {
+	    background-color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.datepicker thead tr:first-child th:hover, .datepicker tfoot tr:first-child th:hover {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	/* 								------------------------ */
+	.mfp-close:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.mfp-arrow:hover, button.mfp-arrow:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.icon-AES2562 .path1:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.icon-AES2562 .path11:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.icon-AES256 .path1:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.icon-AES256 .path11:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-top-panel {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-logo .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-dropdown-obj .tt-dropdown-toggle:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-dropdown-obj.active .tt-dropdown-toggle {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	@media (max-width: 1024px) {
+	    header .tt-account .tt-dropdown-menu .tt-dropdown-inner ul li a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    header .tt-account .tt-dropdown-menu .tt-dropdown-inner ul li a:hover [class^="icon-"] {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	header .tt-account ul li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-account ul li a:hover [class^="icon-"] {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	@media (max-width: 1024px) {
+	    header .tt-multi-obj .tt-dropdown-menu .tt-dropdown-inner ul li a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    header .tt-multi-obj .tt-dropdown-menu .tt-dropdown-inner ul li a:hover [class^="icon-"] {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    header .tt-multi-obj .tt-dropdown-menu .tt-dropdown-inner ul li.active a {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    header .tt-multi-obj .tt-dropdown-menu .tt-dropdown-inner ul li.active a [class^="icon-"] {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	header .tt-multi-obj ul li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-multi-obj ul li a:hover [class^="icon-"] {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-multi-obj ul li.active a {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-multi-obj ul li.active a [class^="icon-"] {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-dropdown-obj:not(.tt-search) .tt-mobile-add .tt-close:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-dropdown-obj:not(.tt-search) .tt-mobile-add .tt-close:hover:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-cart .tt-dropdown-toggle .tt-badge-cart {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-cart .tt-cart-layout .tt-cart-content .tt-cart-list .tt-item a:not([class]):hover .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-cart .tt-cart-layout .tt-cart-content .tt-cart-list .tt-item-close .tt-btn-close:hover:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	@media (min-width: 1025px) {
+	    header .tt-search .tt-dropdown-menu .tt-btn-search:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    header .tt-search .tt-dropdown-menu .tt-btn-close:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	@media (max-width: 1024px) {
+	    header .tt-search .tt-dropdown-menu .tt-btn-close:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    header .tt-search .tt-dropdown-menu .tt-btn-search {
+	        color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	}
+	@media (min-width: 1025px) {
+	    header .tt-search .search-results ul>li a:hover .tt-title {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	header .tt-search .tt-view-all {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-01 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown>a:hover {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-01 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.active>a {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-01 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.selected>a {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-01 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown>a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-01 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.active>a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-01 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.selected>a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-01 .tt-dropdown-obj .tt-dropdown-toggle:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-02 .tt-box-info ul li [class^="icon-"] {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-02 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown>a:hover {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-02 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.active>a {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-02 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.selected>a {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-02 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown>a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-02 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.active>a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-02 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.selected>a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-02 .tt-dropdown-obj .tt-dropdown-toggle:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-03 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown>a:hover {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-03 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.active>a {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-03 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.selected>a {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	header .tt-color-scheme-03 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown>a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-03 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.active>a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-03 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.selected>a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	header .tt-color-scheme-03 .tt-dropdown-obj .tt-dropdown-toggle:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu .header-menu-product a:hover .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu .tt-title-submenu:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu .tt-title-submenu:hover a {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu .tt-title-submenu.active {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu .tt-title-submenu.active a {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu .tt-megamenu-submenu>li>a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu .tt-megamenu-submenu>li.active>a {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu .tt-megamenu-submenu>li ul li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu .tt-megamenu-submenu>li ul li.active>a {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu:not(.tt-hover-02) li.dropdown>a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-desctop-menu:not(.tt-hover-02) li.dropdown.active>a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-desctop-menu:not(.tt-hover-02) li.dropdown.selected>a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-desctop-menu.tt-hover-02 nav>ul li.dropdown>a:hover {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.active>a {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.selected>a {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	body:not(.touch-device) .tt-menu-toggle:hover i {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.panel-menu ul li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.panel-menu #mm0.mmpanel a:not(.mm-close):hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.panel-menu #mm0.mmpanel a:not(.mm-close):hover:after {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.panel-menu .mm-close:hover, .panel-menu .mm-prev-level:hover, .panel-menu .mm-next-level:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.panel-menu .mm-close:hover:before .mm-prev-level:hover:before, .panel-menu .mm-next-level:hover:after {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.panel-menu li.mm-close-parent .mm-close:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.panel-menu li.mm-close-parent .mm-close:hover:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.panel-menu .mm-prev-level:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.panel-menu .mm-prev-level:hover:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.panel-menu .mm-next-level:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.panel-menu .mm-next-level:hover:after {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.panel-menu .mm-original-link:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.panel-menu .mm-original-link:hover:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	footer .tt-logo .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	@media (min-width: 790px) {
+	    footer .tt-color-scheme-01 .tt-collapse-title a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    footer .tt-color-scheme-01 .tt-collapse-content a {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    footer .tt-color-scheme-01 .tt-list li a:hover, footer .tt-color-scheme-01 .tt-mobile-collapse .tt-collapse-content .tt-list li a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    footer .tt-color-scheme-01 .tt-newsletter .form-control:focus {
+	        border-color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    footer .tt-color-scheme-01 .tt-newsletter .btn {
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    footer .tt-color-scheme-02 {
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    footer .tt-color-scheme-03 .tt-mobile-collapse .tt-collapse-content a {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    footer .tt-color-scheme-03 .tt-list li a:hover, footer .tt-color-scheme-03 .tt-mobile-collapse .tt-collapse-content .tt-list li a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    footer .tt-color-scheme-03 .tt-list li.active a, footer .tt-color-scheme-03 .tt-mobile-collapse .tt-collapse-content .tt-list li.active a {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    footer .tt-color-scheme-03 .tt-newsletter .form-control:focus {
+	        border-color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    footer .tt-color-scheme-03 .tt-newsletter .btn {
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    footer .tt-color-scheme-04 .tt-newsletter .form-control:focus {
+	        border-color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    footer .tt-color-scheme-04 .tt-newsletter .btn {
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	}
+	@media (max-width: 789px) {
+	    footer .tt-mobile-collapse .tt-collapse-title:hover:not(:focus) {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    footer .tt-newsletter .form-control:focus {
+	        border-color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    footer .tt-newsletter .btn {
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    footer .tt-list li a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    footer address a {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    footer .tt-logo .tt-title {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	@media (max-width: 789px) {
+	    .f-mobile-dark+.tt-back-to-top:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	.tt-listing-post .tt-post .tt-post-content .tt-tag a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+
+	.tt-listing-post .tt-post .tt-post-content .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-listing-post .tt-post .tt-post-content .tt-meta .tt-comments a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-listing-post .tt-post .tt-post-content .tt-meta .tt-comments a:hover .tt-icon {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-video-block .link-video:hover:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-box-link {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-post-single .tt-tag a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-post-single .post-meta a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-comments-layout .tt-item div[class^="tt-comments-level-"] .tt-content .tt-btn {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-blog-thumb .tt-title-description .tt-tag {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-blog-thumb .tt-title-description .tt-tag a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-blog-thumb .tt-title-description .tt-title a:hover{
+		color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-blog-thumb .tt-title-description .tt-meta .tt-comments a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-blog-thumb .tt-title-description .tt-meta .tt-comments a:hover .tt-icon {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-form-search .tt-btn-icon:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-list-inline li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-aside-post .item .tt-tag {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-aside-post .item .tt-tag a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-aside-post .item>a:not([class]):hover .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-pagination ul li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-pagination ul li.active a {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-pagination .btn-pagination:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-layout-01-post .tt-post .tt-post-content .tt-tag a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-layout-01-post .tt-post .tt-post-content .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-layout-01-post .tt-post .tt-post-content .tt-meta .tt-comments a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-layout-01-post .tt-post .tt-post-content .tt-meta .tt-comments a:hover .tt-icon {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-layout-01-post .tt-post:hover .tt-post-img i {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-portfolio-content figure figcaption .tt-btn-zomm:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-portfolio-content figure figcaption .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-product-single-info .tt-add-info ul li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-product-single-info .tt-price {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-product-single-info .tt-price .new-price {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-product-single-info .tt-review a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-review-block .tt-row-custom-02 a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-review-block .tt-review-form .tt-message-info span {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.video-link-product [class^="icon-"] {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.product-information-buttons a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	ul.tt-options-swatch li:hover a:not(.options-color), ul.tt-options-swatch li.active a:not(.options-color) {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	ul.tt-options-swatch li .options-color:after {
+	    border: 0px solid {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-product-single-img .tt-btn-zomm:hover {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-modal-addtocart.desctope .tt-modal-messages [class^="icon-"] {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-modal-addtocart.desctope .tt-modal-product .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-modal-addtocart.desctope .tt-cart-total .tt-total .tt-price {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-modal-addtocart.mobile .tt-modal-messages [class^="icon-"] {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.modal .modal-header .close:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-modal-newsletter .tt-modal-newsletter-promo .tt-title-large {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-modal-newsletter .row-social-icon .tt-social-icon li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-modal-newsletter .checkbox-group label:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-layout-product-info-02 ul:not([class])>li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-modal-subsribe-good i {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-filters-options .tt-btn-toggle a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-filters-options .tt-btn-toggle a:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	@media (min-width: 1025px) {
+	    .tt-btn-col-close a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	@media (max-width: 1024px) {
+	    .tt-btn-col-close a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	.tt-collapse .tt-collapse-title:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-filter-list li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-filter-list li.active {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-filter-list li.active a:before {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-list-row li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-list-row li.active a {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-aside .tt-item:hover .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-product.tt-view .tt-description .tt-add-info li a:hover, .tt-product-design02.tt-view .tt-description .tt-add-info li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-product.tt-view .tt-description .tt-title a:hover, .tt-product-design02.tt-view .tt-description .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-product.tt-view .tt-description .tt-btn-addtocart, .tt-product-design02.tt-view .tt-description .tt-btn-addtocart {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-product.tt-view .tt-description .tt-btn-addtocart:before, .tt-product-design02.tt-view .tt-description .tt-btn-addtocart:before {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-product.tt-view .tt-description .tt-btn-quickview:hover, .tt-product-design02.tt-view .tt-description .tt-btn-quickview:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	@media (min-width: 1025px) {
+	    .tt-product:not(.tt-view) .tt-image-box .tt-btn-quickview:hover {
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    .tt-product:not(.tt-view) .tt-description .tt-add-info li a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    .tt-product:not(.tt-view) .tt-description .tt-title a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	@media (min-width: 1025px) {
+	    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart {
+	        color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart.thumbprod-button-bg {
+	        background-color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart.thumbprod-button-bg:hover {
+	        background-color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart:before {
+	        color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	}
+	@media (min-width: 1025px) {
+	    .tt-product-design02:not(.tt-view) .tt-description .tt-add-info li a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    .tt-product-design02:not(.tt-view) .tt-description .tt-title a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    .tt-product-design02:not(.tt-view) .tt-options-swatch li:hover a:not(.options-color) {
+	        background: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    .tt-product-design02:not(.tt-view) .tt-options-swatch li.active a:not(.options-color) {
+	        background: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    .tt-product-design02:not(.tt-view) .tt-btn-addtocart {
+	        color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    .tt-product-design02:not(.tt-view) .tt-btn-addtocart:before {
+	        color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    .tt-product-design02:not(.tt-view) .tt-btn-quickview:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    .tt-product-design02:not(.tt-view) .tt-btn-link:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	@media (max-width: 1024px) {
+	    .tt-product:not(.tt-view) .tt-description .tt-add-info li a:hover, .tt-product-design02:not(.tt-view) .tt-description .tt-add-info li a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    .tt-product:not(.tt-view) .tt-description .tt-title a:hover, .tt-product-design02:not(.tt-view) .tt-description .tt-title a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	@media (max-width: 1024px) {
+	    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart, .tt-product-design02:not(.tt-view) .tt-description .tt-btn-addtocart {
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    .tt-product:not(.tt-view) .tt-description .tt-btn-quickview:hover, .tt-product-design02:not(.tt-view) .tt-description .tt-btn-quickview:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	.tt-countdown_box .countdown-row .countdown-section {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-promo-box:not(.hover-type-2):hover .btn-underline {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-collection-item:hover .tt-description .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-promo-fixed .tt-btn-close:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-promo-fixed .tt-description a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-shopcart-table .tt-btn-close:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-shopcart-table .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-shopcart-table01 tfoot tr td {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-shopcart-table-02 .tt-btn-close:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-shopcart-table-02 .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-shopping-layout .tt-link-back {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-shopping-layout .tt-shop-btn svg {
+	    fill: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-table-shop-01 tbody td a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-table-shop-02 tbody td a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-shop-info .tt-item .tt-description strong {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-shop-info .tt-item .tt-description a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-lookbook .tt-hotspot .tt-btn:after {
+	    background-color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-hotspot-content .tt-btn-close:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-hotspot-content .tt-description .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.slider-revolution .video-play a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.slider-revolution [class^="btn"],
+	.slider-revolution [class^="btn"]:hover {
+	    background-color: {{ theme_options.get( 'main_color' ) }};
+	}
+	#loader .dot {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	@media (min-width: 1025px) {
+	    #tt-boxedbutton .rtlbutton .box-btn {
+	        background-color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    #tt-boxedbutton .rtlbutton .box-description {
+	        background-color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    #tt-boxedbutton .rtlbutton .box-disable {
+	        color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	}
+	.btn,
+	.btn:hover {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.btn.btn-dark:hover {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.btn.btn-border {
+	    border: 2px solid {{ theme_options.get( 'main_color' ) }};
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.btn-link, .btn-link:focus {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.btn-link-02, .btn-link-02:focus {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.btn-underline {
+	    border-bottom: 1px solid {{ theme_options.get( 'main_color' ) }};
+	}
+	.btn-underline:not([class$="color"]) {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-link {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.link {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-list-dot>li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-list-dot>li:before {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-blockquote .tt-icon {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-blockquote.add-hover:hover .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-block-title .tt-title a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-block-title .tt-title a:before {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-block-title .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-block-title .tt-title-small a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-block-title .tt-title-small a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-box-faq-listing .tt-box-faq .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	@media (max-width: 790px) {
+	    .tt-about-box .tt-blockquote-02 .tt-icon {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	@media (min-width: 791px) {
+	    .tt-contact-box a:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	.tt-contact-info .tt-icon {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.form-default .form-control:focus {
+	    border-color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.checkbox-group label .check {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.checkbox-group:hover label {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.radio input:focus+.outer .inner {
+	    background-color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.radio .inner {
+	    background-color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.radio:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-box-thumb .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-login-form .tt-item .additional-links a {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-slick-button .slick-arrow:hover {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-slick-button-vertical .slick-arrow:hover {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.arrow-location-01 .slick-arrow:hover {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.arrow-location-02 .slick-arrow:hover {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.arrow-location-03 .slick-arrow:hover {
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.arrow-location-tab .slick-arrow:hover {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.arrow-location-right-top .slick-arrow:hover {
+	    background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.arrow-location-center-02 .slick-arrow:hover {
+	    background: {{ theme_options.get( 'main_color' ) }}
+	}
+	@media (max-width: 789px) {
+	    .tt-back-to-top:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	.tt-breadcrumb ul li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-services-block .tt-col-icon {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-services-block:hover .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-img-box:hover {
+	    border-color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-layout-vertical .tt-title a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-layout-vertical .tt-description .tt-add-info li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-content-info:hover .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-items-categories ul li a:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-items-categories ul li.active a {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-items-categories.active .tt-title {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-loader svg path, .tt-loader svg rect {
+	    fill: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-base-color {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+
+
+	/* !!!!!!!!!!!!!!! rgba */
+	@media (min-width: 790px) {
+		.tt-back-to-top{
+			background-color: {{ theme_options.get( 'main_color' ) }};
+		}
+	}
+	.btn:hover{
+		background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-promo-box.hover-type-2:hover .tt-description-wrapper .tt-background{
+		background: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-promo-box.hover-type-3:hover .tt-description-wrapper .tt-title-large:not(.tt-base-color){
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-promo-box.hover-type-3:hover .tt-description-wrapper .tt-title-large:not(.tt-base-color) span{
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-top-panel.tt-color-dark a:not([class]) {
+	  color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-top-panel.tt-color-dark a:not([class]):before {
+	  background-color: {{ theme_options.get( 'main_color' ) }};
+	}
+	.tt-promo02 .tt-description a.tt-title:hover > *,
+	.tt-promo02.tt-no-btn:hover .tt-description .tt-title > *{
+	    color: {{ theme_options.get( 'main_color' ) }};
+	}
+
+
+	.tt-product.tt-view .tt-description .tt-btn-compare:hover,
+	.tt-product-design02.tt-view .tt-description .tt-btn-compare:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	.tt-product.tt-view .tt-description .tt-btn-wishlist:hover,
+	.tt-product-design02.tt-view .tt-description .tt-btn-wishlist:hover {
+	    color: {{ theme_options.get( 'main_color' ) }}
+	}
+	@media (min-width: 1025px) {
+	 .tt-product:not(.tt-view) .tt-image-box .tt-btn-wishlist:hover {
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    .tt-product:not(.tt-view) .tt-image-box .tt-btn-compare:hover {
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	}
+	@media (min-width: 1025px) {
+	 .tt-product-design02:not(.tt-view) .tt-btn-wishlist:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    .tt-product-design02:not(.tt-view) .tt-btn-compare:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+	@media (max-width: 1024px) {
+	.tt-product:not(.tt-view) .tt-description .tt-btn-wishlist:hover,
+	    .tt-product-design02:not(.tt-view) .tt-description .tt-btn-wishlist:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	    .tt-product:not(.tt-view) .tt-description .tt-btn-compare:hover,
+	    .tt-product-design02:not(.tt-view) .tt-description .tt-btn-compare:hover {
+	        color: {{ theme_options.get( 'main_color' ) }}
+	    }
+	}
+
+
+	@media (min-width: 1025px){
+	    .tt-product:not(.tt-view) .tt-image-box .tt-btn-wishlist.active{
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	     .tt-product:not(.tt-view) .tt-image-box .tt-btn-compare.active{
+	        background: {{ theme_options.get( 'main_color' ) }};
+	    }
+	}
+	@media (max-width: 1024px){
+	    .tt-product-design02:not(.tt-view) .tt-description .tt-btn-wishlist.active,
+	    .tt-product:not(.tt-view) .tt-description .tt-btn-wishlist.active {
+	        color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	    .tt-product-design02:not(.tt-view) .tt-description .tt-btn-compare.active,
+	    .tt-product:not(.tt-view) .tt-description .tt-btn-compare.active {
+	        color: {{ theme_options.get( 'main_color' ) }};
+	    }
+	}
+
+	/* Custom */
+	body .mfilter-slider-slider .ui-slider-range, body #mfilter-price-slider .ui-slider-range,
+	body .mfilter-slider-slider .ui-slider-handle, body #mfilter-price-slider .ui-slider-handle {
+	    background: {{ theme_options.get( 'main_color' ) }} !important;
+	}
+
+	.mfilter-image ul li label:after, .mfilter-image_radio ul li label:after {
+	    border-color: {{ theme_options.get( 'main_color' ) }} !important;
+	}
+
+	.tt-product:not(.tt-view) .tt-description .tt-price .new-price,
+	.tt-aside .tt-item .tt-content .tt-price .sale-price {
+		color: {{ theme_options.get( 'main_color' ) }};
+	}
+	{% endif %} 
+</style>
+{% endif %}

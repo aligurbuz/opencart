@@ -1,0 +1,75 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	{% set theme_options = registry.get('theme_options') %}
+	{% set config = registry.get('config') %}
+
+	{% set columnleft = theme_options.getModules('column_left') %}
+	{% set grid_center = 12 %} 
+	{% if ( columnleft|length > 0 ) %} 
+		{% set grid_center = 9 %} 
+	{% endif %} 
+
+	{% set grid_content_right = 3 %}
+	{% set column_right = theme_options.getModules('column_right') %} 
+	{% if ( column_right|length > 0 ) %}
+		{% if (grid_center == 9) %}
+			{% set grid_content_right = 4 %}
+		{% else %} 
+			{% set grid_content_right = 3 %}
+		{% endif %}
+	{% endif %}
+
+		{% if not product_page %}
+							</div>
+							
+							{% if ( column_right|length > 0 ) %} 
+							<div class="col-lg-{{ grid_content_right }} leftColumn rightColumn {% if categoryPage %}aside{% endif %} {% if (categoryPage and theme_options.get( 'product_grid_type' ) == '1') or (categoryPage and theme_options.get( 'product_grid_type' ) == '2') or (categoryPage and theme_options.get( 'product_grid_type' ) == '3') %}desctop-no-sidebar{% endif %}" id="column-right">
+								{% if categoryPage %}
+									<div class="tt-btn-col-close">
+										<a href="#">{% if (theme_options.get( 'close_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'close_text', config.get( 'config_language_id' ) ) }} {% else %}Close{% endif %}</a>
+									</div>
+									<div class="tt-collapse open tt-filter-detach-option">
+										<div class="tt-collapse-content" style="">
+											<div class="filters-mobile">
+												<div class="filters-row-select">
+
+												</div>
+											</div>
+										</div>
+									</div>
+								{% endif %}
+								{% for module in column_right %} 
+									{{ module }}
+								{% endfor %} 
+							</div>
+							{% endif %} 
+						</div> 
+					</div>
+				</div>
+				
+				<div class="row">	
+					<div class="col-md-12">	
+						{% set contentbottom = theme_options.getModules('content_bottom') %}
+						{% if ( contentbottom|length > 0 ) %} 
+							{% for module in contentbottom %} 
+								{{ module }}
+							{% endfor %}
+						{% endif %} 
+					</div>
+				</div>
+			</div>
+		</div>	
+		{% else %}
+			{% if ( column_right|length > 0 ) %} 
+				{% for module in column_right %} 
+					{{ module }}
+				{% endfor %}
+			{% endif %}
+			{% set contentbottom = theme_options.getModules('content_bottom') %}
+			{% if ( contentbottom|length > 0 ) %} 
+				{% for module in contentbottom %} 
+					{{ module }}
+				{% endfor %}
+			{% endif %} 
+		{% endif %}			  
+	</div>
+{% endif %}

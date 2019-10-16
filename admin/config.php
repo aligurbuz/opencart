@@ -11,7 +11,7 @@ define('HTTPS_CATALOG', 'https://www.modaroom.com/');
 define('DIR_APPLICATION', '/var/www/ssl/admin/');
 define('DIR_SYSTEM', '/var/www/ssl/system/');
 define('DIR_IMAGE', '/var/www/ssl/image/');
-define('DIR_STORAGE', '/var/www/storage/');
+define('DIR_STORAGE', '/var/www/ssl/system/storage/');
 define('DIR_CATALOG', '/var/www/ssl/catalog/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');

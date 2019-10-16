@@ -1,0 +1,272 @@
+{% if (registry.has('theme_options') == constant('false')) %} 
+  <style>
+    body {
+      display: none !important;
+    }
+  </style>
+  <script>
+    window.location = 'themeinstall/index.php';
+  </script>
+{% else %}
+	{% set theme_options = registry.get('theme_options') %}
+	{% set config = registry.get('config') %}
+	{% set request = registry.get('request') %}
+	{% set page_direction = theme_options.get( 'page_direction' ) %} 
+	{% set language_id = config.get( 'config_language_id' ) %} 
+	{% if (request.get['route'] is defined) %}
+		{% if (request.get['product_id'] is defined) %}
+			{% set class = '-' ~ request.get['product_id'] %}
+		{% elseif (request.get['path'] is defined) %}
+			{% set class = '-' ~ request.get['path'] %}
+		{% elseif (request.get['manufacturer_id'] is defined) %}
+			{% set class = '-' ~ request.get['manufacturer_id'] %}
+		{% elseif (request.get['information_id'] is defined) %}
+			{% set class = '-' ~ request.get['information_id'] %}
+		{% else %} 
+			{% set class = '' %}
+		{% endif %}
+
+		{% set klasa = request.get['route']|replace({ '/': "-" }) ~ class %}
+	{% else %} 
+		{% set klasa = 'common-home' %}
+	{% endif %} 
+	<!DOCTYPE html>
+	<html lang="{{ lang }}" class="{% if theme_options.get('layout_type') == '1' %}tt-boxed{% endif %}">
+	<head>
+		<title>{{ title }}</title>
+		<base href="{{ base }}" />
+
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		{% if (theme_options.get( 'responsive_design' ) != '0') %} 
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% endif %} 
+		{% if (description) %} 
+			<meta name="description" content="{{ description|striptags }}" />
+		{% endif %} 
+		{% if (keywords) %} 
+			<meta name="keywords" content="{{ keywords|striptags }}" />
+		{% endif %} 
+		
+		{% for link in links %} 
+			<link href="{{ link['href'] }}" rel="{{ link['rel'] }}" />
+		{% endfor %} 
+
+		{% set lista_plikow = [
+				'catalog/view/theme/wokiee/css/stylesheet.css',
+				'catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css'
+		] %} 
+		
+		{% if (page_direction[language_id] == 'RTL') %}
+			{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/css/rtl.css']) %}
+		{% endif %}
+
+		{{ '<link href="//fonts.googleapis.com/css?family=Hind:800,700,600,500,400,300,200,100" rel="stylesheet" type="text/css">' }}
+
+		{% if (theme_options.get( 'load_styles' ) == '3') %}
+			{{ '<link href="//fonts.googleapis.com/css?family=Roboto:800,700,600,500,400,300,200,100" rel="stylesheet" type="text/css">' }}
+			{{ '<link href="//fonts.googleapis.com/css?family=Roboto+Slab:800,700,600,500,400,300,200,100" rel="stylesheet" type="text/css">' }}
+			{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/css/books.css']) %}
+		{% endif %}
+
+		{% if (theme_options.get( 'load_styles' ) == '4') %}
+			{{ '<link href="//fonts.googleapis.com/css?family=Montserrat:800,700,600,500,400,300,200,100" rel="stylesheet" type="text/css">' }}
+			{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/css/yoga.css']) %}
+		{% endif %}
+
+		{% if (theme_options.get( 'load_styles' ) == '5') %}
+			{{ '<link href="//fonts.googleapis.com/css?family=Roboto+Slab:800,700,600,500,400,300,200,100" rel="stylesheet" type="text/css">' }}
+			{{ '<link href="//fonts.googleapis.com/css?family=Playfair+Display:800,700,600,500,400,300,200,100" rel="stylesheet" type="text/css">' }}
+			{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/css/glasses.css']) %}
+		{% endif %}
+
+		{% if (theme_options.get( 'load_styles' ) == '6') %}
+			{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/css/kids_clothes.css']) %}
+		{% endif %}
+
+		{% if (theme_options.get( 'load_styles' ) == '7') %}
+			{{ '<link href="//fonts.googleapis.com/css?family=Roboto:800,700,600,500,400,300,200,100" rel="stylesheet" type="text/css">' }}
+			{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/css/medical.css']) %}
+		{% endif %}
+
+		{% if (theme_options.get( 'load_styles' ) == '8') %}
+			{{ '<link href="//fonts.googleapis.com/css?family=Rokkitt:800,700,600,500,400,300,200,100" rel="stylesheet" type="text/css">' }}
+			{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/css/jewelry.css']) %}
+		{% endif %}
+
+		{% if (theme_options.get( 'load_styles' ) == '9') %}
+			{{ '<link href="//fonts.googleapis.com/css?family=Helvetica:800,700,600,500,400,300,200,100" rel="stylesheet" type="text/css">' }}
+			{% set lista_plikow = lista_plikow|merge(['catalog/view/theme/wokiee/css/weapons.css']) %}
+		{% endif %}
+
+		{{ theme_options.compressorCodeCss( 'wokiee', lista_plikow, 0, constant('HTTP_SERVER') ) }}
+		
+		{% include 'wokiee/css/custom_colors.twig' %}
+
+		{% if (theme_options.get( 'custom_code_css_status' ) == 1) %} 
+			<link rel="stylesheet" href="catalog/view/theme/wokiee/skins/store_{{ theme_options.get( 'store' ) }}/{{ theme_options.get( 'skin' ) }}/css/custom_code.css">
+		{% endif %} 
+		
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+		{% for style in styles %} 
+			{% if ("mf/style.css" in style['href']) %} 
+				<link rel="{{ style['rel'] }}" type="text/css" href="catalog/view/theme/wokiee/css/mega_filter.css" media="{{ style['media'] }}" />
+			{% elseif (style['href'] != 'catalog/view/javascript/jquery/owl-carousel/owl.carousel.css' and style['href'] != 'catalog/view/javascript/jquery/magnific/magnific-popup.css' and style['href'] != 'catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css') %} 
+				<link rel="{{ style['rel'] }}" type="text/css" href="{{ style['href'] }}" media="{{ style['media'] }}" />
+			{% endif %} 
+		{% endfor %} 
+
+		<script type="text/javascript" src="catalog/view/theme/wokiee/js/jquery.min.js"></script>
+
+		{% for script in scripts %} 
+		     {% if (script != 'catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js') %} 
+		          <script type="text/javascript" src="{{ script }}"></script>
+		     {% endif %} 
+			{% if "mega_filter.js" in script %} 
+				<script type="text/javascript">
+					function display_MFP(view) {
+						{% if theme_options.get( 'product_grid_type' ) == 3 %}
+					        $('.tt-product-listing-masonry .tt-product-init').isotope({
+					            itemSelector: '.element-item',
+					            layoutMode: 'masonry',
+					        });
+						{% else %}
+						    // lazyLoad
+						    (function () {
+						        new LazyLoad();
+						        new LazyLoad({
+						           elements_selector: "iframe"
+						        });
+						        new LazyLoad({
+						           elements_selector: "video"
+						        });
+						    }());
+					    {% endif %}
+
+					    var showZero = true;
+					    $(".tt-countdown").each(function() {
+					        var $this = $(this),
+					          date = $this.data('date'),
+					          set_year = $this.data('year') || 'Yrs',
+					          set_month = $this.data('month') || 'Mths',
+					          set_week = $this.data('week') || 'Wk',
+					          set_day = $this.data('day') || 'Day',
+					          set_hour = $this.data('hour') || 'Hrs',
+					          set_minute = $this.data('minute') || 'Min',
+					          set_second = $this.data('second') || 'Sec';
+
+					        if (date = date.split('-')) {
+					          date = date.join('/');
+					        } else return;
+
+					        $this.countdown(date , function(e) {
+					          var format = '<span class="countdown-row">';
+
+					          function addFormat(func, timeNum, showZero) {
+					            if(timeNum === 0 && !showZero) return;
+
+					            func(format);
+					          };
+
+					          addFormat(function() {
+					            format += '<span class="countdown-section">'
+					                    + '<span class="countdown-amount">' + e.offset.totalDays + '</span>'
+					                    + '<span class="countdown-period">' + set_day + '</span>'
+					                  + '</span>';
+					          }, e.offset.totalDays, showZero);
+
+					          addFormat(function() {
+					            format += '<span class="countdown-section">'
+					                    + '<span class="countdown-amount">' + e.offset.hours + '</span>'
+					                    + '<span class="countdown-period">' + set_hour + '</span>'
+					                  + '</span>';
+					          }, e.offset.hours, showZero);
+
+					          addFormat(function() {
+					            format += '<span class="countdown-section">'
+					                    + '<span class="countdown-amount">' + e.offset.minutes + '</span>'
+					                    + '<span class="countdown-period">' + set_minute + '</span>'
+					                  + '</span>';
+					          }, e.offset.minutes, showZero);
+
+					          addFormat(function() {
+					            format += '<span class="countdown-section">'
+					                    + '<span class="countdown-amount">' + e.offset.seconds + '</span>'
+					                    + '<span class="countdown-period">' + set_second + '</span>'
+					                  + '</span>';
+					          }, e.offset.seconds, showZero);
+
+					          format += '</span>';
+
+					            $(this).html(format);
+					        });
+					    });
+					}
+				</script>
+			{% endif %}
+		{% endfor %} 
+
+		{% for analytic in analytics %} 
+		{{ analytic }} 
+		{% endfor %}  
+	</head>	
+	<body class="{{ klasa }}">
+	<div id="loader-wrapper">
+		<div id="loader">
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+	</div>
+
+	{% set popup = theme_options.getModules('popup') %}
+	{% if ( popup|length > 0 ) %} 
+		{% for module in popup %} 
+			{{ module }}
+		{% endfor %}
+	{% endif %} 
+
+	{% set header_notice = theme_options.getModules('header_notice') %}
+	{% if ( header_notice|length > 0 ) %} 
+		{% for module in header_notice %} 
+			{{ module }}
+		{% endfor %}
+	{% endif %}
+
+	{% set cookie = theme_options.getModules('cookie') %}
+	{% if ( cookie|length > 0 ) %} 
+		{% for module in cookie %} 
+			{{ module }}
+		{% endfor %}
+	{% endif %} 
+
+	{% if (theme_options.get( 'header_type' ) == 2) %}
+		{% include 'wokiee/template/common/header/header_02.twig' %}
+	{% elseif theme_options.get( 'header_type' ) == 3 %}
+		{% include 'wokiee/template/common/header/header_03.twig' %}
+	{% elseif theme_options.get( 'header_type' ) == 4 %}
+		{% include 'wokiee/template/common/header/header_04.twig' %}
+	{% elseif theme_options.get( 'header_type' ) == 5 %}
+		{% include 'wokiee/template/common/header/header_05.twig' %}
+	{% elseif theme_options.get( 'header_type' ) == 6 %}
+		{% include 'wokiee/template/common/header/header_06.twig' %}
+	{% elseif theme_options.get( 'header_type' ) == 7 %}
+		{% include 'wokiee/template/common/header/header_07.twig' %}
+	{% elseif theme_options.get( 'header_type' ) == 8 %}
+		{% include 'wokiee/template/common/header/header_08.twig' %}
+	{% elseif theme_options.get( 'header_type' ) == 9 %}
+		{% include 'wokiee/template/common/header/header_09.twig' %}
+	{% else %} 
+		{% include 'wokiee/template/common/header/header_01.twig' %}
+	{% endif %} 
+
+	{% if (theme_options.get( 'custom_code_javascript_status' ) == 1) %} 
+		<script type="text/javascript" src="catalog/view/theme/wokiee/skins/store_{{ theme_options.get( 'store' ) }}/{{ theme_options.get( 'skin' ) }}/js/custom_code.js"></script>
+	{% endif %} 
+{% endif %}

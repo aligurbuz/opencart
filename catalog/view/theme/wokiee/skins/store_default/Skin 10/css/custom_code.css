@@ -1,0 +1,2 @@
+.common-home footer { margin-top: 20px; }
+footer > *:nth-child(1) { display: none; }

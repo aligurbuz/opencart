@@ -1,0 +1,83 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+     {% set theme_options = registry.get('theme_options') %}
+     {% set config = registry.get('config') %}
+     {% set page_direction = theme_options.get( 'page_direction' ) %} 
+     {% set language_id = config.get( 'config_language_id' ) %}
+     {% set advanced_id = id %} 
+
+     <div class="advanced-grid advanced-grid-{{ advanced_id }} {{ custom_class }} {% if (disable_on_mobile == 1) %} {{ 'd-none d-md-block' }}{% endif %}" style="{% if margin_top != 'auto' %}margin-top: {{ margin_top }}px;{% endif %}{% if (force_full_width != 1) %}{% if margin_left != 'auto' %}margin-left: {{ margin_left }}px;{% endif %}{% if margin_right != 'auto' %}margin-right: {{ margin_right }}px;{% endif %}{% endif %}{% if margin_bottom != 'auto' %}margin-bottom: {{ margin_bottom }}px;{% endif %}">
+          {% if (background_image_type == 1) or (background_image_type == 2) %}<div style="{% if (background_color != '') %} {{ 'background-color: ' ~ background_color ~ ';' }} {% endif %} {% if (background_image != '') %} {{ 'background-image: url(image/' ~ background_image ~ ');' }} {% endif %} {{ 'background-position: ' ~ background_image_position ~ ';background-repeat: ' ~ background_image_repeat ~ ';background-attachment: ' ~ background_image_attachment ~ ';' }}">{% endif %} 
+          {% if (background_image_type == 0) %}<div style="{% if (background_color != '') %} {{ 'background-color: ' ~ background_color ~ ';' }} {% endif %}">{% endif %} 
+               <div style="padding-top: {{ padding_top }}px;padding-left: {{ padding_left }}px;padding-bottom: {{ padding_bottom }}px;padding-right: {{ padding_right }}px;">
+                    <div class="row">
+                         {% set row = 0 %} 
+                         {% for column in columns %} 
+                              
+                              {% if (column['width'] == 'advanced') %}
+                                   {% set column_width = 'col-' ~ column['width_xs'] ~ ' col-md-' ~ column['width_sm'] ~ ' col-lg-' ~ column['width_md'] ~ ' col-xl-' ~ column['width_lg'] ~ '' %}
+                                   {% if (column['width_lg'] == 'hidden') %} 
+                                        {% set column_width = column_width ~ ' d-block d-xl-none' %}
+                                   {% endif %}
+                                   
+                                   {% if (column['width_md'] == 'hidden') %} 
+                                        {% set column_width = column_width ~ ' d-block d-lg-none d-xl-block' %}
+                                   {% endif %}
+
+                                   {% if (column['width_sm'] == 'hidden') %} 
+                                        {% set column_width = column_width ~ ' d-block d-md-none d-lg-block' %}
+                                   {% endif %}
+
+                                   {% if (column['width_xs'] == 'hidden') %} 
+                                        {% set column_width = column_width ~ ' d-none d-md-block' %}
+                                   {% endif %}
+                              {% else %} 
+                                   {% set row = row+column['width'] %}
+                                   {% set column_width = 'col-md-' ~ column['width'] %}
+                                   {% if (column['disable_on_mobile'] == '1') %} 
+                                        {% set column_width = column_width ~ ' d-none d-md-block' %}
+                                   {% endif %}
+                              {% endif %}
+ 
+                              <div class="{{ column_width }}">
+                                   {% for module in column['modules'] %} 
+                                        {% if (module['type'] == 'load_module') %} 
+                                             {{ module['content']['module'] }} 
+                                        {% elseif (module['type'] == 'html') %} 
+                                             {{ module['content']['html'] }} 
+                                        {% elseif (module['type'] == 'box') %} 
+                                             {% if (position == 'footer_bottom' or position == 'footer' or position == 'footer_top' or position == 'footer_left' or position == 'footer_right' or position == 'customfooter_top' or position == 'customfooter_bottom' or position == 'customfooter') %}
+                                                  {{ '<h4>'~module['content']['title']~'</h4>' }}
+                                                  {{ '<div class="strip-line"></div>' }}
+                                                  {{ '<div class="clearfix" style="clear:both">' ~ module['content']['text'] ~ '</div>' }}
+                                             {% else %} 
+                                                  {{ '<div class="box">' }}
+                                                       {{ '<div class="box-heading">' }}
+                                                            {{ module['content']['title'] }}
+                                                       {{ '</div>' }}
+                                                       {{ '<div class="strip-line"></div>' }}
+                                                       {{ '<div class="box-content">' }}
+                                                            {{ module['content']['text'] }}
+                                                       {{ '</div>' }}
+                                                  {{ '</div>' }} 
+                                             {% endif %}   
+                                        {% elseif (module['type'] == 'links') %} 
+                                             {% include 'wokiee/template/extension/module/advanced_grid/links/' ~ module['content']['module_template']|replace({'.tpl': '.twig'}) %}
+                                        {% elseif (module['type'] == 'newsletter') %} 
+                                             {% include 'wokiee/template/extension/module/advanced_grid/newsletter/' ~ module['content']['module_template']|replace({'.tpl': '.twig'}) %} 
+                                        {% elseif (module['type'] == 'latest_blogs') %} 
+                                             {% include 'wokiee/template/extension/module/advanced_grid/latest_blogs/' ~ module['content']['module_template']|replace({'.tpl': '.twig'}) %} 
+                                        {% elseif (module['type'] == 'products') %} 
+                                             {% include 'wokiee/template/extension/module/advanced_grid/products/' ~ module['content']['module_template']|replace({'.tpl': '.twig'}) %} 
+                                        {% elseif (module['type'] == 'products_tabs') %} 
+                                             {% include 'wokiee/template/extension/module/advanced_grid/products_tabs/' ~ module['content']['module_template']|replace({'.tpl': '.twig'}) %} 
+                                        {% else %} 
+                                             Unknown error.
+                                        {% endif %} 
+                                   {% endfor %} 
+                              </div>
+                         {% endfor %}
+                     </div>
+               </div>
+          </div>
+     </div>
+{% endif %}

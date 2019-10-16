@@ -1,0 +1,73 @@
+.common-home footer { margin-top: 0px; }
+@media (min-width: 790px) {
+  footer .tt-color-scheme-01 {
+    background: #303030;
+    color: #888888;
+  }
+  footer .tt-color-scheme-01 .tt-mobile-collapse .tt-collapse-title {
+    color: #ffffff;
+  }
+  footer .tt-color-scheme-01 .tt-mobile-collapse .tt-collapse-content {
+    color: #888888;
+  }
+  footer .tt-color-scheme-01 .tt-mobile-collapse .tt-collapse-content a {
+    color: #2879fe;
+  }
+  footer .tt-color-scheme-01 .tt-mobile-collapse .tt-collapse-content a:hover {
+    color: #ffffff;
+  }
+  footer .tt-color-scheme-01 .tt-box-copyright {
+    color: #888888;
+  }
+  footer .tt-color-scheme-01 .tt-list li a,
+  footer .tt-color-scheme-01 .tt-mobile-collapse .tt-collapse-content .tt-list li a {
+    color: #888888;
+  }
+  footer .tt-color-scheme-01 .tt-list li a:hover,
+  footer .tt-color-scheme-01 .tt-mobile-collapse .tt-collapse-content .tt-list li a:hover {
+    color: #2879fe;
+  }
+  footer .tt-color-scheme-01 .tt-list li.active a,
+  footer .tt-color-scheme-01 .tt-mobile-collapse .tt-collapse-content .tt-list li.active a {
+    color: #2879fe;
+  }
+  footer .tt-color-scheme-01 address span {
+    color: #ffffff;
+  }
+  footer .tt-color-scheme-01 .tt-social-icon li a {
+    color: #777777;
+  }
+  footer .tt-color-scheme-01 .tt-social-icon li a:hover {
+    color: #ffffff;
+  }
+  footer .tt-color-scheme-01 .tt-newsletter .form-control:not(:active):not(:focus) {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #777777;
+  }
+  footer .tt-color-scheme-01 .tt-newsletter .form-control:focus {
+    border-color: #2879fe;
+    background: #ffffff;
+    color: #777777;
+  }
+  footer .tt-color-scheme-01 .tt-newsletter ::-webkit-input-placeholder {
+    color: #777777;
+  }
+  footer .tt-color-scheme-01 .tt-newsletter ::-moz-placeholder {
+    color: #777777;
+  }
+  footer .tt-color-scheme-01 .tt-newsletter :-moz-placeholder {
+    color: #777777;
+  }
+  footer .tt-color-scheme-01 .tt-newsletter :-ms-input-placeholder {
+    color: #777777;
+  }
+  footer .tt-color-scheme-01 .tt-newsletter .btn {
+    background: #2879fe;
+    color: #ffffff;
+  }
+  footer .tt-color-scheme-01 .tt-newsletter .btn:hover {
+    background: #000000;
+    color: #ffffff;
+  }
+}

@@ -1,4 +1,7 @@
-<?php
+<?php 
+
+//var_dump(openssl_get_cert_locations());
+//error_reporting = E_ALL & ~E_WARNING  & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED;
 // Version
 define('VERSION', '3.0.3.2');
 

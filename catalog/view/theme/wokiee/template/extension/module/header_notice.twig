@@ -1,0 +1,76 @@
+<div class="standard-body {% if (disable_on_desktop == 1) %}d-block d-lg-none{% endif %} {% if (disable_on_mobile == 1) %}d-none d-lg-block{% endif %}" id="header-notice-{{ id }}">
+     <div class="header-notice full-width clearfix">
+          <a href="#" class="close-notice"></a>
+          <div class="container">
+               <p>{{ text }}</p>
+          </div>
+     </div>
+</div>
+
+<script type="text/javascript">
+      var css_tpl = '<style type="text/css">';
+      {% if (background_color != '') %} 
+      css_tpl += '#header-notice-{{ id }} .header-notice {';
+      css_tpl += '     background: {{ background_color }};';
+      css_tpl += '}';
+      {% endif %} 
+      
+      {% if (text_color != '') %} 
+      css_tpl += '#header-notice-{{ id }} .header-notice,';
+      css_tpl += '#header-notice-{{ id }} .header-notice a {';
+      css_tpl += '     color: {{ text_color }};';
+      css_tpl += '}';
+      {% endif %} 
+      
+      {% if (text_link_hover_color != '') %} 
+      css_tpl += '#header-notice-{{ id }} .header-notice a:hover {';
+      css_tpl += '     color: {{ text_link_hover_color }};';
+      css_tpl += '}';
+      {% endif %} 
+      
+      {% if (close_button_background_color != '') %} 
+      css_tpl += '#header-notice-{{ id }} .header-notice a.close-notice {';
+      css_tpl += '     background: {{ close_button_background_color }};';
+      css_tpl += '}';
+      {% endif %} 
+      
+      {% if (close_button_hover_background_color != '') %} 
+      css_tpl += '#header-notice-{{ id }} .header-notice a.close-notice:hover {';
+      css_tpl += '     background: {{ close_button_hover_background_color }};';
+      css_tpl += '}';
+      {% endif %} 
+      
+      {% if (close_button_text_color != '') %} 
+      css_tpl += '#header-notice-{{ id }} .header-notice a.close-notice {';
+      css_tpl += '     color: {{ close_button_text_color }};';
+      css_tpl += '}';
+      {% endif %} 
+      
+      {% if (close_button_hover_text_color != '') %} 
+      css_tpl += '#header-notice-{{ id }} .header-notice a.close-notice:hover {';
+      css_tpl += '     color: {{ close_button_hover_text_color }};';
+      css_tpl += '}';
+      {% endif %} 
+      css_tpl += '</style>'
+    $("head").append(css_tpl);
+</script>
+
+<script type="text/javascript">
+     {% if (show_only_once == 1) %} 
+     if (localStorage.getItem('displayNotice') != 'yes') {
+     {% endif %} 
+     
+     $("#header-notice-{{ id }} .header-notice").show();
+     
+     $('#header-notice-{{ id }} .close-notice').on('click', function () {
+          {% if (show_only_once == 1) %} 
+          localStorage.setItem('displayNotice', 'yes');
+          {% endif %} 
+          $("#header-notice-{{ id }} .header-notice").hide();
+          return false;
+     });
+     
+     {% if (show_only_once == 1) %} 
+     } 
+     {% endif %} 
+</script>

@@ -1,0 +1,96 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+{% set theme_options = registry.get('theme_options') %}
+{% set config = registry.get('config') %}
+{% set cart_info = theme_options.getCart() %} 
+
+<div class="tt-desctop-parent-cart tt-parent-box" id="cart_block">
+	<div class="tt-cart tt-dropdown-obj">
+		<button class="tt-dropdown-toggle"  data-tooltip="{{ text_cart }}" data-tposition="bottom">
+			<i class="icon-f-39"></i>
+			<p class="d-none"><span id="total_amount_ajax">{{ cart_info['total_price'] }}</span></p>
+			<span class="tt-badge-cart"><span id="total_count_ajax">{{ cart_info['total_item'] }}</span></span>
+		</button>
+		<div class="tt-dropdown-menu">
+			<div class="tt-mobile-add">
+				<h6 class="tt-title">SHOPPING CART</h6>
+				<button class="tt-close">{% if (theme_options.get( 'close_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'close_text', config.get( 'config_language_id' ) ) }} {% else %}Close{% endif %}</button>
+			</div>
+			<div class="tt-dropdown-inner">
+				<div class="tt-cart-layout">
+					<div id="cart_content">
+						<div id="cart_content_ajax">
+							{% if (products or vouchers) %} 
+								<div class="tt-cart-content">
+									<div class="tt-cart-list">
+										{% for product in products %} 
+											<div class="tt-item">
+												<a href="{{ product['href'] }}">
+													{% if (product['thumb']) %} 
+														<div class="tt-item-img">
+															<img src="{{ product['thumb'] }}" alt="">
+														</div>
+													{% endif %}
+													<div class="tt-item-descriptions">
+														<h2 class="tt-title">{{ product['name'] }}</h2>
+														<ul class="tt-add-info">
+															{% for option in product['option'] %} 
+																<li>{{ option['name'] }} {{ option['value'] }}</li>
+															{% endfor %} 
+															{% if (product['recurring']) %} 
+																<li>{{ text_recurring }} {{ product['recurring'] }}</li>
+															{% endif %} 
+														</ul>
+														<div class="tt-quantity">{{ product['quantity'] }} X</div> <div class="tt-price">{{ product['price'] }}</div>
+													</div>
+												</a>
+												<div class="tt-item-close">
+													<a href="javascript:;" onclick="cart.remove('{{ product['cart_id'] }}');" class="tt-btn-close"></a>
+												</div>
+											</div>
+										{% endfor %}
+										{% for voucher in vouchers %} 
+											<div class="tt-item">
+												<a href="{{ product['href'] }}">
+													<div class="tt-item-descriptions">
+														<h2 class="tt-title">{{ voucher['description'] }}</h2>
+														<div class="tt-quantity">1 X</div> <div class="tt-price">{{ voucher['amount'] }}</div>
+													</div>
+												</a>
+												<div class="tt-item-close">
+													<a href="javascript:;" onclick="voucher.remove('{{ voucher['key'] }}');" class="tt-btn-close"></a>
+												</div>
+											</div>
+										{% endfor %}
+									</div>
+									<div class="tt-cart-total-row">
+										{% for total in totals %} 
+											{% if loop.last %}
+												<div class="tt-cart-total-title">{{ total['title'] }}:</div>
+												<div class="tt-cart-total-price">{{ total['text'] }}</div>
+											{% endif %}
+										{% endfor %}
+									</div>
+									<div class="tt-cart-btn">
+										<div class="tt-item">
+											<a href="{{ checkout }}" class="btn">{{ text_checkout }}</a>
+										</div>
+										<div class="tt-item">
+											<a href="{{ cart }}" class="btn-link-02 tt-hidden-mobile">{{ text_cart }}</a>
+											<a href="{{ cart }}" class="btn btn-border tt-hidden-desctope">{{ text_cart }}</a>
+										</div>
+									</div>
+								</div>
+							{% else %}
+								<a href="{{ cart }}" class="tt-cart-empty">
+									<i class="icon-f-39"></i>
+									<p>{{ text_empty }}</p>
+								</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}

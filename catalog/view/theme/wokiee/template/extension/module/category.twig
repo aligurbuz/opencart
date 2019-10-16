@@ -1,0 +1,33 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	{% set theme_options = registry.get('theme_options') %} 
+	<div class="tt-collapse open">
+		<h3 class="tt-collapse-title">{{ heading_title }}</h3>
+		<div class="tt-collapse-content" style="">
+			<ul class="tt-list-row" id="category">
+				{% for category in categories %} 
+			      <li class="panel">
+			      	<a href="{{ category['href'] }}" {% if (category['category_id'] == category_id) %}class="active"{% endif %}>{{ category['name'] }}</a>
+			        {% set categories_2 = theme_options.getCategories(category['category_id']) %} 
+			        {% if (categories_2) %} 
+				        {% if (categories_2 is not empty) %} 
+					        {% if (category['category_id'] == category_id) %}
+					        	<ul>
+							       {% for child in categories_2 %}
+							        <li>
+							         {% if (child['category_id'] == child_id) %} 
+							         	<a href="{{ child['href'] }}" class="active">{{ child['name'] }}</a>
+							         {% else %} 
+							         	<a href="{{ child['href'] }}">{{ child['name'] }}</a>
+							         {% endif %} 
+							        </li>
+							       {% endfor %} 
+						        </ul>
+						    {% endif %}
+				        {% endif %} 
+			        {% endif %} 
+			      </li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+{% endif %} 

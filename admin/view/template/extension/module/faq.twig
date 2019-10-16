@@ -1,0 +1,296 @@
+{{ header }}{{ column_left }} 
+<div id="content"><div class="container-fluid">
+	<div class="page-header">
+	    <h1>FAQ</h1>
+	    <ul class="breadcrumb">
+		     {% for breadcrumb in breadcrumbs %} 
+		      <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+		      {% endfor %} 
+	    </ul>
+	  </div>
+    
+   <link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+    
+	<script type="text/javascript">
+	$.fn.tabs = function() {
+		var selector = this;
+		
+		this.each(function() {
+			var obj = $(this); 
+			
+			$(obj.attr('href')).hide();
+			
+			$(obj).click(function() {
+				$(selector).removeClass('selected');
+				
+				$(selector).each(function(i, element) {
+					$($(element).attr('href')).hide();
+				});
+				
+				$(this).addClass('selected');
+				
+				$($(this).attr('href')).show();
+				
+				return false;
+			});
+		});
+	
+		$(this).show();
+		
+		$(this).first().click();
+	};
+	</script>
+
+	{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% elseif (success) %} 
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% endif %} 
+	<div class="alert alert-info"><i class="fa fa-exclamation-circle"></i>
+        The FAQ page is available at this <a target="_blank" href="{{ front_url }}">link</a>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+	{% set element = 1 %} 
+	{% set section = 1 %} 
+	<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+		<div class="set-size" id="faq">
+			<div class="content">
+				<div>
+					<div class="tabs clearfix">
+						<!-- Tabs module -->
+						<div id="tab-module" class="tab-content">
+							<div id="tabs_faq" class="htabs tabs-product">
+                                <a href="#tab_faq_item" class="ttab"><span>Module items</span></a>
+                                <a href="#tab_faq_section" class="ttab"><span>Module sections</span></a>
+                                <a href="#tab_faq_setting" class="tsetting"><span>Module setting</span></a>
+							</div>
+							
+							<div id="tab_faq_item" style="padding:20px">
+								<table class="tabs-list">
+									<thead>
+										<tr>
+											<td class="first">Question</td>
+											<td>Answer</td>
+											<td>Section</td>
+											<td class="text-center">Sort</td>
+											<td class="text-center">Remove</td>
+										</tr>
+									</thead>
+									{% if (module['items'] is defined) %}
+                                    {% for tab in module['items'] %} 
+									<tbody id="module-items-{{ element }}">
+										<tr>
+											<td class="first">
+												{% for language in languages %} {% set lang_id = language['language_id'] %} 
+												<div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" />
+                                                    <input type="text" name="faq_module[items][{{ element }}][question][{{ language['language_id'] }}]" value="{% if (tab['question'][lang_id] is defined) %}{{ tab['question'][lang_id] }}{% endif %}">
+                                                </div>
+												{% endfor %} 
+											</td>
+											<td>
+												{% for language in languages %} {% set lang_id = language['language_id'] %} 
+												<div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" class="lang-img"/>
+                                                    <textarea name="faq_module[items][{{ element }}][answer][{{ language['language_id'] }}]" class="html">{% if (tab['answer'][lang_id] is defined) %}{{ tab['answer'][lang_id] }}{% endif %}</textarea>
+                                                </div>
+												{% endfor %} 
+											</td>
+                                            <td>
+                                                <select style="min-width: 100px" name="faq_module[items][{{ element }}][section_id]">
+                                                    <option value="">Not selected</option>
+                                                {% if (module['sections'] is defined) %} 
+                                                {% for sec in module['sections'] %} 
+                                                    <option value="{{ sec['id']}}" {{ tab['section_id'] is defined and sec['id'] == tab['section_id'] ? 'selected' : '' }} >
+                                                        {{ sec['title'][current_lang_id]}}
+                                                    </option>
+                                                {% endfor %} 
+                                                {% endif %} 
+                                                </select>
+                                            </td>
+                                            <td class="text-center">
+                                                <input style="min-width: 60px" type="text" name="faq_module[items][{{ element }}][order]" value="{% if (tab['order'] is defined) %}{{ tab['order'] }}{% endif %}" class="sort">
+                                            </td>
+											<td class="text-center"><a onclick="$('#module-items-{{ element }}').remove();">Remove</a></td>
+										</tr>
+									</tbody>
+                                    {% set element = element + 1 %} 
+									{% endfor %} 
+                                    {% endif %}
+									<tfoot></tfoot>
+								</table>
+                                <a onclick="addItems();" class="add-module"><span>Add item</span></a>
+							</div>
+							
+							<div id="tab_faq_section" style="padding:20px">
+								<table class="tabs-list">
+									<thead>
+										<tr>
+											<td class="first">Title</td>
+											<td class="text-center">No display title</td>
+											<td class="text-center">Sort</td>
+											<td class="text-center">Remove</td>
+										</tr>
+									</thead>
+
+									{% if (module['sections'] is defined) %} 
+                                    {% for tab in module['sections'] %} 
+									<tbody id="module-sections-{{ section }}">
+										<tr>
+											<td class="first">
+                                                <input type="hidden" name="faq_module[sections][{{ section }}][id]" value="{% if (tab['id'] is defined) %}{{ tab['id'] }}{% endif %}" >
+												{% for language in languages %} {% set lang_id = language['language_id'] %} 
+												<div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}"/>
+                                                    <input type="text" name="faq_module[sections][{{ section }}][title][{{ language['language_id'] }}]" value="{% if (tab['title'][lang_id] is defined) %}{{ tab['title'][lang_id] }}{% endif %}" >
+                                                </div>
+												{% endfor %} 
+											</td>
+                                            <td class="text-center" style="width: 150px">
+                                                <input type="checkbox" name="faq_module[sections][{{ section }}][hidden]" value="1" {% if (tab['hidden'] is defined) %} {{ "checked" }} {% endif %}>
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="text" name="faq_module[sections][{{ section }}][order]" value="{% if (tab['order'] is defined) %}{{ tab['order'] }}{% endif %}" class="sort">
+                                            </td>
+											<td class="text-center"><a onclick="$('#module-sections-{{ section }}').remove();">Remove</a></td>
+										</tr>
+									</tbody>
+									{% set section = section + 1 %} 
+                                    {% endfor %} 
+                                    {% endif %} 
+									<tfoot></tfoot>
+								</table>
+								<a onclick="addSections();" class="add-module"><span>Add item</span></a>
+							</div>
+							
+							<div id="tab_faq_setting" style="padding:20px">
+                                <table class="form">
+									<tr>
+										<td>Collapse:</td>
+										<td>
+											<select name="faq_module[settings][collapse]">
+												{% if (module['settings']['collapse']) %} 
+												<option value="1" selected="selected">Enabled</option>
+												<option value="0">Disabled</option>
+												{% else %} 
+												<option value="1">Enabled</option>
+												<option value="0" selected="selected">Disabled</option>
+												{% endif %} 
+											</select>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<script type="text/javascript">
+						$('#tabs_faq a').tabs();
+						</script>
+					</div>
+					
+					<!-- Buttons -->
+					<div class="buttons"><input type="submit" name="button-save" class="button-save" value=""></div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript"><!--
+$('.main-tabs a').tabs();
+//--></script> 
+
+<script type="text/javascript"><!--
+$('#language a').tabs();
+//--></script> 
+
+
+<script type="text/javascript">
+var element = {{ element }};
+var section = {{ section }};
+function addItems() {
+	html  = '<tbody id="module-items-' + element + '">';
+	html += '  <tr>';
+	html += '    <td class="first">';
+	{% for language in languages %} 
+	html += '		<div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" /><input type="text" name="faq_module[items][' + element + '][question][{{ language['language_id'] }}]" ></div>';
+	{% endfor %} 
+	html += '    </td>';
+	html += '	 <td>';
+	{% for language in languages %} 
+	html += '		<div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" class="lang-img" /><textarea name="faq_module[items][' + element + '][answer][{{ language['language_id'] }}]" class="html"></textarea></div>';
+	{% endfor %} 
+	html += '    </td>';
+    html += '    <td>';
+    html += '       <select style="min-width: 100px" name="faq_module[items][{{ element }}][section_id]">';
+    html += '           <option value="">Not selected</option>';
+                {% if (module['sections'] is defined) %} 
+                {% for sec in module['sections'] %} 
+    html += '                <option value="{{ sec['id']}}" >';
+    html += '                    {{ sec['title'][current_lang_id]}}';
+    html += '                </option>';
+                {% endfor %} 
+                {% endif %} 
+    html += '        </select>';
+    html += '    </td>';
+	html += '    <td class="text-center">';
+	html += '		<input style="min-width: 60px" type="text" name="faq_module[items][' + element + '][order]" class="sort" >';
+    html += '    </td>';
+	html += '    <td class="text-center"><a onclick="$(\'#module-items-' + element + '\').remove();">Remove</a></td>';
+	html += '  </tr>';
+	html += '</tbody>';
+	
+	$('#tab_faq_item .tabs-list tfoot').before(html);
+    
+    $('#module-items-' + element + ' textarea').summernote({
+        toolbar: [
+        ['font', ['bold', 'italic', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['link']],
+      ],
+    });
+    
+	element++;
+    
+}
+function addSections() {
+	html  = '<tbody id="module-sections-' + section + '">';
+	html += '  <tr>';
+	html += '    <td class="first">';
+    html += '		<input type="hidden" name="faq_module[sections][' + section + '][id]" >';
+	{% for language in languages %} 
+	html += '		<div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" /><input type="text" name="faq_module[sections][' + section + '][title][{{ language['language_id'] }}]" ></div>';
+	{% endfor %} 
+	html += '    </td>';
+	html += '    <td class="text-center" style="width: 150px">';
+	html += '		<input type="checkbox" value="1" name="faq_module[sections][' + section + '][hidden]" >';
+    html += '    </td>';
+	html += '    <td class="text-center">';
+	html += '		<input type="text" name="faq_module[sections][' + section + '][order]" class="sort" >';
+    html += '    </td>';
+	html += '    <td class="text-center"><a onclick="$(\'#module-sections-' + section + '\').remove();">Remove</a></td>';
+	html += '  </tr>';
+	html += '</tbody>';
+	
+	$('#tab_faq_section .tabs-list tfoot').before(html);
+
+	section++;
+    
+}
+
+
+
+$(document).ready(function() {
+    $('textarea.html').summernote({
+        toolbar: [
+        ['font', ['bold', 'italic', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['link']],
+      ],
+    });
+});
+</script>
+{{ footer }}

@@ -1,0 +1,10 @@
+{{ header }} 
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+
+{% if (text_message is defined) %} {{ text_message }}{% endif %} 
+<div class="buttons">
+  <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+</div>
+  
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

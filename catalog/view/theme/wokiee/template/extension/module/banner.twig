@@ -1,0 +1,15 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	<div class="container container-indent">
+		<div id="banner{{ module }}" class="banner-module">
+		  {% for banner in banners %} 
+		  <div class="item">
+		    {% if (banner['link']) %} 
+		    	<a href="{{ banner['link'] }}"><img src="{{ banner['image'] }}" alt="{{ banner['title'] }}" class="img-responsive" /></a>
+		    {% else %} 
+		    	<img src="{{ banner['image'] }}" alt="{{ banner['title'] }}" class="img-responsive" />
+		    {% endif %} 
+		  </div>
+		  {% endfor %} 
+		</div>
+	</div>
+{% endif %}

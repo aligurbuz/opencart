@@ -1,0 +1,312 @@
+{{ header }}{{ column_left }} 
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-setting" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %} 
+                <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                {% endfor %} 
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        
+        {% if (error_warning) %} 
+        <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endif %} 
+        {% if (success) %} 
+            <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }} 
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %} 
+        {{ handy_box }} 
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-setting" class="form-horizontal">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+                        <li><a href="#tab-article" data-toggle="tab">{{ tab_article }}</a></li>
+                        <li><a href="#tab-author" data-toggle="tab">{{ tab_author }}</a></li>
+                        <li><a href="#tab-comment" data-toggle="tab">{{ tab_comment }}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active in" id="tab-general">
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-gallery-image-size">{{ entry_gallery_image_size }}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="gallery_image_width" value="{{ gallery_image_width }}" id="input-gallery-image-width" class="form-control text-center" style="width: 60px; display: inline-block" />
+                                        x
+                                    <input type="text" name="gallery_image_height" value="{{ gallery_image_height }}" id="input-gallery-image-height" class="form-control text-center" style="width: 60px; display: inline-block" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-gallery-youtube-size">{{ entry_gallery_youtube_size }}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="gallery_youtube_width" value="{{ gallery_youtube_width }}" id="input-gallery-youtube-width" class="form-control text-center" style="width: 60px; display: inline-block" />
+                                        x
+                                    <input type="text" name="gallery_youtube_height" value="{{ gallery_youtube_height }}" id="input-gallery-youtube-height" class="form-control text-center" style="width: 60px; display: inline-block" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-gallery-soundcloud-size">{{ entry_gallery_soundcloud_size }}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="gallery_soundcloud_width" value="{{ gallery_soundcloud_width }}" id="input-gallery-soundcloud-width" class="form-control text-center" style="width: 60px; display: inline-block" />
+                                        x
+                                    <input type="text" name="gallery_soundcloud_height" value="{{ gallery_soundcloud_height }}" id="input-gallery-soundcloud-height" class="form-control text-center" style="width: 60px; display: inline-block" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-article-page-limit">{{ entry_article_page_limit }}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="article_page_limit" value="{{ article_page_limit }}" placeholder="{{ entry_article_page_limit }}" id="input-article-page-limit" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-pagination-type">{{ entry_pagination_type }}</label>
+                                <div class="col-sm-10">
+                                    <select name="pagination_type" id="input-article-list-gallery-display" class="form-control">
+                                        <option value="STANDARD" {{ pagination_type == 'STANDARD' ? 'selected="selected"' : '' }}>{{ text_standard }}</option>
+                                        <option value="AJAX" {{ pagination_type == 'AJAX' ? 'selected="selected"' : '' }}>{{ text_ajax }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-article">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-article-list-template">{{ entry_article_list_template }}</label>
+                                <div class="col-sm-10">
+                                    <div class="module-layouts">
+                                         {% for template in templates %} 
+ {% if (article_list_templates[template] is defined) %}
+ {% set i = 0 %}
+ {{ '<div class="module-layout-title">' ~ template ~ '</div>' }}
+ {% for file_template in article_list_templates[template] %} 
+ 
+                                                    <div class="module-layout clearfix">
+                                                        <input type="radio" name="article_list_template" value="{{ file_template }}" {% if (article_list_template|replace({'.tpl': '.twig'}) == file_template) %} {{ 'checked="checked"' }}{% endif %} class="input-article-list-template">
+                                                        <p>{{ file_template }}</p>
+                                                    </div>
+                                                     {% set i = i + 1 %}
+ {% endfor %}
+ {% endif %}
+ {% endfor %}
+ 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-article-detail-template">{{ entry_article_detail_template }}</label>
+                                <div class="col-sm-10">
+                                    <div class="module-layouts">
+                                         {% for template in templates %} 
+ {% if (article_detail_templates[template] is defined) %}
+ {% set i = 0 %}
+ {{ '<div class="module-layout-title">' ~ template ~ '</div>' }}
+ {% for file_template in article_detail_templates[template] %} 
+ 
+                                                    <div class="module-layout clearfix">
+                                                        <input type="radio" name="article_detail_template" value="{{ file_template }}" {% if (article_detail_template|replace({'.tpl': '.twig'}) == file_template) %} {{ 'checked="checked"' }}{% endif %} class="input-article-detail-templates">
+                                                        <p>{{ file_template }}</p>
+                                                    </div>
+                                                     {% set i = i + 1 %}
+ {% endfor %}
+ {% endif %}
+ {% endfor %}
+ 
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-product-related">{{ entry_product_related }}</label>
+                                <div class="col-sm-10">
+                                    <select name="product_related_status" id="input-product-related" class="form-control">
+                                        {% if (product_related_status) %} 
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                        {% else %} 
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %} 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-product-scroll-related">{{ entry_product_scroll_related }}</label>
+                                <div class="col-sm-10">
+                                    <select name="product_scroll_related" id="input-product-scroll-related" class="form-control">
+                                        {% if (product_scroll_related) %} 
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                        {% else %} 
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %} 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-product-per-row">{{ entry_product_related_per_row }}</label>
+                                <div class="col-sm-10">
+                                    <select name="product_related_per_row" id="input-product-per-row" class="form-control">
+                                        <option value="3" {{ product_related_per_row == 3 ? 'selected="selected"' : '' }}>3</option>
+                                        <option value="4" {{ product_related_per_row == 4 ? 'selected="selected"' : '' }}>4</option>
+                                        <option value="5" {{ product_related_per_row == 5 ? 'selected="selected"' : '' }}>5</option>
+                                        <option value="6" {{ product_related_per_row == 6 ? 'selected="selected"' : '' }}>6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-article-related">{{ entry_article_related }}</label>
+                                <div class="col-sm-10">
+                                    <select name="article_related_status" id="input-article-related" class="form-control">
+                                        {% if (article_related_status) %} 
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                        {% else %} 
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %} 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-article-scroll-related">{{ entry_article_scroll_related }}</label>
+                                <div class="col-sm-10">
+                                    <select name="article_scroll_related" id="input-article-scroll-related" class="form-control">
+                                        {% if (article_scroll_related) %} 
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                        {% else %} 
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %} 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-article-per-row">{{ entry_article_related_per_row }}</label>
+                                <div class="col-sm-10">
+                                    <select name="article_related_per_row" id="input-article-per-row" class="form-control">
+                                        <option value="3" {{ article_related_per_row == 3 ? 'selected="selected"' : '' }}>3</option>
+                                        <option value="4" {{ article_related_per_row == 4 ? 'selected="selected"' : '' }}>4</option>
+                                        <option value="5" {{ article_related_per_row == 5 ? 'selected="selected"' : '' }}>5</option>
+                                        <option value="6" {{ article_related_per_row == 6 ? 'selected="selected"' : '' }}>6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-article-related-template">{{ entry_article_related_template }}</label>
+                                <div class="col-sm-10">
+                                    <div class="module-layouts">
+                                         {% for template in templates %} 
+ {% if (article_related_templates[template] is defined) %}
+ {% set i = 0 %}
+ {{ '<div class="module-layout-title">' ~ template ~ '</div>' }}
+ {% for file_template in article_related_templates[template] %} 
+ 
+                                                    <div class="module-layout clearfix">
+                                                        <input type="radio" name="article_related_template" value="{{ file_template }}" {% if (article_related_template|replace({'.tpl': '.twig'}) == file_template) %} {{ 'checked="checked"' }}{% endif %} class="input-article-related-templates">
+                                                        <p>{{ file_template }}</p>
+                                                    </div>
+                                                     {% set i = i + 1 %}
+ {% endfor %}
+ {% endif %}
+ {% endfor %}
+ 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-gallery-related-article-size">{{ entry_gallery_related_article_size }}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="gallery_related_article_width" value="{{ gallery_related_article_width }}" id="input-gallery-related-article-width" class="form-control text-center" style="width: 60px; display: inline-block" />
+                                        x
+                                    <input type="text" name="gallery_related_article_height" value="{{ gallery_related_article_height }}" id="input-gallery-related-article-height" class="form-control text-center" style="width: 60px; display: inline-block" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="tab-pane fade" id="tab-author">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-author-description">{{ entry_author_description }}</label>
+                                <div class="col-sm-10">
+                                    <select name="author_description" id="input-author-description" class="form-control">
+                                        {% if (author_description) %} 
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                        {% else %} 
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %} 
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="tab-pane fade" id="tab-comment">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-comments-engine">{{ entry_comments_engine }}</label>
+                                <div class="col-sm-10">
+                                    <select name="comments_engine" id="input-comments-engine" class="form-control">
+                                        <option value="LOCAL" {{ comments_engine == 'LOCAL' ? 'selected="selected"' : '' }}>{{ text_local }}</option>
+                                        <option value="DISQUS" {{ comments_engine == 'DISQUS' ? 'selected="selected"' : '' }}>{{ text_disqus }}</option>
+                                        <option value="FACEBOOK" {{ comments_engine == 'FACEBOOK' ? 'selected="selected"' : '' }}>{{ text_facebook }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-facebook-id"><span data-toggle="tooltip" title="{{ help_facebook_id }}">{{ entry_facebook_id }}</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="facebook_id" value="{{ facebook_id }}" placeholder="{{ entry_facebook_id }}" id="input-facebook-id" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-disqus-name">{{ entry_disqus_name }}</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="disqus_name" value="{{ disqus_name }}" placeholder="{{ entry_disqus_name }}" id="input-disqus-name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-comments-approval">{{ entry_comments_approval }}</label>
+                                <div class="col-sm-10">
+                                    <select name="comments_approval" id="input-comments-approval" class="form-control">
+                                        {% if (comments_approval) %} 
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                        {% else %} 
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %} 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ 
+</div>
+
+{{ footer }}

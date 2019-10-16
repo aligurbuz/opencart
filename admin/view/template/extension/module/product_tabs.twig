@@ -1,0 +1,366 @@
+{{ header }}{{ column_left }} 
+<div id="content"><div class="container-fluid">
+	<div class="page-header">
+	    <h1>Product Tabs</h1>
+	    <ul class="breadcrumb">
+		     {% for breadcrumb in breadcrumbs %} 
+		      <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+		      {% endfor %} 
+	    </ul>
+	  </div>
+    
+    <link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+    <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+    <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>  
+    
+	<script type="text/javascript">
+	$.fn.tabs = function() {
+		var selector = this;
+		
+		this.each(function() {
+			var obj = $(this); 
+			
+			$(obj.attr('href')).hide();
+			
+			$(obj).click(function() {
+				$(selector).removeClass('selected');
+				
+				$(selector).each(function(i, element) {
+					$($(element).attr('href')).hide();
+				});
+				
+				$(this).addClass('selected');
+				
+				$($(this).attr('href')).show();
+				
+				return false;
+			});
+		});
+	
+		$(this).show();
+		
+		$(this).first().click();
+	};
+	</script>
+	
+	{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% elseif (success) %} 
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% endif %} 
+	
+	{% set element = 1 %} 
+	<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+		<div class="set-size" id="product_tabs">
+			<div class="content">
+				<div>
+					<div class="tabs clearfix">
+						<!-- Tabs module -->
+						<div id="tabs" class="htabs main-tabs">
+							{% set module_row = 1 %} 
+							{% for module in modules %} 
+							<a href="#tab-module-{{ module_row }}" id="module-{{ module_row }}">Tab {{ module_row }} &nbsp;<img src="view/image/module_template/delete-slider.png"  alt="" onclick="$('.vtabs a:first').trigger('click'); $('#module-{{ module_row }}').remove(); $('#tab-module-{{ module_row }}').remove(); return false;" /></a>
+							{% set module_row = module_row + 1 %} 
+							{% endfor %} 
+                            <span id="module-add" onclick="addModule();" ><img src="view/image/module_template/add.png" alt="" /> Add Tab</span>
+						</div>
+						
+						{% set module_row = 1 %} 
+						{% for module in modules %} 
+						<div id="tab-module-{{ module_row }}" class="tab-content">
+							<div class="input clearfix">
+								<p>Global tag:</p>
+								{% if (module['status'] is defined) %} 
+									{% if (module['status'] == 1) %} 
+										{{ '<div class="status status-on" id="'~module_row~'" title="1" rel="module_'~module_row~'_status"></div>' }} 
+									{% else %} 
+										{{ '<div class="status status-off" id="'~module_row~'" title="0" rel="module_'~module_row~'_status"></div>' }} 
+									{% endif %} 
+									<input name="product_tabs[{{ module_row }}][status]" value="{{ module['status'] }}" id="module_{{ module_row }}_status" type="hidden" />
+								{% else %} 
+									{{ '<div class="status status-off" title="0" rel="module_'~module_row~'_status"></div>' }} 
+									<input name="product_tabs[{{ module_row }}][status]" value="0" id="module_{{ module_row }}_status" type="hidden" />
+								{% endif %} 
+							</div>
+							
+							{% set display_autocomplete = constant('true') %} {% if (module['status'] is defined) %} {% if (module['status'] == 1) %} {% set display_autocomplete = constant('false') %} {% endif %} {% endif %} 
+							<div class="input clearfix" id="product-autocomplete-{{ module_row }}" {% if (display_autocomplete == constant('false')) %} {{ 'style="display:none"' }} {% endif %}>
+								<p>Product name:<br><span style="font-size:11px;color:#808080">(Autocomplete)</span></p>
+								<input type="hidden" name="product_tabs[{{ module_row }}][product_id]" value="{{ module['product_id'] }}" />
+								<input type="text" id="product-autocomplete-input-{{ module_row }}" name="product_tabs[{{ module_row }}][product_name]" title="{{ module_row }}" value="{{ module['product_name'] }}">
+							</div>
+							
+							<script type="text/javascript">
+								$('#product-autocomplete-input-{{ module_row }}').autocomplete({
+									delay: 500,
+									source: function(request, response) {		
+										$.ajax({
+											url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+											dataType: 'json',
+											success: function(json) {
+												response($.map(json, function(item) {
+													return {
+														label: item['name'],
+														value: item['product_id']
+													}
+												}));
+											}
+										});
+									},
+									select: function(item) {
+										$('input[name=\'product_tabs[{{ module_row }}][product_name]\']').val(item['label']);
+										$('input[name=\'product_tabs[{{ module_row }}][product_id]\']').val(item['value']);
+										
+										return false;
+									}
+								});
+							</script>
+
+							
+							<div id="carousel_{{ module_row }}_items" class="tabs_add_element clearfix">
+                                {% set i = 1 %} 
+								{% if (module['tabs'] is defined) %} {% for item in module['tabs'] %} 
+									<a href="#carousel-{{ module_row }}-element-{{ i }}" id="element-{{ element }}">{{ i }} &nbsp;<img src="view/image/module_template/delete-slider.png" alt="" onclick="$('#carousel_{{ module_row }}_items a:first').trigger('click'); $('#element-{{ element }}').remove(); $('#carousel-{{ module_row }}-element-{{ i }}').remove(); return false;" /></a>
+								{% set i = i + 1 %} {% set element = element + 1 %} 
+								{% endfor %} {% endif %} 
+								<img src="view/image/module_template/add.png" alt="" onclick="addElement({{ module_row }});">
+							</div>
+							
+							{% set i = 1 %} 
+							{% if (module['tabs'] is defined) %} {% for item in module['tabs'] %} 
+								<div id="carousel-{{ module_row }}-element-{{ i }}" style="padding-top:20px">
+									<div class="input clearfix">
+										<p>Status:</p>
+										{% if (item['status'] is defined) %} 
+											{% if (item['status'] == 1) %} 
+												{{ '<div class="status status-on" title="1" rel="module_'~module_row~'_tabs_'~i~'_status"></div>' }} 
+											{% else %} 
+												{{ '<div class="status status-off" title="0" rel="module_'~module_row~'_tabs_'~i~'_status"></div>' }} 
+											{% endif %} 
+											<input name="product_tabs[{{ module_row }}][tabs][{{ i }}][status]" value="{{ item['status'] }}" id="module_{{ module_row }}_tabs_{{ i }}_status" type="hidden" />
+										{% else %} 
+											{{ '<div class="status status-off" title="0" rel="module_'~module_row~'_tabs_'~i~'_status"></div>' }} 
+											<input name="product_tabs[{{ module_row }}][tabs][{{ i }}][status]" value="0" id="module_{{ module_row }}_tabs_{{ i }}_status" type="hidden" />
+										{% endif %} 
+									</div>
+									
+									<div class="input clearfix">
+										<p>Sort order:</p>
+										<input type="text" name="product_tabs[{{ module_row }}][tabs][{{ i }}][sort_order]" value="{% if (item['sort_order'] is defined) %}{{ item['sort_order'] }}{% endif %}" style="width:75px" />	
+									</div>
+									
+									<div id="language-{{ module_row }}-element-{{ i }}" class="htabs" style="margin-top:20px">
+										{% for language in languages %} 
+											<a href="#tab-language-{{ module_row }}-{{ i }}-{{ language['language_id'] }}"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" /> {{ language['name'] }}</a>
+										{% endfor %} 
+									</div>
+									
+									{% for language in languages %} {% set lang_id = language['language_id'] %} 
+									<div id="tab-language-{{ module_row }}-{{ i }}-{{ language['language_id'] }}">
+										<div class="input clearfix">
+											<p>Name:</p>
+											<input type="text" name="product_tabs[{{ module_row }}][tabs][{{ i }}][{{ lang_id }}][name]" value="{% if (item[lang_id]['name'] is defined) %}{{ item[lang_id]['name'] }}{% endif %}" />
+										</div>
+										
+										<div class="clearfix" style="padding-top: 20px">
+											<textarea rows="0" cols="0" id="product_tabs_{{ module_row }}_{{ i }}_{{ lang_id }}_html" name="product_tabs[{{ module_row }}][tabs][{{ i }}][{{ lang_id }}][html]"  data-toggle="summernote">{% if (item[lang_id]['html'] is defined) %}{{ item[lang_id]['html'] }}{% endif %}</textarea>
+										</div>
+									</div>
+									{% endfor %} 
+								</div>
+								
+								<script type="text/javascript">
+								$('#language-{{ module_row }}-element-{{ i }} a').tabs();	
+								</script>
+								{% set i = i + 1 %} 
+							{% endfor %} {% endif %} 
+							<script type="text/javascript"> 
+							$('#carousel_{{ module_row }}_items a').tabs();	
+							</script>
+							
+							<div id="carousel_{{ module_row }}_items_add"></div>
+						</div>
+						{% set module_row = module_row + 1 %} 
+						{% endfor %} 
+					</div>
+					
+					<!-- Buttons -->
+					<div class="buttons"><input type="submit" name="button-save" class="button-save" value=""></div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript"><!--
+$('.main-tabs a').tabs();
+//--></script> 
+
+<script type="text/javascript"><!--
+{% set module_row = 1 %} 
+{% for module in modules %} 
+{% set module_row = module_row + 1 %} 
+{% endfor %} 
+//--></script> 
+
+<script type="text/javascript"><!--
+var module_row = {{ module_row }};
+
+function addModule() {	
+	html  = '<div id="tab-module-' + module_row + '" class="tab-content">';
+		html += '	<div class="input clearfix">';
+		html += '		<p>Global tag:</p>';
+		html += '		<div class="status status-off" id="' + module_row + '" title="0" rel="module_' + module_row + '_status"></div><input name="product_tabs[' + module_row + '][status]" value="0" id="module_' + module_row + '_status" type="hidden" />';	
+		html += '	</div>';
+		
+		html += '	<div class="input clearfix" id="product-autocomplete-' + module_row + '">';
+		html += '		<p>Product name:<br><span style="font-size:11px;color:#808080">(Autocomplete)</span></p>';
+		html += '		<input type="hidden" name="product_tabs[' + module_row + '][product_id]" value="" />';
+		html += '		<input type="text" id="product-autocomplete-input-' + module_row + '" name="product_tabs[' + module_row + '][product_name]" title="' + module_row + '" value="">';
+		html += '	</div>';
+		
+		html += '	<div id="carousel_'+module_row+'_items" class="tabs_add_element clearfix">';
+		html += '		<img src="view/image/module_template/add.png" alt="" onclick="addElement('+module_row+');">';
+		html += '	</div>';
+		
+		html += '	<div id="carousel_'+module_row+'_items_add"></div>';
+	html += '</div>';
+	
+	$('.tabs').append(html);
+	
+	var module_row2 = module_row;
+	
+	$('#product-autocomplete-input-' + module_row + '').autocomplete({
+		delay: 500,
+		source: function(request, response) {		
+			$.ajax({
+				url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+				dataType: 'json',
+				success: function(json) {
+					response($.map(json, function(item) {
+						return {
+							label: item['name'],
+							value: item['product_id']
+						}
+					}));
+				}
+			});
+		},
+		select: function(item) {
+			$('input[name=\'product_tabs[' + module_row2 + '][product_name]\']').val(item['label']);
+			$('input[name=\'product_tabs[' + module_row2 + '][product_id]\']').val(item['value']);
+			
+			return false;
+		}
+	});
+	
+	$('#module-add').before('<a href="#tab-module-' + module_row + '" id="module-' + module_row + '">Tab ' + module_row + ' &nbsp;<img src="view/image/module_template/delete-slider.png" alt="" onclick="$(\'.vtabs a:first\').trigger(\'click\'); $(\'#module-' + module_row + '\').remove(); $(\'#tab-module-' + module_row + '\').remove(); return false;" /></a>');
+	
+	$('.main-tabs a').tabs();
+	
+	$('#module-' + module_row).trigger('click');
+	
+	module_row++;
+	
+	var height = $("#tabs").height()+70;
+	if(height > 400) $("#product_tabs .content > div .tabs").css("min-height", height);
+}
+
+var height = $("#tabs").height()+70;
+if(height > 400) $("#product_tabs .content > div .tabs").css("min-height", height);
+//--></script> 
+<script type="text/javascript"><!--
+var elements = {{ element }};
+function addElement(module_row) {
+	html = '<div id="carousel-' + module_row + '-element-' + elements + '" style="padding-top:20px">';
+	html += '	<div class="input clearfix">';
+	html += '		<p>Status:</p>';
+	html += '		<div class="status status-off" title="0" rel="module_' + module_row + '_tabs_' + elements + '_status"></div><input name="product_tabs[' + module_row + '][tabs][' + elements + '][status]" value="0" id="module_' + module_row + '_tabs_' + elements + '_status" type="hidden" />';	
+	html += '	</div>';
+	html += '	<div class="input clearfix">';
+	html += '		<p>Sort order:</p>';
+	html += '		<input type="text" name="product_tabs['+ module_row +'][tabs][' + elements + '][sort_order]" value="" style="width:75px" />';	
+	html += '	</div>';
+	
+	html += '  <div id="language-' + module_row + '-element-' + elements + '" class="htabs" style="margin-top:20px">';
+	{% for language in languages %} 
+	html += '    <a href="#tab-language-'+ module_row + '-' + elements + '-{{ language['language_id'] }}"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" /> {{ language['name'] }}</a>';
+	{% endfor %} 
+	html += '  </div>';
+	
+	{% for language in languages %} 
+	html += '    <div id="tab-language-'+ module_row + '-' + elements + '-{{ language['language_id'] }}">';
+	html += '		<div class="input clearfix">';
+	html += '			<p>Name:</p>';
+	html += '			<input type="text" name="product_tabs['+ module_row +'][tabs][' + elements + '][{{ language['language_id'] }}][name]" value="" />';
+	html += '		</div>';
+	
+	html += '		<div class="clearfix" style="padding-top: 20px">';
+	html += '			<textarea rows="0" cols="0" id="product_tabs_' + module_row + '_' + elements + '_{{ language['language_id'] }}_html" name="product_tabs['+ module_row +'][tabs][' + elements + '][{{ language['language_id'] }}][html]"></textarea>';
+	html += '		</div>';
+	html += '    </div>';
+	{% endfor %} 
+	html += '</div>';
+		
+	$('#carousel_' + module_row + '_items > img').before('<a href="#carousel-' + module_row + '-element-' + elements + '" id="element-' + elements + '">' + elements + ' &nbsp;<img src="view/image/module_template/delete-slider.png" alt="" onclick="$(\'#carousel_'+ module_row +'_items a:first\').trigger(\'click\'); $(\'#element-' + elements+ '\').remove(); $(\'#carousel-' + module_row + '-element-' + elements + '\').remove(); return false;" /></a>');
+	
+	$('#carousel_' + module_row + '_items_add').before(html);
+	$('#carousel_' + module_row + '_items a').tabs();	
+	$('#element-' + elements).trigger('click');
+	
+	$('#language-' + module_row + '-element-' + elements + ' a').tabs();
+	
+	{% for language in languages %} 
+		$('#product_tabs_' + module_row + '_' + elements + '_{{ language['language_id'] }}_html').summernote({
+			height: 300
+		});
+	{% endfor %}	
+	
+	elements++;
+}
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	
+	$('#product_tabs').on('click', '.status', function () {
+		
+		var styl = $(this).attr("rel");
+		var co = $(this).attr("title");
+		var product_autocomplete = $(this).attr("id");
+		
+		if(co == 1) {
+			
+			if(product_autocomplete != '') {
+				$("#product-autocomplete-" + product_autocomplete).show();
+			}
+			$(this).removeClass('status-on');
+			$(this).addClass('status-off');
+			$(this).attr("title", "0");
+
+			$("#"+styl+"").val(0);
+		
+		}
+		
+		if(co == 0) {
+			
+			if(product_autocomplete != '') {
+				$("#product-autocomplete-" + product_autocomplete).hide();
+			}
+			$(this).addClass('status-on');
+			$(this).removeClass('status-off');
+			$(this).attr("title", "1");
+
+			$("#"+styl+"").val(1);
+		
+		}
+		
+	});
+
+});	
+</script>
+{{ footer }}

@@ -1,0 +1,32 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+    <div class="tt-block-aside">
+        <h3 class="tt-aside-title">{{ heading_title }}</h3>
+        <div class="tt-aside-content">
+            <ul class="tt-list-row">
+                {% for category in categories %} 
+                    <li class="panel">
+                        {% if (category['category_id'] == category_id) %} 
+                            <a href="{{ category['href'] }}" class="active">{{ category['name'] }}</a>
+                        {% else %} 
+                            <a href="{{ category['href'] }}">{{ category['name'] }}</a>
+                        {% endif %} 
+                        {% set categories_2 = category['children'] %} 
+                        {% if (categories_2|length > 0 and category['category_id'] == category_id) %} 
+                            <ul>
+                            {% for child in categories_2 %} 
+                                <li>
+                                    {% if (child['category_id'] == child_id) %} 
+                                        <a href="{{ child['href'] }}" class="active">{{ child['name'] }}</a>
+                                    {% else %} 
+                                        <a href="{{ child['href'] }}">{{ child['name'] }}</a>
+                                    {% endif %} 
+                                </li>
+                            {% endfor %} 
+                            </ul>
+                        {% endif %} 
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

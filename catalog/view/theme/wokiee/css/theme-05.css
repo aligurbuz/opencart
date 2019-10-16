@@ -1,0 +1,970 @@
+.datepicker table tr td.day:hover {
+    color: #fe5722;
+}
+.datepicker table tr td.today:hover, .datepicker table tr td.today:hover:hover, .datepicker table tr td.today.disabled:hover, .datepicker table tr td.today.disabled:hover:hover, .datepicker table tr td.today:active, .datepicker table tr td.today:hover:active, .datepicker table tr td.today.disabled:active, .datepicker table tr td.today.disabled:hover:active, .datepicker table tr td.today.active, .datepicker table tr td.today:hover.active, .datepicker table tr td.today.disabled.active, .datepicker table tr td.today.disabled:hover.active, .datepicker table tr td.today.disabled, .datepicker table tr td.today:hover.disabled, .datepicker table tr td.today.disabled.disabled, .datepicker table tr td.today.disabled:hover.disabled, .datepicker table tr td.today[disabled], .datepicker table tr td.today:hover[disabled], .datepicker table tr td.today.disabled[disabled], .datepicker table tr td.today.disabled:hover[disabled] {
+    color: #fe5722
+}
+.datepicker table tr td.today:active, .datepicker table tr td.today:hover:active, .datepicker table tr td.today.disabled:active, .datepicker table tr td.today.disabled:hover:active, .datepicker table tr td.today.active, .datepicker table tr td.today:hover.active, .datepicker table tr td.today.disabled.active, .datepicker table tr td.today.disabled:hover.active {
+    color: #fe5722 \9
+}
+.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
+    color: #fe5722
+}
+.datepicker table tr td.active:hover, .datepicker table tr td.active:hover:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active.disabled:hover:hover, .datepicker table tr td.active:active, .datepicker table tr td.active:hover:active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.active, .datepicker table tr td.active:hover.active, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled:hover.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active:hover.disabled, .datepicker table tr td.active.disabled.disabled, .datepicker table tr td.active.disabled:hover.disabled, .datepicker table tr td.active[disabled], .datepicker table tr td.active:hover[disabled], .datepicker table tr td.active.disabled[disabled], .datepicker table tr td.active.disabled:hover[disabled] {
+    color: #fe5722
+}
+.datepicker table tr td.active:active, .datepicker table tr td.active:hover:active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.active, .datepicker table tr td.active:hover.active, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled:hover.active {
+    color: #fe5722 \9
+}
+.datepicker table tr td span:hover {
+    color: #fe5722
+}
+.datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
+    background-color: #fe5722;
+}
+.datepicker table tr td span.active:hover, .datepicker table tr td span.active:hover:hover, .datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active.disabled:hover:hover, .datepicker table tr td span.active:active, .datepicker table tr td span.active:hover:active, .datepicker table tr td span.active.disabled:active, .datepicker table tr td span.active.disabled:hover:active, .datepicker table tr td span.active.active, .datepicker table tr td span.active:hover.active, .datepicker table tr td span.active.disabled.active, .datepicker table tr td span.active.disabled:hover.active, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active:hover.disabled, .datepicker table tr td span.active.disabled.disabled, .datepicker table tr td span.active.disabled:hover.disabled, .datepicker table tr td span.active[disabled], .datepicker table tr td span.active:hover[disabled], .datepicker table tr td span.active.disabled[disabled], .datepicker table tr td span.active.disabled:hover[disabled] {
+    background-color: #fe5722
+}
+.datepicker thead tr:first-child th:hover, .datepicker tfoot tr:first-child th:hover {
+    background: #fe5722
+}
+/* 								------------------------ */
+.mfp-close:hover {
+    color: #fe5722
+}
+.mfp-arrow:hover, button.mfp-arrow:hover {
+    color: #fe5722
+}
+.icon-AES2562 .path1:before {
+    color: #fe5722
+}
+.icon-AES2562 .path11:before {
+    color: #fe5722
+}
+.icon-AES256 .path1:before {
+    color: #fe5722
+}
+.icon-AES256 .path11:before {
+    color: #fe5722
+}
+.tt-top-panel {
+    background: #fe5722
+}
+header .tt-logo .tt-title {
+    color: #fe5722;
+}
+header .tt-dropdown-obj .tt-dropdown-toggle:hover {
+    color: #fe5722
+}
+header .tt-dropdown-obj.active .tt-dropdown-toggle {
+    color: #fe5722
+}
+@media (max-width: 1024px) {
+    header .tt-account .tt-dropdown-menu .tt-dropdown-inner ul li a:hover {
+        color: #fe5722
+    }
+    header .tt-account .tt-dropdown-menu .tt-dropdown-inner ul li a:hover [class^="icon-"] {
+        color: #fe5722
+    }
+}
+header .tt-account ul li a:hover {
+    color: #fe5722
+}
+header .tt-account ul li a:hover [class^="icon-"] {
+    color: #fe5722
+}
+@media (max-width: 1024px) {
+    header .tt-multi-obj .tt-dropdown-menu .tt-dropdown-inner ul li a:hover {
+        color: #fe5722
+    }
+    header .tt-multi-obj .tt-dropdown-menu .tt-dropdown-inner ul li a:hover [class^="icon-"] {
+        color: #fe5722
+    }
+    header .tt-multi-obj .tt-dropdown-menu .tt-dropdown-inner ul li.active a {
+        color: #fe5722
+    }
+    header .tt-multi-obj .tt-dropdown-menu .tt-dropdown-inner ul li.active a [class^="icon-"] {
+        color: #fe5722
+    }
+}
+header .tt-multi-obj ul li a:hover {
+    color: #fe5722
+}
+header .tt-multi-obj ul li a:hover [class^="icon-"] {
+    color: #fe5722
+}
+header .tt-multi-obj ul li.active a {
+    color: #fe5722
+}
+header .tt-multi-obj ul li.active a [class^="icon-"] {
+    color: #fe5722
+}
+header .tt-dropdown-obj:not(.tt-search) .tt-mobile-add .tt-close:hover {
+    color: #fe5722
+}
+header .tt-dropdown-obj:not(.tt-search) .tt-mobile-add .tt-close:hover:before {
+    color: #fe5722
+}
+header .tt-cart .tt-dropdown-toggle .tt-badge-cart {
+    background: #fe5722;
+}
+header .tt-cart .tt-cart-layout .tt-cart-content .tt-cart-list .tt-item a:not([class]):hover .tt-title {
+    color: #fe5722
+}
+header .tt-cart .tt-cart-layout .tt-cart-content .tt-cart-list .tt-item-close .tt-btn-close:hover:before {
+    color: #fe5722
+}
+@media (min-width: 1025px) {
+    header .tt-search .tt-dropdown-menu .tt-btn-search:hover {
+        color: #fe5722
+    }
+    header .tt-search .tt-dropdown-menu .tt-btn-close:hover {
+        color: #fe5722
+    }
+}
+@media (max-width: 1024px) {
+    header .tt-search .tt-dropdown-menu .tt-btn-close:hover {
+        color: #fe5722
+    }
+    header .tt-search .tt-dropdown-menu .tt-btn-search {
+        color: #fe5722;
+    }
+}
+@media (min-width: 1025px) {
+    header .tt-search .search-results ul>li a:hover .tt-title {
+        color: #fe5722
+    }
+}
+header .tt-search .tt-view-all {
+    color: #fe5722;
+}
+header .tt-color-scheme-01 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown>a:hover {
+    background: #fe5722
+}
+header .tt-color-scheme-01 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.active>a {
+    background: #fe5722
+}
+header .tt-color-scheme-01 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.selected>a {
+    background: #fe5722
+}
+header .tt-color-scheme-01 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown>a:hover {
+    color: #fe5722;
+}
+header .tt-color-scheme-01 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.active>a {
+    color: #fe5722;
+}
+header .tt-color-scheme-01 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.selected>a {
+    color: #fe5722;
+}
+header .tt-color-scheme-01 .tt-dropdown-obj .tt-dropdown-toggle:hover {
+    color: #fe5722
+}
+header .tt-color-scheme-02 .tt-box-info ul li [class^="icon-"] {
+    color: #fe5722
+}
+header .tt-color-scheme-02 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown>a:hover {
+    background: #fe5722
+}
+header .tt-color-scheme-02 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.active>a {
+    background: #fe5722
+}
+header .tt-color-scheme-02 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.selected>a {
+    background: #fe5722
+}
+header .tt-color-scheme-02 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown>a:hover {
+    color: #fe5722;
+}
+header .tt-color-scheme-02 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.active>a {
+    color: #fe5722;
+}
+header .tt-color-scheme-02 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.selected>a {
+    color: #fe5722;
+}
+header .tt-color-scheme-02 .tt-dropdown-obj .tt-dropdown-toggle:hover {
+    color: #fe5722
+}
+header .tt-color-scheme-03 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown>a:hover {
+    background: #fe5722
+}
+header .tt-color-scheme-03 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.active>a {
+    background: #fe5722
+}
+header .tt-color-scheme-03 .tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.selected>a {
+    background: #fe5722
+}
+header .tt-color-scheme-03 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown>a:hover {
+    color: #fe5722;
+}
+header .tt-color-scheme-03 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.active>a {
+    color: #fe5722;
+}
+header .tt-color-scheme-03 .tt-desctop-menu:not(.tt-hover-02) nav>ul li.dropdown.selected>a {
+    color: #fe5722;
+}
+header .tt-color-scheme-03 .tt-dropdown-obj .tt-dropdown-toggle:hover {
+    color: #fe5722
+}
+.tt-desctop-menu .header-menu-product a:hover .tt-title {
+    color: #fe5722
+}
+.tt-desctop-menu .tt-title-submenu:hover {
+    color: #fe5722
+}
+.tt-desctop-menu .tt-title-submenu:hover a {
+    color: #fe5722
+}
+.tt-desctop-menu .tt-title-submenu.active {
+    color: #fe5722
+}
+.tt-desctop-menu .tt-title-submenu.active a {
+    color: #fe5722
+}
+.tt-desctop-menu .tt-megamenu-submenu>li>a:hover {
+    color: #fe5722
+}
+.tt-desctop-menu .tt-megamenu-submenu>li.active>a {
+    color: #fe5722
+}
+.tt-desctop-menu .tt-megamenu-submenu>li ul li a:hover {
+    color: #fe5722
+}
+.tt-desctop-menu .tt-megamenu-submenu>li ul li.active>a {
+    color: #fe5722
+}
+.tt-desctop-menu:not(.tt-hover-02) li.dropdown>a:hover {
+    color: #fe5722;
+}
+.tt-desctop-menu:not(.tt-hover-02) li.dropdown.active>a {
+    color: #fe5722;
+}
+.tt-desctop-menu:not(.tt-hover-02) li.dropdown.selected>a {
+    color: #fe5722;
+}
+.tt-desctop-menu.tt-hover-02 nav>ul li.dropdown>a:hover {
+    background: #fe5722
+}
+.tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.active>a {
+    background: #fe5722
+}
+.tt-desctop-menu.tt-hover-02 nav>ul li.dropdown.selected>a {
+    background: #fe5722
+}
+body:not(.touch-device) .tt-menu-toggle:hover i {
+    color: #fe5722
+}
+.panel-menu ul li a:hover {
+    color: #fe5722;
+}
+.panel-menu #mm0.mmpanel a:not(.mm-close):hover {
+    color: #fe5722;
+}
+.panel-menu #mm0.mmpanel a:not(.mm-close):hover:after {
+    color: #fe5722
+}
+.panel-menu .mm-close:hover, .panel-menu .mm-prev-level:hover, .panel-menu .mm-next-level:hover {
+    color: #fe5722;
+}
+.panel-menu .mm-close:hover:before .mm-prev-level:hover:before, .panel-menu .mm-next-level:hover:after {
+    color: #fe5722
+}
+.panel-menu li.mm-close-parent .mm-close:hover {
+    color: #fe5722;
+}
+.panel-menu li.mm-close-parent .mm-close:hover:before {
+    color: #fe5722
+}
+.panel-menu .mm-prev-level:hover {
+    color: #fe5722;
+}
+.panel-menu .mm-prev-level:hover:before {
+    color: #fe5722
+}
+.panel-menu .mm-next-level:hover {
+    color: #fe5722;
+}
+.panel-menu .mm-next-level:hover:after {
+    color: #fe5722
+}
+.panel-menu .mm-original-link:hover {
+    color: #fe5722;
+}
+.panel-menu .mm-original-link:hover:before {
+    color: #fe5722
+}
+footer .tt-logo .tt-title {
+    color: #fe5722;
+}
+@media (min-width: 790px) {
+    footer .tt-color-scheme-01 .tt-collapse-title a:hover {
+        color: #fe5722
+    }
+    footer .tt-color-scheme-01 .tt-collapse-content a {
+        color: #fe5722
+    }
+    footer .tt-color-scheme-01 .tt-list li a:hover, footer .tt-color-scheme-01 .tt-mobile-collapse .tt-collapse-content .tt-list li a:hover {
+        color: #fe5722
+    }
+    footer .tt-color-scheme-01 .tt-newsletter .form-control:focus {
+        border-color: #fe5722;
+    }
+    footer .tt-color-scheme-01 .tt-newsletter .btn {
+        background: #fe5722;
+    }
+    footer .tt-color-scheme-02 {
+        background: #fe5722;
+    }
+    footer .tt-color-scheme-03 .tt-mobile-collapse .tt-collapse-content a {
+        color: #fe5722
+    }
+    footer .tt-color-scheme-03 .tt-list li a:hover, footer .tt-color-scheme-03 .tt-mobile-collapse .tt-collapse-content .tt-list li a:hover {
+        color: #fe5722
+    }
+    footer .tt-color-scheme-03 .tt-list li.active a, footer .tt-color-scheme-03 .tt-mobile-collapse .tt-collapse-content .tt-list li.active a {
+        color: #fe5722
+    }
+    footer .tt-color-scheme-03 .tt-newsletter .form-control:focus {
+        border-color: #fe5722;
+    }
+    footer .tt-color-scheme-03 .tt-newsletter .btn {
+        background: #fe5722;
+    }
+    footer .tt-color-scheme-04 .tt-newsletter .form-control:focus {
+        border-color: #fe5722;
+    }
+    footer .tt-color-scheme-04 .tt-newsletter .btn {
+        background: #fe5722;
+    }
+}
+@media (max-width: 789px) {
+    footer .tt-mobile-collapse .tt-collapse-title:hover:not(:focus) {
+        color: #fe5722
+    }
+    footer .tt-newsletter .form-control:focus {
+        border-color: #fe5722;
+    }
+    footer .tt-newsletter .btn {
+        background: #fe5722;
+    }
+    footer .tt-list li a:hover {
+        color: #fe5722
+    }
+    footer address a {
+        color: #fe5722
+    }
+    footer .tt-logo .tt-title {
+        color: #fe5722
+    }
+}
+@media (max-width: 789px) {
+    .f-mobile-dark+.tt-back-to-top:hover {
+        color: #fe5722
+    }
+}
+.tt-listing-post .tt-post .tt-post-content .tt-tag a {
+    color: #fe5722;
+}
+
+.tt-listing-post .tt-post .tt-post-content .tt-title a:hover {
+    color: #fe5722
+}
+.tt-listing-post .tt-post .tt-post-content .tt-meta .tt-comments a:hover {
+    color: #fe5722
+}
+.tt-listing-post .tt-post .tt-post-content .tt-meta .tt-comments a:hover .tt-icon {
+    color: #fe5722
+}
+.tt-video-block .link-video:hover:before {
+    color: #fe5722
+}
+.tt-box-link {
+    color: #fe5722;
+}
+.tt-post-single .tt-tag a {
+    color: #fe5722;
+}
+.tt-post-single .post-meta a {
+    color: #fe5722;
+}
+.tt-comments-layout .tt-item div[class^="tt-comments-level-"] .tt-content .tt-btn {
+    color: #fe5722;
+}
+.tt-blog-thumb .tt-title-description .tt-tag {
+    color: #fe5722
+}
+.tt-blog-thumb .tt-title-description .tt-tag a {
+    color: #fe5722;
+}
+.tt-blog-thumb .tt-title-description .tt-title a:hover{
+	color: #fe5722;
+}
+.tt-blog-thumb .tt-title-description .tt-meta .tt-comments a:hover {
+    color: #fe5722
+}
+.tt-blog-thumb .tt-title-description .tt-meta .tt-comments a:hover .tt-icon {
+    color: #fe5722
+}
+.tt-form-search .tt-btn-icon:hover {
+    color: #fe5722
+}
+.tt-list-inline li a:hover {
+    color: #fe5722
+}
+.tt-aside-post .item .tt-tag {
+    color: #fe5722;
+}
+.tt-aside-post .item .tt-tag a {
+    color: #fe5722;
+}
+.tt-aside-post .item>a:not([class]):hover .tt-title {
+    color: #fe5722
+}
+.tt-pagination ul li a:hover {
+    color: #fe5722
+}
+.tt-pagination ul li.active a {
+    color: #fe5722
+}
+.tt-pagination .btn-pagination:hover {
+    color: #fe5722
+}
+.tt-layout-01-post .tt-post .tt-post-content .tt-tag a {
+    color: #fe5722;
+}
+.tt-layout-01-post .tt-post .tt-post-content .tt-title a:hover {
+    color: #fe5722
+}
+.tt-layout-01-post .tt-post .tt-post-content .tt-meta .tt-comments a:hover {
+    color: #fe5722
+}
+.tt-layout-01-post .tt-post .tt-post-content .tt-meta .tt-comments a:hover .tt-icon {
+    color: #fe5722
+}
+.tt-layout-01-post .tt-post:hover .tt-post-img i {
+    color: #fe5722
+}
+.tt-portfolio-content figure figcaption .tt-btn-zomm:hover {
+    color: #fe5722
+}
+.tt-portfolio-content figure figcaption .tt-title a:hover {
+    color: #fe5722
+}
+.tt-product-single-info .tt-add-info ul li a:hover {
+    color: #fe5722
+}
+.tt-product-single-info .tt-price {
+    color: #fe5722
+}
+.tt-product-single-info .tt-price .old-price, .tt-product-single-info .tt-price .old-price .money {
+    color: #fe5722;
+}
+.tt-product-single-info .tt-review a {
+    color: #fe5722;
+}
+.tt-review-block .tt-row-custom-02 a {
+    color: #fe5722;
+}
+.tt-review-block .tt-review-form .tt-message-info span {
+    color: #fe5722
+}
+.video-link-product [class^="icon-"] {
+    color: #fe5722;
+}
+.product-information-buttons a {
+    color: #fe5722;
+}
+ul.tt-options-swatch li:hover a:not(.options-color), ul.tt-options-swatch li.active a:not(.options-color) {
+    background: #fe5722;
+}
+ul.tt-options-swatch li .options-color:after {
+    border: 0px solid #fe5722
+}
+.tt-product-single-img .tt-btn-zomm:hover {
+    background: #fe5722;
+}
+.tt-modal-addtocart.desctope .tt-modal-messages [class^="icon-"] {
+    color: #fe5722
+}
+.tt-modal-addtocart.desctope .tt-modal-product .tt-title a:hover {
+    color: #fe5722
+}
+.tt-modal-addtocart.desctope .tt-cart-total .tt-total .tt-price {
+    color: #fe5722;
+}
+.tt-modal-addtocart.mobile .tt-modal-messages [class^="icon-"] {
+    color: #fe5722
+}
+.modal .modal-header .close:hover {
+    color: #fe5722
+}
+.tt-modal-newsletter .tt-modal-newsletter-promo .tt-title-large {
+    color: #fe5722;
+}
+.tt-modal-newsletter .row-social-icon .tt-social-icon li a:hover {
+    color: #fe5722
+}
+.tt-modal-newsletter .checkbox-group label:hover {
+    color: #fe5722
+}
+.tt-layout-product-info-02 ul:not([class])>li a:hover {
+    color: #fe5722
+}
+.tt-modal-subsribe-good i {
+    color: #fe5722;
+}
+.tt-filters-options .tt-btn-toggle a {
+    color: #fe5722;
+}
+.tt-filters-options .tt-btn-toggle a:before {
+    color: #fe5722
+}
+@media (min-width: 1025px) {
+    .tt-btn-col-close a:hover {
+        color: #fe5722
+    }
+}
+@media (max-width: 1024px) {
+    .tt-btn-col-close a:hover {
+        color: #fe5722
+    }
+}
+.tt-collapse .tt-collapse-title:hover {
+    color: #fe5722
+}
+.tt-filter-list li a:hover {
+    color: #fe5722
+}
+.tt-filter-list li.active {
+    color: #fe5722
+}
+.tt-filter-list li.active a:before {
+    color: #fe5722
+}
+.tt-list-row li a:hover {
+    color: #fe5722
+}
+.tt-list-row li.active a {
+    color: #fe5722
+}
+.tt-aside .tt-item:hover .tt-title {
+    color: #fe5722
+}
+.tt-product.tt-view .tt-description .tt-add-info li a:hover, .tt-product-design02.tt-view .tt-description .tt-add-info li a:hover {
+    color: #fe5722
+}
+.tt-product.tt-view .tt-description .tt-title a:hover, .tt-product-design02.tt-view .tt-description .tt-title a:hover {
+    color: #fe5722
+}
+.tt-product.tt-view .tt-description .tt-btn-addtocart, .tt-product-design02.tt-view .tt-description .tt-btn-addtocart {
+    color: #fe5722;
+}
+.tt-product.tt-view .tt-description .tt-btn-addtocart:before, .tt-product-design02.tt-view .tt-description .tt-btn-addtocart:before {
+    color: #fe5722;
+}
+.tt-product.tt-view .tt-description .tt-btn-quickview:hover, .tt-product-design02.tt-view .tt-description .tt-btn-quickview:hover {
+    color: #fe5722
+}
+@media (min-width: 1025px) {
+    .tt-product:not(.tt-view) .tt-image-box .tt-btn-quickview:hover {
+        background: #fe5722;
+    }
+    .tt-product:not(.tt-view) .tt-description .tt-add-info li a:hover {
+        color: #fe5722
+    }
+    .tt-product:not(.tt-view) .tt-description .tt-title a:hover {
+        color: #fe5722
+    }
+}
+@media (min-width: 1025px) {
+    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart {
+        color: #fe5722;
+    }
+    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart.thumbprod-button-bg {
+        background-color: #fe5722;
+    }
+    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart.thumbprod-button-bg:hover {
+        background-color: #2267d8;
+    }
+    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart:before {
+        color: #fe5722;
+    }
+}
+@media (min-width: 1025px) {
+    .tt-product-design02:not(.tt-view) .tt-description .tt-add-info li a:hover {
+        color: #fe5722
+    }
+    .tt-product-design02:not(.tt-view) .tt-description .tt-title a:hover {
+        color: #fe5722
+    }
+    .tt-product-design02:not(.tt-view) .tt-options-swatch li:hover a:not(.options-color) {
+        background: #fe5722
+    }
+    .tt-product-design02:not(.tt-view) .tt-options-swatch li.active a:not(.options-color) {
+        background: #fe5722
+    }
+    .tt-product-design02:not(.tt-view) .tt-btn-addtocart {
+        color: #fe5722;
+    }
+    .tt-product-design02:not(.tt-view) .tt-btn-addtocart:before {
+        color: #fe5722;
+    }
+    .tt-product-design02:not(.tt-view) .tt-btn-quickview:hover {
+        color: #fe5722
+    }
+    .tt-product-design02:not(.tt-view) .tt-btn-link:hover {
+        color: #fe5722
+    }
+}
+@media (max-width: 1024px) {
+    .tt-product:not(.tt-view) .tt-description .tt-add-info li a:hover, .tt-product-design02:not(.tt-view) .tt-description .tt-add-info li a:hover {
+        color: #fe5722
+    }
+    .tt-product:not(.tt-view) .tt-description .tt-title a:hover, .tt-product-design02:not(.tt-view) .tt-description .tt-title a:hover {
+        color: #fe5722
+    }
+}
+@media (max-width: 1024px) {
+    .tt-product:not(.tt-view) .tt-description .tt-btn-addtocart, .tt-product-design02:not(.tt-view) .tt-description .tt-btn-addtocart {
+        background: #fe5722;
+    }
+    .tt-product:not(.tt-view) .tt-description .tt-btn-quickview:hover, .tt-product-design02:not(.tt-view) .tt-description .tt-btn-quickview:hover {
+        color: #fe5722
+    }
+}
+.tt-countdown_box .countdown-row .countdown-section {
+    color: #fe5722;
+}
+.tt-promo-box:not(.hover-type-2):hover .btn-underline {
+    color: #fe5722
+}
+.tt-collection-item:hover .tt-description .tt-title {
+    color: #fe5722
+}
+.tt-promo-fixed .tt-btn-close:hover {
+    color: #fe5722
+}
+.tt-promo-fixed .tt-description a:hover {
+    color: #fe5722
+}
+.tt-shopcart-table .tt-btn-close:hover {
+    color: #fe5722
+}
+.tt-shopcart-table .tt-title a:hover {
+    color: #fe5722
+}
+.tt-shopcart-table01 tfoot tr td {
+    color: #fe5722;
+}
+.tt-shopcart-table-02 .tt-btn-close:hover {
+    color: #fe5722
+}
+.tt-shopcart-table-02 .tt-title a:hover {
+    color: #fe5722
+}
+.tt-shopping-layout .tt-link-back {
+    color: #fe5722;
+}
+.tt-shopping-layout .tt-shop-btn svg {
+    fill: #fe5722;
+}
+.tt-table-shop-01 tbody td a {
+    color: #fe5722;
+}
+.tt-table-shop-02 tbody td a {
+    color: #fe5722;
+}
+.tt-shop-info .tt-item .tt-description strong {
+    color: #fe5722
+}
+.tt-shop-info .tt-item .tt-description a {
+    color: #fe5722;
+}
+.tt-lookbook .tt-hotspot .tt-btn:after {
+    background-color: #fe5722;
+}
+.tt-hotspot-content .tt-btn-close:hover {
+    color: #fe5722
+}
+.tt-hotspot-content .tt-description .tt-title a:hover {
+    color: #fe5722
+}
+.slider-revolution .video-play a:hover {
+    color: #fe5722
+}
+.slider-revolution [class^="btn"] {
+    background-color: #fe5722;
+}
+#loader .dot {
+    background: #fe5722
+}
+@media (min-width: 1025px) {
+    #tt-boxedbutton .rtlbutton .box-btn {
+        background-color: #fe5722
+    }
+    #tt-boxedbutton .rtlbutton .box-description {
+        background-color: #fe5722;
+    }
+    #tt-boxedbutton .rtlbutton .box-disable {
+        color: #fe5722;
+    }
+}
+.btn,
+.btn:hover {
+    background: #fe5722;
+}
+.btn.btn-dark:hover {
+    background: #fe5722;
+}
+.btn.btn-border {
+    border: 2px solid #fe5722;
+    color: #fe5722;
+}
+.btn-link, .btn-link:focus {
+    color: #fe5722;
+}
+.btn-link-02, .btn-link-02:focus {
+    color: #fe5722;
+}
+.btn-underline {
+    border-bottom: 1px solid #fe5722;
+}
+.btn-underline:not([class$="color"]) {
+    color: #fe5722
+}
+.tt-link {
+    color: #fe5722;
+}
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+    color: #fe5722
+}
+.link {
+    color: #fe5722;
+}
+.tt-list-dot>li a:hover {
+    color: #fe5722
+}
+.tt-list-dot>li:before {
+    background: #fe5722;
+}
+.tt-blockquote .tt-icon {
+    color: #fe5722
+}
+.tt-blockquote.add-hover:hover .tt-title {
+    color: #fe5722
+}
+.tt-block-title .tt-title a {
+    color: #fe5722;
+}
+.tt-block-title .tt-title a:before {
+    background: #fe5722
+}
+.tt-block-title .tt-title a:hover {
+    color: #fe5722
+}
+.tt-block-title .tt-title-small a {
+    color: #fe5722;
+}
+.tt-block-title .tt-title-small a:hover {
+    color: #fe5722;
+}
+.tt-box-faq-listing .tt-box-faq .tt-title a:hover {
+    color: #fe5722
+}
+@media (max-width: 790px) {
+    .tt-about-box .tt-blockquote-02 .tt-icon {
+        color: #fe5722
+    }
+}
+@media (min-width: 791px) {
+    .tt-contact-box a:hover {
+        color: #fe5722
+    }
+}
+.tt-contact-info .tt-icon {
+    color: #fe5722
+}
+.form-default .form-control:focus {
+    border-color: #fe5722;
+}
+.checkbox-group label .check {
+    background: #fe5722;
+}
+.checkbox-group:hover label {
+    color: #fe5722
+}
+.radio input:focus+.outer .inner {
+    background-color: #fe5722
+}
+.radio .inner {
+    background-color: #fe5722;
+}
+.radio:hover {
+    color: #fe5722
+}
+.tt-box-thumb .tt-title a:hover {
+    color: #fe5722
+}
+.tt-login-form .tt-item .additional-links a {
+    color: #fe5722;
+}
+.tt-slick-button .slick-arrow:hover {
+    background: #fe5722;
+}
+.tt-slick-button-vertical .slick-arrow:hover {
+    background: #fe5722;
+}
+.arrow-location-01 .slick-arrow:hover {
+    background: #fe5722;
+}
+.arrow-location-02 .slick-arrow:hover {
+    background: #fe5722;
+}
+.arrow-location-03 .slick-arrow:hover {
+    color: #fe5722;
+}
+.arrow-location-tab .slick-arrow:hover {
+    background: #fe5722;
+}
+.arrow-location-right-top .slick-arrow:hover {
+    background: #fe5722;
+}
+.arrow-location-center-02 .slick-arrow:hover {
+    background: #fe5722
+}
+@media (max-width: 789px) {
+    .tt-back-to-top:hover {
+        color: #fe5722
+    }
+}
+.tt-breadcrumb ul li a:hover {
+    color: #fe5722
+}
+.tt-services-block .tt-col-icon {
+    color: #fe5722
+}
+.tt-services-block:hover .tt-title {
+    color: #fe5722
+}
+.tt-img-box:hover {
+    border-color: #fe5722
+}
+.tt-layout-vertical .tt-title a:hover {
+    color: #fe5722
+}
+.tt-layout-vertical .tt-description .tt-add-info li a:hover {
+    color: #fe5722
+}
+.tt-content-info:hover .tt-title {
+    color: #fe5722
+}
+.tt-items-categories ul li a:hover {
+    color: #fe5722
+}
+.tt-items-categories ul li.active a {
+    color: #fe5722
+}
+.tt-items-categories.active .tt-title {
+    color: #fe5722
+}
+.tt-loader svg path, .tt-loader svg rect {
+    fill: #fe5722
+}
+.tt-base-color {
+    color: #fe5722
+}
+
+
+/* !!!!!!!!!!!!!!! rgba */
+.tt-back-to-top{
+	background-color: rgba(254,87,34,0.75);
+}
+.btn:hover{
+	background: rgba(254,87,34,0.75);
+}
+.tt-promo-box.hover-type-2:hover .tt-description-wrapper .tt-background{
+	background: rgba(254,87,34,0.9);
+}
+.tt-promo-box.hover-type-3:hover .tt-description-wrapper .tt-title-large:not(.tt-base-color){
+    color: #fe5722;
+}
+.tt-promo-box.hover-type-3:hover .tt-description-wrapper .tt-title-large:not(.tt-base-color) span{
+    color: #fe5722;
+}
+.tt-top-panel.tt-color-dark a:not([class]) {
+  color: #fe5722;
+}
+.tt-top-panel.tt-color-dark a:not([class]):before {
+  background-color: #fe5722;
+}
+.tt-promo02 .tt-description a.tt-title:hover > *,
+.tt-promo02.tt-no-btn:hover .tt-description .tt-title > *{
+    color: #fe5722;
+}
+
+
+
+.tt-product.tt-view .tt-description .tt-btn-compare:hover,
+.tt-product-design02.tt-view .tt-description .tt-btn-compare:hover {
+    color: #fe5722
+}
+.tt-product.tt-view .tt-description .tt-btn-wishlist:hover,
+.tt-product-design02.tt-view .tt-description .tt-btn-wishlist:hover {
+    color: #fe5722
+}
+@media (min-width: 1025px) {
+ .tt-product:not(.tt-view) .tt-image-box .tt-btn-wishlist:hover {
+        background: #fe5722;
+    }
+    .tt-product:not(.tt-view) .tt-image-box .tt-btn-compare:hover {
+        background: #fe5722;
+    }
+}
+@media (min-width: 1025px) {
+ .tt-product-design02:not(.tt-view) .tt-btn-wishlist:hover {
+        color: #fe5722
+    }
+    .tt-product-design02:not(.tt-view) .tt-btn-compare:hover {
+        color: #fe5722
+    }
+}
+@media (max-width: 1024px) {
+.tt-product:not(.tt-view) .tt-description .tt-btn-wishlist:hover,
+    .tt-product-design02:not(.tt-view) .tt-description .tt-btn-wishlist:hover {
+        color: #fe5722
+    }
+    .tt-product:not(.tt-view) .tt-description .tt-btn-compare:hover,
+    .tt-product-design02:not(.tt-view) .tt-description .tt-btn-compare:hover {
+        color: #fe5722
+    }
+}
+
+
+
+
+@media (min-width: 1025px){
+    .tt-product:not(.tt-view) .tt-image-box .tt-btn-wishlist.active{
+        background: #fe5722;
+    }
+     .tt-product:not(.tt-view) .tt-image-box .tt-btn-compare.active{
+        background: #fe5722;
+    }
+}
+@media (max-width: 1024px){
+    .tt-product-design02:not(.tt-view) .tt-description .tt-btn-wishlist.active,
+    .tt-product:not(.tt-view) .tt-description .tt-btn-wishlist.active {
+        color: #fe5722;
+    }
+    .tt-product-design02:not(.tt-view) .tt-description .tt-btn-compare.active,
+    .tt-product:not(.tt-view) .tt-description .tt-btn-compare.active {
+        color: #fe5722;
+    }
+}
+
+/* Custom */
+.mfilter-slider-slider .ui-slider-range, #mfilter-price-slider .ui-slider-range,
+.mfilter-slider-slider .ui-slider-handle, #mfilter-price-slider .ui-slider-handle {
+    background: #fe5722 !important;
+}
+
+.mfilter-image ul li label:after, .mfilter-image_radio ul li label:after {
+    border-color: #fe5722 !important;
+}

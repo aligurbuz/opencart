@@ -1,0 +1,32 @@
+{% if (reviews) %} 
+	<div class="tt-review-block">
+		<div class="tt-review-comments">
+			{% for review in reviews %} 
+				<div class="tt-item">
+					<div class="tt-content">
+						<div class="tt-rating">
+							<i class="icon-star{% if not (review['rating'] >= 1) %}-empty{% endif %}"></i>
+							<i class="icon-star{% if not (review['rating'] >= 2) %}-empty{% endif %}"></i>
+							<i class="icon-star{% if not (review['rating'] >= 3) %}-empty{% endif %}"></i>
+							<i class="icon-star{% if not (review['rating'] >= 4) %}-empty{% endif %}"></i>
+							<i class="icon-star{% if not (review['rating'] >= 5) %}-empty{% endif %}"></i>
+						</div>
+						<div class="tt-comments-info">
+							<span class="username">by <span>{{ review['author'] }}</span></span>
+							<span class="time">{{ review['date_added'] }}</span>
+						</div>
+						<p style="padding-top: 5px">
+							{{ review['text'] }}
+						</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="row pagination-results">
+		  <div class="col-sm-6 text-left">{{ pagination }}</div>
+		  <div class="col-sm-6 text-right">{{ results }}</div>
+		</div>
+	</div>
+{% else %} 
+	<p style="padding-bottom: 10px">{{ text_no_reviews }}</p>
+{% endif %} 

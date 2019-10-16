@@ -1,0 +1,67 @@
+{{ header }}{{ column_left }} 
+<div id="content"><div class="container-fluid">
+	<div class="page-header">
+	    <h1>Camera Slider</h1>
+	    <ul class="breadcrumb">
+		     {% for breadcrumb in breadcrumbs %} 
+		      <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+		      {% endfor %} 
+	    </ul>
+	  </div>
+    
+    <link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+
+	{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	  {% else %} 
+	  {% if (success) %} 
+	  <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+	    <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  </div>
+	  {% endif %} {% endif %} 
+	
+	<!-- Camera slider -->
+	<div class="set-size" id="camera-slider">		
+			<!-- Content -->
+			<div class="content">
+				<div>
+					<div class="bg-tabs clearfix">
+						<div id="tabs">
+							<a href="{{ placement }}" id="placement"><span>Module placement</span></a>
+							<a href="{{ existing }}" id="existing" class="active"><span>Existing modules</span></a>
+						</div>
+
+						<div class="tab-content2">
+							<table id="module-placement">
+								<thead>
+									<tr>
+										<td class="first" style="width:700px">Name</td>
+										<td>Edit</td>
+										<td>Delete</td>
+									</tr>
+								</thead>
+								<tbody>
+									{% for slider in sliders %} 
+									<tr>
+										<td class="first">{{ slider['name'] }}</td>
+										<td><a href="{{ link_slider~'&slider_id='~slider['id'] }}">Edit</a></td>
+										<td><a href="{{ link_slider~'&slider_id='~slider['id']~'&delete=true' }}" onclick="return confirm('Are you sure you want to delete?')">Remove</a></td>
+									</tr>
+									{% endfor %} 
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<div>
+						<!-- Buttons -->
+						<div class="buttons"><a href="{{ link_slider }}" class="button-add-slider"></a></div>
+					</div>
+				</div>
+			</div>		
+	</div>
+</div>
+
+{{ footer }}

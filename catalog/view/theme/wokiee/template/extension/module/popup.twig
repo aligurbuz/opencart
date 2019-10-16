@@ -1,0 +1,242 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+  {% if (type == 1) %}
+    <!-- Modal (newsletter) -->
+    <div class="modal  fade"  id="Modalnewsletter" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true"  data-pause="{% if show_after > 0 %}{{ show_after }}{% else %}0{% endif %}">
+      <div class="modal-dialog modal-sm" id="popup-{{ module_id }}">
+        <div class="modal-content ">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+          </div>
+          <div class="modal-body no-background" style="{% if (content_width > 100) %} {{ 'max-width: ' ~ content_width ~ 'px;' }} {% endif %} {% if (background_color != '') %} {{ 'background-color: ' ~ background_color ~ ';' }} {% endif %} {% if (background_image != '') %} {{ 'background-image: url(image/' ~ background_image ~ ');background-position: ' ~ background_image_position ~ ';background-repeat: ' ~ background_image_repeat ~ ';' }} {% endif %}">
+            <div class="tt-modal-newsletter">
+              <div class="tt-modal-newsletter-promo">
+                {% set heading = newsletter_popup_title|split(',') %}
+                <div class="tt-title-small">{{ heading[0] }}</div>
+                <div class="tt-title-large">{{ heading[1] }}</div>
+                <p>
+                  {{ heading[2] }}
+                </p>
+              </div>
+              <p>
+                {{ newsletter_popup_text }}<br>
+              </p>
+              <div class="subscribe-form form-default">
+                <div class="row-subscibe">
+                  <div class="input-group">
+                    <input type="text" class="form-control email" placeholder="{{ newsletter_input_placeholder }}" />
+                    <button type="submit" class="btn subscribe">{{ newsletter_subscribe_button_text }}</button>
+                  </div>
+                </div>
+                {% if (display_text_dont_show_again == 0 and not ajax) %} 
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="checkBox1">
+                    <label for="checkBox1">
+                      <span class="check"></span>
+                      <span class="box"></span>
+                      {{ text_dont_show_again }}
+                    </label>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      function Subscribe() {
+        $.post('{{ subscribe_url }}', 
+          { 
+            email: $('#popup-{{ module_id }} .email').val() 
+          }, function (e) {
+            if(e.error === 1) {
+              var r = confirm(e.message);
+              if (r == true) {
+                  $.post('{{ unsubscribe_url }}', { 
+                    email: $('#popup-{{ module_id }} .email').val() 
+                  }, function (e) {
+                    $('#popup-{{ module_id }} .email').val('');
+                    alert(e.message);
+                  }, 'json');
+              }
+          } else if(e.error === 0) {
+            $('#popup-{{ module_id }} .email').val('');
+            alert(e.message);
+            $.magnificPopup.close();
+            } else {
+              $('#popup-{{ module_id }} .email').val('');
+              alert(e.message);
+            }
+          }
+        , 'json');
+      }
+
+      $('#popup-{{ module_id }} .subscribe').click(Subscribe);
+      $('#popup-{{ module_id }} .email').keypress(function (e) {
+          if (e.which == 13) {
+              Subscribe();
+          }
+      });
+    });
+    </script>
+  {% elseif (type == 2) %}
+    {% if (display_buttons_yes_no == 0 and not ajax) %}
+      <!-- Modal (VerifyAge) -->
+      <div class="modal fade" id="ModalVerifyAge" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true"  data-pause="{% if show_after > 0 %}{{ show_after }}{% else %}0{% endif %}">
+        <div class="modal-dialog modal-small">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+            </div>
+            <div class="modal-body" style="{% if (content_width > 100) %} {{ 'max-width: ' ~ content_width ~ 'px;' }} {% endif %} {% if (background_color != '') %} {{ 'background-color: ' ~ background_color ~ ';' }} {% endif %} {% if (background_image != '') %} {{ 'background-image: url(image/' ~ background_image ~ ');background-position: ' ~ background_image_position ~ ';background-repeat: ' ~ background_image_repeat ~ ';' }} {% endif %}">
+              <div class="tt-modal-verifyage">
+                {{ custom_popup_text }}
+                <div class="row-btn">
+                  <a href="#" class="btn js-btn-close">{{ yes }}</a><a href="https://www.google.com/" class="btn">{{ no }}</a>
+                </div>
+                {% if (display_text_dont_show_again == 0 and not ajax) %} 
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="checkBox1">
+                    <label for="checkBox1">
+                      <span class="check"></span>
+                      <span class="box"></span>
+                      {{ text_dont_show_again }}
+                    </label>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <!-- Modal (Discount) -->
+      <div class="modal fade" id="ModalDiscount" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true"  data-pause="{% if show_after > 0 %}{{ show_after }}{% else %}0{% endif %}">
+        <div class="modal-dialog modal-discount">
+          <div class="modal-content" style="{% if (content_width > 100) %} {{ 'max-width: ' ~ content_width ~ 'px;' }} {% endif %} {% if (background_color != '') %} {{ 'background-color: ' ~ background_color ~ ';' }} {% endif %} {% if (background_image != '') %} {{ 'background-image: url(image/' ~ background_image ~ ');background-position: ' ~ background_image_position ~ ';background-repeat: ' ~ background_image_repeat ~ ';' }} {% endif %}">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+            </div>
+            <h4>{{ custom_popup_title }}</h4>
+            {{ custom_popup_text }}
+            {% if (display_text_dont_show_again == 0 and not ajax) %} 
+              <div class="checkbox-group">
+                <input type="checkbox" id="checkBox1">
+                <label for="checkBox1">
+                  <span class="check"></span>
+                  <span class="box"></span>
+                  {{ text_dont_show_again }}
+                </label>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+      <!-- Modal (Contact Form) -->
+      <div class="modal fade" id="ModalDiscount2" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true"  data-pause="{% if show_after > 0 %}{{ show_after }}{% else %}0{% endif %}">
+        <div class="modal-dialog modal-small" id="popup-{{ module_id }}">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+            </div>
+            <div class="modal-body" style="{% if (content_width > 100) %} {{ 'max-width: ' ~ content_width ~ 'px;' }} {% endif %} {% if (background_color != '') %} {{ 'background-color: ' ~ background_color ~ ';' }} {% endif %} {% if (background_image != '') %} {{ 'background-image: url(image/' ~ background_image ~ ');background-position: ' ~ background_image_position ~ ';background-repeat: ' ~ background_image_repeat ~ ';' }} {% endif %}">
+              <div class="tt-modal-verifyage">
+                 <form action="" method="post" enctype="multipart/form-data" id="contact" class="popup-contact form-default">
+                    {% if (contact_form_popup_title != '') %}<h5>{{ contact_form_popup_title }}</h5>{% endif %} 
+                      {% if (product_id is defined) %} 
+                      <input type="hidden" name="product_id" value="{{ product_id }}" />
+                      {% elseif (url is defined) %} 
+                      <input type="hidden" name="url" value="{{ url }}" />
+                      {% endif %} 
+                      
+                      <fieldset>
+                        <div class="contact-label">
+                          <div>
+                            <input type="text" name="name" value="" id="input-name" placeholder="{{ entry_name }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="contact-label">
+                          <div>
+                            <input type="text" name="email" value="" id="input-email" placeholder="{{ entry_email }}" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="contact-label">
+                          <div>
+                            <textarea name="enquiry" rows="7" id="input-enquiry" placeholder="{{ entry_enquiry }}" class="form-control"></textarea>
+                          </div>
+                        </div>
+                      </fieldset>
+                                
+                     <input class="btn btn-primary" type="submit" value="{{ button_submit }}" />
+                 </form>
+
+                {% if (display_text_dont_show_again == 0 and not ajax) %} 
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="checkBox1">
+                    <label for="checkBox1">
+                      <span class="check"></span>
+                      <span class="box"></span>
+                      {{ text_dont_show_again }}
+                    </label>
+                  </div>
+                {% endif %}
+                 
+                 <script type="text/javascript">
+                      function IsEmail(email) {
+                           var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                           return regex.test(email);
+                      }
+
+                      // $('#contact').bind('submit', function(){
+                      $('body').on('submit', '#popup-{{ module_id }} #contact', function() {
+                           var valid = true;
+                           if($('#popup-{{ module_id }} #input-name').val().length < 3 || $('#popup-{{ module_id }} #input-name').val().length > 32){
+                                $('#popup-{{ module_id }} #input-name').addClass("error");
+                                valid = false;
+                           } else {
+                                $('#popup-{{ module_id }} #input-name').removeClass("error");
+       
+                           }
+                           
+                           if(IsEmail($('#popup-{{ module_id }} #input-email').val())) {
+                                $('#popup-{{ module_id }} #input-email').removeClass("error");
+                           } else {
+                                $('#popup-{{ module_id }} #input-email').addClass("error");
+                                valid = false;
+                           }
+                           
+                           if($('#popup-{{ module_id }} #input-enquiry').val().length < 10 || $('#popup-{{ module_id }} #input-enquiry').val().length > 3000){
+                                $('#popup-{{ module_id }} #input-enquiry').addClass("error");
+                                valid = false;
+                           } else {
+                                $('#popup-{{ module_id }} #input-enquiry').removeClass("error");
+                           }
+                           
+                           if(valid) {
+                                $.ajax({
+                                       type: "POST",
+                                       url: "{{ contact_url }}",
+                                       data: $("#popup-{{ module_id }} #contact").serialize(), // serializes the form's elements.
+                                       success: function(data)
+                                       {
+                                           alert(data); // show response from the php script.
+                                           $('#ModalDiscount2').modal('hide')
+                                       }
+                                     });
+                                     
+                                return false;
+                           } else {
+                                return false;
+                           }
+                      });
+                 </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  {% endif %}
+{% endif %}

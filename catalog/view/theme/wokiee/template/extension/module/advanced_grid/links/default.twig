@@ -1,0 +1,11 @@
+<div class="tt-mobile-collapse">
+   <h4 class="tt-collapse-title">{{ module['content']['title'] }}</h4>
+   <div class="tt-collapse-content">
+        <ul class="tt-list">
+        	{% set language_id = config.get( 'config_language_id' ) %}
+        	{% for link in module['content']['links'] %} 
+             <li><a href="{{ link['url'][language_id]  }}">{{ theme_options.html_entity_decode(link['name']) }}</a></li>
+            {% endfor %} 
+        </ul>
+   </div>
+</div>

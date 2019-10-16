@@ -1,0 +1,15 @@
+<div class="container-indent">
+  <div class="container">
+    <div class="row tt-carousel-brands arrow-location-center-02 tt-arrow-hover slick-animated-show-js">
+      {% for banner in banners %} 
+        <div>
+           {% if (banner['link']) %} 
+           <a href="{{ banner['link'] }}"><img src="{{ banner['image'] }}" alt="{{ banner['title'] }}" class="img-responsive" /></a>
+           {% else %} 
+           <img src="{{ banner['image'] }}" alt="{{ banner['title'] }}" class="img-responsive" />
+           {% endif %} 
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

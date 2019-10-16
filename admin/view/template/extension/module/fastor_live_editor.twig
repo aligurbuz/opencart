@@ -1,0 +1,683 @@
+{{ header }} 
+<link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="view/stylesheet/css/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="view/stylesheet/template_options.css" />
+<link rel="stylesheet" type="text/css" href="view/stylesheet/live_editor.css" />
+<script type="text/javascript" src="view/javascript/jquery/colorpicker.js"></script>
+<script type="text/javascript" src="view/javascript/jquery/jquery.cookie.js"></script>
+<div id="theme-options">
+<div id="live-editor">
+    
+  {% if (error_warning) %} 
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+  {% elseif (success) %} 
+    <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+  {% endif %} 
+    
+    <div class="live-sidebar">
+        <div class="live-title">
+            Advanced Settings<br>
+            <span>Live editor</span>
+        </div>
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+        <!-- Elements -->
+        <div class="section accordion">
+            <div class="section-title">
+                <h4>Header<br> section</h4>
+                <div class="expander"></div>
+            </div>
+            <div class="section-content">
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Header margin top</p>
+                   <select name="header_margin_top">
+                       <option value="0"{% if (header_margin_top == '0') %}{{ ' selected="selected"' }}{% endif %}>0px</option>
+                       <option value="20"{% if (header_margin_top == '20') %}{{ ' selected="selected"' }}{% endif %}>20px</option>
+                       <option value="30"{% if (header_margin_top == '30') %}{{ ' selected="selected"' }}{% endif %}>30px</option>
+                       <option value="80"{% if (header_margin_top == '80') %}{{ ' selected="selected"' }}{% endif %}>80px</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Top Bar</p>
+                   <select name="top_bar_type">
+                       <option value="0"{% if (top_bar_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (top_bar_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (top_bar_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (top_bar_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">My account</p>
+                   <select name="my_account_type">
+                       <option value="0"{% if (my_account_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (my_account_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (my_account_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (my_account_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (my_account_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Cart block</p>
+                   <select name="cart_block_type">
+                       <option value="0"{% if (cart_block_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (cart_block_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (cart_block_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (cart_block_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (cart_block_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (cart_block_type == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (cart_block_type == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                       <option value="8"{% if (cart_block_type == '8') %}{{ ' selected="selected"' }}{% endif %}>Type 8</option>
+                       <option value="9"{% if (cart_block_type == '9') %}{{ ' selected="selected"' }}{% endif %}>Type 9</option>
+                       <option value="10"{% if (cart_block_type == '10') %}{{ ' selected="selected"' }}{% endif %}>Type 10</option>
+                       <option value="11"{% if (cart_block_type == '11') %}{{ ' selected="selected"' }}{% endif %}>Type 11</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Category box</p>
+                   <select name="category_box_style">
+                       <option value="0"{% if (category_box_style == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="1"{% if (category_box_style == '1') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="2"{% if (category_box_style == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="3"{% if (category_box_style == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+                  <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Megamenu label</p>
+                   <select name="megamenu_label_type">
+                       <option value="0"{% if (megamenu_label_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (megamenu_label_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (megamenu_label_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (megamenu_label_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (megamenu_label_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (megamenu_label_type == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (megamenu_label_type == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Search</p>
+                   <select name="search_type_in_header">
+                       <option value="0"{% if (search_type_in_header == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (search_type_in_header == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (search_type_in_header == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (search_type_in_header == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (search_type_in_header == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (search_type_in_header == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (search_type_in_header == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Menu</p>
+                   <select name="megamenu_type">
+                       <option value="0"{% if (megamenu_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (megamenu_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (megamenu_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (megamenu_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (megamenu_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (megamenu_type == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (megamenu_type == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                       <option value="8"{% if (megamenu_type == '8') %}{{ ' selected="selected"' }}{% endif %}>Type 8</option>
+                       <option value="9"{% if (megamenu_type == '9') %}{{ ' selected="selected"' }}{% endif %}>Type 9</option>
+                       <option value="10"{% if (megamenu_type == '10') %}{{ ' selected="selected"' }}{% endif %}>Type 10</option>
+                       <option value="11"{% if (megamenu_type == '11') %}{{ ' selected="selected"' }}{% endif %}>Type 11</option>
+                       <option value="12"{% if (megamenu_type == '12') %}{{ ' selected="selected"' }}{% endif %}>Type 12</option>
+                       <option value="13"{% if (megamenu_type == '13') %}{{ ' selected="selected"' }}{% endif %}>Type 13</option>
+                       <option value="14"{% if (megamenu_type == '14') %}{{ ' selected="selected"' }}{% endif %}>Type 14</option>
+                       <option value="15"{% if (megamenu_type == '15') %}{{ ' selected="selected"' }}{% endif %}>Type 15</option>
+                       <option value="16"{% if (megamenu_type == '16') %}{{ ' selected="selected"' }}{% endif %}>Type 16</option>
+                       <option value="17"{% if (megamenu_type == '17') %}{{ ' selected="selected"' }}{% endif %}>Type 17</option>
+                       <option value="18"{% if (megamenu_type == '18') %}{{ ' selected="selected"' }}{% endif %}>Type 18</option>
+                       <option value="19"{% if (megamenu_type == '19') %}{{ ' selected="selected"' }}{% endif %}>Type 19</option>
+                       <option value="20"{% if (megamenu_type == '20') %}{{ ' selected="selected"' }}{% endif %}>Type 20</option>
+                       <option value="21"{% if (megamenu_type == '21') %}{{ ' selected="selected"' }}{% endif %}>Type 21</option>
+                       <option value="22"{% if (megamenu_type == '22') %}{{ ' selected="selected"' }}{% endif %}>Type 22</option>
+                       <option value="23"{% if (megamenu_type == '23') %}{{ ' selected="selected"' }}{% endif %}>Type 23</option>
+                       <option value="24"{% if (megamenu_type == '24') %}{{ ' selected="selected"' }}{% endif %}>Type 24</option>
+                       <option value="25"{% if (megamenu_type == '25') %}{{ ' selected="selected"' }}{% endif %}>Type 25</option>
+                       <option value="26"{% if (megamenu_type == '26') %}{{ ' selected="selected"' }}{% endif %}>Type 26</option>
+                       <option value="27"{% if (megamenu_type == '27') %}{{ ' selected="selected"' }}{% endif %}>Type 27</option>
+                       <option value="28"{% if (megamenu_type == '28') %}{{ ' selected="selected"' }}{% endif %}>Type 28</option>
+                       <option value="29"{% if (megamenu_type == '29') %}{{ ' selected="selected"' }}{% endif %}>Type 29</option>
+                       <option value="30"{% if (megamenu_type == '30') %}{{ ' selected="selected"' }}{% endif %}>Type 30</option>
+                       <option value="31"{% if (megamenu_type == '31') %}{{ ' selected="selected"' }}{% endif %}>Type 31</option>
+                       <option value="32"{% if (megamenu_type == '32') %}{{ ' selected="selected"' }}{% endif %}>Type 32</option>
+                       <option value="33"{% if (megamenu_type == '33') %}{{ ' selected="selected"' }}{% endif %}>Type 33</option>
+                       <option value="34"{% if (megamenu_type == '34') %}{{ ' selected="selected"' }}{% endif %}>Type 34</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+                 <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Dropdown menu type</p>
+                   <select name="dropdown_menu_type">
+                       <option value="0"{% if (dropdown_menu_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (dropdown_menu_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (dropdown_menu_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (dropdown_menu_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (dropdown_menu_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Buttons prev/next in slider</p>
+                   <select name="buttons_prev_next_in_slider">
+                       <option value="0"{% if (buttons_prev_next_in_slider == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (buttons_prev_next_in_slider == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="section accordion">
+            <div class="section-title">
+                <h4>Category<br> page</h4>
+                <div class="expander"></div>
+            </div>
+            <div class="section-content">
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Breadcrumb</p>
+                   <select name="breadcrumb_style">
+                       <option value="0"{% if (breadcrumb_style == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="1"{% if (breadcrumb_style == '1') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="2"{% if (breadcrumb_style == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="3"{% if (breadcrumb_style == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="4"{% if (breadcrumb_style == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="5"{% if (breadcrumb_style == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="6"{% if (breadcrumb_style == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                       <option value="7"{% if (breadcrumb_style == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 8</option>
+                       <option value="8"{% if (breadcrumb_style == '8') %}{{ ' selected="selected"' }}{% endif %}>Type 9</option>
+                       <option value="9"{% if (breadcrumb_style == '9') %}{{ ' selected="selected"' }}{% endif %}>Type 10</option>
+                       <option value="10"{% if (breadcrumb_style == '10') %}{{ ' selected="selected"' }}{% endif %}>Type 11</option>
+                       <option value="11"{% if (breadcrumb_style == '11') %}{{ ' selected="selected"' }}{% endif %}>Type 12</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Product grid</p>
+                   <select name="product_grid_type">
+                       <option value="0"{% if (product_grid_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (product_grid_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (product_grid_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (product_grid_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (product_grid_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (product_grid_type == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (product_grid_type == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                       <option value="8"{% if (product_grid_type == '8') %}{{ ' selected="selected"' }}{% endif %}>Type 8</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Product list</p>
+                   <select name="product_list_type">
+                       <option value="0"{% if (product_list_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (product_list_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (product_list_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (product_list_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section accordion">
+            <div class="section-title">
+                <h4>Product<br> page</h4>
+                <div class="expander"></div>
+            </div>
+            <div class="section-content">
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Product Page</p>
+                   <select name="product_page_type">
+                       <option value="0"{% if (product_page_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (product_page_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (product_page_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+                <!-- Input -->
+               <div class="input">
+                  <p style="width:270px">Products buttons</p>
+                  <select name="products_buttons_action">
+                      <option value="0"{% if (products_buttons_action == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                      <option value="2"{% if (products_buttons_action == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                      <option value="3"{% if (products_buttons_action == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                      <option value="4"{% if (products_buttons_action == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                  </select>
+                  <div class="clear"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section accordion">
+            <div class="section-title">
+                <h4>Footer<br> section</h4>
+                <div class="expander"></div>
+            </div>
+            <div class="section-content">
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Footer type</p>
+                   <select name="footer_type">
+                       <option value="0"{% if (footer_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (footer_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (footer_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (footer_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (footer_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (footer_type == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (footer_type == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                       <option value="8"{% if (footer_type == '8') %}{{ ' selected="selected"' }}{% endif %}>Type 8</option>
+                       <option value="9"{% if (footer_type == '9') %}{{ ' selected="selected"' }}{% endif %}>Type 9</option>
+                       <option value="10"{% if (footer_type == '10') %}{{ ' selected="selected"' }}{% endif %}>Type 10</option>
+                       <option value="11"{% if (footer_type == '11') %}{{ ' selected="selected"' }}{% endif %}>Type 11</option>
+                       <option value="12"{% if (footer_type == '12') %}{{ ' selected="selected"' }}{% endif %}>Type 12</option>
+                       <option value="13"{% if (footer_type == '13') %}{{ ' selected="selected"' }}{% endif %}>Type 13</option>
+                       <option value="14"{% if (footer_type == '14') %}{{ ' selected="selected"' }}{% endif %}>Type 14</option>
+                       <option value="15"{% if (footer_type == '15') %}{{ ' selected="selected"' }}{% endif %}>Type 15</option>
+                       <option value="16"{% if (footer_type == '16') %}{{ ' selected="selected"' }}{% endif %}>Type 16</option>
+                       <option value="17"{% if (footer_type == '17') %}{{ ' selected="selected"' }}{% endif %}>Type 17</option>
+                       <option value="18"{% if (footer_type == '18') %}{{ ' selected="selected"' }}{% endif %}>Type 18</option>
+                       <option value="19"{% if (footer_type == '19') %}{{ ' selected="selected"' }}{% endif %}>Type 19</option>
+                       <option value="20"{% if (footer_type == '20') %}{{ ' selected="selected"' }}{% endif %}>Type 20</option>
+                       <option value="21"{% if (footer_type == '21') %}{{ ' selected="selected"' }}{% endif %}>Type 21</option>
+                       <option value="22"{% if (footer_type == '22') %}{{ ' selected="selected"' }}{% endif %}>Type 22</option>
+                       <option value="23"{% if (footer_type == '23') %}{{ ' selected="selected"' }}{% endif %}>Type 23</option>
+                       <option value="24"{% if (footer_type == '24') %}{{ ' selected="selected"' }}{% endif %}>Type 24</option>
+                       <option value="25"{% if (footer_type == '25') %}{{ ' selected="selected"' }}{% endif %}>Type 25</option>
+                       <option value="26"{% if (footer_type == '26') %}{{ ' selected="selected"' }}{% endif %}>Type 26</option>
+                       <option value="27"{% if (footer_type == '27') %}{{ ' selected="selected"' }}{% endif %}>Type 27</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section accordion">
+            <div class="section-title">
+                <h4 style="padding: 7px 0 2px 0">Other</h4>
+                <div class="expander"></div>
+            </div>
+            <div class="section-content">
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Border width in full-width</p>
+                   <select name="border_width">
+                       <option value="0"{% if (border_width == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="1"{% if (border_width == '1') %}{{ ' selected="selected"' }}{% endif %}>100%</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+                <!-- Input -->
+                <div class="input">
+                    <p style="width:270px">Countdown special</p>
+                    <select name="countdown_special">
+                        <option value="0"{% if (countdown_special == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                        <option value="2"{% if (countdown_special == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                        <option value="3"{% if (countdown_special == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                        <option value="4"{% if (countdown_special == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                        <option value="5"{% if (countdown_special == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                        <option value="6"{% if (countdown_special == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                        <option value="7"{% if (countdown_special == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                        <option value="8"{% if (countdown_special == '8') %}{{ ' selected="selected"' }}{% endif %}>Type 8</option>
+                        <option value="9"{% if (countdown_special == '9') %}{{ ' selected="selected"' }}{% endif %}>Type 9</option>
+                    </select>
+                    <div class="clear"></div>
+                 </div>
+
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Button type</p>
+                   <select name="button_type">
+                       <option value="0"{% if (button_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (button_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (button_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (button_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (button_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (button_type == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (button_type == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                       <option value="8"{% if (button_type == '8') %}{{ ' selected="selected"' }}{% endif %}>Type 8</option>
+                       <option value="9"{% if (button_type == '9') %}{{ ' selected="selected"' }}{% endif %}>Type 9</option>
+                       <option value="10"{% if (button_type == '10') %}{{ ' selected="selected"' }}{% endif %}>Type 10</option>
+                       <option value="11"{% if (button_type == '11') %}{{ ' selected="selected"' }}{% endif %}>Type 11</option>
+                       <option value="12"{% if (button_type == '12') %}{{ ' selected="selected"' }}{% endif %}>Type 12</option>
+                       <option value="13"{% if (button_type == '13') %}{{ ' selected="selected"' }}{% endif %}>Type 13</option>
+                       <option value="14"{% if (button_type == '14') %}{{ ' selected="selected"' }}{% endif %}>Type 14</option>
+                       <option value="15"{% if (button_type == '15') %}{{ ' selected="selected"' }}{% endif %}>Type 15</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Sale, new label type</p>
+                   <select name="sale_new_type">
+                       <option value="0"{% if (sale_new_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (sale_new_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (sale_new_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (sale_new_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (sale_new_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (sale_new_type == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (sale_new_type == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                       <option value="8"{% if (sale_new_type == '8') %}{{ ' selected="selected"' }}{% endif %}>Type 8</option>
+                       <option value="9"{% if (sale_new_type == '9') %}{{ ' selected="selected"' }}{% endif %}>Type 9</option>
+                       <option value="10"{% if (sale_new_type == '10') %}{{ ' selected="selected"' }}{% endif %}>Type 10</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Box type</p>
+                   <select name="box_type">
+                       <option value="0"{% if (box_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (box_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (box_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (box_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (box_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (box_type == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (box_type == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                       <option value="8"{% if (box_type == '8') %}{{ ' selected="selected"' }}{% endif %}>Type 8</option>
+                       <option value="9"{% if (box_type == '9') %}{{ ' selected="selected"' }}{% endif %}>Type 9</option>
+                       <option value="10"{% if (box_type == '10') %}{{ ' selected="selected"' }}{% endif %}>Type 10</option>
+                       <option value="11"{% if (box_type == '11') %}{{ ' selected="selected"' }}{% endif %}>Type 11</option>
+                       <option value="12"{% if (box_type == '12') %}{{ ' selected="selected"' }}{% endif %}>Type 12</option>
+                       <option value="13"{% if (box_type == '13') %}{{ ' selected="selected"' }}{% endif %}>Type 13</option>
+                       <option value="14"{% if (box_type == '14') %}{{ ' selected="selected"' }}{% endif %}>Type 14</option>
+                       <option value="15"{% if (box_type == '15') %}{{ ' selected="selected"' }}{% endif %}>Type 15</option>
+                       <option value="16"{% if (box_type == '16') %}{{ ' selected="selected"' }}{% endif %}>Type 16</option>
+                       <option value="17"{% if (box_type == '17') %}{{ ' selected="selected"' }}{% endif %}>Type 17</option>
+                       <option value="18"{% if (box_type == '18') %}{{ ' selected="selected"' }}{% endif %}>Type 18</option>
+                       <option value="19"{% if (box_type == '19') %}{{ ' selected="selected"' }}{% endif %}>Type 19</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+
+                <!-- Input -->
+                <div class="input">
+                   <p style="width:270px">Inputs type</p>
+                   <select name="inputs_type">
+                       <option value="0"{% if (inputs_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Default</option>
+                       <option value="2"{% if (inputs_type == '2') %}{{ ' selected="selected"' }}{% endif %}>Type 2</option>
+                       <option value="3"{% if (inputs_type == '3') %}{{ ' selected="selected"' }}{% endif %}>Type 3</option>
+                       <option value="4"{% if (inputs_type == '4') %}{{ ' selected="selected"' }}{% endif %}>Type 4</option>
+                       <option value="5"{% if (inputs_type == '5') %}{{ ' selected="selected"' }}{% endif %}>Type 5</option>
+                       <option value="6"{% if (inputs_type == '6') %}{{ ' selected="selected"' }}{% endif %}>Type 6</option>
+                       <option value="7"{% if (inputs_type == '7') %}{{ ' selected="selected"' }}{% endif %}>Type 7</option>
+                   </select>
+                   <div class="clear"></div>
+                </div>
+
+            </div>
+        </div>
+        <input type="hidden" name="store_id" value="{{ store_id }}"/>
+        <!-- Buttons -->
+        
+        <div class="buttons"><input type="submit" name="button-save-live-editor" class="button-save" value=""></div>
+        
+        <!-- End Buttons -->
+    </form>
+        <a class="quit-live-editor" href="{{ theme_options_link }}">Back to <b>wokiee theme options</b></a>
+        
+    </div>
+    <div class="live-content">
+        <iframe id="editor" src="{{ front_url }}"></iframe>
+    </div>
+</div>
+</div>
+<script>
+    
+    var EDITOR = {
+        body: {},
+        init: function(){
+            this.body = $("#editor").contents().find("body");
+        }
+        
+    };
+    
+    $(window).load(function(){
+        EDITOR.init();
+    })
+    
+    $(function(){
+    
+        $('.section.accordion .section-title').click(function(){
+            if(!$(this).parent().hasClass('opened')){
+                $(this).parent().addClass('opened')
+                $(this).next('.section-content').hide().stop().slideDown();
+            }else{
+                $(this).parent().removeClass('opened')
+                $(this).next('.section-content').show().stop().slideUp();
+            }
+        })
+        
+        
+        
+        $('select').change(function(){
+            EDITOR.init();
+            var action = $(this).attr('name');
+            var value = $(this).val();
+            switch(action){
+                
+                case 'header_margin_top':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)header-margin-top-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('header-margin-top-'+value);
+                    break;
+                
+                case 'top_bar_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)top-bar-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('top-bar-type-'+value);
+                    break;
+                
+                case 'my_account_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)my-account-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('my-account-type-'+value);
+                    break;
+                
+                case 'cart_block_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)cart-block-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('cart-block-type-'+value);
+                    break;
+                
+                case 'category_box_style':
+                    EDITOR.body.find('.box.box-with-categories').removeClass (function (index, css) {
+                        return (css.match (/(^|\s)category-box-type-\S+/g) || []).join(' ');
+                    });
+                    if(value == 1){
+                        EDITOR.body.find('.box.box-with-categories').addClass('category-box-type-2');
+                    }
+                    if(value == 2){
+                        EDITOR.body.find('.box.box-with-categories').addClass('category-box-type-3').addClass('category-box-type-2');
+                    }
+                    if(value == 3){
+                        EDITOR.body.find('.box.box-with-categories').addClass('category-box-type-4').addClass('category-box-type-2');
+                    }
+                    break;
+                    
+                                    
+                case 'megamenu_label_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)megamenu-label-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('megamenu-label-type-'+value);
+                    break;
+                                    
+                case 'search_type_in_header':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)search-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('search-type-'+value);
+                    break;
+                                    
+                case 'megamenu_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)megamenu-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('megamenu-type-'+value);
+                    break;
+                                    
+                case 'dropdown_menu_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)dropdown-menu-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('dropdown-menu-type-'+value);
+                    break;
+                                    
+                case 'buttons_prev_next_in_slider':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)buttons-prev-next-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('buttons-prev-next-type-'+value);
+                    break;
+                                    
+                case 'breadcrumb_style':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)breadcrumb-style-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('breadcrumb-style-'+value);
+                    break;
+                    
+                case 'product_grid_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)product-grid-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('product-grid-type-'+value);
+                    break;
+                    
+                case 'product_list_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)product-list-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('product-list-type-'+value);
+                    break;
+                    
+                case 'product_page_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)product-page-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('product-page-type-'+value);
+                    break;
+                    
+                case 'products_buttons_action':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)products-buttons-action-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('products-buttons-action-type-'+value);
+                    break;
+                    
+                case 'footer_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)footer-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('footer-type-'+value);
+                    break;
+                    
+                case 'border_width':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)border-width-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('border-width-'+value);
+                    break;
+                    
+                case 'countdown_special':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)countdown-special-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('countdown-special-type-'+value);
+                    break;
+                    
+                case 'button_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)button-body-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('button-body-type-'+value);
+                    break;
+                    
+                case 'sale_new_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)sale-new-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('sale-new-type-'+value);
+                    break;
+                    
+                case 'box_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)box-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('box-type-'+value);
+                    break;
+                    
+                case 'inputs_type':
+                    EDITOR.body.removeClass (function (index, css) {
+                        return (css.match (/(^|\s)inputs-type-\S+/g) || []).join(' ');
+                    });
+                    EDITOR.body.addClass('inputs-type-'+value);
+                    break;
+            }
+        })
+    });
+    
+</script>
+{{ footer }}

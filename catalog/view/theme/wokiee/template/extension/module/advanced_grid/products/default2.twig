@@ -1,0 +1,44 @@
+{% set theme_options = registry.get('theme_options') %}
+<div class="divider visible-xs"></div>
+<div class="t">
+  <h6 class="tt-title-sub">{{ module['content']['title'] }}</h6>
+  <div class="tt-layout-vertical-listing">
+    {% for product in module['content']['products'] %} 
+      <div class="tt-item">
+        <div class="tt-layout-vertical">
+          <div class="tt-img">
+            <a href="{{ product['href'] }}">
+              {% if (product['thumb']) %} 
+                <span class="tt-img-default"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="{{ product['thumb'] }}" alt="{{ product['name'] }}"></span>
+                {% if (theme_options.get( 'product_image_effect' ) == '1') %}
+                  {% set nthumb = product['thumb']|replace({' ': "%20"}) %}
+                  {% set adres = constant('HTTP_SERVER') %}
+                  {% set nthumb = nthumb|replace({adres: ""}) %}
+                  {% set image_size = theme_options.getimagesize(nthumb) %}
+                  {% set image_swap = theme_options.productImageSwap(product['product_id'], image_size[0], image_size[1]) %}
+                  {% if (image_swap != '') %}<span class="tt-img-roll-over"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="{{ image_swap }}" alt="{{ product['name'] }}"></span>{% endif %}
+                {% endif %}
+              {% else %} 
+                <span class="tt-img-default"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="image/no_image.jpg" alt=""></span>
+              {% endif %} 
+            </a>
+          </div>
+          <div class="tt-description">
+            <ul class="tt-add-info">
+              {% set product_detail = theme_options.getDataProduct( product['product_id'] ) %} 
+              <li><a href="{{ product_detail['category_url'] }}">{{ product_detail['category_name'] }}</a></li>
+            </ul>
+            <h6 class="tt-title"><a href="{{ product['href'] }}">{{ product['name'] }}</a></h6>
+            <div class="tt-price">
+             {% if (not product['special']) %}
+              {{ product['price'] }}
+             {% else %} 
+              {{ '<span class="sale-price">' ~ product['special'] ~ '</span> <span class="old-price">' ~ product['price'] ~ '</span>' }}
+             {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

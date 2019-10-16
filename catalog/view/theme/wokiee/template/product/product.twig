@@ -1,0 +1,942 @@
+{{ header }} 
+{% set theme_options = registry.get('theme_options') %}
+{% set config = registry.get('config') %}
+{% set product_page = constant('true') %}
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+
+<div class="container-indent" id="product">
+	<!-- mobile product slider  -->
+	<div class="tt-mobile-product-layout visible-xs">
+		<div class="tt-mobile-product-slider arrow-location-center slick-animated-show-js">
+	      	{% if (thumb) %} 
+	      		<div><img src='{{ popup }}' alt=""></div>
+		  	{% else %} 
+		  	 	<div><img src='image/no_image.jpg' alt=""></div>
+		  	{% endif %} 
+		  	{% for image in images %} 
+				<div><img src="{{ image['popup'] }}" alt=""></div>
+			{% endfor %}
+		</div>
+	</div>
+	<!-- /mobile product slider  -->
+	<div class="container">
+		<div class="row airSticky_stop-block">
+			{% set product_custom_block = theme_options.getModules('product_custom_block') %} 
+			<div class="col-lg-{% if (theme_options.get( 'custom_block', 'product_page', config.get( 'config_language_id' ), 'status' ) == 1 or product_custom_block|length > 0) %}9{% else %}12{% endif %}">
+				<div class="row {% if (theme_options.get( 'custom_block', 'product_page', config.get( 'config_language_id' ), 'status' ) == 1 or product_custom_block|length > 0) %}custom-single-page{% endif %}">
+					<div class="{% if theme_options.get( 'product_type' ) == 2 %}col-md-6{% else %}col-md-12{% endif %} col-lg-6 hidden-xs">
+						{% set product_image_top = theme_options.getModules('product_image_top') %}
+						{% if ( product_image_top|length > 0 ) %} 
+							{% for module in product_image_top %} 
+								{{ module }}
+							{% endfor %}
+						{% endif %} 
+						{% if theme_options.get( 'product_type' ) == 1 %}
+							<div class="airSticky deactivate-sticky">
+								<div class="tt-product-single-img">
+									<div>
+										<button class="tt-btn-zomm tt-top-right"><i class="icon-f-86"></i></button>
+								      	{% if (thumb) %} 
+								      		<img class="zoom-product" src='{{ popup }}' data-zoom-image="{{ popup }}" alt="">
+									  	{% else %} 
+									  	 	<img class="zoom-product" src='image/no_image.jpg' data-zoom-image="image/no_image.jpg" alt="">
+									  	{% endif %} 
+									</div>
+								</div>
+								<div class="product-images-carousel">
+									<ul id="smallGallery" class="arrow-location-02  slick-animated-show-js">
+										{% if (thumb) %} 
+											<li><a class="zoomGalleryActive" href="#" data-image="{{ popup }}" data-zoom-image="{{ popup }}"><img src="{{ popup }}" alt=""></a></li>
+										{% else %}
+											<li><a class="zoomGalleryActive" href="#" data-image="image/no_image.jpg" data-zoom-image="image/no_image.jpg"><img src="image/no_image.jpg" alt=""></a></li>
+										{% endif %}
+										{% for image in images %} 
+											<li><a href="#" data-image="{{ image['popup'] }}" data-zoom-image="{{ image['popup'] }}"><img src="{{ image['popup'] }}" alt=""></a></li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						{% elseif theme_options.get( 'product_type' ) == 2 %}
+							<div class="product-images-static hidden-xs">
+								<ul  data-scrollzoom="false">
+									{% if (thumb) %} 
+										<li><img class="zoom-product" src="{{ popup }}" alt=""></li>
+									{% else %}
+										<li><img class="zoom-product" src="image/no_image.jpg" alt=""></li>
+									{% endif %}
+									{% for image in images %} 
+										<li><img class="zoom-product" src="{{ image['popup'] }}" alt=""></li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% elseif theme_options.get( 'product_type' ) == 3 %}
+							<div class="airSticky deactivate-sticky">
+								<div class="product-images-col" data-scrollzoom="false">
+									{% if (thumb) %} 
+										<div class="item"><img class="zoom-product" src="{{ popup }}" alt=""></div>
+									{% else %}
+										<div class="item"><img class="zoom-product" src="image/no_image.jpg" alt=""></div>
+									{% endif %}
+									{% for image in images %} 
+										<div class="item"><img class="zoom-product" src="{{ image['popup'] }}" alt=""></div>
+									{% endfor %}
+								</div>
+							</div>
+						{% else %}
+							<div class="airSticky deactivate-sticky">
+								<div class="tt-product-vertical-layout clearfix">
+									<div class="tt-product-single-img">
+										<div>
+											<button class="tt-btn-zomm tt-top-right"><i class="icon-f-86"></i></button>
+									      	{% if (thumb) %} 
+									      		<img class="zoom-product" src='{{ popup }}' data-zoom-image="{{ popup }}" alt="">
+										  	{% else %} 
+										  	 	<img class="zoom-product" src='image/no_image.jpg' data-zoom-image="image/no_image.jpg" alt="">
+										  	{% endif %} 
+										</div>
+									</div>
+									<div class="tt-product-single-carousel-vertical">
+										<ul id="smallGallery" class="tt-slick-button-vertical  slick-animated-show-js">
+											{% if (thumb) %} 
+												<li><a class="zoomGalleryActive" href="#" data-image="{{ popup }}" data-zoom-image="{{ popup }}"><img src="{{ popup }}" alt=""></a></li>
+											{% else %}
+												<li><a class="zoomGalleryActive" href="#" data-image="image/no_image.jpg" data-zoom-image="image/no_image.jpg"><img src="image/no_image.jpg" alt=""></a></li>
+											{% endif %}
+											{% for image in images %} 
+												<li><a href="#" data-image="{{ image['popup'] }}" data-zoom-image="{{ image['popup'] }}"><img src="{{ image['popup'] }}" alt=""></a></li>
+											{% endfor %}
+										</ul>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+						{% set product_image_bottom = theme_options.getModules('product_image_bottom') %}
+						{% if ( product_image_bottom|length > 0 ) %} 
+							{% for module in product_image_bottom %} 
+								{{ module }}
+							{% endfor %}
+						{% endif %} 
+					</div>
+					<div class="{% if theme_options.get( 'product_type' ) == 2 %}col-md-6{% else %}col-md-12{% endif %} col-lg-6">
+						{% if theme_options.get( 'product_type' ) == 2 %}
+							<div class="airSticky">
+						{% endif %}
+						<div class="tt-product-single-info">
+							{% set product_options_top = theme_options.getModules('product_options_top') %}
+							{% if ( product_options_top|length > 0 ) %} 
+								{% for module in product_options_top %} 
+									{{ module }}
+								{% endfor %}
+							{% endif %} 
+					      	 {% if (special and theme_options.get( 'display_text_sale' ) != '0') %} 
+					      	 	{% set text_sale = 'Sale' %}
+					 	 		{% if (theme_options.get( 'sale_text', config.get( 'config_language_id' ) ) != '') %}
+					 	 			{% set text_sale = theme_options.get( 'sale_text', config.get( 'config_language_id' ) ) %}
+					 	 		{% endif %} 
+					      	 	{% if (theme_options.get( 'type_sale' ) == '1') %} 
+						      	 	{% set product_detail = theme_options.getDataProduct( product_id ) %}
+						 	 		{% set roznica_ceny = product_detail['price']-product_detail['special'] %}
+						 	 		{% set procent = roznica_ceny*100/product_detail['price'] %} 
+					      	 		<div class="tt-wrapper"><div class="tt-label"><div class="tt-label tt-label-sale">-{{ procent|round }}%</div></div></div>
+					      	 	{% else %} 
+					      	 		<div class="tt-wrapper"><div class="tt-label"><div class="tt-label tt-label-sale">{{ text_sale }}</div></div></div>
+					      	 	{% endif %} 
+					      	 {% elseif (theme_options.get( 'display_text_new' ) != '0' and theme_options.isLatestProduct( product_id )) %} 
+							     	<div class="tt-wrapper"><div class="tt-label"><div class="tt-label-new">{% if (theme_options.get( 'new_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'new_text', config.get( 'config_language_id' ) ) }} {% else %} {{ 'New' }} {% endif %}</div></div></div>
+					      	 {% endif %} 
+							<div class="tt-add-info">
+								<ul>
+									<li><span>{{ text_model }}</span> {{ model }}</li>
+									<li><span>{{ text_stock }}</span> {{ stock }}</li>
+								</ul>
+							</div>
+							<h1 class="tt-title">{{ heading_title }}</h1>
+							{% if (price) %} 
+								<div class="tt-price">
+							        {% if (not special) %} 
+							        <span id="price-old">{{ price }}</span>
+							        {% else %} 
+							        <span class="new-price"><span id="price-special">{{ special }}</span></span> <span class="old-price" id="price-old">{{ price }}</span>
+							        {% endif %} 
+								</div>
+						        {% if (tax) %} 
+						        <span class="price-tax">{{ text_tax }} <span id="price-tax">{{ tax }}</span></span><br />
+						        {% endif %} 
+						        {% if (points) %} 
+						        <span class="reward">{{ text_points }} {{ points }}</span><br />
+						        {% endif %} 
+						        {% if (discounts) %} 
+						        <div class="discount">
+						          {% for discount in discounts %} 
+						          {{ discount['quantity'] }}{{ text_discount }}{{ discount['price'] }}<br />
+						          {% endfor %} 
+						        </div>
+						        {% endif %} 
+							{% endif %}
+					        {% if (review_status) %} 
+					          <div class="tt-review">
+					            <div class="tt-rating">
+					              <i class="icon-star{% if not (rating >= 1) %}-empty{% endif %}"></i>
+					              <i class="icon-star{% if not (rating >= 2) %}-empty{% endif %}"></i>
+					              <i class="icon-star{% if not (rating >= 3) %}-empty{% endif %}"></i>
+					              <i class="icon-star{% if not (rating >= 4) %}-empty{% endif %}"></i>
+					              <i class="icon-star{% if not (rating >= 5) %}-empty{% endif %}"></i>
+					            </div>
+					            <a href="javascript:$('#review-tab .tt-collapse-title').click();">({{ reviews }})</a>
+					          </div>
+					        {% endif %}
+							<div class="tt-wrapper">
+								{{ description|striptags[:200] ~ '...' }}
+							</div>
+							{% if (theme_options.get( 'display_specials_countdown' ) == '1' and special) %}
+								{% set product_detail = theme_options.getDataProduct( product_id ) %}
+								{% set date_end = product_detail['date_end'] %}
+								{% if (date_end != '0000-00-00' and date_end) %} 
+									<div class="tt-wrapper">
+										<div class="tt-countdown_box_02">
+											<div class="tt-countdown_inner">
+												<div class="tt-countdown"
+													data-date="{{ date_end }}"
+													data-year="{% if (theme_options.get( 'yrs_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'yrs_text', config.get( 'config_language_id' ) ) }}{% else %}Yrs{% endif %}"
+													data-month="{% if (theme_options.get( 'mths_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'mths_text', config.get( 'config_language_id' ) ) }}{% else %}Mths{% endif %}"
+													data-week="{% if (theme_options.get( 'wk_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'wk_text', config.get( 'config_language_id' ) ) }}{% else %}Wk{% endif %}"
+													data-day="{% if (theme_options.get( 'day_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'day_text', config.get( 'config_language_id' ) ) }}{% else %}Day{% endif %}"
+													data-hour="{% if (theme_options.get( 'hrs_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'hrs_text', config.get( 'config_language_id' ) ) }}{% else %}Hrs{% endif %}"
+													data-minute="{% if (theme_options.get( 'min_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'min_text', config.get( 'config_language_id' ) ) }}{% else %}Min{% endif %}"
+													data-second="{% if (theme_options.get( 'sec_text', config.get( 'config_language_id' ) ) != '') %}{{ theme_options.get( 'sec_text', config.get( 'config_language_id' ) ) }}{% else %}Sec{% endif %}"></div>
+											</div>
+										</div>
+									</div>
+								{% endif %} 
+							{% endif %} 
+							<div class="tt-swatches-container">
+						        {% if (options) %} 
+						        <div class="options">
+						          {% for option in options %} 
+						          {% if (option['type'] == 'select') %} 
+						          <div class="tt-wrapper form-default">
+						            <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+						            <div class="form-group{{ option['required'] ? ' required' : '' }}">
+							            <select name="option[{{ option['product_option_id'] }}]" id="input-option{{ option['product_option_id'] }}" class="form-control">
+							              <option value="">{{ text_select }}</option>
+							              {% for option_value in option['product_option_value'] %} 
+							              <option value="{{ option_value['product_option_value_id'] }}">{{ option_value['name'] }} 
+							              {% if (option_value['price']) %} 
+							              ({{ option_value['price_prefix'] }}{{ option_value['price'] }})
+							              {% endif %} 
+							              </option>
+							              {% endfor %} 
+							            </select>
+							        </div>
+						          </div>
+						          {% endif %} 
+						          {% if (option['type'] == 'radio') %} 
+						          	{% if (theme_options.get( 'product_page_radio_style' ) == 1) %}
+							          <div class="tt-wrapper" id="input-option{{ option['product_option_id'] }}">
+							            <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+							            <div class="form-group{{ option['required'] ? ' required' : '' }}">
+											<ul class="tt-options-swatch options-large">
+												{% for option_value in option['product_option_value'] %} 
+													{% if (option_value['image']) %}  
+													<li><a class="options-color" href="javascript:;" {% if (option_value['price']) %}data-tooltip="{{ option_value['price_prefix'] }}{{ option_value['price'] }}" data-tposition="top"{% endif %}>
+														<span class="swatch-img">
+															<input type="radio" class="d-none" name="option[{{ option['product_option_id'] }}]" value="{{ option_value['product_option_value_id'] }}" />
+															<img src="{{ option_value['image'] }}" alt="" class="loading" data-was-processed="true">
+														</span>
+													</a></li>	
+													{% else %}
+														<li><a href="javascript:;" {% if (option_value['price']) %}data-tooltip="{{ option_value['price_prefix'] }}{{ option_value['price'] }}" data-tposition="top"{% endif %}>
+															<input type="radio" class="d-none" name="option[{{ option['product_option_id'] }}]" value="{{ option_value['product_option_value_id'] }}" />
+															{{ option_value['name'] }}
+														</a></li>
+													{% endif %}
+												{% endfor %}
+												<script type="text/javascript">
+													$(document).ready(function () {
+														$("#input-option{{ option['product_option_id'] }} .tt-options-swatch li a").click(function () {
+															$(this).find('input').prop( "checked", true ).change();
+															$("#input-option{{ option['product_option_id'] }} .tt-options-swatch li").removeClass("active");
+															$(this).parent().addClass("active");
+														});
+													});	
+												</script>
+											</ul>
+								        </div>
+								      </div>
+							        {% else %}
+							          <div class="tt-wrapper">
+							            <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+							            <div class="form-group{{ option['required'] ? ' required' : '' }}">
+								            <div id="input-option{{ option['product_option_id'] }}">
+								              {% for option_value in option['product_option_value'] %} 
+								              <div class="radio2">
+								                <label>
+								                  <input type="radio" name="option[{{ option['product_option_id'] }}]" value="{{ option_value['product_option_value_id'] }}" />&nbsp;
+								                  <span>
+								                  	  {{ option_value['name'] }}
+									                  {% if (option_value['image']) %} 
+									                  <img src="{{ option_value['image'] }}" alt="{{ option_value['name'] ~ option_value['price'] ? ' ' ~ option_value['price_prefix'] ~ option_value['price'] : '' }}" class="img-thumbnail" /> 
+									                  {% endif %} 
+									                  {% if (option_value['price']) %} 
+									                  ({{ option_value['price_prefix'] }}{{ option_value['price'] }})
+									                  {% endif %}
+									              </span>
+								                </label>
+								              </div>
+								              {% endfor %} 
+								            </div>
+								        </div>
+							          </div>
+							        {% endif %}
+						          {% endif %} 
+						          {% if (option['type'] == 'checkbox') %} 
+						          	{% if (theme_options.get( 'product_page_checkbox_style' ) == 1) %}
+							          <div class="tt-wrapper" id="input-option{{ option['product_option_id'] }}">
+							            <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+							            <div class="form-group{{ option['required'] ? ' required' : '' }}">
+											<ul class="tt-options-swatch options-large">
+												{% for option_value in option['product_option_value'] %}
+													{% if (option_value['image']) %}  
+													<li><a class="options-color" href="javascript:;" {% if (option_value['price']) %}data-tooltip="{{ option_value['price_prefix'] }}{{ option_value['price'] }}" data-tposition="top"{% endif %}>
+														<span class="swatch-img">
+															<input type="checkbox" class="d-none" name="option[{{ option['product_option_id'] }}][]" value="{{ option_value['product_option_value_id'] }}" />
+															<img src="{{ option_value['image'] }}" alt="" class="loading" data-was-processed="true">
+														</span>
+													</a></li>	
+													{% else %}
+														<li><a href="javascript:;" {% if (option_value['price']) %}data-tooltip="{{ option_value['price_prefix'] }}{{ option_value['price'] }}" data-tposition="top"{% endif %}>
+															<input type="checkbox" class="d-none" name="option[{{ option['product_option_id'] }}][]" value="{{ option_value['product_option_value_id'] }}" />
+															{{ option_value['name'] }}
+														</a></li>
+													{% endif %}
+												{% endfor %}
+												<script type="text/javascript">
+													$(document).ready(function () {
+														$("#input-option{{ option['product_option_id'] }} .tt-options-swatch li a").click(function () {
+															if($(this).find("input").is(":checked")) {
+																$(this).find('input').prop( "checked", false ).change();
+																$(this).parent().removeClass("active");
+															} else {
+																$(this).find('input').prop( "checked", true ).change();
+																$(this).parent().addClass("active");
+															}
+														});
+													});	
+												</script>
+											</ul>
+								        </div>
+								      </div>
+							        {% else %}
+							          <div class="tt-wrapper">
+							            <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+							            <div class="form-group{{ option['required'] ? ' required' : '' }}">
+								            <div id="input-option{{ option['product_option_id'] }}">
+								              {% for option_value in option['product_option_value'] %} 
+								              <div class="checkbox {% if (theme_options.get( 'product_page_checkbox_style' ) == 1) %} {{ 'radio-type-button2' }} {% endif %}">
+								                <label>
+								                  <input type="checkbox" name="option[{{ option['product_option_id'] }}][]" value="{{ option_value['product_option_value_id'] }}" />&nbsp;
+								                  <span>{{ option_value['name'] }} 
+									                {% if (option_value['image']) %} 
+								                    	<img src="{{ option_value['image'] }}" alt="{{ option_value['name'] ~ option_value['price'] ? ' ' ~ option_value['price_prefix'] ~ option_value['price'] : '' }}" class="img-thumbnail" /> 
+								                    {% endif %} 
+								                  	{% if (option_value['price']) %} 
+								                  		({{ option_value['price_prefix'] }}{{ option_value['price'] }})
+								                  	{% endif %}
+								                  </span>
+								                </label>
+								              </div>
+								              {% endfor %} 
+								            </div>
+								        </div>
+							          </div>
+							        {% endif %}
+						          {% endif %} 
+						          {% if (option['type'] == 'text') %} 
+							        <div class="tt-wrapper form-default">
+							            <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+							            <div class="form-group{{ option['required'] ? ' required' : '' }}">
+						            		<input type="text" name="option[{{ option['product_option_id'] }}]" value="{{ option['value'] }}" placeholder="{{ option['name'] }}" id="input-option{{ option['product_option_id'] }}" class="form-control" />
+						            	</div>
+						          	</div>
+						          {% endif %} 
+						          {% if (option['type'] == 'textarea') %} 
+							        <div class="tt-wrapper form-default">
+							            <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+							            <div class="form-group{{ option['required'] ? ' required' : '' }}">
+						            		<textarea name="option[{{ option['product_option_id'] }}]" rows="5" placeholder="{{ option['name'] }}" id="input-option{{ option['product_option_id'] }}" class="form-control">{{ option['value'] }}</textarea>
+						            	</div>
+						         	</div>
+						          {% endif %} 
+						          {% if (option['type'] == 'file') %} 
+							        <div class="tt-wrapper form-default">
+							            <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+							            <div class="form-group{{ option['required'] ? ' required' : '' }}">
+							            	<button type="button" id="button-upload{{ option['product_option_id'] }}" class="btn btn-default btn-block" style="margin-top: 7px"><i class="fa fa-upload"></i> {{ button_upload }}</button>
+							            	<input type="hidden" name="option[{{ option['product_option_id'] }}]" value="" id="input-option{{ option['product_option_id'] }}" />
+							            </div>
+							        </div>
+						          {% endif %} 
+						            {% if (option['type'] == 'date') %} 
+						            <div class="tt-wrapper form-default">
+						              <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+						              <div class="form-group{{ option['required'] ? ' required' : '' }}">
+							              <div class="input-group datetimepicker-date">
+							                <input type="text" name="option[{{ option['product_option_id'] }}]" value="{{ option['value'] }}" data-date-format="YYYY-MM-DD" id="input-option{{ option['product_option_id'] }}" class="form-control" />
+							                <span class="input-group-btn">
+							                	<button class="btn btn-default" type="button"><i class="far fa-calendar"></i></button>
+							                </span>
+							           	  </div>
+						               </div>
+						            </div>
+						            {% endif %} 
+						            {% if (option['type'] == 'datetime') %} 
+						            <div class="tt-wrapper form-default">
+						              <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+						              <div class="form-group{{ option['required'] ? ' required' : '' }}">
+							              <div class="input-group datetimepicker-datetime">
+							                <input type="text" name="option[{{ option['product_option_id'] }}]" value="{{ option['value'] }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option['product_option_id'] }}" class="form-control" />
+							                <span class="input-group-btn">
+							                <button type="button" class="btn btn-default"><i class="far fa-calendar"></i></button>
+							                </span>
+							              </div>
+							           </div>
+						            </div>
+						            {% endif %} 
+						            {% if (option['type'] == 'time') %} 
+						            <div class="tt-wrapper form-default">
+						              <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+						              <div class="form-group{{ option['required'] ? ' required' : '' }}">
+							              <div class="input-group datetimepicker-time">
+							                <input type="text" name="option[{{ option['product_option_id'] }}]" value="{{ option['value'] }}" data-date-format="HH:mm" id="input-option{{ option['product_option_id'] }}" class="form-control" />
+							                <span class="input-group-btn">
+							                <button type="button" class="btn btn-default"><i class="far fa-calendar"></i></button>
+							                </span></div>
+							            </div>
+							        </div>
+						            {% endif %} 
+						          {% endfor %} 
+						        </div>
+						        {% endif %} 
+						        
+						        {% if (recurrings) %} 
+						        <div class="options">
+						        	<div class="tt-wrapper form-default">
+						        		<div class="tt-title-options">{{ text_payment_recurring }}</div>
+							            <div class="form-group required">
+							              <select name="recurring_id" class="form-control">
+							                <option value="">{{ text_select }}</option>
+							                {% for recurring in recurrings %} 
+							                <option value="{{ recurring['recurring_id'] }}">{{ recurring['name'] }}</option>
+							                {% endfor %} 
+							              </select>
+							              <div class="help-block" id="recurring-description"></div>
+							            </div>
+							        </div>
+						        </div>
+		        				{% endif %} 
+		        			</div>
+		        			{% set product_options_center = theme_options.getModules('product_options_center') %}
+							{% if ( product_options_center|length > 0 ) %} 
+								{% for module in product_options_center %} 
+									{{ module }}
+								{% endfor %}
+							{% endif %}      
+
+							{% set product_question = theme_options.getModules('product_question') %}
+							{% if ( product_question|length > 0 ) %} 
+								{% for module in product_question %} 
+									{{ module }}
+								{% endfor %}
+							{% endif %} 
+
+							{% set product_enquiry = theme_options.getModules('product_enquiry') %}
+							{% if ( product_enquiry|length > 0 ) %} 
+								{% for module in product_enquiry %} 
+									{{ module }}
+								{% endfor %}
+							{% else %} 
+								<div class="tt-wrapper">
+									<div class="tt-row-custom-01">
+										<div class="col-item">
+											<div class="tt-input-counter style-01">
+												<span class="minus-btn"></span>
+												<input type="text" name="quantity" id="quantity_wanted" size="200" value="{{ minimum }}" />
+												<span class="plus-btn"></span>
+											</div>
+										</div>
+										<div class="col-item">
+			             					<input type="hidden" name="product_id" value="{{ product_id }}" />
+			             					<a href="javascript:;" class="btn btn-lg" id="button-cart" data-loading-text="{{ text_loading }}" data-original-text="{{ button_cart }}"><i class="icon-f-39"></i><span>{{ button_cart }}</span></a>
+										</div>
+									</div>
+								</div>
+							{% endif %}
+							{% if (minimum > 1) %} 
+								<div class="minimum">{{ text_minimum }}</div>
+							{% endif %} 
+							<div class="tt-wrapper">
+								<ul class="tt-list-btn">
+									<li><a href="javascript:;" onclick="wishlist.add('{{ product_id }}');" class="btn-link"><i class="icon-n-072"></i>{% if (theme_options.get( 'add_to_wishlist_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'add_to_wishlist_text', config.get( 'config_language_id' ) ) }} {% else %} {{ 'ADD TO WISHLIST' }} {% endif %}</a></li>
+									<li><a href="javascript:;" onclick="compare.add('{{ product_id }}');" class="btn-link"><i class="icon-n-08"></i>{% if (theme_options.get( 'add_to_compare_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'add_to_compare_text', config.get( 'config_language_id' ) ) }} {% else %} {{ 'ADD TO COMPARE' }} {% endif %}</a></li>
+								</ul>
+							</div>
+							{% set product_options_bottom = theme_options.getModules('product_options_bottom') %}
+							{% if ( product_options_bottom|length > 0 ) %} 
+								{% for module in product_options_bottom %} 
+									{{ module }}
+								{% endfor %}
+							{% endif %} 
+							<div class="tt-wrapper">
+								<div class="tt-add-info">
+									<ul>
+								        {% if (manufacturer) %} 
+								        	<li><span>{{ text_manufacturer }}:</span> <a href="{{ manufacturers }}">{{ manufacturer }}</a></li>
+								        {% endif %} 
+								        {% if (reward) %} 
+											<li><span>{{ text_reward }}</span> {{ reward }}</li>
+										{% endif %}
+										{% if (tags) %} 
+											<li><span>{{ text_tags }}</span>
+												{% set i = 0 %}
+												{% set tags_count = tags|length %}
+												{% for i in i..tags_count %} 
+													{% if (i < (tags|length - 1)) %} 
+														<a href="{{ tags[i]['href'] }}">{{ tags[i]['tag'] }}</a>,
+													{% else %} 
+														<a href="{{ tags[i]['href'] }}">{{ tags[i]['tag'] }}</a>
+													{% endif %} 
+												{% endfor %} 
+											</li>
+										{% endif %}
+									</ul>
+								</div>
+							</div>
+							{% set product_over_tabs = theme_options.getModules('product_over_tabs') %}
+							{% if ( product_over_tabs|length > 0 ) %} 
+								{% for module in product_over_tabs %} 
+									{{ module }}
+								{% endfor %}
+							{% endif %} 
+							<div class="tt-collapse-block">
+								{% set language_id = config.get( 'config_language_id' ) %}
+								{% set tabs = [] %}
+								{% set tabs = tabs | merge([{'content': 'description', 'heading': tab_description, 'sort': 1 }]) %}
+
+								{% if (attribute_groups) %} 
+								{% set tabs = tabs | merge([{'content': 'attribute', 'heading': tab_attribute, 'sort': 3 }]) %}
+								{% endif %}
+
+								{% if (review_status) %} 
+								 {% set tabs = tabs | merge([{'content': 'review', 'heading': tab_review, 'sort': 5 }]) %}
+								{% endif %} 
+
+								{% if (config.get('product_tabs') is iterable) %}
+									{% for tab in config.get('product_tabs') %} 
+										{% if (tab['status'] == 1 or tab['product_id'] == product_id) %}
+											{% for zakladka in tab['tabs'] %} 
+												{% if (zakladka['status'] == 1) %}
+													{% set heading = constant('false') %} 
+													{% set content = constant('false') %}
+													{% if (zakladka[language_id] is defined) %}
+														{% set heading = zakladka[language_id]['name'] %}
+														{% set content = theme_options.html_entity_decode(zakladka[language_id]['html']) %}
+													{% endif %}
+													{% set tabs = tabs | merge([{'content': content, 'heading': heading, 'sort': zakladka['sort_order'] }]) %}
+												{% endif %}
+											{% endfor %}
+										{% endif %}
+									{% endfor %}
+								{% endif %} 
+
+								{% set tabs_test = theme_options.usort(tabs) %}
+
+								{% for tab in tabs_test  %} 
+									<div class="tt-item" {% if tab['content'] == 'review' %}id="review-tab"{% endif %}>
+										<div class="tt-collapse-title">{{ tab['heading'] }}</div>
+										<div class="tt-collapse-content">
+										 	{% if (tab['content'] != 'description' and tab['content'] != 'attribute' and tab['content'] != 'review') %}
+										 		{{ tab['content'] }}
+										 	{% else %}
+										 		{% if tab['content'] == 'description' %}
+										 			{{ description }}
+										 		{% endif %}
+										 		{% if tab['content'] == 'attribute' %}
+													{% if (attribute_groups) %} 
+														<div id="tab-attribute" class="tab-content">
+															<table class="tt-table-03" cellspacing="0">
+															  {% for attribute_group in attribute_groups %} 
+															  <thead>
+															    <tr>
+															      <td colspan="2">{{ attribute_group['name'] }}</td>
+															    </tr>
+															  </thead>
+															  <tbody>
+															    {% for attribute in attribute_group['attribute'] %} 
+															    <tr>
+															      <td>{{ attribute['name'] }}</td>
+															      <td>{{ attribute['text'] }}</td>
+															    </tr>
+															    {% endfor %} 
+															  </tbody>
+															  {% endfor %} 
+															</table>
+														</div>
+													{% endif %}
+										 		{% endif %}
+										 		{% if tab['content'] == 'review' %}
+													<form class="form-horizontal" id="form-review">
+													  <div id="review"></div>
+													  <h2>{{ text_write }}</h2>
+													  {% if (review_guest) %} 
+													  	<div class="form-default">
+														  <div class="form-group required">
+														    <div class="">
+														      <label class="control-label" for="input-name">{{ entry_name }}</label>
+														      <input type="text" name="name" value="" id="input-name" class="form-control" />
+														    </div>
+														  </div>
+														  <div class="form-group required">
+														    <div class="">
+														         <label class="control-label">{{ entry_rating }}</label>
+														        
+														       <div class="rating set-rating tt-rating">
+														          <i class="icon-star" data-value="1"></i>
+														          <i class="icon-star" data-value="2"></i>
+														          <i class="icon-star" data-value="3"></i>
+														          <i class="icon-star" data-value="4"></i>
+														          <i class="icon-star" data-value="5"></i>
+														      </div>
+														      <script type="text/javascript">
+														          $(document).ready(function() {
+														            $('.set-rating i').hover(function(){
+														                var rate = $(this).data('value');
+														                var i = 0;
+														                $('.set-rating i').each(function(){
+														                    i++;
+														                    if(i <= rate){
+														                        $(this).addClass('active');
+														                    }else{
+														                        $(this).removeClass('active');
+														                    }
+														                })
+														            })
+														            
+														            $('.set-rating i').mouseleave(function(){
+														                var rate = $('input[name="rating"]:checked').val();
+														                rate = parseInt(rate);
+														                i = 0;
+														                  $('.set-rating i').each(function(){
+														                    i++;
+														                    if(i <= rate){
+														                        $(this).addClass('active');
+														                    }else{
+														                        $(this).removeClass('active');
+														                    }
+														                  })
+														            })
+														            
+														            $('.set-rating i').click(function(){
+														                $('input[name="rating"]:nth('+ ($(this).data('value')-1) +')').prop('checked', true);
+														            });
+														          });
+														      </script>
+														      <div class="d-none">
+														         &nbsp;&nbsp;&nbsp; {{ entry_bad }}&nbsp;
+														         <input type="radio" name="rating" value="1" />
+														         &nbsp;
+														         <input type="radio" name="rating" value="2" />
+														         &nbsp;
+														         <input type="radio" name="rating" value="3" />
+														         &nbsp;
+														         <input type="radio" name="rating" value="4" />
+														         &nbsp;
+														         <input type="radio" name="rating" value="5" />
+														         &nbsp;{{ entry_good }} 
+														      </div>
+														   </div>
+														  </div>
+														  <div class="form-group required">
+														    <div class="">
+														      <label class="control-label" for="input-review">{{ entry_review }}</label>
+														      <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+														      <div class="help-block">{{ text_note }}</div>
+														    </div>
+														  </div>
+														  {{ captcha }} 
+														  <div class="buttons clearfix" style="margin-bottom: 0px">
+														    <div class="pull-right">
+														      <button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
+														    </div>
+														  </div>
+														</div>
+													  {% else %} 
+													  	{{ text_login }} 
+													  {% endif %} 
+													</form>
+										 		{% endif %}
+										 	{% endif %}
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+						{% if theme_options.get( 'product_type' ) == 2 %}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			{% if (theme_options.get( 'custom_block', 'product_page', config.get( 'config_language_id' ), 'status' ) == 1 or product_custom_block|length > 0) %} 
+				<div class="col-lg-3">
+					{% if (theme_options.get( 'custom_block', 'product_page', config.get( 'config_language_id' ), 'status' ) == 1) %} 
+			    		<div class="product-block">
+			    			{% if (theme_options.get( 'custom_block', 'product_page', config.get( 'config_language_id' ), 'heading' ) != '') %} 
+			    			<h4 class="title-block">{{ theme_options.get( 'custom_block', 'product_page', config.get( 'config_language_id' ), 'heading' ) }}</h4>
+			    			{% endif %} 
+			    			<div class="block-content">
+			    				{{ theme_options.html_entity_decode(theme_options.get( 'custom_block', 'product_page', config.get( 'config_language_id' ), 'text' )) }} 
+			    			</div>
+			    		</div>
+			    	{% endif %}
+		    		{% for module in product_custom_block %} {{ module }} {% endfor %} 
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% if (theme_options.get( 'product_social_share' ) != '0') %} 
+<div class="container-indent wrapper-social-icon">
+	<div class="container">
+        <div class="share">
+        	<!-- AddThis Button BEGIN -->
+        	<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
+        	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script> 
+        	<!-- AddThis Button END --> 
+        </div>
+	</div>
+</div>
+{% endif %}
+
+{% if (products and theme_options.get( 'product_related_status' ) != '0') %} 
+<div class="container-indent">
+	<div class="container container-fluid-custom-mobile-padding">
+		<div class="tt-block-title text-left">
+			<h3 class="tt-title-small">{{ text_related }}</h3>
+		</div>
+		<div class="tt-carousel-products row arrow-location-right-top tt-alignment-img tt-layout-product-item slick-animated-show-js">
+			{% for product in products %}
+				<div class="col-2 col-md-4 col-lg-3">
+					{% include 'wokiee/template/new_elements/product.twig' %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% endif %}
+
+<script type="text/javascript"><!--
+$('#product select[name=\'recurring_id\'], #product input[name="quantity"]').change(function(){
+	$.ajax({
+		url: 'index.php?route=product/product/getRecurringDescription',
+		type: 'post',
+		data: $('input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#recurring-description').html('');
+		},
+		success: function(json) {
+			$('.alert, .text-danger').remove();
+			
+			if (json['success']) {
+				$('#recurring-description').html(json['success']);
+			}
+		}
+	});
+});
+//--></script> 
+
+<script type="text/javascript"><!--
+$('#product #button-cart').on('click', function() {
+	$.ajax({
+		url: 'index.php?route=checkout/cart/add',
+		type: 'post',
+		data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#product #button-cart span').html($('#product #button-cart').attr("data-loading-text"));
+		},
+		complete: function() {
+			$('#product #button-cart span').html($('#product #button-cart').attr("data-original-text"));
+		},
+		success: function(json) {
+			$('#product .alert, #product .text-danger').remove();
+			$('#product .form-group').removeClass('has-error');
+
+			if (json['error']) {
+				if (json['error']['option']) {
+					for (i in json['error']['option']) {
+						var element = $('#product #input-option' + i.replace('_', '-'));
+						
+						if (element.parent().hasClass('input-group')) {
+							element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						} else {
+							element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+						}
+					}
+				}
+				
+				if (json['error']['recurring']) {
+					$('#product select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+				}
+				
+				// Highlight any found errors
+				$('#product .text-danger').parent().addClass('has-error');
+			}
+			
+			if (json['success']) {
+              var product_id = $('#product input[name="product_id"]').val();
+              $('#ModalquickView').modal('hide');
+              $('#modalAddToCartProduct').modal('show');
+              if($(".product-images-col .item img").length > 0) {
+              	$('#modalAddToCartProduct .tt-img img').attr('src', $("#product").find(".product-images-col .item img").attr("src"));
+              } else if($(".product-images-static ul li img").length > 0) {
+              	$('#modalAddToCartProduct .tt-img img').attr('src', $("#product").find(".product-images-static ul li img").attr("src"));
+              } else {
+              	$('#modalAddToCartProduct .tt-img img').attr('src', $("#product").find(".zoomGalleryActive img").attr("src"));
+              }	
+              $('#modalAddToCartProduct .tt-title').html($("#product").find(".tt-title").html());
+              $('#modalAddToCartProduct .tt-product-total .tt-price').html($("#product").find(".tt-price").html());
+              $('#modalAddToCartProduct .tt-qty span').html($('#product input[name="quantity"]').val());
+              $('#modalAddToCartProduct .tt-cart-total .tt-price').html(' ').load('index.php?route=common/cart/info #total_amount_ajax');
+              $('#modalAddToCartProduct .tt-cart-total .text-total').text($('#modalAddToCartProduct .tt-cart-total .text-total').text().replace(/[0-9]+/, parseInt($('#total_count_ajax').html())+parseInt($('#product input[name="quantity"]').val())));
+              $('#cart_block #cart_content, .tt-stuck-parent-cart #cart_content').load('index.php?route=common/cart/info #cart_content_ajax');
+              $('#cart_block .tt-badge-cart, .tt-stuck-parent-cart .tt-badge-cart').load('index.php?route=common/cart/info #total_count_ajax');
+			}
+		},
+     	error: function(xhr, ajaxOptions, thrownError) {
+     	    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+     	}
+	});
+});
+//--></script> 
+<script type="text/javascript">
+$('#product button[id^=\'button-upload\']').on('click', function() {
+	var node = this;
+	
+	$('#form-upload').remove();
+	
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+	
+	$('#form-upload input[name=\'file\']').trigger('click');
+	
+	timer = setInterval(function() {
+		if ($('#form-upload input[name=\'file\']').val() != '') {
+			clearInterval(timer);
+			
+			$.ajax({
+				url: 'index.php?route=tool/upload',
+				type: 'post',
+				dataType: 'json',
+				data: new FormData($('#form-upload')[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(node).button('loading');
+				},
+				complete: function() {
+					$(node).button('reset');
+				},
+				success: function(json) {
+					$('.text-danger').remove();
+					
+					if (json['error']) {
+						$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+					}
+					
+					if (json['success']) {
+						alert(json['success']);
+						
+						$(node).parent().find('input').attr('value', json['code']);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	}, 500);
+});
+</script> 
+<script type="text/javascript"><!--
+$('#review').delegate('.pagination a', 'click', function(e) {
+	e.preventDefault();
+	
+    $('#review').fadeOut('slow');
+        
+    $('#review').load(this.href);
+    
+    $('#review').fadeIn('slow');
+});         
+
+$('#review').load('index.php?route=product/product/review&product_id={{ product_id }}');
+
+$('#button-review').on('click', function() {
+    $.ajax({
+        url: 'index.php?route=product/product/write&product_id={{ product_id }}',
+        type: 'post',
+        dataType: 'json',
+        data: $("#form-review").serialize(),
+        beforeSend: function() {
+            $('#button-review').button('loading');
+        },
+        complete: function() {
+            $('#button-review').button('reset');
+        },
+        success: function(json) {
+			$('.alert-success, .alert-danger').remove();
+            
+			if (json['error']) {
+                $('#review').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+            }
+            
+            if (json['success']) {
+                $('#review').after('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+                                
+                $('input[name=\'name\']').val('');
+                $('textarea[name=\'text\']').val('');
+                $('input[name=\'rating\']:checked').prop('checked', false);
+            }
+        }
+    });
+});
+</script>
+
+<script type="text/javascript">
+var ajax_price = function() {
+	$.ajax({
+		type: 'POST',
+		url: 'index.php?route=product/liveprice/index',
+		data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
+		dataType: 'json',
+			success: function(json) {
+			if (json.success) {
+				change_price('#product #price-special', json.new_price.special);
+				change_price('#product #price-tax', json.new_price.tax);
+				change_price('#product #price-old', json.new_price.price);
+			}
+		}
+	});
+}
+
+var change_price = function(id, new_price) {
+	$(id).html(new_price);
+}
+
+$('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\'], #product input[type=\'checkbox\'], #product select, #product textarea, #product input[name=\'quantity\']').on('change', function() {
+	ajax_price();
+});
+</script>
+
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

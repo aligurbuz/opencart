@@ -1,0 +1,449 @@
+  {% if (registry.has('theme_options') == constant('true')) %} 
+{% set url = registry.get('url') %}
+{% set theme_options = registry.get('theme_options') %}
+<div class="tt-modal-quickview desctope">
+  <div class="row">
+    <div class="col-12 col-md-5 col-lg-6">
+      <div class="tt-mobile-product-slider arrow-location-center">
+        {% if (thumb) %} 
+          <div><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" id="image" itemprop="image" data-zoom-image="{{ popup }}" /></div>
+        {% else %}
+          <div><img src="image/no_image.jpg" title="{{ heading_title }}" alt="{{ heading_title }}" id="image" itemprop="image" /></div>
+        {% endif %}
+        {% for image in images %} 
+           <div><img src="{{ image['popup'] }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></div>
+        {% endfor %} 
+      </div>
+    </div>
+    <div class="col-12 col-md-7 col-lg-6">
+      <div class="tt-product-single-info">
+        <div class="tt-add-info">
+          <ul>
+            <li><span>{{ text_model }}</span> {{ model }}</li>
+            <li><span>{{ text_stock }}</span> {{ stock }}</li>
+          </ul>
+        </div>
+        <h2 class="tt-title">{{ heading_title }}</h2>
+        <div class="tt-price">
+          {% if (not special) %} 
+            <span id="price-old">{{ price }}</span>
+          {% else %} 
+            <span class="new-price" id="price-special">{{ special }}</span> <span class="old-price" id="price-old">{{ price }}</span>
+          {% endif %} 
+        </div>
+        <div class="tt-additional-price">
+          {% if (tax) %} 
+          <span class="price-tax">{{ text_tax }} <span id="price-tax">{{ tax }}</span></span><br />
+          {% endif %} 
+          {% if (points) %} 
+          <span class="reward">{{ text_points }} {{ points }}</span><br />
+          {% endif %} 
+          {% if (discounts) %} 
+          <br />
+          <div class="discount">
+            {% for discount in discounts %} 
+            {{ discount['quantity'] }}{{ text_discount }}{{ discount['price'] }}<br />
+            {% endfor %} 
+          </div>
+          {% endif %} 
+        </div>
+        {% if (review_status) %} 
+          <div class="tt-review">
+            <div class="tt-rating">
+              <i class="icon-star{% if not (rating >= 1) %}-empty{% endif %}"></i>
+              <i class="icon-star{% if not (rating >= 2) %}-empty{% endif %}"></i>
+              <i class="icon-star{% if not (rating >= 3) %}-empty{% endif %}"></i>
+              <i class="icon-star{% if not (rating >= 4) %}-empty{% endif %}"></i>
+              <i class="icon-star{% if not (rating >= 5) %}-empty{% endif %}"></i>
+            </div>
+            <a href="{{ url.link('product/product&product_id=' ~ product_id) }}">({{ reviews }})</a>
+          </div>
+        {% endif %}
+        <div class="tt-wrapper">
+          {{ description|striptags[:200] ~ '...' }}
+        </div>
+        <div class="tt-swatches-container">
+          {% if (options) %} 
+          <div class="options">
+            {% for option in options %} 
+            {% if (option['type'] == 'select') %} 
+            <div class="tt-wrapper form-default">
+              <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+              <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                <select name="option[{{ option['product_option_id'] }}]" id="input-option{{ option['product_option_id'] }}" class="form-control">
+                  <option value="">{{ text_select }}</option>
+                  {% for option_value in option['product_option_value'] %} 
+                  <option value="{{ option_value['product_option_value_id'] }}">{{ option_value['name'] }} 
+                  {% if (option_value['price']) %} 
+                  ({{ option_value['price_prefix'] }}{{ option_value['price'] }})
+                  {% endif %} 
+                  </option>
+                  {% endfor %} 
+                </select>
+            </div>
+            </div>
+            {% endif %} 
+            {% if (option['type'] == 'radio') %} 
+              {% if (theme_options.get( 'product_page_radio_style' ) == 1) %}
+              <div class="tt-wrapper" id="input-option{{ option['product_option_id'] }}">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+            <ul class="tt-options-swatch options-large">
+              {% for option_value in option['product_option_value'] %} 
+                {% if (option_value['image']) %}  
+                <li><a class="options-color" href="javascript:;" {% if (option_value['price']) %}data-tooltip="{{ option_value['price_prefix'] }}{{ option_value['price'] }}" data-tposition="top"{% endif %}>
+                  <span class="swatch-img">
+                    <input type="radio" class="d-none" name="option[{{ option['product_option_id'] }}]" value="{{ option_value['product_option_value_id'] }}" />
+                    <img src="{{ option_value['image'] }}" alt="" class="loading" data-was-processed="true">
+                  </span>
+                </a></li> 
+                {% else %}
+                  <li><a href="javascript:;" {% if (option_value['price']) %}data-tooltip="{{ option_value['price_prefix'] }}{{ option_value['price'] }}" data-tposition="top"{% endif %}>
+                    <input type="radio" class="d-none" name="option[{{ option['product_option_id'] }}]" value="{{ option_value['product_option_value_id'] }}" />
+                    {{ option_value['name'] }}
+                  </a></li>
+                {% endif %}
+              {% endfor %}
+              <script type="text/javascript">
+                $(document).ready(function () {
+                  $("#input-option{{ option['product_option_id'] }} .tt-options-swatch li a").click(function () {
+                    $(this).find('input').prop( "checked", true ).change();
+                    $("#input-option{{ option['product_option_id'] }} .tt-options-swatch li").removeClass("active");
+                    $(this).parent().addClass("active");
+                  });
+                }); 
+              </script>
+            </ul>
+              </div>
+            </div>
+            {% else %}
+              <div class="tt-wrapper">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                  <div id="input-option{{ option['product_option_id'] }}">
+                    {% for option_value in option['product_option_value'] %} 
+                    <div class="radio2">
+                      <label>
+                        <input type="radio" name="option[{{ option['product_option_id'] }}]" value="{{ option_value['product_option_value_id'] }}" />&nbsp;
+                        <span>
+                            {{ option_value['name'] }}
+                          {% if (option_value['image']) %} 
+                          <img src="{{ option_value['image'] }}" alt="{{ option_value['name'] ~ option_value['price'] ? ' ' ~ option_value['price_prefix'] ~ option_value['price'] : '' }}" class="img-thumbnail" /> 
+                          {% endif %} 
+                          {% if (option_value['price']) %} 
+                          ({{ option_value['price_prefix'] }}{{ option_value['price'] }})
+                          {% endif %}
+                      </span>
+                      </label>
+                    </div>
+                    {% endfor %} 
+                  </div>
+              </div>
+              </div>
+            {% endif %}
+            {% endif %} 
+            {% if (option['type'] == 'checkbox') %} 
+              {% if (theme_options.get( 'product_page_checkbox_style' ) == 1) %}
+              <div class="tt-wrapper" id="input-option{{ option['product_option_id'] }}">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                  <ul class="tt-options-swatch options-large">
+                    {% for option_value in option['product_option_value'] %}
+                      {% if (option_value['image']) %}  
+                      <li><a class="options-color" href="javascript:;" {% if (option_value['price']) %}data-tooltip="{{ option_value['price_prefix'] }}{{ option_value['price'] }}" data-tposition="top"{% endif %}>
+                        <span class="swatch-img">
+                          <input type="checkbox" class="d-none" name="option[{{ option['product_option_id'] }}][]" value="{{ option_value['product_option_value_id'] }}" />
+                          <img src="{{ option_value['image'] }}" alt="" class="loading" data-was-processed="true">
+                        </span>
+                      </a></li> 
+                      {% else %}
+                        <li><a href="javascript:;" {% if (option_value['price']) %}data-tooltip="{{ option_value['price_prefix'] }}{{ option_value['price'] }}" data-tposition="top"{% endif %}>
+                          <input type="checkbox" class="d-none" name="option[{{ option['product_option_id'] }}][]" value="{{ option_value['product_option_value_id'] }}" />
+                          {{ option_value['name'] }}
+                        </a></li>
+                      {% endif %}
+                    {% endfor %}
+                    <script type="text/javascript">
+                      $(document).ready(function () {
+                        $("#input-option{{ option['product_option_id'] }} .tt-options-swatch li a").click(function () {
+                          if($(this).find("input").is(":checked")) {
+                            $(this).find('input').prop( "checked", false ).change();
+                            $(this).parent().removeClass("active");
+                          } else {
+                            $(this).find('input').prop( "checked", true ).change();
+                            $(this).parent().addClass("active");
+                          }
+                        });
+                      }); 
+                    </script>
+                  </ul>
+              </div>
+            </div>
+            {% else %}
+              <div class="tt-wrapper">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                  <div id="input-option{{ option['product_option_id'] }}">
+                    {% for option_value in option['product_option_value'] %} 
+                    <div class="checkbox {% if (theme_options.get( 'product_page_checkbox_style' ) == 1) %} {{ 'radio-type-button2' }} {% endif %}">
+                      <label>
+                        <input type="checkbox" name="option[{{ option['product_option_id'] }}][]" value="{{ option_value['product_option_value_id'] }}" />&nbsp;
+                        <span>{{ option_value['name'] }} 
+                        {% if (option_value['image']) %} 
+                            <img src="{{ option_value['image'] }}" alt="{{ option_value['name'] ~ option_value['price'] ? ' ' ~ option_value['price_prefix'] ~ option_value['price'] : '' }}" class="img-thumbnail" /> 
+                          {% endif %} 
+                          {% if (option_value['price']) %} 
+                            ({{ option_value['price_prefix'] }}{{ option_value['price'] }})
+                          {% endif %}
+                        </span>
+                      </label>
+                    </div>
+                    {% endfor %} 
+                  </div>
+              </div>
+              </div>
+            {% endif %}
+            {% endif %} 
+            {% if (option['type'] == 'text') %} 
+            <div class="tt-wrapper form-default">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                  <input type="text" name="option[{{ option['product_option_id'] }}]" value="{{ option['value'] }}" placeholder="{{ option['name'] }}" id="input-option{{ option['product_option_id'] }}" class="form-control" />
+                </div>
+              </div>
+            {% endif %} 
+            {% if (option['type'] == 'textarea') %} 
+            <div class="tt-wrapper form-default">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                  <textarea name="option[{{ option['product_option_id'] }}]" rows="5" placeholder="{{ option['name'] }}" id="input-option{{ option['product_option_id'] }}" class="form-control">{{ option['value'] }}</textarea>
+                </div>
+            </div>
+            {% endif %} 
+            {% if (option['type'] == 'file') %} 
+            <div class="tt-wrapper form-default">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                  <button type="button" id="button-upload{{ option['product_option_id'] }}" class="btn btn-default btn-block" style="margin-top: 7px"><i class="fa fa-upload"></i> {{ button_upload }}</button>
+                  <input type="hidden" name="option[{{ option['product_option_id'] }}]" value="" id="input-option{{ option['product_option_id'] }}" />
+                </div>
+            </div>
+            {% endif %} 
+              {% if (option['type'] == 'date') %} 
+              <div class="tt-wrapper form-default">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                  <div class="input-group datetimepicker-date">
+                    <input type="text" name="option[{{ option['product_option_id'] }}]" value="{{ option['value'] }}" data-date-format="YYYY-MM-DD" id="input-option{{ option['product_option_id'] }}" class="form-control" />
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button"><i class="far fa-calendar"></i></button>
+                    </span>
+                  </div>
+                 </div>
+              </div>
+              {% endif %} 
+              {% if (option['type'] == 'datetime') %} 
+              <div class="tt-wrapper form-default">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                  <div class="input-group datetimepicker-datetime">
+                    <input type="text" name="option[{{ option['product_option_id'] }}]" value="{{ option['value'] }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option['product_option_id'] }}" class="form-control" />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default"><i class="far fa-calendar"></i></button>
+                    </span>
+                  </div>
+               </div>
+              </div>
+              {% endif %} 
+              {% if (option['type'] == 'time') %} 
+              <div class="tt-wrapper form-default">
+                <div class="tt-title-options"><label class="control-label" for="input-option{{ option['product_option_id'] }}">{{ option['name'] }}:</label></div>
+                <div class="form-group{{ option['required'] ? ' required' : '' }}">
+                  <div class="input-group datetimepicker-time">
+                    <input type="text" name="option[{{ option['product_option_id'] }}]" value="{{ option['value'] }}" data-date-format="HH:mm" id="input-option{{ option['product_option_id'] }}" class="form-control" />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default"><i class="far fa-calendar"></i></button>
+                    </span></div>
+                </div>
+            </div>
+              {% endif %} 
+            {% endfor %} 
+          </div>
+          {% endif %} 
+          
+          {% if (recurrings) %} 
+          <div class="options">
+            <div class="tt-wrapper form-default">
+              <div class="tt-title-options">{{ text_payment_recurring }}</div>
+                <div class="form-group required">
+                  <select name="recurring_id" class="form-control">
+                    <option value="">{{ text_select }}</option>
+                    {% for recurring in recurrings %} 
+                    <option value="{{ recurring['recurring_id'] }}">{{ recurring['name'] }}</option>
+                    {% endfor %} 
+                  </select>
+                  <div class="help-block" id="recurring-description"></div>
+                </div>
+            </div>
+          </div>
+          {% endif %} 
+        </div>
+
+        {% set product_enquiry = theme_options.getModules('product_enquiry') %}
+        {% if ( product_enquiry|length > 0 ) %} 
+          {% for module in product_enquiry %} 
+            {{ module }}
+          {% endfor %}
+        {% else %} 
+          <div class="tt-wrapper">
+            <div class="tt-row-custom-01">
+              <div class="col-item">
+                <div class="tt-input-counter style-01">
+                  <span class="minus-btn" id="q_down"></span>
+                  <input type="text" name="quantity" id="quantity_wanted" size="200" value="{{ minimum }}" />
+                  <span class="plus-btn" id="q_up"></span>
+                </div>
+              </div>
+              <div class="col-item">
+               <input type="hidden" name="product_id" value="{{ product_id }}" />
+               <a href="javascript:;" class="btn btn-lg" id="button-cart" data-loading-text="{{ text_loading }}" data-original-text="{{ button_cart }}"><i class="icon-f-39"></i><span>{{ button_cart }}</span></a>
+              </div>
+            </div>
+          </div>
+        {% endif  %}
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.tt-modal-quickview #q_up').click(function(){
+      var q_val_up=parseInt($(".tt-modal-quickview input#quantity_wanted").val());
+      if(isNaN(q_val_up)) {
+        q_val_up=0;
+      }
+      $(".tt-modal-quickview input#quantity_wanted").val(q_val_up+1).keyup(); 
+      return false; 
+    });
+    
+    $('.tt-modal-quickview #q_down').click(function(){
+      var q_val_up=parseInt($(".tt-modal-quickview input#quantity_wanted").val());
+      if(isNaN(q_val_up)) {
+        q_val_up=0;
+      }
+      
+      if(q_val_up>1) {
+        $(".tt-modal-quickview input#quantity_wanted").val(q_val_up-1).keyup();
+      } 
+      return false; 
+    });
+  });
+</script>
+<script type="text/javascript"><!--
+$('.tt-modal-quickview select[name=\'recurring_id\'], .tt-modal-quickview input[name="quantity"]').change(function(){
+    $.ajax({
+         url: 'index.php?route=product/product/getRecurringDescription',
+         type: 'post',
+         data: $('.tt-modal-quickview input[name=\'product_id\'], .tt-modal-quickview input[name=\'quantity\'], .tt-modal-quickview select[name=\'recurring_id\']'),
+         dataType: 'json',
+         beforeSend: function() {
+              $('#recurring-description').html('');
+         },
+         success: function(json) {
+              $('.alert, .text-danger').remove();
+              
+              if (json['success']) {
+                   $('#recurring-description').html(json['success']);
+              }
+         }
+    });
+});
+//--></script> 
+ <script type="text/javascript"><!--
+ $('.tt-modal-quickview .datetimepicker-date').datetimepicker({
+      pickTime: false
+ });
+
+ $('.tt-modal-quickview .datetimepicker-datetime').datetimepicker({
+      pickDate: true,
+      pickTime: true
+ });
+
+ $('.tt-modal-quickview .datetimepicker-time').datetimepicker({
+      pickDate: false
+ });
+           
+ $('.tt-modal-quickview button[id^=\'button-upload\']').on('click', function() {
+      var node = this;
+      
+      $('#form-upload').remove();
+      
+      $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+      
+      $('#form-upload input[name=\'file\']').trigger('click');
+      
+      timer = setInterval(function() {
+           if ($('#form-upload input[name=\'file\']').val() != '') {
+                clearInterval(timer);
+                
+                $.ajax({
+                     url: 'index.php?route=tool/upload',
+                     type: 'post',
+                     dataType: 'json',
+                     data: new FormData($('#form-upload')[0]),
+                     cache: false,
+                     contentType: false,
+                     processData: false,
+                     beforeSend: function() {
+                          $(node).button('loading');
+                     },
+                     complete: function() {
+                          $(node).button('reset');
+                     },
+                     success: function(json) {
+                          $('.text-danger').remove();
+                          
+                          if (json['error']) {
+                               $(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+                          }
+                          
+                          if (json['success']) {
+                               alert(json['success']);
+                               
+                               $(node).parent().find('input').attr('value', json['code']);
+                          }
+                     },
+                     error: function(xhr, ajaxOptions, thrownError) {
+                          alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                     }
+                });
+           }
+      }, 500);
+ });
+ //--></script> 
+<script type="text/javascript">
+var ajax_price = function() {
+    $.ajax({
+         type: 'POST',
+         url: 'index.php?route=product/liveprice/index',
+         data: $('.tt-modal-quickview input[type=\'text\'], .tt-modal-quickview input[type=\'hidden\'], .tt-modal-quickview input[type=\'radio\']:checked, .tt-modal-quickview input[type=\'checkbox\']:checked, .tt-modal-quickview select, .tt-modal-quickview textarea'),
+         dataType: 'json',
+              success: function(json) {
+              if (json.success) {
+                   change_price('.tt-modal-quickview #price-special', json.new_price.special);
+                   change_price('.tt-modal-quickview #price-tax', json.new_price.tax);
+                   change_price('.tt-modal-quickview #price-old', json.new_price.price);
+              }
+         }
+    });
+}
+
+var change_price = function(id, new_price) {
+    $(id).html(new_price);
+}
+
+$('.tt-modal-quickview input[type=\'text\'], .tt-modal-quickview input[type=\'hidden\'], .tt-modal-quickview input[type=\'radio\'], .tt-modal-quickview input[type=\'checkbox\'], .tt-modal-quickview select, .tt-modal-quickview textarea, .tt-modal-quickview input[name=\'quantity\']').on('change', function() {
+    ajax_price();
+});
+</script>
+{% endif %}

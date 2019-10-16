@@ -1,0 +1,12 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+    <div class="tt-block-aside">
+        <h3 class="tt-aside-title">{{ heading_title }}</h3>
+        <div class="tt-aside-content">
+            <ul class="tt-list-inline">
+                {% for tag in tags %} 
+                <li><a href="{{ tag['href'] }}">{{ tag['tag'] }}</a></li>
+                {% endfor %} 
+            </ul>
+        </div>
+    </div>
+{% endif %}

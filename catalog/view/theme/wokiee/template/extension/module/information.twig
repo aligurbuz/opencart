@@ -1,0 +1,12 @@
+  <div class="tt-collapse open">
+    <h3 class="tt-collapse-title">{{ heading_title }}</h3>
+    <div class="tt-collapse-content" style="">
+      <ul>
+        {% for information in informations %} 
+        <li><a href="{{ information['href'] }}">{{ information['title'] }}</a></li>
+        {% endfor %} 
+        <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+        <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
+      </ul>
+    </div>
+  </div>

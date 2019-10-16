@@ -1,0 +1,19 @@
+{% if (type == 1) %}
+	{% if (position == 'footer_bottom' or position == 'footer_top' or position == 'footer_left' or position == 'footer_right' or position == 'customfooter_top' or position == 'customfooter_bottom') %}
+		{{ '<h4>'~block_heading~'</h4>' }}
+		{{ '<div class="strip-line"></div>' }}
+		{{ block_content }}
+	{% else %} 
+		{{ '<div class="box">' }}
+			{{ '<div class="box-heading">' }}
+				{{ block_heading }}
+			{{ '</div>' }}
+			{{ '<div class="strip-line"></div>' }}
+			{{ '<div class="box-content">' }}
+				{{ block_content }}
+			{{ '</div>' }}
+		{{ '</div>' }}	
+	{% endif %}	
+{% else %} 
+	{{ text }}
+{% endif %}

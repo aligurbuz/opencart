@@ -1,0 +1,216 @@
+{{ header }} 
+{% set theme_options = registry.get('theme_options') %}
+{% set config = registry.get('config') %}
+{% set categoryPage = constant('true') %}
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+
+<div id="content">
+  <div id="mfilter-content-container">
+    <label class="control-label" for="input-search"><b>{{ entry_search }}</b></label>
+    <div class="row" id="content-search" style="padding-top: 7px">
+      <div class="col-sm-4">
+        <input type="text" name="search" value="{{ search }}" placeholder="{{ text_keyword }}" id="input-search" class="form-control" />
+      </div>
+      <div class="col-sm-3">
+        <select name="category_id" class="form-control">
+          <option value="0">{{ text_category }}</option>
+          {% for category_1 in categories %} 
+          {% if (category_1['category_id'] == category_id) %} 
+          <option value="{{ category_1['category_id'] }}" selected="selected">{{ category_1['name'] }}</option>
+          {% else %} 
+          <option value="{{ category_1['category_id'] }}">{{ category_1['name'] }}</option>
+          {% endif %} 
+          {% for category_2 in category_1['children'] %} 
+          {% if (category_2['category_id'] == category_id) %} 
+          <option value="{{ category_2['category_id'] }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2['name'] }}</option>
+          {% else %} 
+          <option value="{{ category_2['category_id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2['name'] }}</option>
+          {% endif %} 
+          {% for category_3 in category_2['children'] %} 
+          {% if (category_3['category_id'] == category_id) %} 
+          <option value="{{ category_3['category_id'] }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3['name'] }}</option>
+          {% else %} 
+          <option value="{{ category_3['category_id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3['name'] }}</option>
+          {% endif %} 
+          {% endfor %} 
+          {% endfor %} 
+          {% endfor %} 
+        </select>
+      </div>
+      <div class="col-sm-3" style="padding-top: 7px">
+        <label class="checkbox-inline">
+          {% if (sub_category) %} 
+          <input type="checkbox" name="sub_category" value="1" checked="checked" />
+          {% else %} 
+          <input type="checkbox" name="sub_category" value="1" />
+          {% endif %} 
+          {{ text_sub_category }}</label>
+      </div>
+    </div>
+    <p>
+      <label class="checkbox-inline">
+        {% if (description) %} 
+        <input type="checkbox" name="description" value="1" id="description" checked="checked" />
+        {% else %} 
+        <input type="checkbox" name="description" value="1" id="description" />
+        {% endif %} 
+        {{ entry_description }}</label>
+    </p>
+    <input type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary" style="margin-top: 10px" />
+    <h4 style="padding-top: 40px"></h4>
+    
+    {% if (products) %} 
+    {% set currently = theme_options.getCurrently() %}
+    <div class="tt-filters-options {% if theme_options.get( 'product_grid_type' ) == '1' or theme_options.get( 'product_grid_type' ) == '2' or theme_options.get( 'product_grid_type' ) == '3' %}desctop-no-sidebar{% endif %}">
+      <h1 class="tt-title">
+        {{ heading_title }}
+      </h1>
+      <div class="tt-btn-toggle">
+        <a href="#">{% if (theme_options.get( 'filter_text', config.get( 'config_language_id' ) ) != '') %} {{ theme_options.get( 'filter_text', config.get( 'config_language_id' ) ) }} {% else %}FILTER{% endif %}</a>
+      </div>
+      <div class="tt-sort d-none d-md-block">
+        <select onchange="location = this.value;">
+          {% for sorts in sorts %} 
+          {% if (sorts['value'] == sort ~ '-' ~ order) %} 
+          <option value="{{ sorts['href'] }}" selected="selected">{{ sorts['text'] }}</option>
+          {% else %} 
+          <option value="{{ sorts['href'] }}">{{ sorts['text'] }}</option>
+          {% endif %} 
+          {% endfor %} 
+        </select>
+        <select onchange="location = this.value;">
+          {% for limits in limits %} 
+          {% if (limits['value'] == limit) %} 
+          <option value="{{ limits['href'] }}" selected="selected">{{ limits['text'] }}</option>
+          {% else %} 
+          <option value="{{ limits['href'] }}">{{ limits['text'] }}</option>
+          {% endif %} 
+          {% endfor %} 
+        </select>
+      </div>
+      {% if not (theme_options.get( 'product_grid_type' ) == '3') %}
+        <div class="tt-quantity">
+          <a href="#" class="tt-col-one d-block d-md-none {% if currently == 'verylarge' %}active{% endif %}" data-value="tt-col-one"></a>
+          <a href="#" class="tt-col-two {% if theme_options.get( 'product_grid_type' ) == '1' or theme_options.get( 'product_grid_type' ) == '2' %}d-block d-md-none{% endif %} {% if currently == 'large' %}active{% endif %}" data-value="tt-col-two"></a>
+          <a href="#" class="tt-col-three d-none d-md-block {% if currently != 'large' and currently != 'small' and currently != 'verysmall' and currently != 'verylarge' %}active{% endif %}" data-value="tt-col-three"></a>
+          <a href="#" class="tt-col-four d-none d-md-block {% if currently == 'small' %}active{% endif %}" data-value="tt-col-four"></a>
+          {% if theme_options.get( 'product_grid_type' ) == '1' or theme_options.get( 'product_grid_type' ) == '2' %}
+            <a href="#" class="tt-col-six d-none d-md-block {% if currently == 'verysmall' %}active{% endif %}" data-value="tt-col-six"></a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if theme_options.get( 'product_grid_type' ) == '3' %}
+      <div class="tt-product-listing-masonry">
+        <div class="tt-product-init tt-add-item">
+          {% for product in products %} 
+            <div class="element-item {% if loop.index == 3 or loop.index == 6 %}double-size{% endif %}">
+                {% include 'wokiee/template/new_elements/product2.twig' %}
+            </div>
+          {% endfor %} 
+        </div>
+      </div>
+    {% else %}
+      {% set class = '4' %}
+      {% if theme_options.get( 'product_grid_type' ) == '1' %}
+        {% set class = '3' %}
+      {% endif %}
+      {% if theme_options.get( 'product_grid_type' ) == '2' %}
+        {% set class = '2' %}
+      {% endif %}
+      {% if currently == 'large' %}{% set class = '6' %}{% endif %}
+      {% if currently == 'small' %}{% set class = '3' %}{% endif %}
+      {% if currently == 'medium' %}{% set class = '4' %}{% endif %}
+      {% if currently == 'verylarge' %}{% set class = '12' %}{% endif %}
+      {% if currently == 'verysmall' %}{% set class = '2' %}{% endif %}
+      <div class="tt-product-listing row">
+        {% for product in products %} 
+          <div class="col-{% if class == '12' %}12{% else %}6{% endif %} {% if class == '3' %}col-md-4 col-lg-{{ class }}{% elseif class == '2' %}col-md-4 col-lg-3 col-xl-{{ class }}{% else %}col-md-{{ class }}{% endif %} tt-col-item">
+              {% include 'wokiee/template/new_elements/product.twig' %}
+          </div>
+        {% endfor %} 
+      </div>
+    {% endif %}
+    
+    <div class="row pagination-results">
+      <div class="col-sm-6 text-left">{{ pagination }}</div>
+      <div class="col-sm-6 text-right">{{ results }}</div>
+    </div>
+    {% else %} 
+    <p style="padding-bottom: 10px;padding-top: 0px;margin-top: 0">{{ text_empty }}</p>
+    {% endif %} 
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#content-search input[name=\'search\']').keydown(function(e) {
+  if (e.keyCode == 13) {
+    $('#button-search').trigger('click');
+  }
+});
+
+$('select[name=\'category_id\']').bind('change', function() {
+  if (this.value == '0') {
+    $('input[name=\'sub_category\']').attr('disabled', 'disabled');
+    $('input[name=\'sub_category\']').removeAttr('checked');
+  } else {
+    $('input[name=\'sub_category\']').removeAttr('disabled');
+  }
+});
+
+$('select[name=\'category_id\']').trigger('change');
+
+$('#button-search').bind('click', function() {
+  url = 'index.php?route=product/search';
+  
+  var search = $('#content-search input[name=\'search\']').val();
+  
+  if (search) {
+    url += '&search=' + encodeURIComponent(search);
+  }
+
+  var category_id = $('#content select[name=\'category_id\']').val();
+  
+  if (category_id > 0) {
+    url += '&category_id=' + encodeURIComponent(category_id);
+  }
+  
+  var sub_category = $('#content input[name=\'sub_category\']:checked').val();
+  
+  if (sub_category) {
+    url += '&sub_category=true';
+  }
+    
+  var filter_description = $('#content input[name=\'description\']:checked').val();
+  
+  if (filter_description) {
+    url += '&description=true';
+  }
+
+  location = url;
+});
+
+function setCookie(key, value) {
+    var expires = new Date();
+    expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+    document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+}
+$(document).ready(function () {
+  $("body").on("click", ".tt-quantity a", function () {
+    if($(this).attr("data-value") == 'tt-col-two') {
+      setCookie('display','large');
+    } else if($(this).attr("data-value") == 'tt-col-four') {
+      setCookie('display','small');
+    } else if($(this).attr("data-value") == 'tt-col-six') {
+      setCookie('display','verysmall');
+    } else if($(this).attr("data-value") == 'tt-col-one') {
+      setCookie('display','verylarge');
+    } else {
+      setCookie('display','medium');
+    }
+  });
+});
+//--></script> 
+
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

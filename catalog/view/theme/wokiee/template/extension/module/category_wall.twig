@@ -1,0 +1,33 @@
+  <div class="container-indent">
+    <div class="container container-fluid-custom-mobile-padding">
+      <div class="tt-block-title">
+        <h1 class="tt-title">{{ block_heading }}</h1>
+      </div>
+		 {% set class = 3 %} 
+		{% if (category_number == 6) %} {% set class = 2 %}{% endif %}
+		{% if (category_number == 5) %} {% set class = 25 %}{% endif %}
+		{% if (category_number == 3) %} {% set class = 4 %}{% endif %}
+		{% if (category_number == 2) %} {% set class = 6 %}{% endif %} 
+		
+		{% set i = 0 %}
+		{{ '<div class="category-wall"><div class="row">' }}
+			{% for category in categories %} 
+				{% if (i%category_number == 0 and i != 0) %} {{ '</div><div class="row">' }}{% endif %}
+				{{ '<div class="col-6 col-md-' ~ class ~ '">' }}
+					{% if (category['image']) %} {{ '<a href="' ~ category['href'] ~ '"><img src="' ~ category['image'] ~'" alt="' ~ category['name'] ~ '"></a>' }}{% endif %}
+					{{ '<div class="name"><a href="' ~ category['href'] ~ '">' ~ category['name'] ~ '</a></div>' }}
+					
+					{% if (category['children']|length > 0) %}
+						{{ '<ul>' }}
+						{% for child in category['children'] %} 
+							{{ '<li><a href="' ~ child['href'] ~ '">' ~ child['name'] ~ '</a></li>' }}
+						{% endfor %}
+						{{ '</ul>' }}
+						{{ '<a href="' ~ category['href'] ~ '" class="more-link">' ~ more_text ~ '</a>' }}
+					{% endif %}
+				{{ '</div>' }}
+				{% set i = i + 1 %}
+			{% endfor %}
+		{{ '</div></div>' }} 
+	</div>
+</div>

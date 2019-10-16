@@ -1,0 +1,52 @@
+{{ header }} 
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+{% set theme_options = registry.get('theme_options') %}
+{% set config = registry.get('config') %} 
+{% set s = 1 %}
+
+<div class="row">
+    <div class="col-sm-12">
+    {% if (sections|length > 0) %}
+        <div class="faq-area">
+        {% set i = 0 %}
+        {% for section in sections %}
+            {% if (section['items']|length > 0) %}
+                <div class="faq-section"> 
+                     {% if (not section['hidden']) %}
+                     <h2 class="section-title">{{ section['title'] }}</h2>
+                     {% set s = 1 %} 
+                     {% endif %} 
+                     
+                     <div id="accordion">
+                          {% for item in section['items'] %}
+                              <div class="panel panel-faq">
+                                  <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                          {% if (settings['collapse']) %}
+                                            <a data-toggle="collapse" data-parent="#questions" href="#answer-{{ i }}" aria-expanded="false" class="collapsed">
+                                                {{ s ~ '. ' ~ item['question'] }} 
+                                            </a>
+                                          {% else %} 
+                                            <span>{{ s ~ '. ' ~ item['question'] }}</span>
+                                          {% endif %} 
+                                      </h4>
+                                  </div>
+                                  <div id="answer-{{ i }}" {% if (settings['collapse']) %} class="panel-collapse collapse" aria-expanded="false" {% endif %}>
+                                      <div class="panel-body">
+                                          {{ item['answer'] }}
+                                      </div>
+                                  </div>
+                              </div>
+                              {% set i = i + 1 %} {% set s = s + 1 %} 
+                          {% endfor %}
+                     </div>
+                </div>
+            {% endif %} 
+        {% endfor %} 
+        </div>
+    {% endif %}    
+    </div>
+</div>
+
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

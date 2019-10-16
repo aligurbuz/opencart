@@ -1,0 +1,77 @@
+{{ header }} 
+
+{% if (registry.has('theme_options') == constant('true')) %}
+	{% set theme_options = registry.get('theme_options') %}
+	{% set config = registry.get('config') %} 
+	{% set grid_center = 12 %} 
+	{% if (column_left != '') %} {% set grid_center = grid_center-3 %}{% endif %} 
+	{% if (column_right != '') %} {% set grid_center = grid_center-3 %}{% endif %}
+
+	<div id="tt-pageContent">
+		{% set slideshow = theme_options.getModules('slideshow') %}
+		{% if ( slideshow|length > 0 ) %} 
+			{% for module in slideshow %} 
+				{{ module }}
+			{% endfor %}
+		{% endif %} 
+
+		{% set preface_left = theme_options.getModules('preface_left') %}
+		{% if ( preface_left|length > 0 ) %}
+			{% for module in preface_left %} 
+				{{ module }}
+			{% endfor %}
+		{% endif %}
+			
+		{% set preface_right = theme_options.getModules('preface_right') %}
+		{% if ( preface_right|length > 0 ) %}
+			{% for module in preface_right %} 
+				{{ module }}
+			{% endfor %}
+		{% endif %} 
+		
+		{% set preface_fullwidth = theme_options.getModules('preface_fullwidth') %}
+		{% if ( preface_fullwidth|length > 0 ) %} 
+			{% for module in preface_fullwidth %} 
+				{{ module }}
+			{% endfor %}
+		{% endif %} 
+		
+			
+		{% set columnleft = theme_options.getModules('column_left') %}
+		{% if ( columnleft|length > 0 ) %} 
+			{% for module in columnleft %} 
+				{{ module }}
+			{% endfor %}
+		{% endif %} 
+
+		{% set content_big_column = theme_options.getModules('content_big_column') %}
+		{% if ( content_big_column|length > 0 ) %} 
+			{% for module in content_big_column %} 
+				{{ module }}
+			{% endfor %}
+		{% endif %} 
+																				
+		{% set content_top = theme_options.getModules('content_top') %}
+		{% if ( content_top|length > 0 ) %} 
+			{% for module in content_top %} 
+				{{ module }}
+			{% endfor %}
+		{% endif %} 
+					
+		{% set column_right = theme_options.getModules('column_right') %} 
+		{% if ( column_right|length > 0 ) %} 
+			{% for module in column_right %} 
+				{{ module }}
+			{% endfor %} 
+		{% endif %} 
+
+		{% set contentbottom = theme_options.getModules('content_bottom') %}
+		{% if ( contentbottom|length > 0 ) %} 
+			{% for module in contentbottom %} 
+				{{ module }}
+			{% endfor %}
+		{% endif %} 
+	</div>
+{% endif %}
+
+{{ footer }}

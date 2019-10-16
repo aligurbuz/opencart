@@ -1,0 +1,35 @@
+{% if (articles|length > 0) %}
+    {% for article in articles %}
+        <div class="element-item">
+            <div class="tt-post">
+                {% if (article['gallery']|length > 0) %}
+                    <div class="tt-post-img">
+                        {{ article['gallery'][0]['output'] }}
+                    </div>
+                {% endif %}
+                <div class="tt-post-content">
+                    <div class="tt-background"></div>
+                    <div class="tt-tag">
+                        {% for tag in article['tags'] %} 
+                            {% if loop.index == 1 %}
+                                <a href="{{ tag['href'] }}">{{ tag['tag'] }}</a>
+                            {% endif %} 
+                         {% endfor %} 
+                    </div>
+                    <h2 class="tt-title"><a href="{{ article['href'] }}">{{ article['title'] }}</a></h2>
+                    <div class="tt-description">
+                        {{ article['description']}}
+                    </div>
+                    <div class="tt-meta">
+                        <div class="tt-autor">
+                            {{ theme_options.date('F d, Y', theme_options.strtotime(article['date_published'])) }}
+                        </div>
+                        <div class="tt-comments">
+                            <a href="{{ article['href'] }}"><i class="tt-icon icon-f-88"></i>{{ article['comments_count'] }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

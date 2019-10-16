@@ -1,0 +1,91 @@
+{{ header }}{{ column_left }} 
+<div id="content"><div class="container-fluid">
+	<div class="page-header">
+	    <h1>About page 1</h1>
+	    <ul class="breadcrumb">
+		     {% for breadcrumb in breadcrumbs %} 
+		      <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+		      {% endfor %} 
+	    </ul>
+	  </div>
+    <link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+    
+	<script type="text/javascript">
+	$.fn.tabs = function() {
+		var selector = this;
+		
+		this.each(function() {
+			var obj = $(this); 
+			
+			$(obj.attr('href')).hide();
+			
+			$(obj).click(function() {
+				$(selector).removeClass('selected');
+				
+				$(selector).each(function(i, element) {
+					$($(element).attr('href')).hide();
+				});
+				
+				$(this).addClass('selected');
+				
+				$($(this).attr('href')).show();
+				
+				return false;
+			});
+		});
+	
+		$(this).show();
+		
+		$(this).first().click();
+	};
+	</script>
+
+	{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% elseif (success) %} 
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% endif %} 
+	
+	<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+		<div class="set-size" id="custom_module">
+			<div class="content">
+				<div>
+					<div class="tabs clearfix">
+						<div id="tab-module-1" class="tab-content">
+							<div id="language-1" class="htabs">
+							  {% for language in languages %} 
+							  <a href="#tab-language-1-{{ language['language_id'] }}"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" /> {{ language['name'] }}</a>
+							  {% endfor %} 
+							</div>
+							{% for language in languages %} 
+							<div id="tab-language-1-{{ language['language_id'] }}">
+							  <table class="form">
+							    <tr>
+							      <td>Title:</td>
+							      <td><input name="about1_module[1][title][{{ language['language_id'] }}]" class="html" value="{{ modules[1]['title'][language['language_id']] is defined ? modules[1]['title'][language['language_id']] : '' }}"></td>
+							    </tr>
+							    <tr>
+							      <td>HTML:</td>
+							      <td><textarea name="about1_module[1][html][{{ language['language_id'] }}]" class="html">{{ modules[1]['html'][language['language_id']] is defined ? modules[1]['html'][language['language_id']] : '' }}</textarea></td>
+							    </tr>
+							  </table>
+							</div>
+							{% endfor %} 
+						</div>
+					</div>
+					
+					<!-- Buttons -->
+					<div class="buttons"><input type="submit" name="button-save" class="button-save" value=""></div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	$('#language-1 a').tabs();
+</script>
+{{ footer }}

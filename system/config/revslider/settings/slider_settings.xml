@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fields>
+	<fieldset name="general" label="general_settings" icon="eg-icon-cog-alt">
+		<field name="delay" type="text" default="9000" label="Delay" description="slide_stays" />
+		<field name="shuffle" type="radio" default="off" label="Shuffle_Mode" description="Turn_Shuffle">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="lazy_load" type="radio" default="off" label="Lazy_Load" description="lazy_load_desc">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="use_wpml" type="radio" default="off" label="Use_Multi_Language" description="Use_Multi_Language_desc">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="enable_static_layers" type="radio" default="off" label="Enable_Static_Layers" description="Enable_Static_Layers_desc">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="next_slide_on_window_focus" type="radio" default="off" label="Next_Slide_Focus" description="Next_Slide_on_Focus">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="simplify_ie8_ios4" type="radio" default="off" label="Simplify_IOS4_IE8" description="Simplyfies">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+	</fieldset>
+	<fieldset name="stopslider" label="Loop_Progress" icon="eg-icon-chart-bar">
+		<field name="stop_slider" type="radio" default="off" label="Stop_Slider" description="On_Off_loops">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="stop_after_loops" type="text" default="0" label="Stop_After_Loops" datatype="number" description="certain_amount_loops" />
+		<field name="stop_at_slide" type="text" default="2" label="Stop_At_Slide" datatype="number" description="given_slide" />
+		<field type="control" ctype="enable" parent="stop_slider" child="stop_after_loops" value="on" />
+		<field type="control" ctype="enable" parent="stop_slider" child="stop_at_slide" value="on" />
+		<field name="show_timerbar" type="list" default="top" label="Show_Progressbar" description="Show_running_progressbar">
+			<option value="top" text="Top" />
+			<option value="bottom" text="Bottom" />
+			<option value="hide" text="Hide" />
+		</field>
+		<field name="loop_slide" type="radio" default="loop" label="Loop_Single_Slide" description="ILoop_Single_Slidef">
+			<option value="loop" text="On" />
+			<option value="noloop" text="Off" />
+		</field>
+	</fieldset>
+	<fieldset name="position" label="Position" icon="eg-icon-resize-full-alt">
+		<field name="position" type="list" default="center" label="Position_page" description="Position_slider">
+			<option value="left" text="Left" />
+			<option value="center" text="Center" />
+			<option value="right" text="Right" />
+		</field>
+		<field name="margin_top" type="text" label="Margin_Top" default="0" unit="px" datatype="number" description="top_wrapper" />
+		<field name="margin_bottom" type="text" label="Margin_Bottom" default="0" unit="px" datatype="number" description="bottom_wrapper" />
+		<field name="margin_left" type="text" label="Margin_left" default="0" unit="px" datatype="number" description="left_margin_wrapper" />
+		<field name="margin_right" type="text" label="Margin_wrapper_div" default="0" unit="px" datatype="number" description="right_wrapper" />
+		<field type="control" ctype="disable" parent="position" child="margin_left" value="center" />
+		<field type="control" ctype="disable" parent="position" child="margin_right" value="center" />
+	</fieldset>
+	<fieldset name="appearance" label="Appearance" icon="eg-icon-droplet">
+		<field name="shadow_type" type="list" default="2" label="Shadow_Type" description="slider_shadow">
+			<option value="0" text="No_Shadow" />
+			<option value="1" text="1" />
+			<option value="2" text="2" />
+			<option value="3" text="3" />
+		</field>
+		<field name="padding" type="text" default="0" label="Padding_border" datatype="number" description="border_around_slider" />
+		<field name="backround_image_options" type="statictext" label="Background_transparent_slides" />
+		<field type="hr" />
+		<field name="background_color" type="color" default="#E9E9E9" label="Background_color" description="transparent_slider" />
+		<field name="background_dotted_overlay" type="list" default="none" label="Dotted_Overlay_Size" description="dotted_overlay">
+			<option value="none" text="none" />
+			<option value="twoxtwo" text="2_2_Black" />
+			<option value="twoxtwowhite" text="2_2_White" />
+			<option value="threexthree" text="3_3_Black" />
+			<option value="threexthreewhite" text="3_3_White" />
+		</field>
+		<field name="show_background_image" type="radio" default="false" label="Show_Background_Image" description="main_slider_wrapper">
+			<option value="true" text="Yes" />
+			<option value="false" text="No" />
+		</field>
+		<field name="background_image" type="text" default="" label="Background_Image_Url" class="text-sidebar-long" description="slider_preloading" />
+		<field name="bg_fit" type="list" default="cover" label="Background_Fit" description="background_fitted">
+			<option value="cover" text="cover" />
+			<option value="contain" text="contain" />
+			<option value="normal" text="normal" />
+		</field>
+		<field name="bg_repeat" type="list" default="no-repeat" label="Background_Repeat" description="background_repeated_into">
+			<option value="no-repeat" text="no-repeat" />
+			<option value="repeat" text="repeat" />
+			<option value="repeat-x" text="repeat-x" />
+			<option value="repeat-y" text="repeat-y" />
+		</field>
+		<field name="bg_position" type="list" default="center top" label="Background_Position" description="background_positioned_Slider">
+			<option value="center top" text="center_top" />
+			<option value="center right" text="center_right" />
+			<option value="center bottom" text="center_bottom" />
+			<option value="center center" text="center_center" />
+			<option value="left top" text="left_top" />
+			<option value="left center" text="left_center" />
+			<option value="left bottom" text="left_bottom" />
+			<option value="right top" text="right_top" />
+			<option value="right center" text="right_center" />
+			<option value="right bottom" text="right_bottom" />
+		</field>
+		<field type="control" ctype="enable" parent="show_background_image" child="background_image" value="true" />
+		<field type="control" ctype="enable" parent="show_background_image" child="bg_fit" value="true" />
+		<field type="control" ctype="enable" parent="show_background_image" child="bg_repeat" value="true" />
+		<field type="control" ctype="enable" parent="show_background_image" child="bg_position" value="true" />
+	</fieldset>
+	<fieldset name="navigation" label="Navigation" icon="eg-icon-flickr">
+		<field name="stop_on_hover" type="radio" default="on" label="Stop_On_Hover" description="hovering_Navigation">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="keyboard_navigation" type="radio" default="off" label="Keyboard_Navigation" description="navigate_keyboard">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="navigation_style" type="list" default="round" label="Navigation_Style" description="Navigation_nexttobullets">
+			<option value="round" text="Round" />
+			<option value="navbar" text="Navbar" />
+			<option value="preview1" text="Preview 1" />
+			<option value="preview2" text="Preview 2" />
+			<option value="preview3" text="Preview 3" />
+			<option value="preview4" text="Preview 4" />
+			<option value="custom" text="Custom" />
+			<option value="round-old" text="Old_Round" />
+			<option value="square-old" text="Old_Square" />
+			<option value="navbar-old" text="Old_Navbar" />
+		</field>
+		
+		<field name="navigaion_type" type="list" default="bullet" label="Bullet_Type" description="navigation_bar">
+			<option value="none" text="None" />
+			<option value="bullet" text="Bullet" />
+			<option value="thumb" text="Thumb" />
+		</field>
+		<field name="navigation_arrows" type="list" default="solo" label="Navigation_Arrows" description="navigation_Thumb_arrows">
+			<option value="nexttobullets" text="With_Bullets" />
+			<option value="solo" text="Solo" />
+			<option value="none" text="None" />
+		</field>
+		<field name="navigaion_always_on" type="list" default="false" label="Always_Show_Navigation" description="show_navigation_thumbnails">
+			<option value="true" text="Yes" />
+			<option value="false" text="No" />
+		</field>
+		<field name="hide_thumbs" type="text" label="Hide_Navitagion_After" default="200" unit="ms" datatype="number" description="Time_Navigatio_hidden" />
+		<field type="control" ctype="enable" parent="navigaion_always_on" child="hide_thumbs" value="false" />
+		<field type="bulk_control_start" parent="navigaion_type" ctype="hide" value="none" />
+		<field name="bullets_and_thumbnail_positions" type="statictext" label="Bullets_Thumbnail_Position" />
+		<field type="hr" />
+		<field name="navigaion_align_hor" type="list" default="center" label="Navigation_Horizontal_Align" description="Horizontal_Align_Bullets">
+			<option value="left" text="Left" />
+			<option value="center" text="Center" />
+			<option value="right" text="Right" />
+		</field>
+		<field name="navigaion_align_vert" type="list" default="bottom" label="Navigation_Vertical_Align" description="Vertical_Align_Bullets">
+			<option value="top" text="Top" />
+			<option value="center" text="Center" />
+			<option value="bottom" text="Bottom" />
+		</field>
+		<field name="navigaion_offset_hor" type="text" label="Navigation_Horizontal_Offset" default="0" unit="px" description="Horizontal_position_Bullets" />
+		<field name="navigaion_offset_vert" type="text" label="Navigation_Vertical_Offset" default="20" unit="px" datatype="number" description="current_Vertical_position" />
+		<field type="bulk_control_end" />
+		<field type="bulk_control_start" parent="navigation_arrows" ctype="hide" value="none" />
+		<field name="left_arrow_positions" type="statictext" label="" />
+		<field type="hr" />
+		<field name="leftarrow_align_hor" type="list" default="left" label="Left_Arrow_Horizontal" description="Horizontal_Align_left">
+			<option value="left" text="Left" />
+			<option value="center" text="Center" />
+			<option value="right" text="Right" />
+		</field>
+		<field name="leftarrow_align_vert" type="list" default="center" label="Left_Arrow_Vertical" description="Vertical_Align_left">
+			<option value="top" text="Top" />
+			<option value="center" text="Center" />
+			<option value="bottom" text="Bottom" />
+		</field>
+		<field name="leftarrow_offset_hor" type="text" label="Left_Arrow_Offset" default="20" unit="px" datatype="number" description="Offset_Horizontal_position" />
+		<field name="leftarrow_offset_vert" type="text" label="Vertical_Offset" default="0" unit="px" datatype="number" description="Offset_Vertical_position" />
+		<field name="right_arrow_positions" type="statictext" label="" />
+		<field type="hr" />
+		<field name="rightarrow_align_hor" type="list" default="right" label="Right_Arrow_Horizontal" description="Horizontal_Align">
+			<option value="left" text="Left" />
+			<option value="center" text="Center" />
+			<option value="right" text="Right" />
+		</field>
+		<field name="rightarrow_align_vert" type="list" default="center" label="Right_Arrow_Align" description="Vertical_right_Arrow">
+			<option value="top" text="Top" />
+			<option value="center" text="Center" />
+			<option value="bottom" text="Bottom" />
+		</field>
+		<field name="rightarrow_offset_hor" type="text" label="Right_Horizontal" default="20" datatype="number" unit="px" description="current_Horizontal_position" />
+		<field name="rightarrow_offset_vert" type="text" label="Right_Offset" default="0" datatype="number" unit="px" description="position_negative_direction" />
+		<field type="bulk_control_end" />
+	</fieldset>
+	<fieldset name="thumbs" label="Thumbnails" icon="eg-icon-th-large">
+		<field name="thumb_width" type="text" label="Thumb_Width" default="100" unit="px" datatype="number" description="thumb_selected" />
+		<field name="thumb_height" type="text" label="Thumb_Height" default="50" unit="px" datatype="number" description="Thumbnail_selected" />
+		<field name="thumb_amount" type="text" label="Thumb_Amount" default="5" unit="px" datatype="number" description="Thumbs_visible_selected" />
+	</fieldset>
+	<fieldset name="spinner" label="Spinner" icon="eg-icon-back-in-time">
+		<field name="use_spinner" type="list" default="0" label="Choose_Spinner" description="Select_Spinner_Slider">
+			<option value="0" text="0" />
+			<option value="1" text="1" />
+			<option value="2" text="2" />
+			<option value="3" text="3" />
+			<option value="4" text="4" />
+			<option value="5" text="5" />
+		</field>
+		<field name="spinner_color" type="color" default="#FFFFFF" label="Spinner_Color" description="Color_Spinner_shown" />
+	</fieldset>
+	<fieldset name="parallax" label="Parallax" icon="eg-icon-camera-alt">
+		<field name="use_parallax" type="radio" default="off" label="Enable_Parallax" description="parallax_effect">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="disable_parallax_mobile" type="list" default="off" label="Disable_on_Mobile" description="parallax_effect_desc">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="parallax_type" type="list" default="mouse" label="Type" description="parallax_effect_react">
+			<option value="mouse" text="Mouse_Position" />
+			<option value="scroll" text="Scroll_Position" />
+			<option value="mouse+scroll" text="Mouse_and_Scroll" />
+		</field>
+		<field name="parallax_bg_freeze" type="list" default="off" label="BG_Freeze" description="freeze_background">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="parallax_level_1" type="text" label="Level_Depth_1" default="5" description="Level_Depth_desc" />
+		<field name="parallax_level_2" type="text" label="Level_Depth_2" default="10" description="Level_Depth_desc" />
+		<field name="parallax_level_3" type="text" label="Level_Depth_3" default="15" description="Level_Depth_desc" />
+		<field name="parallax_level_4" type="text" label="Level_Depth_4" default="20" description="Level_Depth_desc" />
+		<field name="parallax_level_5" type="text" label="Level_Depth_5" default="25" description="Level_Depth_desc" />
+		<field name="parallax_level_6" type="text" label="Level_Depth_6" default="30" description="Level_Depth_desc" />
+		<field name="parallax_level_7" type="text" label="Level_Depth_7" default="35" description="Level_Depth_desc" />
+		<field name="parallax_level_8" type="text" label="Level_Depth_8" default="40" description="Level_Depth_desc" />
+		<field name="parallax_level_9" type="text" label="Level_Depth_9" default="45" description="Level_Depth_desc" />
+		<field name="parallax_level_10" type="text" label="Level_Depth_10" default="50" description="Level_Depth_desc" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_type" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_bg_freeze" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_1" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_2" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_3" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_4" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_5" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_6" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_7" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_8" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_9" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="parallax_level_10" value="on" />
+		<field type="control" ctype="enable" parent="use_parallax" child="disable_parallax_mobile" value="on" />
+	</fieldset>
+	<fieldset name="mobile_touch" label="Mobile_Touch" icon="eg-icon-up-hand">
+		<field name="touchenabled" type="radio" default="on" label="Touch_Enabled" description="Function_touch_devices">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="swipe_velocity" type="text" label="Swipe_Treshhold" default="75" datatype="number" description="sensibility_gestures" />
+		<field name="swipe_min_touches" type="text" label="Swipe_Min_Finger" default="1" datatype="number" description="Swipe_Min_Finger_desc" />
+		<field name="drag_block_vertical" type="radio" default="false" label="Drag_Block_Vertical" description="Drag_Block_Vertical_desc">
+			<option value="true" text="On" />
+			<option value="false" text="Off" />
+		</field>
+	</fieldset>
+	<fieldset name="mobile_visibility" label="Mobile_Visibility" icon="eg-icon-mobile">
+		<field name="disable_on_mobile" type="radio" default="off" label="Disable_Slider_Mobile" description="Disable_Slider_Mobile_desc">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="disable_kenburns_on_mobile" type="radio" default="off" label="Disable_KenBurn_Mobile" description="Disable_KenBurn_Mobile_desc">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="hide_slider_under" type="text" label="Hide_Under_Width" default="0" unit="px" datatype="number" description="Hide_slider_width" />
+		<field name="hide_defined_layers_under" type="text" label="Hide_Layers_Under" default="0" unit="px" datatype="number" description="Hide_layer_properties" />
+		<field name="hide_all_layers_under" type="text" label="Hide_Layers_Under" default="0" unit="px" datatype="number" description="layers_some_width" />
+		<field type="hr" />
+		<field name="hide_arrows_on_mobile" type="radio" default="off" label="Hide_Arrows_Mobile" description="Navigation_Arrows">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="hide_bullets_on_mobile" type="radio" default="off" label="Hide_Bullets_Mobile" description="ShowHideNavigationBullets">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="hide_thumbs_on_mobile" type="radio" default="off" label="Hide_Thumbnails_Mobile" description="ShowHideThumbnailsBullets">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="hide_thumbs_under_resolution" type="text" label="Hide_Thumbs_Under_Width" default="0" unit="px" datatype="number" description="Thumbnails_Mobile_Devices" />
+		<field name="hide_thumbs_delay_mobile" type="text" label="Hide_Mobile_After" default="1500" unit="ms" datatype="number" description="Hide_Mobile_After_desc" />
+	</fieldset>
+	<fieldset name="first_slide" label="Alternative_First_Slide" icon="eg-icon-thumbs-up">
+		<field name="start_with_slide" type="text" default="1" label="Start_With_Slide" description="Change_want_start" />
+		<field type="hr" />
+		<field name="first_transition_active" type="radio" default="false" label="First_Transition_Active" description="overwrite_first_slide">
+			<option value="true" text="On" />
+			<option value="false" text="Off" />
+		</field>
+		<field type="bulk_control_start" parent="first_transition_active" ctype="enable" value="true" />
+		<field name="first_transition_type" type="list" default="fade" label="First_Transition_Type" description="First_slide_transition">
+			<option value="replace" text="Replace_me" />
+			<option value="replace2" text="Replace_me" />
+		</field>
+		<field name="first_transition_duration" type="text" default="300" datatype="number" label="First_Transition_Duration" description="First_slide_duration" unit="ms" />
+		<field name="first_transition_slot_amount" type="text" default="7" datatype="number" label="First_Transition_Slot" description="slide_divided" unit="ms" />
+		<field type="bulk_control_end" />
+	</fieldset>
+	<fieldset name="reset_slide_settings" label="Global_Overwrites" icon="eg-icon-reply">
+		<field name="reset_transitions" type="list" default=" " label="Reset_Transitions" description="Reset_Transitions_desc">
+			<option value=" " text="Choose_operate" />
+			<option value="random-static" text="Random_Flat" />
+			<option value="random-premium" text="Random_Premium" />
+			<option value="random" text="Random_Flat_Premium" />
+			<option value="slideup" text="Slide_To_Top" />
+			<option value="slidedown" text="Slide_To_Bottom" />
+			<option value="slideright" text="Slide_To_Right" />
+			<option value="slideleft" text="Slide_To_Left" />
+			<option value="slidehorizontal" text="Slide_Horizontal" />
+			<option value="slidevertical" text="Slide_Vertical" />
+			<option value="boxslide" text="Slide_Boxes" />
+			<option value="slotslide-horizontal" text="Slide_Slots_Horizontal" />
+			<option value="slotslide-vertical" text="Slide_Slots_Vertical" />
+			<option value="notransition" text="No_Transition" />
+			<option value="fade" text="Fade" />
+			<option value="boxfade" text="Fade_Boxes" />
+			<option value="slotfade-horizontal" text="Fade_Slots_Horizontal" />
+			<option value="slotfade-vertical" text="Fade_Slots_Vertical" />
+			<option value="fadefromright" text="Fade_Slide_Right" />
+			<option value="fadefromleft" text="Fade_Slide_Left" />
+			<option value="fadefromtop" text="Fade_Slide_Top" />
+			<option value="fadefrombottom" text="Fade_Slide_Bottom" />
+			<option value="fadetoleftfadefromright" text="Fade_To_Left" />
+			<option value="fadetorightfadefromleft" text="Fade_To_Right" />
+			<option value="fadetotopfadefrombottom" text="Fade_To_Top" />
+			<option value="fadetobottomfadefromtop" text="Fade_To_Bottom" />
+			<option value="parallaxtoright" text="Parallax_Right" />
+			<option value="parallaxtoleft" text="Parallax_Left" />
+			<option value="parallaxtotop" text="Parallax_Top" />
+			<option value="parallaxtobottom" text="Parallax_Bottom" />
+			<option value="scaledownfromright" text="Zoom_Out" />
+			<option value="scaledownfromleft" text="Zoom_OutLeft" />
+			<option value="scaledownfromtop" text="Zoom_OutTop" />
+			<option value="scaledownfrombottom" text="Zoom_OutBottom" />
+			<option value="zoomout" text="ZoomOut" />
+			<option value="zoomin" text="ZoomIn" />
+			<option value="slotzoom-horizontal" text="Zoom_Slots_Horizontal" />
+			<option value="slotzoom-vertical" text="Zoom_Slots_Vertical" />
+			<option value="curtain-1" text="Curtain_Left" />
+			<option value="curtain-2" text="Curtain_Right" />
+			<option value="curtain-3" text="Curtain_Middle" />
+			<option value="3dcurtain-horizontal" text="Curtain_Horizontal" />
+			<option value="3dcurtain-vertical" text="Curtain_Vertical" />
+			<option value="cube" text="Cube_Vertical" />
+			<option value="cube-horizontal" text="Cube_Horizontal" />
+			<option value="incube" text="In_Cube_Vertical" />
+			<option value="incube-horizontal" text="In_Cube_Horizontal" />
+			<option value="turnoff" text="TurnOff_Horizontal" />
+			<option value="turnoff-vertical" text="TurnOff_Vertical" />
+			<option value="papercut" text="Paper Cut" />
+			<option value="flyin" text="Fly_In" />
+		</field>
+		<field name="reset_transition_duration" type="text" default="0" datatype="number" label="Reset_Transition_Duration" description="Reset_all_Duration" unit="ms" />
+		<field name="reset_slide_button" type="button" class="button-primary revblue" default="Execute settings on all slides" />
+	</fieldset>
+	<fieldset name="troubleshooting" label="Troubleshooting" icon="eg-icon-medkit">
+		<field name="jquery_noconflict" type="list" default="off" label="JQuery_Conflict_Mode" description="JQuery_Conflict_desc">
+			<option value="on" text="On" />
+			<option value="off" text="Off" />
+		</field>
+		<field name="js_to_body" type="radio" default="false" label="Put_JS_Body" description="Put_JS_Body_desc">
+			<option value="true" text="True" />
+			<option value="false" text="False" />
+		</field>
+		<field name="output_type" type="list" default="none" label="Output_Filters_Protection" description="Output_Filters_desc">
+			<option value="none" text="None" />
+			<option value="compress" text="By_Compressing_Output" />
+			<option value="echo" text="By_Echo_Output" />
+		</field>
+	</fieldset>
+	<fieldset name="google_fonts" label="Google_Font_Settings" icon="eg-icon-font">
+		<field name="text_google_deprecated" type="statictext" label="Google_Font_Settings_desc" />
+		<field name="load_googlefont" type="radio" default="false" label="Load_Google_Font" description="Load_Google_desc">
+			<option value="true" text="Yes" />
+			<option value="false" text="No" />
+		</field>
+		<field name="text_google_font" type="statictext" label="google_families_load" />
+		<field name="google_font" type="multitext" class="text-sidebar-long-double" default="" />
+		<field name="text_google_font" type="statictext" label="" />
+		<field name="text_google" type="statictext" label="" />
+	</fieldset>
+	
+</fields>

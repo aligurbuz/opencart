@@ -1,0 +1,34 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+  {% set theme_options = registry.get('theme_options') %}
+  {% set class = 'col-6 col-md-4 col-lg-3' %}
+  {% if (theme_options.get( 'product_per_pow' ) == 1) %}{% set class = 'col-12' %}{% endif %}
+  {% if (theme_options.get( 'product_per_pow' ) == 2) %}{% set class = 'col-12 col-md-6' %}{% endif %}
+  {% if (theme_options.get( 'product_per_pow' ) == 3) %}{% set class = 'col-12 col-md-6 col-lg-4' %}{% endif %}
+  {% if (theme_options.get( 'product_per_pow' ) == 4) %}{% set class = 'col-6 col-md-4 col-lg-3' %}{% endif %}
+  {% if (theme_options.get( 'product_per_pow' ) == 5) %}{% set class = 'col-6 col-md-4 col-lg-25' %}{% endif %}
+  {% if (theme_options.get( 'product_per_pow' ) == 6) %}{% set class = 'col-6 col-md-3 col-lg-2' %}{% endif %}
+
+  <div class="container-indent">
+    <div class="container container-fluid-custom-mobile-padding">
+      <div class="tt-block-title">
+        <h1 class="tt-title">{{ heading_title }}</h1>
+      </div>
+
+      {% if (theme_options.get( 'product_scroll_latest' ) != '0') %} 
+      <div class="tt-carousel-products row arrow-location-tab arrow-location-tab01 tt-alignment-img tt-layout-product-item slick-animated-show-js" data-item="{{ theme_options.get( 'product_per_pow' ) }}">
+      {% else %}
+      <div class="row tt-layout-product-item">
+      {% endif %}
+        <div class="{{ class }}">
+          {% for product in products %}
+            {% if loop.index > 1 %}
+              </div>
+              <div class="{{ class }}">
+            {% endif %}
+              {% include 'wokiee/template/new_elements/product.twig' %}
+          {% endfor %} 
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

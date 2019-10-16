@@ -1,0 +1,106 @@
+{{ header }} 
+{% include 'wokiee/template/new_elements/wrapper_top.twig' %}
+
+{% for breadcrumb in breadcrumbs %} 
+  {% set heading_title = breadcrumb['text'] %}
+{% endfor %} 
+
+<h1 class="tt-title-subpages noborder">{{ heading_title }}</h1>
+
+<form action="{{ action }}" method="post" enctype="multipart/form-data">
+  <div class="table-responsive tt-shopcart-table-02 form-default">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <td class="text-center">{{ column_image }}</td>
+          <td class="text-center">{{ column_name }}</td>
+          <td class="text-center">{{ column_model }}</td>
+          <td class="text-center">{{ column_quantity }}</td>
+          <td class="text-center">{{ column_price }}</td>
+          <td class="text-center">{{ column_total }}</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %} 
+        <tr>
+          <td class="text-center">{% if (product['thumb']) %} 
+            <a href="{{ product['href'] }}"><img src="{{ product['thumb'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" class="img-thumbnail" /></a>
+            {% endif %} 
+            <div class="d-block d-md-none" style="padding-top: 7px"><a href="{{ product['href'] }}">{{ product['name'] }}<div>
+            </td>
+          <td class="text-center"><a href="{{ product['href'] }}">{{ product['name'] }}</a>
+            {% if (not product['stock']) %} 
+            <span class="text-danger">***</span>
+            {% endif %} 
+            {% if (product['option']) %} 
+            {% for option in product['option'] %} 
+            <br />
+            <small>{{ option['name'] }}: {{ option['value'] }}</small>
+            {% endfor %} 
+            {% endif %} 
+            {% if (product['reward']) %} 
+            <br />
+            <small>{{ product['reward'] }}</small>
+            {% endif %} 
+            {% if (product['recurring']) %} 
+            <br />
+            <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product['recurring'] }}</small>
+            {% endif %}</td>
+          <td class="text-center">{{ product['model'] }}</td>
+          <td class="text-center">
+              <input type="text" name="quantity[{{ product['cart_id'] }}]" class="form-control" style="width: 50px;display: inline-block" value="{{ product['quantity'] }}" size="1" />
+              &nbsp;
+              <input type="image" src="catalog/view/theme/wokiee/img/update.png" alt="{{ button_update }}" title="{{ button_update }}" />
+              &nbsp; <a href="javascript:;" onclick="cart.remove('{{ product['cart_id'] }}');" class="tt-btn-close"></a>
+          </td>
+          <td class="text-center"><span class="tt-price">{{ product['price'] }}</span></td>
+          <td class="text-center"><span class="tt-price">{{ product['total'] }}</span></td>
+        </tr>
+        {% endfor %} 
+        {% for voucher in vouchers %} 
+        <tr>
+          <td></td>
+          <td class="text-center">{{ voucher['description'] }}</td>
+          <td class="text-center"></td>
+          <td class="text-center">
+              <input type="text" name="" value="1" size="1" disabled="disabled" class="form-control" />
+              <a href="javascript:;" onclick="voucher.remove('{{ voucher['key'] }}');" class="tt-btn-close"></a>
+          </td>
+          <td class="text-center"><span class="tt-price">{{ voucher['amount'] }}</span></td>
+          <td class="text-center"><span class="tt-price">{{ voucher['amount'] }}</span></td>
+        </tr>
+        {% endfor %} 
+      </tbody>
+    </table>
+  </div>
+</form>
+
+{% if (modules) %} 
+<div class="modules">
+<h5>{{ text_next }}</h5>
+<p>{{ text_next_choice }}</p>
+<div class="panel-group form-default" id="accordion">
+     {% for module in modules %} 
+     {{ module }} 
+     {% endfor %} 
+</div>
+</div>
+{% endif %} 
+
+<div class="cart-total">
+    <table>
+      {% for total in totals %} 
+      <tr>
+        <td class="text-right"><strong>{{ total['title'] }}:</strong></td>
+        <td class="text-right">{{ total['text'] }}</td>
+      </tr>
+      {% endfor %} 
+    </table>
+</div>
+<div class="buttons">
+  <div class="pull-left"><a href="{{ continue }}" class="btn btn-default">{{ button_shopping }}</a></div>
+  <div class="pull-right"><a href="{{ checkout }}" class="btn btn-primary">{{ button_checkout }}</a></div>
+</div>
+
+{% include 'wokiee/template/new_elements/wrapper_bottom.twig' %}
+{{ footer }}

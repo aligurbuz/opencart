@@ -1,0 +1,427 @@
+{{ header }}{{ column_left }} 
+<div id="content"><div class="container-fluid">
+	<div class="page-header">
+	    <h1>Cookie</h1>
+	    <ul class="breadcrumb">
+		     {% for breadcrumb in breadcrumbs %} 
+		      <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+		      {% endfor %} 
+	    </ul>
+	  </div>
+	  
+	<link rel="stylesheet" type="text/css" href="view/stylesheet/css/colorpicker.css" />
+	<script type="text/javascript" src="view/javascript/jquery/colorpicker.js"></script>    
+    <link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+	
+	<script type="text/javascript">
+	$.fn.tabs = function() {
+		var selector = this;
+		
+		this.each(function() {
+			var obj = $(this); 
+			
+			$(obj.attr('href')).hide();
+			
+			$(obj).click(function() {
+				$(selector).removeClass('selected');
+				
+				$(selector).each(function(i, element) {
+					$($(element).attr('href')).hide();
+				});
+				
+				$(this).addClass('selected');
+				
+				$($(this).attr('href')).show();
+				
+				return false;
+			});
+		});
+	
+		$(this).show();
+		
+		$(this).first().click();
+        
+        $('.colorpicker-input').ColorPicker({
+			onChange: function (hsb, hex, rgb, el) {
+				$(el).val("#" +hex);
+				$(el).next('.color_selected').css("background", "#" + hex);
+			},
+			onShow: function (colpkr) {
+				$(colpkr).show();
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).hide();
+				return false;
+			}
+		});
+	};
+	</script>
+
+	{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% elseif (success) %} 
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% endif %} 
+	
+	<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+		<div class="set-size" id="cookie">
+			<div class="content">
+				<div>
+					<div class="tabs clearfix">
+						<!-- Tabs module -->
+						<div id="tabs" class="htabs main-tabs">
+							{% set module_row = 1 %} 
+							{% for module in modules %} 
+							<a href="#tab-module-{{ module_row }}" id="module-{{ module_row }}">Module {{ module_row }} &nbsp;<img src="view/image/module_template/delete-slider.png"  alt="" onclick="$('.vtabs a:first').trigger('click'); $('#module-{{ module_row }}').remove(); $('#tab-module-{{ module_row }}').remove(); return false;" /></a>
+							{% set module_row = module_row + 1 %} 
+							{% endfor %} 
+                            <span id="module-add" onclick="addModule();"><img src="view/image/module_template/add.png" alt="" /> Add Module</span>
+						</div>
+						
+						{% set module_row = 1 %} 
+						{% for module in modules %} 
+						<div id="tab-module-{{ module_row }}" class="tab-content">
+
+							<div id="language-{{ module_row }}" class="htabs">
+							  {% for language in languages %} 
+							  <a href="#tab-language-{{ module_row }}-{{ language['language_id'] }}"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" /> {{ language['name'] }}</a>
+							  {% endfor %} 
+							</div>
+							{% for language in languages %} 
+							<div id="tab-language-{{ module_row }}-{{ language['language_id'] }}">
+							  <div class="html{{ module_row }}">
+								  <table class="form">
+								    <tr>
+								      <td>Cookie text:</td>
+								      <td><textarea name="cookie_module[{{ module_row }}][text_cookie][{{ language['language_id'] }}]" class="html" id="block-content-{{ module_row }}-{{ language['language_id'] }}">{{ module['text_cookie'][language['language_id']] is defined ? module['text_cookie'][language['language_id']] : '' }}</textarea></td>
+								    </tr>
+								  </table>	
+							  </div>
+							</div>
+						
+							{% endfor %} 
+                            
+                            <input type="hidden" name="cookie_module[{{ module_row }}][module_id]" value="{{ module['module_id'] }}" />
+							<table class="form">
+							  <tr>
+							       <td>Text color:</td>
+							       <td class="color_input">
+                                       <input type="text" name="cookie_module[{{ module_row }}][text_color]" class="colorpicker-input" value="{{ module['text_color'] }}"  />
+                                       <span class="color_selected" {% if (module['text_color'] != '') %} {{ 'style="background: ' ~ module['text_color'] ~ '"' }} {% endif %} ></span>
+                                   </td>
+							  </tr>
+							  <tr>
+							       <td>Border color:</td>
+							       <td class="color_input">
+                                       <input type="text" name="cookie_module[{{ module_row }}][border_color]" class="colorpicker-input" value="{{ module['border_color'] }}" />
+                                       <span class="color_selected" {% if (module['border_color'] != '') %} {{ 'style="background: ' ~ module['border_color'] ~ '"' }} {% endif %} ></span>
+                                   </td>
+							  </tr>
+							  <tr>
+							       <td>Background color:</td>
+                                   <td class="color_input">
+                                       <input type="text" name="cookie_module[{{ module_row }}][background_color]" class="colorpicker-input" value="{{ module['background_color'] }}"  />
+                                       <span class="color_selected" {% if (module['background_color'] != '') %} {{ 'style="background: ' ~ module['background_color'] ~ '"' }} {% endif %}></span>
+                                   </td>
+							  </tr>
+							  <tr>
+							       <td>Background image:</td>
+							       <td>
+							            {% if (module['background_image']) %} 
+							            <a href="" id="thumb-{{ module_row }}" class="img-thumbnail img-edit" data-toggle="image"><img src="../image/{{ module['background_image'] }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+							            {% else %} 
+							            <a href="" id="thumb-{{ module_row }}" class="img-thumbnail img-edit" data-toggle="image"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+							            {% endif %} 
+							            <input type="hidden" name="cookie_module[{{ module_row }}][background_image]" value="{{ module['background_image'] }}" id="input-{{ module_row }}" />
+							       </td>
+							  </tr>
+							  <tr>
+							       <td>Background image position:</td>
+							       <td><select name="cookie_module[{{ module_row }}][background_image_position]">
+							            <option value="top left"{% if (module['background_image_position'] == 'top left') %} {{ ' selected="selected"' }} {% endif %}>Top left</option>
+							            <option value="top center"{% if (module['background_image_position'] == 'top center') %} {{ ' selected="selected"' }} {% endif %}>Top center</option>
+							            <option value="top right"{% if (module['background_image_position'] == 'top right') %} {{ ' selected="selected"' }} {% endif %}>Top right</option>
+							            <option value="bottom left"{% if (module['background_image_position'] == 'bottom left') %} {{ ' selected="selected"' }} {% endif %}>Bottom left</option>
+							            <option value="bottom center"{% if (module['background_image_position'] == 'bottom center') %} {{ ' selected="selected"' }} {% endif %}>Bottom center</option>
+							            <option value="bottom right"{% if (module['background_image_position'] == 'bottom right') %} {{ ' selected="selected"' }} {% endif %}>Bottom right</option>
+							       </select></td>
+							  </tr>
+							  <tr>
+							       <td>Background image repeat:</td>
+							       <td><select name="cookie_module[{{ module_row }}][background_image_repeat]">
+							            <option value="no-repeat"{% if (module['background_image_repeat'] == 'no-repeat') %} {{ ' selected="selected"' }} {% endif %}>no-repeat</option>
+							            <option value="repeat-x"{% if (module['background_image_repeat'] == 'repeat-x') %} {{ ' selected="selected"' }} {% endif %}>repeat-x</option>
+							            <option value="repeat-y"{% if (module['background_image_repeat'] == 'repeat-y') %} {{ ' selected="selected"' }} {% endif %}>repeat-y</option>
+							            <option value="repeat"{% if (module['background_image_repeat'] == 'repeat') %} {{ ' selected="selected"' }} {% endif %}>repeat</option>
+							       </select></td>
+							  </tr>
+							  <tr>
+							       <td>Translate text button:</td>
+							       <td><div class="list-language">
+							            {% for language in languages %} 
+							            <div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" /><input type="text" name="cookie_module[{{ module_row }}][text_button][{{ language['language_id'] }}]" value="{{ module['text_button'][language['language_id']] is defined ? module['text_button'][language['language_id']] : '' }}"></div>
+							            {% endfor %} 
+							       </div></td>
+							  </tr>
+                                <tr>
+                                    <td>Layout:</td>
+                                    <td><select name="cookie_module[{{ module_row }}][layout_id]">
+                                {% if (99999 == module['layout_id']) %} 
+                                <option value="99999" selected="selected">All pages</option>
+                                {% else %} 
+                                <option value="99999">All pages</option>
+                                {% endif %} 
+
+                                {% for store in stores %} 
+                                     {% if ('99999' ~ store['store_id'] == module['layout_id']) %} 
+                                     <option value="99999{{ store['store_id'] }}" selected="selected">All pages - Store {{ store['name'] }}</option>
+                                     {% else %} 
+                                     <option value="99999{{ store['store_id'] }}">All pages - Store {{ store['name'] }}</option>
+                                     {% endif %} 
+                                {% endfor %} 
+
+                                {% for layout in layouts %} 
+                                {% if (layout['layout_id'] == module['layout_id']) %} 
+                                <option value="{{ layout['layout_id'] }}" selected="selected">{{ layout['name'] }}</option>
+                                {% else %} 
+                                <option value="{{ layout['layout_id'] }}">{{ layout['name'] }}</option>
+                                {% endif %} 
+                                {% endfor %} 
+                                    </select></td>
+                             </tr>
+							  <tr style="display: none">
+							    <td>Position:</td>
+							    <td><select name="cookie_module[{{ module_row }}][position]">
+						     	<option value="cookie" selected="selected">Cookie</option>
+							      </select></td>
+							  </tr>
+							  <tr>
+							    <td>Display position:</td>
+							    <td><select name="cookie_module[{{ module_row }}][display_position]">
+						     	<option value="top" {{ 'top' == module['display_position'] ? 'selected="selected"' : "" }}>Top</option>
+						     	<option value="bottom" {{ 'bottom' == module['display_position'] ? 'selected="selected"' : "" }}>Bottom</option>
+							      </select></td>
+							  </tr>
+							  <tr>
+							    <td>Status:</td>
+							    <td><select name="cookie_module[{{ module_row }}][status]">
+							        {% if (module['status']) %} 
+							        <option value="1" selected="selected">Enabled</option>
+							        <option value="0">Disabled</option>
+							        {% else %} 
+							        <option value="1">Enabled</option>
+							        <option value="0" selected="selected">Disabled</option>
+							        {% endif %} 
+							      </select></td>
+							  </tr>
+							  <tr>
+							    <td>Sort Order:</td>
+							    <td><input type="text" name="cookie_module[{{ module_row }}][sort_order]" value="{{ module['sort_order'] }}" size="3" /></td>
+							  </tr>
+							</table>
+						</div>
+						{% set module_row = module_row + 1 %} 
+						{% endfor %} 
+					</div>
+					
+					<!-- Buttons -->
+					<div class="buttons"><input type="submit" name="button-save" class="button-save" value=""></div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript"><!--
+$('.main-tabs a').tabs();
+//--></script> 
+
+<script type="text/javascript"><!--
+{% set module_row = 1 %} 
+{% for module in modules %} 
+$('#language-{{ module_row }} a').tabs();
+{% set module_row = module_row + 1 %} 
+{% endfor %} 
+//--></script> 
+
+<script type="text/javascript"><!--
+{% set module_row = 1 %} 
+{% for module in modules %} 
+{% set module_row = module_row + 1 %} 
+{% endfor %} 
+//--></script> 
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$('#cookie').on('change', 'select.select-type', function () {
+		var id_module = $(this).attr("id");
+		$("#" + id_module +" option:selected").each(function() {
+			if($(this).val() == 1) {
+				$(".html" + id_module + "").hide();
+				$(".block" + id_module + "").show();
+			} else {
+				$(".html" + id_module + "").show();
+				$(".block" + id_module + "").hide();
+			}
+		});
+	});
+	
+});
+</script>
+
+<script type="text/javascript"><!--
+var module_row = {{ module_row }};
+
+function addModule() {	
+	html  = '<div id="tab-module-' + module_row + '" class="tab-content">';
+
+		
+		html += '  <div id="language-' + module_row + '" class="htabs">';
+	    {% for language in languages %} 
+	    html += '    <a href="#tab-language-'+ module_row + '-{{ language['language_id'] }}"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" title="{{ language['name'] }}" /> {{ language['name'] }}</a>';
+	    {% endfor %} 
+		html += '  </div>';
+            
+		{% for language in languages %} 
+		html += '    <div id="tab-language-'+ module_row + '-{{ language['language_id'] }}">';
+		
+		html += '	 <div class="html' + module_row + '">';
+		html += '	   <table class="form">';
+		html += '			<tr>';
+		html += '				<td>Cookie text</td>';
+		html += '				<td><textarea name="cookie_module[' + module_row + '][text_cookie][{{ language['language_id'] }}]" class="html" id="block-content-' + module_row + '-{{ language['language_id'] }}"></textarea></td>';
+		html += '			</tr>';
+		html += '	   </table>';
+		html += '	 </div>';
+
+		
+		html += '    </div>';
+		{% endfor %} 
+	
+		
+		html += '  <input type="hidden" name="cookie_module[' + module_row + '][module_id]" value="' + module_row + '" />';
+    
+		html += '  <table class="form">';
+        html += '    <tr>';
+		html += '      <td>Text color:</td>';
+		html += '      <td class="color_input"><input type="text" name="cookie_module[' + module_row + '][text_color]" class="colorpicker-input" value="" /> <span class="color_selected"></span></td>';
+		html += '    </tr>';
+        html += '    <tr>';
+		html += '      <td>Border color:</td>';
+		html += '      <td class="color_input"><input type="text" name="cookie_module[' + module_row + '][border_color]" class="colorpicker-input" value="" /> <span class="color_selected"></span></td>';
+		html += '    </tr>';
+        html += '    <tr>';
+		html += '      <td>Background color:</td>';
+		html += '      <td class="color_input"><input type="text" name="cookie_module[' + module_row + '][background_color]" class="colorpicker-input" value="" /> <span class="color_selected"></span></td>';
+		html += '    </tr>';
+		html += '    <tr>';
+		html += '           <td>Background image:</td>';
+		html += '			<td>';
+		html += '				<a href="" id="thumb-' + module_row + '" class="img-thumbnail img-edit" data-toggle="image"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>';
+		html += '				<input type="hidden" name="cookie_module[' + module_row + '][background_image]" value="" id="input-'+ module_row +'" />';
+		html += '			</td>';
+		html += '    </tr>';
+		html += '    <tr>';
+		html += '           <td>Background image position:</td>';
+		html += '      	<td><select name="cookie_module[' + module_row + '][background_image_position]">';
+		html += '        		<option value="top left">Top left</option>';
+		html += '        		<option value="top center">Top center</option>';
+		html += '        		<option value="top right">Top right</option>';
+		html += '        		<option value="bottom left">Bottom left</option>';
+		html += '        		<option value="bottom center">Bottom center</option>';
+		html += '        		<option value="bottom right">Bottom right</option>';
+		html += '      	</select></td>';
+		html += '    </tr>';
+		html += '    <tr>';
+		html += '           <td>Background image repeat:</td>';
+		html += '      	<td><select name="cookie_module[' + module_row + '][background_image_repeat]">';
+		html += '        	     <option value="no-repeat">no-repeat</option>';
+		html += '        		<option value="repeat-x">repeat-x</option>';
+		html += '        		<option value="repeat-y">repeat-y</option>';
+		html += '        		<option value="repeat">repeat</option>';
+		html += '      	</select></td>';
+		html += '    </tr>';
+		html += '    <tr>';
+		html += '      <td>Translate text button:</td>';
+		html += '      <td><div class="list-language">';
+		{% for language in languages %} 
+		html += '               <div class="language"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" /><input type="text" name="cookie_module['+ module_row +'][text_button][{{ language['language_id'] }}]" value=""></div>';
+		{% endfor %} 
+		html += '      </div></td>';
+		html += '    </tr>';
+        html += '    		<tr>';
+        html += '     		 	<td>Layout:</td>';
+        html += '      			<td><select name="cookie_module[' + module_row + '][layout_id]">';
+        html += '           		<option value="99999">All pages</option>';
+
+                  {% for store in stores %} 
+        html += '           		<option value="99999{{ store['store_id'] }}">All pages - Store {{ store['name'] }}</option>';
+                  {% endfor %} 
+
+                {% for layout in layouts %} 
+        html += '           		<option value="{{ layout['layout_id'] }}">{{ layout['name']|e('html') }}</option>';
+                {% endfor %} 
+        html += '      			</select></td>';
+        html += '   		 </tr>';
+		html += '    <tr>';
+		html += '    <tr style="display: none">';
+		html += '      <td>Position:</td>';
+		html += '      <td><select name="cookie_module[' + module_row + '][position]">';
+		html += '       		<option value="cookie" selected="selected">Cookie</option>';
+		html += '      </select></td>';
+		html += '    </tr>';
+		html += '      <td>Display Position:</td>';
+		html += '      <td><select name="cookie_module[' + module_row + '][display_position]">';
+		html += '       		<option value="top">Top</option>';
+		html += '       		<option value="bottom">Bottom</option>';
+		html += '      </select></td>';
+		html += '    </tr>';
+		html += '      <td>Status:</td>';
+		html += '      <td><select name="cookie_module[' + module_row + '][status]">';
+		html += '        <option value="1">Enabled</option>';
+		html += '        <option value="0">Disabled</option>';
+		html += '      </select></td>';
+		html += '    </tr>';
+		html += '    <tr>';
+		html += '      <td>Sort Order:</td>';
+		html += '      <td><input type="text" name="cookie_module[' + module_row + '][sort_order]" value="" size="3" /></td>';
+		html += '    </tr>';
+		html += '  </table>'; 
+	html += '</div>';
+	
+	$('.tabs').append(html);
+	
+	$('#language-' + module_row + ' a').tabs();
+
+	$('#module-add').before('<a href="#tab-module-' + module_row + '" id="module-' + module_row + '">Module ' + module_row + ' &nbsp;<img src="view/image/module_template/delete-slider.png" alt="" onclick="$(\'.vtabs a:first\').trigger(\'click\'); $(\'#module-' + module_row + '\').remove(); $(\'#tab-module-' + module_row + '\').remove(); return false;" /></a>');
+	
+	$('.main-tabs a').tabs();
+	
+	
+	$('.colorpicker-input').ColorPicker({
+		onChange: function (hsb, hex, rgb, el) {
+			$(el).val("#" +hex);
+			$(el).next('.color_selected').css("background", "#" + hex);
+		},
+		onShow: function (colpkr) {
+			$(colpkr).show();
+			return false;
+		},
+		onHide: function (colpkr) {
+			$(colpkr).hide();
+			return false;
+		}
+	});
+    
+	$('#module-' + module_row).trigger('click');
+	
+	
+	module_row++;
+}
+//--></script> 
+{{ footer }}

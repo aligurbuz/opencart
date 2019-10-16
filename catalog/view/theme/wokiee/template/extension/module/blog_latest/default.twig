@@ -1,0 +1,45 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+    {% set theme_options = registry.get('theme_options') %}
+    <div class="container-indent">
+        <div class="container">
+            <div class="tt-block-title">
+                {% set title = heading_title|split(',') %}
+                <h2 class="tt-title">{{ title[0] }}</h2>
+                <div class="tt-description">{{ title[1] }}</div>
+            </div>
+            <div class="tt-blog-thumb-list">
+                <div class="row">
+                    {% for article in articles %}
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                        <div class="tt-blog-thumb">
+                            {% if (article['thumb']) %}
+                                <div class="tt-img"><a href="{{ article['href'] }}" target="_blank"><img src="catalog/view/theme/wokiee/img/loader.svg" data-src="{{ article['thumb'] }}" alt=""></a></div>
+                            {% endif %} 
+                            <div class="tt-title-description">
+                                <div class="tt-background"></div>
+                                <div class="tt-tag">
+                                    <a href="{{ article['href'] }}">{{ article['tags'][0]['tag'] }}</a>
+                                </div>
+                                <div class="tt-title">
+                                    <a href="{{ article['href'] }}">{{ article['title'] }}</a>
+                                </div>
+                                <p>
+                                    {{ article['description']|slice(0, 130) ~ '...' }}
+                                </p>
+                                <div class="tt-meta">
+                                    <div class="tt-autor">
+                                        {{ theme_options.date('F d, Y', theme_options.strtotime(article['date_published'])) }}
+                                    </div>
+                                    <div class="tt-comments">
+                                        <a href="{{ article['href'] }}"><i class="tt-icon icon-f-88"></i>{{ article['comments_count'] }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

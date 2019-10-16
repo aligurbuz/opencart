@@ -1,0 +1,32 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+	{% set id = random(5000)*random(50000) %}
+	<div class="container-indent1">
+		<div class="container container-fluid-custom-mobile-padding">
+			<div class="tt-block-title text-left">
+				<h1 class="tt-title">{{ module['content']['title'] }}</h1>
+			</div>
+			<div class="tt-tab-wrapper">
+				<ul class="nav nav-tabs tt-tabs-default" role="tablist">
+					{% for product_tab in module['content']['products_tabs'] %} 
+					<li class="nav-item">
+						<a class="nav-link show {% if loop.index == 1 %}active{% endif %}" data-toggle="tab" href="#tt-tab{{ id }}-{{ loop.index }}" role="tab">{{ product_tab['name'] }}</a>
+					</li>
+					{% endfor %} 
+				</ul>
+				<div class="tab-content">
+					{% for product_tab in module['content']['products_tabs'] %} 
+						<div class="tab-pane {% if loop.index == 1 %}active fade{% endif %}" id="tt-tab{{ id }}-{{ loop.index }}" role="tabpanel">
+							<div class="tt-carousel-products row arrow-location-tab tt-alignment-img tt-layout-product-item slick-animated-show-js">
+								{% for product in product_tab['products'] %}
+									<div class="col-2 col-md-4 col-lg-3">
+										{% include 'wokiee/template/new_elements/product.twig' %}
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}

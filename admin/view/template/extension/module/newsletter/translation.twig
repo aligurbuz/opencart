@@ -1,0 +1,115 @@
+{{ header }}{{ column_left }} 
+<div id="content"><div class="container-fluid">
+	<div class="page-header">
+	    <h1>Newsletter</h1>
+	    <ul class="breadcrumb">
+		     {% for breadcrumb in breadcrumbs %} 
+		      <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+		      {% endfor %} 
+	    </ul>
+	  </div>
+    
+    <link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+    
+	{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% elseif (success) %} 
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	{% endif %} 
+
+	<div class="set-size" id="newsletter">
+		<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+			<!-- Content -->
+			<div class="content">
+				<div>
+					<div class="bg-tabs clearfix">
+						<div id="tabs">
+							<a href="{{ placement }}" id="placement"><span>Module placement</span></a>
+							<a href="{{ settings }}" id="existing" class="active"><span>Translation text</span></a>
+							<a href="{{ list_subscribed }}" id="subscribed"><span>List subscribers</span></a>
+							<a href="{{ send_mail }}" id="existing"><span>Send mail</span></a>
+						</div>
+
+						<div class="tab-content2">
+							<h4>Translation text</h4>
+							<div class="input clearfix">
+								<p>Subscribe Message:</p>
+								<div class="list-language">
+									{% for language in languages %} 
+									<div class="language">
+										{% set language_id = language['language_id'] %} 
+										<img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+										<input type="text" name="newsletter_settings[{{ language_id }}][subscribe_message]" {% if (newsletter_settings[language_id]['subscribe_message'] is defined) %} {{ 'value="'~newsletter_settings[language_id]['subscribe_message']~'"' }} {% endif %}>
+									</div>
+									{% endfor %} 
+								</div>
+							</div>
+							
+							<div class="input clearfix">
+								<p>Unsubscribe Message:</p>
+								<div class="list-language">
+									{% for language in languages %} 
+									<div class="language">
+										{% set language_id = language['language_id'] %} 
+										<img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+										<input type="text" name="newsletter_settings[{{ language_id }}][unsubscribe_message]" {% if (newsletter_settings[language_id]['unsubscribe_message'] is defined) %} {{ 'value="'~newsletter_settings[language_id]['unsubscribe_message']~'"' }} {% endif %}>
+									</div>
+									{% endfor %} 
+								</div>
+							</div>
+							
+							<div class="input clearfix">
+								<p>Confirm Unsubscribe:</p>
+								<div class="list-language">
+									{% for language in languages %} 
+									<div class="language">
+										{% set language_id = language['language_id'] %} 
+										<img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+										<input type="text" name="newsletter_settings[{{ language_id }}][confirm_unsubscribe]" {% if (newsletter_settings[language_id]['confirm_unsubscribe'] is defined) %} {{ 'value="'~newsletter_settings[language_id]['confirm_unsubscribe']~'"' }} {% endif %}>
+									</div>
+									{% endfor %} 
+								</div>
+							</div>
+							
+							<div class="input clearfix">
+								<p>Invalid Email Message:</p>
+								<div class="list-language">
+									{% for language in languages %} 
+									<div class="language">
+										{% set language_id = language['language_id'] %} 
+										<img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+										<input type="text" name="newsletter_settings[{{ language_id }}][invalid_email_message]" {% if (newsletter_settings[language_id]['invalid_email_message'] is defined) %} {{ 'value="'~newsletter_settings[language_id]['invalid_email_message']~'"' }} {% endif %}>
+									</div>
+									{% endfor %} 
+								</div>
+							</div>
+							
+							<div class="input clearfix">
+								<p>Email not found:</p>
+								<div class="list-language">
+									{% for language in languages %} 
+									<div class="language">
+										{% set language_id = language['language_id'] %} 
+										<img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" />
+										<input type="text" name="newsletter_settings[{{ language_id }}][email_not_found]" {% if (newsletter_settings[language_id]['email_not_found'] is defined) %} {{ 'value="'~newsletter_settings[language_id]['email_not_found']~'"' }} {% endif %}>
+									</div>
+									{% endfor %} 
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div>
+						<!-- Buttons -->
+						<div class="buttons"><input type="submit" name="button-save" class="button-save" value=""></div>
+					</div>
+				</div>
+			</div>		
+		</form>
+	</div>
+</div>
+{{ footer }}

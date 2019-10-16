@@ -1,0 +1,18 @@
+{% if (registry.has('theme_options') == constant('true')) %} 
+  {% set theme_options = registry.get('theme_options') %}
+  {% set config = registry.get('config') %}
+  {% set page_direction = theme_options.get( 'page_direction' ) %} {% set language_id = config.get( 'config_language_id' ) %} 
+  <div class="container container-indent">
+       <div class="camera_slider">
+        <div class="camera_wrap" id="camera_wrap_{{ module+20 }}">
+          {% for banner in banners %} 
+          {% if (banner['link']) %} 
+          <a href="{{ banner['link'] }}"><img src="{{ banner['image'] }}" alt="{{ banner['title'] }}" /></a>
+          {% else %} 
+          <img src="{{ banner['image'] }}" alt="{{ banner['title'] }}" />
+          {% endif %} 
+          {% endfor %} 
+        </div>
+    </div>
+  </div>
+{% endif %}

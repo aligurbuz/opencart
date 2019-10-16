@@ -1,0 +1,274 @@
+{{ header }}{{ column_left }} 
+<div id="content"><div class="container-fluid">
+	<div class="page-header">
+	    <h1>Camera Slider</h1>
+	    <ul class="breadcrumb">
+		     {% for breadcrumb in breadcrumbs %} 
+		      <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+		      {% endfor %} 
+	    </ul>
+	  </div>
+    
+    <link href='https://fonts.googleapis.com/css?family=Poppins:700,600,500,400,300' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript">
+$.fn.tabs = function() {
+	var selector = this;
+	
+	this.each(function() {
+		var obj = $(this); 
+		
+		$(obj.attr('href')).hide();
+		
+		$(obj).click(function() {
+			$(selector).removeClass('selected');
+			
+			$(selector).each(function(i, element) {
+				$($(element).attr('href')).hide();
+			});
+			
+			$(this).addClass('selected');
+			
+			$($(this).attr('href')).show();
+			
+			return false;
+		});
+	});
+
+	$(this).show();
+	
+	$(this).first().click();
+};
+</script>
+
+	{% if (error_warning) %} 
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	  {% else %} 
+	  {% if (success) %} 
+	  <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }} 
+	    <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  </div>
+	  {% endif %} {% endif %} 
+	
+	<!-- Camera slider -->
+	<div class="set-size" id="camera-slider">		
+		<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+			{% if (slider_id is defined) %} 
+			<input type="hidden" name="slider_id" value="{{ slider_id }}">
+			{% endif %} 
+			<!-- Content -->
+			<div class="content">
+				<div>
+					<div class="bg-tabs clearfix">
+						<!-- Tabs module -->
+						<div id="tabs_slider">
+							<a href="#tab-generaloptions" style="padding-top: 25px">General options</a>
+							{% set module_row = 1 %} 
+							{% for slider in sliders %} 
+							<a href="#tab-slide-{{ module_row }}" id="slide-{{ module_row }}">Slide {{ module_row }} &nbsp;<img src="view/image/module_template/delete-slider.png"  alt="" onclick="$('#tabs_slider a:first').trigger('click'); $('#slide-{{ module_row }}').remove(); $('#tab-slide-{{ module_row }}').remove(); return false;" /></a>
+							{% set module_row = module_row + 1 %} 
+							{% endfor %} 
+                            <span id="slide-add" onclick="addSlide();"><img src="view/image/module_template/add.png" alt=""  /> Add Slide</span>
+						</div>
+						
+						<div class="tab-content2" id="tab-generaloptions">
+							<h4>General settings</h4>
+							
+							<!-- Input -->
+							<div class="input clearfix">
+								<p>Slider name:</p>
+								<input type="text" name="slider_name" value="{{ slider_name }}" style="width:155px">
+							</div>
+							
+							<!-- Input -->
+							<div class="input clearfix">
+								<p>Width slider (px):</p>
+								<input type="text" name="slider_width" value="{{ slider_width }}" style="width:155px">
+							</div>
+							
+							<!-- Input -->
+							<div class="input clearfix">
+								<p>Height slider (px):</p>
+								<input type="text" name="slider_height" value="{{ slider_height }}" style="width:155px">
+							</div>
+
+							<!-- Input -->
+							<div class="input clearfix">
+								<p>Layout Type:</p>
+								<select name="layout_type">
+									<option value="0" {% if (layout_type == '0') %}{{ ' selected="selected"' }}{% endif %}>Full width</option>
+									<option value="1" {% if (layout_type == '1') %}{{ ' selected="selected"' }}{% endif %}>Fixed</option>
+								</select>
+							</div>
+						</div>
+						
+						{% set module_row = 1 %} 
+						{% for slider in sliders %} 
+						<div class="tab-content" id="tab-slide-{{ module_row }}">
+							<div id="tab-slider-{{ module_row }}-language" class="tab-slider-language">
+							{% for language in languages %} 
+								<a href="#tab_slider_{{ module_row }}_language_{{ language['language_id'] }}"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" /><span>{{ language['name'] }}</span></a>
+							{% endfor %} 
+							</div>
+							
+							{% for language in languages %} 
+							{% set language_id = language['language_id'] %} 
+							<div id="tab_slider_{{ module_row }}_language_{{ language_id }}" class="tab-content3">
+							
+										<!-- Status -->
+										
+										{% if (slider[language_id]['status'] is defined) %} 
+										{% if (slider[language_id]['status'] == 1) %} {{ '<div class="status status-on" title="1" rel="slider_'~module_row~'_'~language_id~'_status"></div>' }} {% else %} {{ '<div class="status status-off" title="0" rel="slider_'~module_row~'_'~language_id~'_status"></div>' }} {% endif %} 
+										
+										<input name="slider[{{ module_row }}][{{ language_id }}][status]" value="{{ slider[language_id]['status'] }}" id="slider_{{ module_row }}_{{ language_id }}_status" type="hidden" />
+										{% else %} 
+										{{ '<div class="status status-off" title="0" rel="slider_'~module_row~'_'~language_id~'_status"></div>' }} 
+										<input name="slider[{{ module_row }}][{{ language_id }}][status]" value="0" id="slider_{{ module_row }}_{{ language_id }}_status" type="hidden" />
+										{% endif %} 
+
+										<div class="input clearfix">
+											<p>Image:</p>
+											
+											<div class="slider">
+												{% if (slider[language_id]['slider'] is defined) %} 
+													{% if (slider[language_id]['slider']) %} 
+													<a href="" id="thumb-{{ module_row }}-{{ language_id }}" class="img-thumbnail img-edit" data-toggle="image"><img src="../image/{{ slider[language_id]['slider'] }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+													{% else %} 
+													<a href="" id="thumb-{{ module_row }}-{{ language_id }}" class="img-thumbnail img-edit" data-toggle="image"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+													{% endif %} 
+													<input type="hidden" name="slider[{{ module_row }}][{{ language_id }}][slider]" value="{{ slider[language_id]['slider'] }}" id="input-{{ module_row }}-{{ language_id }}" />
+												{% else %} 
+													<a href="" id="thumb-{{ module_row }}-{{ language_id }}" class="img-thumbnail img-edit" data-toggle="image"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+													<input type="hidden" name="slider[{{ module_row }}][{{ language_id }}][slider]" value="" id="input-{{ module_row }}-{{ language_id }}" />
+												{% endif %} 
+											</div>
+											
+											<div class="clear"></div>
+										</div>
+										
+										<!-- Input -->
+										<div class="input clearfix">
+										
+											<p>Link:</p>
+											{% if (slider[language_id]['link'] is defined) %} 
+											<input type="text" name="slider[{{ module_row }}][{{ language_id }}][link]" value="{{ slider[language_id]['link'] }}" style="margin-right:0px;width:332px" />
+											{% else %} 
+											<input type="text" name="slider[{{ module_row }}][{{ language_id }}][link]" value="" style="margin-right:0px;width:332px" />
+											{% endif %} 
+										
+											<div class="clear"></div>
+										
+										</div>
+										<!-- End Input -->
+							</div>
+							{% endfor %} 
+							
+							<script type="text/javascript"><!--
+							
+							$('#tab-slider-{{ module_row }}-language a').tabs();
+							
+							//--></script> 
+							
+						</div>
+						{% set module_row = module_row + 1 %} 
+						{% endfor %} 
+					</div>
+					
+					<div>
+						{% if (slider_id is defined) %} 
+						<!-- Buttons -->
+						<div class="buttons"><input type="submit" name="button-save" class="button-save" value=""></div>
+						{% else %} 
+						<div class="buttons"><input type="submit" name="button-add" class="button-save" value=""></div>
+						{% endif %} 
+					</div>
+				</div>
+			</div>	
+		</form>	
+	</div>
+</div>
+
+<script type="text/javascript"><!--
+$('#tabs_slider a').tabs();
+//--></script> 
+
+<script type="text/javascript"><!--
+var module_row = {{ module_row }};
+
+function addSlide() {
+	html  = '<div id="tab-slide-' + module_row + '" class="tab-content">';
+	html += '	<div id="tab-slider-'+ module_row +'-language" class="tab-slider-language">';
+	{% for language in languages %} 
+	html += '		<a href="#tab_slider_'+ module_row +'_language_{{ language['language_id'] }}"><img src="language/{{ language['code'] }}/{{ language['code'] }}.png" alt="{{ language['name'] }}" width="16px" height="11px" /><span>{{ language['name'] }}</span></a>';
+	{% endfor %} 
+	html += '	</div>';
+	{% for language in languages %} 
+	html += '	<div id="tab_slider_'+ module_row +'_language_{{ language['language_id'] }}" class="tab-content3">';
+	html += '		<div class="status status-off" title="0" rel="slider_' + module_row + '_{{ language['language_id'] }}_status"></div><input name="slider[' + module_row + '][{{ language['language_id'] }}][status]" value="0" id="slider_' + module_row + '_{{ language['language_id'] }}_status" type="hidden" />';
+
+	html += '		<div class="input clearfix">';
+	html += '			<p>Image:</p>';
+	html += '			<div class="slider">';
+	html += '				<a href="" id="thumb-'+ module_row +'-{{ language['language_id'] }}" class="img-thumbnail img-edit" data-toggle="image"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>';
+	html += '				<input type="hidden" name="slider['+ module_row +'][{{ language['language_id'] }}][slider]" value="" id="input-'+ module_row +'-{{ language['language_id'] }}" />';
+	html += '			</div>';
+	html += '		</div>';
+	
+	html += '		<div class="input clearfix">';
+	html += '			<p>Link:</p>';
+	html += '			<input type="text" name="slider['+ module_row +'][{{ language['language_id'] }}][link]" value="" style="margin-right:0px;width:332px">';
+	html += '		</div>';
+
+	html += '	</div>';
+	{% endfor %} 
+	html += '</div>';
+	
+	$('.bg-tabs').append(html);
+	
+	$('#tab-slider-'+ module_row +'-language a').tabs();
+	
+	$('#slide-add').before('<a href="#tab-slide-' + module_row + '" id="slide-' + module_row + '">Slide ' + module_row + ' &nbsp;<img src="view/image/module_template/delete-slider.png" alt="" onclick="$(\'#tabs_slider a:first\').trigger(\'click\'); $(\'#slide-' + module_row + '\').remove(); $(\'#tab-slide-' + module_row + '\').remove(); return false;" /></a>');
+	
+	$('#tabs_slider a').tabs();
+	
+	$('#slide-' + module_row).trigger('click');
+	
+	module_row++;
+}
+//--></script> 
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	
+	$('#camera-slider').on('click', '.status', function () {
+		
+		var styl = $(this).attr("rel");
+		var co = $(this).attr("title");
+		
+		if(co == 1) {
+		
+			$(this).removeClass('status-on');
+			$(this).addClass('status-off');
+			$(this).attr("title", "0");
+
+			$("#"+styl+"").val(0);
+		
+		}
+		
+		if(co == 0) {
+		
+			$(this).addClass('status-on');
+			$(this).removeClass('status-off');
+			$(this).attr("title", "1");
+
+			$("#"+styl+"").val(1);
+		
+		}
+		
+	});
+
+});	
+</script>
+{{ footer }}
